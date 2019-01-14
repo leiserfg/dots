@@ -1,2 +1,2 @@
 # dots
-My dotsfiles using yamd
+My dotsfiles using yadm
