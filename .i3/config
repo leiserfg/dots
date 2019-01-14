@@ -59,8 +59,6 @@ bindsym $mod+Ctrl+b exec $term -e 'bmenu'
 bindsym $mod+F2 exec firefox
 # bindsym $mod+F3 exec thunar
 bindsym $mod+F3 exec $term  ranger
-bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec $term -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
