@@ -1,0 +1,100 @@
+[include]
+	path = .gitconfig.local
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	quotepath = false
+[color]
+	ui = auto
+[color "branch"]
+	current = red
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = cyan
+	frag = magenta
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[credential]
+	helper = gnome-keyring
+[alias]
+	st = status -sb
+	ci = commit
+	co = checkout
+	br = branch
+    down = clone --depth=1
+	cp = cherry-pick
+	cps = cherry-pick -s
+	today = diff @{yesterday}.. --stat
+	meh = commit --amend
+	wdiff = diff --word-diff=color
+	wshow = show --word-diff=color
+	lasttag = describe --tags --abbrev=0
+	branches = branch -vv
+	sync = !git pull && git push
+	comerge = "!x() { target=`git symbolic-ref HEAD`; git co $1; git merge $target; }; x"
+	ours = "!f() { git checkout --ours -- $@ && git add -- $@; }; f"
+	theirs = "!f() { git checkout --theirs -- $@ && git add -- $@; }; f"
+	assume = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+	authors = shortlog -sn
+	addpr = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"
+	patdiff = difftool -y -x patdiff
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	yolo = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+    
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+    cached = diff --cached
+	uncommit = reset --soft HEAD~1
+	show-patch = format-patch -1 --stdout
+	sha = rev-parse HEAD
+	origin = config --get remote.origin.url
+	current = rev-parse --abbrev-ref HEAD
+	out = !git log origin/$(git current)..
+	incoming = !git log ..origin/$(git current)
+	publish= !git push origin $(git current)
+	id = !echo "git clone --recursive $(git origin) --branch $(git current)"
+	recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 100
+	fixup = "!f() { git commit --fixup=$1; git rebase -i --autosquash $1~1; }; f"
+	fixit = "!f() { git commit --fixup=$1; GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $1~1; }; f"
+	wip = !git add --all . && git commit -m 'WIP'
+	root = !pwd
+	back = checkout -
+	upstream = !git branch --set-upstream-to=origin/$(git current) $(git current)
+	repo=!git remote -v | grep '@.*fetch' | sed 's/.*:\\(.*\\).git.*/\\1/g'
+	pr=!open https://github.com/$(git repo)/compare/$(git current)?expand=1
+
+  # Welcome to fzf heaven. xargs hell
+	fzfbr= !BRANCH=`git recent | fzf` && git checkout ${BRANCH}
+	fzfadd= !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && git add --all ${FILES}
+	fzffix= !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
+	fzfshow= !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git show `echo ${HASH} | awk '{ print $1 }'`
+	fzflog= !HASH=`git log --pretty=oneline | head -n 100 | fzf` && echo ${HASH} | awk '{ print $1 }' | xargs echo -n | xsel --clipboard --input
+	fzfrebase= !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git rebase -i `echo ${HASH} | awk '{ print $1 }'`^
+	fzfed= !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && nvim ${FILES}
+	fzfedconflicts= !FILES=`git status -s | grep '^[UMDA]\\{2\\} ' | awk '{ print $2 }' | fzf -x -m` && nvim ${FILES}
+	fzfgrep= !sh -c 'FILES=`git grep -l -A 0 -B 0 $1 $2 | fzf -x -m` &&  nvim `echo ${FILES} | cut -d':' -f1 | xargs`' -
+	fzfedlog= !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && nvim ${FILES}
+    fzfreset= !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
+	undo = !git reset --hard
+[push]
+	default=current
+[diff]
+	algorithm = patience
+
+[http]
+	sslVerify = false
+[user]
+	email = leiserfg@gmail.com
+	name = leiserfg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
