@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 sudo pacman -S yay
 yay -S nvim-drop-in python-neovim i3pystatus i3ipc-python python-colour pipsi kitty compton dunst
-i3-scrot i3lock-fancy-rapid polkit-gnome  xss-lock rofi
-
+i3-scrot i3lock-fancy-rapid polkit-gnome  xss-lock rofi ttf-iosevka-ss07 ttf-iosevka-term-ss07
+ttf-nerd-fonts-symbols fzf ripgrep youtube-dl  
 pipsi install python-language-server
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
