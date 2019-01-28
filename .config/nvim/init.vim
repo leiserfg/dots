@@ -3,6 +3,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Olical/vim-enmasse'
+Plug 'semanser/vim-outdated-plugins'
 
 " Extra operators
 Plug 'tpope/vim-commentary'  "gc
@@ -11,7 +12,7 @@ Plug 'junegunn/vim-easy-align'  "ga
 Plug 'vim-scripts/ReplaceWithRegister'  " gr
 Plug 'vim-scripts/vis'  " :'<,'>B
 
-
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
@@ -19,7 +20,7 @@ Plug 'AndrewRadev/switch.vim'    " -
 " better search
 Plug 'junegunn/vim-slash'
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'lucasteles/SWTC.Vim' | Plug 'dahu/vim-rng'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -189,10 +190,10 @@ nnoremap Q @q
 
 " jk | Escaping 
 inoremap jk <Esc>
-xnoremap jk <Esc>
+" xnorecmap ii <Esc>
 cnoremap jk <C-c>
 
-
+nnoremap <leader>w :w<cr>
 
 " ----------------------------------------------------------------------------
 " Readline-style key bindings in command-line (excerpt from rsi.vim)
@@ -349,7 +350,8 @@ command! PlugHelp call fzf#run(fzf#wrap({
  " switch.vim {{{
 let g:switch_mapping = '-'
 let g:switch_custom_definitions = [
-\   ['MON', 'TUE', 'WED', 'THU', 'FRI']
+\   ['MON', 'TUE', 'WED', 'THU', 'FRI'],
+\   ['staging', 'production']
 \ ]
 
 

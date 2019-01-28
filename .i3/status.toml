@@ -1,0 +1,24 @@
+icons = "awesome"
+[theme] 
+name = "gruvbox-dark"
+
+[theme.overrides]
+separator = ''
+
+[[block]]
+block = "focused_window"
+max_width = 50
+
+[[block]]
+block = "battery"
+upower = true
+format = "{percentage}% {time}"
+
+[[block]]
+block = "sound"
+on_click = "pavucontrol"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
