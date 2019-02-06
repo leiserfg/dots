@@ -19,8 +19,6 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-[credential]
-	helper = gnome-keyring
 [alias]
 	st = status -sb
 	ci = commit

@@ -1,7 +1,16 @@
 export EDITOR=nvim
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
+set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
+#Python local installed packages
+set PATH (python3 -m site --user-base)/bin $PATH 
 
-set PATH ~/bin/ ~/.local/bin/ $PATH
+if not functions -q fisher
+    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+    fish -c fisher
+end
+
+set PATH ~/bin/ $PATH
 
 # if status --is-interactive
     # cat ~/.cache/wal/sequences  ^ /dev/null

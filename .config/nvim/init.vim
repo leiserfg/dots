@@ -60,7 +60,7 @@ Plug 'morhetz/gruvbox'
 
 Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
-Plug '/usr/bin/fzf'
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 " }}}
@@ -106,8 +106,8 @@ set nocursorline " cursorline is slow
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
 set clipboard+=unnamedplus
-let g:python_host_prog='/usr/bin/python'
-let g:python3_host_prog='/usr/bin/python'
+let g:python_host_prog='/usr/local/bin/python3'
+let g:python3_host_prog='/usr/local/bin/python3'
 
 syntax enable
 set encoding=utf8
@@ -297,7 +297,7 @@ let g:signify_sign_changedelete = '│'
 " ----------------------------------------------------------------------------
 " vim-emoji :dog: :cat: :rabbit:!
 " ----------------------------------------------------------------------------
-command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
+" command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
 " goyo.vim + limelight.vim {{{ "
 let g:limelight_paragraph_span = 1
@@ -372,6 +372,9 @@ let g:multi_cursor_quit_key = '<Esc>'
 
 " LSP {{{
 let g:LanguageClient_serverCommands = { 'python': ['pyls']}
+
+" The default value brake the quickfix list
+let g:LanguageClient_diagnosticsList = 'Location' 
 
 function! LC_maps()
     if has_key(g:LanguageClient_serverCommands, &filetype)
