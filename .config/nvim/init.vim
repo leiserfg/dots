@@ -30,7 +30,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-signify'
-
+Plug 'ruanyl/vim-gh-line'
 
 "Completion
 Plug 'autozimu/LanguageClient-neovim', {
