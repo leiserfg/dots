@@ -106,8 +106,8 @@ set nocursorline " cursorline is slow
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
 set clipboard+=unnamedplus
-let g:python_host_prog='/usr/local/bin/python3'
-let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/usr/bin/python3'
+let g:python3_host_prog='/usr/bin/python3'
 
 syntax enable
 set encoding=utf8
