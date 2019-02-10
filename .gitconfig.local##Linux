@@ -1,2 +1,2 @@
 [credential]
-	helper = gnome-keyring
+	helper = /usr/lib/git-core/git-credential-libsecret
