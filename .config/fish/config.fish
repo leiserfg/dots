@@ -33,6 +33,9 @@ if test -n $DISPLAY
     # set fish_term24bit 1
 end
 
+
+
+
 #PIPENV
 eval (pipenv --completion)
 
