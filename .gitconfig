@@ -45,8 +45,7 @@
 	addpr        = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"
 	patdiff      = difftool -y -x patdiff
 	ignore       = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-	yolo         = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
-    
+	yolo         = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
         graphviz     = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
         cached       = diff --cached
 	uncommit     = reset --soft HEAD~1
