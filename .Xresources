@@ -51,5 +51,6 @@ Xft.autohint:  false
 
 Xcursor.theme: xcursor-breeze
 
+rofi.run-command: fish -c '{cmd}'
 rofi.run-list-command: 'fish -c functions'
 
