@@ -16,14 +16,13 @@ function! PlugRemotePlugins(info) abort
 endfunction
 " }}}
 " PlugCoc(info) {{{
+
 function! PlugCoc(info) abort
-  if a:info.status ==? 'installed' || a:info.force
-    !yarn install
     if exists('s:coc_extensions')
-      call call('coc#add_extension', s:coc_extensions)
+        call call('coc#add_extension', s:coc_extensions)
     endif
-  elseif a:info.status ==? 'updated'
     !yarn install
+  if a:info.status ==? 'updated'
     call coc#util#update()
   endif
   call PlugRemotePlugins(a:info)
@@ -73,7 +72,7 @@ Plug 'ruanyl/vim-gh-line'
 " Plug 'ncm2/ncm2-ultisnips'
 Plug 'neoclide/coc-neco' | Plug 'Shougo/neco-vim' 
 
-let s:coc_extensions = [
+let s:coc_extensions= [
 \   'coc-css',
 \   'coc-html',
 \   'coc-json',
@@ -84,7 +83,7 @@ let s:coc_extensions = [
 \   'coc-tsserver',
 \   'coc-ultisnips'
 \ ]
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': function('PlugCoc')}
+Plug 'neoclide/coc.nvim', {'do': function('PlugCoc')}
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
