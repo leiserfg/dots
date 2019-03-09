@@ -1,3 +1,4 @@
+cd (/usr/bin/pwd)
 export EDITOR=nvim
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
