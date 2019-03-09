@@ -1,7 +1,37 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
+
 " Plug Setup{{{
+" Automatic Download {{{
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo "~/.local/share/nvim/site/autoload/plug.vim"  --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+" }}}
+" PlugRemotePlugins(info) {{{
+let s:remote_plugins_updated = 0
+function! PlugRemotePlugins(info) abort
+    if !s:remote_plugins_updated
+      let s:remote_plugins_updated = 1
+      UpdateRemotePlugins
+    endif
+endfunction
+" }}}
+" PlugCoc(info) {{{
+function! PlugCoc(info) abort
+  if a:info.status ==? 'installed' || a:info.force
+    !yarn install
+    if exists('s:coc_extensions')
+      call call('coc#add_extension', s:coc_extensions)
+    endif
+  elseif a:info.status ==? 'updated'
+    !yarn install
+    call coc#util#update()
+  endif
+  call PlugRemotePlugins(a:info)
+endfunction
+" }}}
+
+
 call plug#begin('~/.config/nvim/plugged')
-Plug 'terryma/vim-multiple-cursors'
 Plug 'Olical/vim-enmasse'
 Plug 'semanser/vim-outdated-plugins'
 
@@ -21,10 +51,9 @@ Plug 'AndrewRadev/switch.vim'    " -
 Plug 'junegunn/vim-slash'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-Plug 'lucasteles/SWTC.Vim' | Plug 'dahu/vim-rng'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-
+Plug 'machakann/vim-highlightedyank'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -33,15 +62,29 @@ Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 
 "Completion
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-Plug 'ncm2/ncm2-ultisnips'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+" Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-github'
+" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+" Plug 'ncm2/ncm2-ultisnips'
+Plug 'neoclide/coc-neco' | Plug 'Shougo/neco-vim' 
+
+let s:coc_extensions = [
+\   'coc-css',
+\   'coc-html',
+\   'coc-json',
+\   'coc-pyls',
+\   'coc-yaml',
+\   'coc-emmet',
+\   'coc-vetur',
+\   'coc-tsserver',
+\   'coc-ultisnips'
+\ ]
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': function('PlugCoc')}
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -139,6 +182,9 @@ nmap <leader>w :w!<cr>
 
 " Easier shortcut for exiting the terminal
 tnoremap <Esc> <C-\><C-n>
+" interactive replace
+set inccommand=split
+
 
 " }}}
 
@@ -275,6 +321,17 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+" lightline
+set noshowmode  " we don't need it any more because of the status line
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -351,7 +408,8 @@ command! PlugHelp call fzf#run(fzf#wrap({
 let g:switch_mapping = '-'
 let g:switch_custom_definitions = [
 \   ['MON', 'TUE', 'WED', 'THU', 'FRI'],
-\   ['staging', 'production']
+\   ['staging', 'production'],
+\   ['true', 'false']
 \ ]
 
 
@@ -366,9 +424,6 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 \ ]
 " }}} "
 " ----------------------------------------------------------------------------
-" Multiple cursors {{{
-let g:multi_cursor_quit_key = '<Esc>'
-" }}}
 
 " LSP {{{
 let g:LanguageClient_serverCommands = { 'python': ['pyls']}
@@ -385,38 +440,70 @@ function! LC_maps()
     endif
 endfunction
 
-autocmd FileType python call LC_maps()
+" autocmd FileType python call LC_maps()
 
 " }}}
 
-" UltiSnips {{{
+" Coc {{{ "
+nmap <leader>=  <Plug>(coc-format)
 
-let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings=0
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " }}}
 
-" Completion {{{
-let g:ncm2#matcher="substrfuzzy"
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
+" ultisnips {{{1 "
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
+let g:UltiSnipsExpandTrigger = "<NUL>"
+autocmd! CompleteDone * call <SID>try_expand()
+
+function! s:try_expand() abort
+  " Ignore events without completion item.
+  " Furthermore ignore completions with items having a 'kind' property, since
+  " UltiSnips does not define such. This is useful to avoid snippet completion
+  " in case no snippet trigger has been completed, but a equal named candidate
+  " like a variable or function.
+  " Check if a at least one completion candidate exists (only one available
+  " after completion).
+  if !empty(v:completed_item) &&
+        \ strlen(v:completed_item.kind) == 0 &&
+        \ len(UltiSnips#SnippetsInCurrentScope()) > 0
+
+    call UltiSnips#ExpandSnippet()
+  endif
+endfunction
+" }}}
+
+" " Completion {{{
+" let g:ncm2#matcher="substrfuzzy"
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+" " When the <Enter> key is pressed while the popup menu is visible, it only
+" " hides the menu. Use this mapping to close the menu and also start a new
+" " line.
+" set shortmess+=c
+" set completeopt=noinsert,menuone,noselect
+
+" " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+" inoremap <c-c> <ESC>
 
 
 " Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " }}}
 
 " Terraform {{{
@@ -432,6 +519,8 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 " }}}
+
+let g:highlightedyank_highlight_duration = 100
 
 let g:gh_use_canonical = 1
 " }}} "
