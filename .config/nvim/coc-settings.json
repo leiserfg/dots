@@ -1,0 +1,6 @@
+{
+    "diagnostic.virtualText": true,
+    "diagnostic.warningSign": "‽",
+    "diagnostic.infoSign": "●",
+    "diagnostic.errorSign": "●"
+}
