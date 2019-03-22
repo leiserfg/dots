@@ -36,6 +36,7 @@ Plug 'semanser/vim-outdated-plugins'
 
 " Extra operators
 Plug 'tpope/vim-commentary'  "gc
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'  "ys, ds, cs
 Plug 'junegunn/vim-easy-align'  "ga
 Plug 'vim-scripts/ReplaceWithRegister'  " gr
@@ -46,8 +47,8 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
 
-" better search
-Plug 'junegunn/vim-slash'
+" " better search
+" Plug 'junegunn/vim-slash'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'junegunn/goyo.vim'
@@ -59,6 +60,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
+Plug 'rhysd/git-messenger.vim'
 
 "Completion
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -102,7 +104,7 @@ Plug 'morhetz/gruvbox'
 
 Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 call plug#end()
 " }}}
@@ -142,6 +144,9 @@ set foldenable
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
+
+
+au InsertEnter * set nohlsearch 
 " }}}
 
 " General {{{
@@ -150,6 +155,9 @@ cabbr <expr> %% expand('%:p:h')
 set clipboard+=unnamedplus
 let g:python_host_prog='/usr/bin/python3'
 let g:python3_host_prog='/usr/bin/python3'
+
+
+set diffopt+=internal,algorithm:histogram
 
 syntax enable
 set encoding=utf8
@@ -361,11 +369,13 @@ let g:limelight_priority = -1
 
 function! s:goyo_enter()
   Limelight
+  set bg=
   let &l:statusline = '%M'
   hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
 endfunction
 
 function! s:goyo_leave()
+  set bg=dark
   Limelight!
 endfunction
 
@@ -463,6 +473,19 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 " }}}
 
 " ultisnips {{{1 "
