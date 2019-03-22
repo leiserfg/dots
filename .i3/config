@@ -17,7 +17,6 @@ hide_edge_borders none
 # change borders
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -36,6 +35,7 @@ bindsym $mod+Shift+q kill
 # Now i'm using albert
 
 # start program launcher
+bindsym $mod+n exec --no-startup-id "~/bin/nmcli_rofi"
 bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons"
 bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $mod+F8  exec --no-startup-id "i3-layout-manager"
