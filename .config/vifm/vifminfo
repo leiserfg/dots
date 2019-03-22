@@ -1,0 +1,82 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/leiserfg/
+	..
+1547069604
+'b
+	/home/leiserfg/bin/
+	..
+1547069604
+'h
+	/home/leiserfg/
+	..
+1547069604
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/leiserfg
+	MEGAsync
+5
+d/home/leiserfg/MEGAsync
+	..
+0
+d/home/leiserfg
+	android
+12
+d/home/leiserfg/android
+	..
+0
+d/home/leiserfg
+	amazon.pdf
+26
+d
+
+# Right window history (oldest to newest):
+D/home/leiserfg
+	certificado_matrimonio.jpg
+30
+D
+
+# Command line history (oldest to newest):
+:view
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+""/home/leiserfg/.local/share/vifm/Trash/000_\
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+t/home/leiserfg/.local/share/vifm/Trash/000_WC3315_fr.ppd
+	/home/leiserfg/WC3315_fr.ppd
+t/home/leiserfg/.local/share/vifm/Trash/000_\
+	/home/leiserfg/\
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0
