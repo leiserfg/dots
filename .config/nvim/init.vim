@@ -106,6 +106,9 @@ Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
+
 call plug#end()
 " }}}
 
@@ -434,25 +437,6 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 " }}} "
 " ----------------------------------------------------------------------------
 
-" LSP {{{
-let g:LanguageClient_serverCommands = { 'python': ['pyls']}
-
-" The default value brake the quickfix list
-let g:LanguageClient_diagnosticsList = 'Location' 
-
-function! LC_maps()
-    if has_key(g:LanguageClient_serverCommands, &filetype)
-        nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
-        nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ "gotoCmd": "split" })<CR>
-        nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ "gotoCmd": "vsplit" })<CR>
-        nnoremap <leader>= :call LanguageClient#textDocument_formatting()<CR>
-    endif
-endfunction
-
-" autocmd FileType python call LC_maps()
-
-" }}}
-
 " Coc {{{ "
 nmap <leader>=  <Plug>(coc-format)
 
@@ -481,6 +465,19 @@ nmap <silent> gy <Plug>(coc-type-definition)
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 vmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
