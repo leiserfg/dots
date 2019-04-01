@@ -478,12 +478,14 @@ endfunction
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " }}}
+
 
 " ultisnips {{{1 "
 
