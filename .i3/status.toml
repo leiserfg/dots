@@ -29,7 +29,7 @@ block     = "net"
 device    = "wlp3s0"
 ssid      = true
 # ip = true
-speed_up  = false
+speed_up  = true
 graph_up  = false
 interval  = 5
 
