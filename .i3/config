@@ -57,7 +57,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%; notify-send 'Volume up'"
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%; notify-send 'Volume down'"
 # Start Applications
-bindsym $mod+F2 exec google-chrome-stable
+bindsym $mod+F2 exec brave
 bindsym $mod+F3 exec $term  ranger
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
@@ -287,7 +287,6 @@ exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
 exec --no-startup-id "sleep 3;pulseaudio --start"
-exec --no-startup-id "play-with-mpv"
 # exec --no-startup-id pa-applet  #pasystray
 # exec --no-startup-id "albert"
 # exec --no-startup-id "setxkbmap -option ctrl:nocaps"
