@@ -414,6 +414,8 @@ command! PlugHelp call fzf#run(fzf#wrap({
   \ 'source': sort(keys(g:plugs)),
   \ 'sink':   function('s:plug_help_sink')}))
 
+noremap <leader>/ :Rg 
+
 " }}} FZF "
 
  " switch.vim {{{
