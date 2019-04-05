@@ -40,7 +40,7 @@ end
 #PIPENV
 eval (pipenv --completion)
 
-eval (direnv hook fish)
+direnv hook fish|source
 
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_hide_untrackedfiles 1
