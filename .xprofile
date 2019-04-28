@@ -2,5 +2,6 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0.5
 export GDK_SCALE=2
 ##Downscale text
 export GDK_DPI_SCALE=0.5
-export BROWSER=google-chrome-stable
+export BROWSER=brave
 export TERMCMD=kitty
+export TERMINAL=kitty
