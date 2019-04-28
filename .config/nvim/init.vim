@@ -62,6 +62,7 @@ Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 Plug 'rhysd/git-messenger.vim'
 
+
 "Completion
 " Plug 'autozimu/LanguageClient-neovim', {
 "     \ 'branch': 'next',
@@ -71,16 +72,17 @@ Plug 'rhysd/git-messenger.vim'
 " Plug 'ncm2/ncm2-path'
 " Plug 'ncm2/ncm2-github'
 " Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-" Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-ultisnips
 Plug 'neoclide/coc-neco' | Plug 'Shougo/neco-vim' 
 
 let s:coc_extensions= [
+\   'coc-emoji',
+\   'coc-dictionary',
 \   'coc-css',
 \   'coc-html',
 \   'coc-json',
 \   'coc-pyls',
 \   'coc-yaml',
-\   'coc-emmet',
 \   'coc-vetur',
 \   'coc-tsserver',
 \   'coc-ultisnips'
@@ -89,6 +91,7 @@ Plug 'neoclide/coc.nvim', {'do': function('PlugCoc')}
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'jceb/emmet.snippets'
 
 Plug 'lambdalisue/suda.vim'
 Plug 'tpope/vim-eunuch'
@@ -106,7 +109,7 @@ Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
+Plug 'pbogut/fzf-mru.vim'
 Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
 call plug#end()
@@ -223,6 +226,10 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " }}}
 
 " Editing mappings {{{
+map <F1> <Esc><Esc>
+imap <F1> <Esc><Esc>
+
+
 " Remap leader
 let mapleader=" "
 

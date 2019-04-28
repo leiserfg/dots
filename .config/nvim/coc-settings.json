@@ -1,5 +1,17 @@
 {
     "diagnostic.warningSign": "‽",
     "diagnostic.infoSign": "●",
-    "diagnostic.errorSign": "●"
+    "diagnostic.errorSign": "●",
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/softprops/serverless-yml-schema/master/serverless-schema.json": "serverless.yml"
+    },
+    "languageserver": {
+        "elixirLS": {
+            "command": "/home/leiserfg/projects/elixir-ls/release/language_server.sh",
+            "filetypes": [
+                "elixir",
+                "eelixir"
+            ]
+        }
+    }
 }
