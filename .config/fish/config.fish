@@ -34,8 +34,10 @@ if test -n $DISPLAY
     # set fish_term24bit 1
 end
 
+set PATH "$HOME/.nimble/bin/" $PATH
 
-
+export NODE_VERSIONS=$HOME/.config/nvm/
+export NODE_VERSION_PREFIX=''
 
 #PIPENV
 eval (pipenv --completion)
@@ -62,13 +64,3 @@ set -g __fish_git_prompt_color_stagedstate yellow
 set -g __fish_git_prompt_color_invalidstate red
 set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/serverless.fish ]; and . /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/sls.fish ]; and . /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/sls.fish
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[ -f /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/slss.fish ]; and . /home/leiserfg/inventorum/elasticpypi/node_modules/tabtab/.completions/slss.fish
