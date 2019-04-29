@@ -1,34 +1,6 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 
 " Plug Setup{{{
-" Automatic Download {{{
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo "~/.local/share/nvim/site/autoload/plug.vim"  --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-endif
-" }}}
-" PlugRemotePlugins(info) {{{
-let s:remote_plugins_updated = 0
-function! PlugRemotePlugins(info) abort
-    if !s:remote_plugins_updated
-      let s:remote_plugins_updated = 1
-      UpdateRemotePlugins
-    endif
-endfunction
-" }}}
-" PlugCoc(info) {{{
-
-function! PlugCoc(info) abort
-    if exists('s:coc_extensions')
-        call call('coc#add_extension', s:coc_extensions)
-    endif
-    !yarn install
-  if a:info.status ==? 'updated'
-    call coc#util#update()
-  endif
-  call PlugRemotePlugins(a:info)
-endfunction
-" }}}
-
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Olical/vim-enmasse'
@@ -64,30 +36,17 @@ Plug 'rhysd/git-messenger.vim'
 
 
 "Completion
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-github'
-" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-" Plug 'ncm2/ncm2-ultisnips
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-github'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+Plug 'ncm2/ncm2-ultisnips'
 Plug 'neoclide/coc-neco' | Plug 'Shougo/neco-vim' 
 
-let s:coc_extensions= [
-\   'coc-emoji',
-\   'coc-dictionary',
-\   'coc-css',
-\   'coc-html',
-\   'coc-json',
-\   'coc-pyls',
-\   'coc-yaml',
-\   'coc-vetur',
-\   'coc-tsserver',
-\   'coc-ultisnips'
-\ ]
-Plug 'neoclide/coc.nvim', {'do': function('PlugCoc')}
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -104,7 +63,7 @@ Plug 'tweekmonster/django-plus.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
-
+Plug 'aonemd/kuroi.vim'
 Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -341,14 +300,15 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " lightline
 set noshowmode  " we don't need it any more because of the status line
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'fugitive#head'
+            \ },
+            \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -445,95 +405,120 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 \ ]
 " }}} "
 " ----------------------------------------------------------------------------
+" LSP {{{	
+let g:LanguageClient_serverCommands = {
+            \ 'Dockerfile': ['docker-langserver', '--stdio'],
+            \ 'python': ['pyls'],
+            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+            \ }
+
+let g:LanguageClient_diagnosticsDisplay = {
+            \     1: {
+            \         "name": "Error",
+            \         "signText": "💥",
+            \         "virtualTexthl": "ErrorMsg",
+            \     },
+            \     2: {
+            \         "name": "Warning",
+            \         "signText": "❗",
+            \         "virtualTexthl": "WarningMsg",
+            \     }
+            \ }
+ " The default value brake the quickfix list	
+let g:LanguageClient_diagnosticsList = 'Location' 	
+
+ function! LC_maps()	
+    if has_key(g:LanguageClient_serverCommands, &filetype)	
+        nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
+        nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ "gotoCmd": "split" })<CR>	
+        nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ "gotoCmd": "vsplit" })<CR>	
+        nnoremap <leader>= :call LanguageClient#textDocument_formatting()<CR>	
+        nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
+    endif
+endfunction
+
+ autocmd FileType python,rust,Dockerfile call LC_maps()	
+
+ " }}}
 
 " Coc {{{ "
-nmap <leader>=  <Plug>(coc-format)
+" nmap <leader>=  <Plug>(coc-format)
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" " Use <c-space> for trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
 
 
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+" vmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" function! s:show_documentation()
+"   if &filetype == 'vim'
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+" " Use K for show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" " Remap for do codeAction of current line
+" nmap <leader>ac  <Plug>(coc-codeaction)
+" " Fix autofix problem of current line
+" nmap <leader>qf  <Plug>(coc-fix-current)
 " }}}
 
 
-" ultisnips {{{1 "
+" UltiSnips {{{
 
-let g:UltiSnipsExpandTrigger = "<NUL>"
-autocmd! CompleteDone * call <SID>try_expand()
+let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
 
-function! s:try_expand() abort
-  " Ignore events without completion item.
-  " Furthermore ignore completions with items having a 'kind' property, since
-  " UltiSnips does not define such. This is useful to avoid snippet completion
-  " in case no snippet trigger has been completed, but a equal named candidate
-  " like a variable or function.
-  " Check if a at least one completion candidate exists (only one available
-  " after completion).
-  if !empty(v:completed_item) &&
-        \ strlen(v:completed_item.kind) == 0 &&
-        \ len(UltiSnips#SnippetsInCurrentScope()) > 0
 
-    call UltiSnips#ExpandSnippet()
-  endif
-endfunction
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings=0
 " }}}
 
 " " Completion {{{
-" let g:ncm2#matcher="substrfuzzy"
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-" " When the <Enter> key is pressed while the popup menu is visible, it only
-" " hides the menu. Use this mapping to close the menu and also start a new
-" " line.
-" set shortmess+=c
-" set completeopt=noinsert,menuone,noselect
+let g:ncm2#matcher="substrfuzzy"
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+set shortmess+=c
+set completeopt=noinsert,menuone,noselect
 
-" " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-" inoremap <c-c> <ESC>
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
 
 
 " Use <TAB> to select the popup menu:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " }}}
 
 " Terraform {{{
@@ -573,5 +558,5 @@ command! EX if !empty(expand('%'))
 " Theme {{{
 set termguicolors
 set background=dark
-colorscheme gruvbox 
+colorscheme kuroi 
 " }}}
