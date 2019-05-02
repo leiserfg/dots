@@ -23,8 +23,6 @@ Plug 'AndrewRadev/switch.vim'    " -
 " Plug 'junegunn/vim-slash'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'machakann/vim-highlightedyank'
 
 " Git
@@ -60,6 +58,7 @@ Plug 'direnv/direnv.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
+Plug 'pest-parser/pest.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
@@ -68,12 +67,11 @@ Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
 Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 " }}}
-
+"
 " User interface {{{
 " Show line numbers
 set number
@@ -328,33 +326,23 @@ let g:signify_sign_add          = '│'
 let g:signify_sign_change       = '│'
 let g:signify_sign_changedelete = '│'
 
+highlight link SignifyLineAdd             DiffAdd
+highlight link SignifyLineChange          DiffChange
+highlight link SignifyLineDelete          DiffDelete
+highlight link SignifyLineChangeDelete    SignifyLineChange
+highlight link SignifyLineDeleteFirstLine SignifyLineDelete
+
+highlight link SignifySignAdd             Identifier
+highlight link SignifySignChange          Identifier
+highlight link SignifySignDelete          Number
+highlight link SignifySignChangeDelete    SignifySignChange
+highlight link SignifySignDeleteFirstLine SignifySignDelete
+
 " ----------------------------------------------------------------------------
 " vim-emoji :dog: :cat: :rabbit:!
 " ----------------------------------------------------------------------------
 " command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
-" goyo.vim + limelight.vim {{{ "
-let g:limelight_paragraph_span = 1
-let g:limelight_priority = -1
-
-function! s:goyo_enter()
-  Limelight
-  set bg=
-  let &l:statusline = '%M'
-  hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
-endfunction
-
-function! s:goyo_leave()
-  set bg=dark
-  Limelight!
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-nnoremap <F11> :Goyo<CR>
-" }}} "
-"
 " FZF {{{
 " ============================================================================
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
@@ -404,12 +392,12 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 \   [ 'pick', 'reword', 'edit', 'squash', 'fixup', 'exec' ]
 \ ]
 " }}} "
-" ----------------------------------------------------------------------------
+
 " LSP {{{	
 let g:LanguageClient_serverCommands = {
             \ 'Dockerfile': ['docker-langserver', '--stdio'],
             \ 'python': ['pyls'],
-            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+            \ 'rust': ['rustup', 'run', 'stable', 'rls']
             \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
@@ -437,7 +425,7 @@ let g:LanguageClient_diagnosticsList = 'Location'
     endif
 endfunction
 
- autocmd FileType python,rust,Dockerfile call LC_maps()	
+ autocmd FileType keys(g:LanguageClient_serverCommands) call LC_maps()	
 
  " }}}
 
