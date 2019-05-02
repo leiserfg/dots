@@ -43,7 +43,6 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
 Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
 Plug 'ncm2/ncm2-ultisnips'
-Plug 'neoclide/coc-neco' | Plug 'Shougo/neco-vim' 
 
 
 Plug 'SirVer/ultisnips'
@@ -61,7 +60,6 @@ Plug 'tweekmonster/django-plus.vim'
 Plug 'pest-parser/pest.vim'
 
 Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
 Plug 'aonemd/kuroi.vim'
 Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
@@ -338,10 +336,6 @@ highlight link SignifySignDelete          Number
 highlight link SignifySignChangeDelete    SignifySignChange
 highlight link SignifySignDeleteFirstLine SignifySignDelete
 
-" ----------------------------------------------------------------------------
-" vim-emoji :dog: :cat: :rabbit:!
-" ----------------------------------------------------------------------------
-" command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
 " FZF {{{
 " ============================================================================
@@ -429,56 +423,6 @@ endfunction
 
  " }}}
 
-" Coc {{{ "
-" nmap <leader>=  <Plug>(coc-format)
-
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-
-" " Use <c-space> for trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-
-
-" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-" vmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-
-" function! s:show_documentation()
-"   if &filetype == 'vim'
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-" " Use K for show documentation in preview window
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-" " Remap for do codeAction of current line
-" nmap <leader>ac  <Plug>(coc-codeaction)
-" " Fix autofix problem of current line
-" nmap <leader>qf  <Plug>(coc-fix-current)
-" }}}
-
-
 " UltiSnips {{{
 
 let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
@@ -546,5 +490,5 @@ command! EX if !empty(expand('%'))
 " Theme {{{
 set termguicolors
 set background=dark
-colorscheme kuroi 
+colorscheme kuroi
 " }}}
