@@ -83,6 +83,7 @@
 	default=current
 [diff]
 	algorithm = histogram
+	indentheuristic = true
 
 [http]
 	sslVerify = false
