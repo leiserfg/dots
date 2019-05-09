@@ -3,7 +3,6 @@
 " Plug Setup{{{
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Olical/vim-enmasse'
 Plug 'semanser/vim-outdated-plugins'
 
 " Extra operators
@@ -19,11 +18,10 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
 
-" " better search
-" Plug 'junegunn/vim-slash'
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'
+
+Plug 'Olical/vim-enmasse'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -409,17 +407,17 @@ let g:LanguageClient_diagnosticsDisplay = {
  " The default value brake the quickfix list	
 let g:LanguageClient_diagnosticsList = 'Location' 	
 
- function! LC_maps()	
+function! LC_maps()	
     if has_key(g:LanguageClient_serverCommands, &filetype)	
         nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
         nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ "gotoCmd": "split" })<CR>	
         nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ "gotoCmd": "vsplit" })<CR>	
-        nnoremap <leader>= :call LanguageClient#textDocument_formatting()<CR>	
         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
+        nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>	
     endif
 endfunction
 
- autocmd FileType keys(g:LanguageClient_serverCommands) call LC_maps()	
+autocmd FileType  *  call LC_maps()	
 
  " }}}
 
