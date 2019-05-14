@@ -2,6 +2,12 @@
 
 " Plug Setup{{{
 
+" Automatic Download {{{
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo "~/.local/share/nvim/site/autoload/plug.vim"  --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+" }}}
+
 call plug#begin('~/.config/nvim/plugged')
 Plug 'semanser/vim-outdated-plugins'
 
@@ -321,19 +327,6 @@ let g:signify_skip_filetype = { 'journal': 1 }
 let g:signify_sign_add          = '│'
 let g:signify_sign_change       = '│'
 let g:signify_sign_changedelete = '│'
-
-highlight link SignifyLineAdd             DiffAdd
-highlight link SignifyLineChange          DiffChange
-highlight link SignifyLineDelete          DiffDelete
-highlight link SignifyLineChangeDelete    SignifyLineChange
-highlight link SignifyLineDeleteFirstLine SignifyLineDelete
-
-highlight link SignifySignAdd             Identifier
-highlight link SignifySignChange          Identifier
-highlight link SignifySignDelete          Number
-highlight link SignifySignChangeDelete    SignifySignChange
-highlight link SignifySignDeleteFirstLine SignifySignDelete
-
 
 " FZF {{{
 " ============================================================================
