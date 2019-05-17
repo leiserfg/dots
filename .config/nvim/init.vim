@@ -23,6 +23,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
+Plug 'andymass/vim-matchup'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'
@@ -93,12 +94,12 @@ set hlsearch " Highlight search results
 set incsearch " Make search act as in modern browsers
 set hidden
 set showmatch " Show matching brackets
-set mat=2 " Length of blink for matching brackets
+set matchtime=2 " Length of blink for matching brackets
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=500
+set timeoutlen=500
 
 " More natural split
 set splitbelow
@@ -111,7 +112,7 @@ set autoread " autoreload file changes
 set nocursorline " cursorline is slow
 
 
-au InsertEnter * set nohlsearch 
+autocmd InsertEnter * set nohlsearch
 " }}}
 
 " General {{{
@@ -126,6 +127,7 @@ set diffopt+=internal,algorithm:histogram,indent-heuristic
 
 syntax enable
 set encoding=utf8
+scriptencoding utf-8
 
 " Use spaces instead of tabs
 set expandtab
@@ -140,11 +142,11 @@ set shiftwidth=4
 set softtabstop=4
 
 " Linebreak on
-set lbr
-set tw=100
+set linebreak
+set textwidth=100
 
-set ai "Auto indent
-set si "Smart indent
+set autoindent
+set smartindent
 set wrap! "Wrap lines
 
 set signcolumn=yes
@@ -157,7 +159,8 @@ tnoremap <Esc> <C-\><C-n>
 " interactive replace
 set inccommand=split
 
-
+autocmd BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
+autocmd FileType gitcommit setlocal spell spelllang=en_us
 " }}}
 
 " File, backups and undo {{{
@@ -190,7 +193,7 @@ imap <F1> <Esc><Esc>
 
 
 " Remap leader
-let mapleader=" "
+let mapleader=' '
 
 "Move current lines
 nmap <M-j> mz:m+<cr>`z
@@ -297,6 +300,22 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+function! s:plug_gx()
+  let line = getline('.')
+  let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
+  let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
+                      \ : getline(search('^- .*:$', 'bn'))[2:-2]
+  let uri  = get(get(g:plugs, name, {}), 'uri', '')
+  if uri !~ 'github.com'
+    return
+  endif
+  let repo = matchstr(uri, '[^:/]*/'.name)
+  let url  = empty(sha) ? 'https://github.com/'.repo
+                      \ : printf('https://github.com/%s/commit/%s', repo, sha)
+  call netrw#BrowseX(url, 0)
+endfunction
+            
+let g:outdated_plugins_silent_mode = 1
 " lightline
 set noshowmode  " we don't need it any more because of the status line
 let g:lightline = {
@@ -355,7 +374,6 @@ command! PlugHelp call fzf#run(fzf#wrap({
   \ 'sink':   function('s:plug_help_sink')}))
 
 noremap <leader>/ :Rg 
-
 " }}} FZF "
 
  " switch.vim {{{
@@ -387,14 +405,14 @@ let g:LanguageClient_serverCommands = {
 
 let g:LanguageClient_diagnosticsDisplay = {
             \     1: {
-            \         "name": "Error",
-            \         "signText": "💥",
-            \         "virtualTexthl": "ErrorMsg",
+            \         'name': 'Error',
+            \         'signText': '💥',
+            \         'virtualTexthl': 'ErrorMsg',
             \     },
             \     2: {
-            \         "name": "Warning",
-            \         "signText": "❗",
-            \         "virtualTexthl": "WarningMsg",
+            \         'name': 'Warning',
+            \         'signText': '❗',
+            \         'virtualTexthl': 'WarningMsg',
             \     }
             \ }
  " The default value brake the quickfix list	
@@ -403,8 +421,8 @@ let g:LanguageClient_diagnosticsList = 'Location'
 function! LC_maps()	
     if has_key(g:LanguageClient_serverCommands, &filetype)	
         nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
-        nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ "gotoCmd": "split" })<CR>	
-        nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ "gotoCmd": "vsplit" })<CR>	
+        nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
+        nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'vsplit' })<CR>	
         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
         nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>	
     endif
@@ -419,15 +437,15 @@ autocmd FileType  *  call LC_maps()
 let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger= "<c-k>"
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger= '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger= '<c-k>'
 let g:UltiSnipsRemoveSelectModeMappings=0
 " }}}
 
-" " Completion {{{
-let g:ncm2#matcher="substrfuzzy"
+" Completion {{{
+let g:ncm2#matcher='substrfuzzy'
 autocmd BufEnter * call ncm2#enable_for_buffer()
 " When the <Enter> key is pressed while the popup menu is visible, it only
 " hides the menu. Use this mapping to close the menu and also start a new
@@ -440,8 +458,8 @@ inoremap <c-c> <ESC>
 
 
 " Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
+inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 " }}}
 
 " Terraform {{{
