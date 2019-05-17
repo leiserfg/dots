@@ -57,9 +57,7 @@ Plug 'jceb/emmet.snippets'
 Plug 'lambdalisue/suda.vim'
 Plug 'tpope/vim-eunuch'
 
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'direnv/direnv.vim'
-Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'pest-parser/pest.vim'
@@ -111,8 +109,11 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
 
+augroup vimrc
+    autocmd!
+augroup END
 
-autocmd InsertEnter * set nohlsearch
+autocmd vimrc InsertEnter * set nohlsearch
 " }}}
 
 " General {{{
@@ -184,7 +185,7 @@ nnoremap [t :tabp<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au vimrc BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 " }}}
 
 " Editing mappings {{{
@@ -300,6 +301,10 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+
+" ----------------------------------------------------------------------------
+" vim-plug extension
+" ----------------------------------------------------------------------------
 function! s:plug_gx()
   let line = getline('.')
   let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
@@ -314,7 +319,43 @@ function! s:plug_gx()
                       \ : printf('https://github.com/%s/commit/%s', repo, sha)
   call netrw#BrowseX(url, 0)
 endfunction
-            
+
+function! s:scroll_preview(down)
+  silent! wincmd P
+  if &previewwindow
+    execute 'normal!' a:down ? "\<c-e>" : "\<c-y>"
+    wincmd p
+  endif
+endfunction
+
+function! s:plug_doc()
+  let name = matchstr(getline('.'), '^- \zs\S\+\ze:')
+  if has_key(g:plugs, name)
+    for doc in split(globpath(g:plugs[name].dir, 'doc/*.txt'), '\n')
+      execute 'tabe' doc
+    endfor
+  endif
+endfunction
+
+function! s:setup_extra_keys()
+  " PlugDiff
+  nnoremap <silent> <buffer> J :call <sid>scroll_preview(1)<cr>
+  nnoremap <silent> <buffer> K :call <sid>scroll_preview(0)<cr>
+  nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
+  nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
+  nmap <silent> <buffer> <c-j> <c-n>o
+  nmap <silent> <buffer> <c-k> <c-p>o
+
+  " gx
+  nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
+
+  " helpdoc
+  nnoremap <buffer> <silent> H  :call <sid>plug_doc()<cr>
+endfunction
+
+autocmd vimrc FileType vim-plug call s:setup_extra_keys()
+
+
 let g:outdated_plugins_silent_mode = 1
 " lightline
 set noshowmode  " we don't need it any more because of the status line
