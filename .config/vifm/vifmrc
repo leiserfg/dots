@@ -222,16 +222,6 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
           \*.as[fx]
          \ ffprobe -pretty %c 2>&1
 
-" Web
-filextype *.html,*.htm
-        \ {Open with dwb}
-        \ dwb %f %i &,
-        \ {Open with firefox}
-        \ firefox %f &,
-        \ {Open with uzbl}
-        \ uzbl-browser %f %i &,
-filetype *.html,*.htm links, lynx
-
 " Object
 filetype *.o nm %f | less
 
@@ -243,24 +233,11 @@ fileviewer *.[1-8] man ./%c | col -b
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
         \ sxiv %f,
-        \ {View in gpicview}
-        \ gpicview %c,
-        \ {View in shotwell}
-        \ shotwell,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
 		   \ kitty icat --transfer-mode=file --place=%pwx%ph@%pxx%py %c
 		   \ %pc
 		   \ kitty icat --transfer-mode=file --clear
 
-" OpenRaster
-filextype *.ora
-        \ {Edit in MyPaint}
-        \ mypaint %f,
-
-" Mindmap
-filextype *.vym
-        \ {Open with VYM}
-        \ vym %f &,
 
 " MD5
 filetype *.md5
@@ -286,10 +263,6 @@ filetype *.sha512
 filetype *.asc
        \ {Check signature}
        \ !!gpg --verify %c,
-
-" Torrent
-filetype *.torrent ktorrent %f &
-fileviewer *.torrent dumptorrent -v %c
 
 " FuseZipMount
 filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
@@ -434,7 +407,7 @@ nnoremap cc cw<c-u>
 nnoremap A cw
 
 " Open console in current directory
-nnoremap ,t :!xterm &<cr>
+nnoremap ,t :!$TERMINAL &<cr>
 
 " Toggle wrap setting on ,w key
 nnoremap ,w :set wrap!<cr>
@@ -451,9 +424,7 @@ nnoremap <f8> :delete<cr>
 
 " Various customization examples
 
-" Use ag (the silver searcher) instead of grep
-"
-" set grepprg='ag --line-numbers %i %a %s'
+set grepprg='rg --vimgrep --no-heading --smart-case %a'
 
 " Add additional place to look for executables
 "
