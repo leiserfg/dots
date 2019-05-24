@@ -30,7 +30,7 @@ prompt {
 }
 textbox-prompt-colon {
     expand: false;
-    str: "::";
+    str: "∷";
     padding: 10px;
 }
 entry {
