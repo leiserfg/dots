@@ -151,7 +151,7 @@
     icon_position = left
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/48x48/devices/
+    icon_path = /usr/share/icons/Papirus/64x64/status/:/usr/share/icons/Papirus/64x64/devices/
 
     # Limit icons size.
     max_icon_size=256
@@ -162,21 +162,10 @@
     # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
     # "mod3" and "mod4" (windows-key).
     # Xev might be helpful to find names for keys.
-    
-    # Close notification.
     close = mod1+space
-    
-    # Close all notifications.
-    # close_all = ctrl+shift+space
     close_all = ctrl+mod1+space
-
-    # Redisplay last message(s).
-    # On the US keyboard layout "grave" is normally above TAB and left
-    # of "1".
     history = ctrl+mod4+h 
-    
-    # Context menu.
-    context = ctrl+mod1+c
+    context = ctrl+mod4+space
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
