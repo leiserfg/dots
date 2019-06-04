@@ -1,7 +1,6 @@
-cd (/usr/bin/pwd)
 export EDITOR=nvim
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
-set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
+# set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
 #Python local installed packages
 set PATH (python3 -m site --user-base)/bin $PATH 
 
@@ -27,14 +26,6 @@ set PATH "$NPM_PACKAGES/bin/" $PATH
 
 #Rust
 set PATH "$HOME/.cargo/bin/" $PATH
-
-#Colors
-if test -n $DISPLAY
-    # set TERM 'screen-256color'
-    # set fish_term24bit 1
-end
-
-set PATH "$HOME/.nimble/bin/" $PATH
 
 export NODE_VERSIONS=$HOME/.config/nvm/
 export NODE_VERSION_PREFIX=''

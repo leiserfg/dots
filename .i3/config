@@ -188,7 +188,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 assign [class="Telegram"] $ws4
-assign [class="Slack"] $ws4
 
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
