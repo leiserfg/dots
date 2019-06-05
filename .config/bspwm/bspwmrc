@@ -1,14 +1,9 @@
 #!/bin/sh
-export SXHKD_SHELL=/usr/bin/dash 
+export SXHKD_SHELL=/usr/bin/dash
 
-gap=12
 
-#This creates negative padding eaual to window gap so that gaps are shown only between windows and not on desktop edges.
-bspc config window_gap $gap;
-# bspc config top_padding -$gap
-# bspc config left_padding -$gap
-# bspc config right_padding -$gap
-# bspc config bottom_padding -$gap
+
+bspc config window_gap 12
 
 
 bspc monitor -d ₁ ₂ ₃ ₄ ₅    
@@ -26,23 +21,22 @@ bspc rule -a "TelegramDesktop" desktop='^4'
 bspc rule -a Zathura state=tiled
 
 
-
 #Don't run if it's running
 run_once(){
+   printf "%s\n" "$1"
    pidof $1 || $@ &
 }
 
 #Those operation are idempotent
 pidof sxhkd && pkill -USR1 -x sxhkd || sxhkd &
-~/.config/polybar/launch.sh
+~/.config/polybar/launch.sh > /dev/null 2>&1 
 pkill compton; compton -b
 nitrogen --restore
-xset s 300 300
+xset s 60 120
+fix_xcursor
 
 run_once pulseaudio --start
-run_once xss-lock -- i3lock-fancy-rapid 5 3
-run_once fix_xcursor
+run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 3
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run_once uncluter
-run_once xfce4-power-manager
+run_once unclutter -b
 

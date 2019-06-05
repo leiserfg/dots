@@ -101,7 +101,7 @@ super + shift + {1-9}
 super + {1-9}
         arg1={1-9};\
         current_desktop=$(bspc query -d -T|jq -r .id);\
-        next_desktop=$(bspc wm -d|jq -r "(.monitors[].desktops[$arg1-1].id|select(. !=$current_desktop)) // last(.focusHistory[].desktopId|select(. != $current_desktop))");\
+        next_desktop=$(bspc wm -d|jq -r "(.monitors[].desktops[$arg1-1].id|select(. !=$current_desktop)) // \"last\" ");\
         bspc desktop -f $next_desktop
 
 
@@ -142,3 +142,19 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# multimedia
+XF86AudioMute 
+       pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86AudioRaiseVolume  
+       pactl set-sink-volume @DEFAULT_SINK@ +5%; notify-send 'Volume up'
+
+XF86AudioLowerVolume  
+       pactl set-sink-volume @DEFAULT_SINK@ -5%; notify-send 'Volume down'
+
+XF86MonBrightnessUp 
+       xbacklight -inc 10 
+
+XF86MonBrightnessDown 
+       xbacklight -dec 10 
