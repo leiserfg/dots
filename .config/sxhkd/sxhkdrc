@@ -99,11 +99,9 @@ super + shift + {1-9}
 	bspc node -d '^{1-9}'
 
 super + {1-9}
-        arg1={1-9};\
-        current_desktop=$(bspc query -d -T|jq -r .id);\
-        next_desktop=$(bspc wm -d|jq -r "(.monitors[].desktops[$arg1-1].id|select(. !=$current_desktop)) // \"last\" ");\
-        bspc desktop -f $next_desktop
-
+        focused_desktop=$(bspc query -d focused -D);\
+        target_desktop=$(bspc query -d ^{1-9} -D);\
+        bspc desktop -f $([ $focused_desktop = $target_desktop ] && echo "last" || echo $target_desktop)
 
 super + 0
         rofi_power 
