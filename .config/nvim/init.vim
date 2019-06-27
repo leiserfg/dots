@@ -36,7 +36,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 Plug 'rhysd/git-messenger.vim'
-
+Plug 'lambdalisue/gina.vim'
 
 "Completion
 Plug 'autozimu/LanguageClient-neovim', {
@@ -68,6 +68,7 @@ Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
 call plug#end()

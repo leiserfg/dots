@@ -1,7 +1,6 @@
 ﻿#
 # wm independent hotkeys
 #
-
 # terminal emulator
 super + Return
 	cd $(xcwd); $TERMINAL
@@ -104,14 +103,14 @@ super + {1-9}
         bspc desktop -f $([ $focused_desktop = $target_desktop ] && echo "last" || echo $target_desktop)
 
 super + 0
-        rofi_power 
+        rofi_power
 #
 # preselect
 #
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+	bspc node -p \~{west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}

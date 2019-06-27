@@ -162,10 +162,11 @@
     # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
     # "mod3" and "mod4" (windows-key).
     # Xev might be helpful to find names for keys.
-    close = mod1+space
-    close_all = ctrl+mod1+space
-    history = ctrl+mod4+h 
-    context = ctrl+mod4+space
+    
+    close = mod4+period
+    close_all = mod4+period
+    history = mod4+shift+period
+    context = mod4+ctrl+period
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.

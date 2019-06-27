@@ -129,7 +129,11 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 " :mark mark /full/directory/path [filename]
 
 mark h ~/
-
+mark c ~/Documents
+mark d ~/Downloads
+mark p ~/Pictures
+mark b ~/Public
+mark v ~/Videos
 " ------------------------------------------------------------------------------
 
 " :com[mand][!] command_name action
@@ -425,6 +429,12 @@ nnoremap <f8> :delete<cr>
 " Various customization examples
 
 set grepprg='rg --vimgrep --no-heading --smart-case %a'
+
+" copy files to the opposite pane (using rsync)
+nmap ry :!tsp rsync -a %f %D<cr>
+
+" move files to the opposite pane (using rsync)
+nmap rd :!tsp rsync -a --remove-source-files %f %D && tsp find %f -type d -empty -exec rmdir {} \; && tsp rmdir %f<cr>
 
 " Add additional place to look for executables
 "
