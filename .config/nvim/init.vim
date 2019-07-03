@@ -38,6 +38,7 @@ Plug 'ruanyl/vim-gh-line'
 Plug 'rhysd/git-messenger.vim'
 Plug 'lambdalisue/gina.vim'
 
+Plug 'alok/notational-fzf-vim'
 "Completion
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -302,6 +303,7 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+let g:nv_search_paths = ['~/txts']
 let g:suda_smart_edit = 1
 " ----------------------------------------------------------------------------
 " vim-plug extension

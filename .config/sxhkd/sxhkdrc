@@ -3,7 +3,7 @@
 #
 # terminal emulator
 super + Return
-	cd $(xcwd); $TERMINAL
+	cd $(xcwd); $TERMCMD
 
 super + slash
 	$BROWSER
