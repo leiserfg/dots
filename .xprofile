@@ -4,5 +4,5 @@ export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 export BROWSER=firefox-developer-edition
 export TERMCMD=kitty
-export TERMINAL=kitty
+export TERMINAL=$TERMCMD
 export PATH=$HOME/.local/bin/:$PATH

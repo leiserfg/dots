@@ -72,6 +72,10 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
 call plug#end()
 " }}}
 "
@@ -393,7 +397,46 @@ let g:signify_sign_changedelete = '│'
 
 " FZF {{{
 " ============================================================================
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', '#5f5f87'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
+let $FZF_DEFAULT_OPTS .=' --layout=reverse '
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, 'number', 'no')
+
+  let height = float2nr(&lines/2)
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  "let width = &columns
+  let row = float2nr(&lines / 3)
+  let col = float2nr((&columns - width) / 3)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': row,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height':height,
+        \ }
+  let win =  nvim_open_win(buf, v:true, opts)
+  call setwinvar(win, '&number', 0)
+  call setwinvar(win, '&relativenumber', 0)
+endfunction
 
 " Hide statusline of terminal buffer
 autocmd! FileType fzf
@@ -440,11 +483,18 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 \ ]
 " }}} "
 
+" Preattier 
+let g:prettier#autoformat = 0
+
 " LSP {{{	
 let g:LanguageClient_serverCommands = {
             \ 'Dockerfile': ['docker-langserver', '--stdio'],
             \ 'python': ['pyls'],
-            \ 'rust': ['rustup', 'run', 'stable', 'rls']
+            \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+            \ 'json': ['json-languageserver', '--stdio' ],
+            \'javascript': ['/usr/bin/javascript-typescript-stdio'],
+            \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+            \'typescript': ['/usr/bin/javascript-typescript-stdio'],
             \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
@@ -468,7 +518,7 @@ function! LC_maps()
         nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
         nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'vsplit' })<CR>	
         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
-        nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>	
+        nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>
     endif
 endfunction
 
