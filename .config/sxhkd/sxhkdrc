@@ -44,8 +44,14 @@ super + f
 super + y
 	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
+
+#Balance focused (usually a parent)
 super + b
-        bspc node @parent -B
+        bspc node -B
+
+#Tilt focused (usually parent)
+super + t
+        bspc node -R 90
 
 # zoom (swap to biggest window)
 super + z
@@ -72,7 +78,7 @@ super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
+super + {p,a,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
