@@ -26,7 +26,13 @@ run_once(){
 }
 
 #Those operation are idempotent
-pidof sxhkd && pkill -USR1 -x sxhkd || sxhkd &
+if pidof sxhkd
+then
+    pkill -USR1 -x sxhkd 
+else
+    sxhkd &
+fi
+
 ~/.config/polybar/launch.sh > /dev/null 2>&1 
 pkill compton; compton -b
 nitrogen --restore
