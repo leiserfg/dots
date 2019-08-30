@@ -1,17 +1,4 @@
-
-/* This theme is intended for a simple display of a 5
- * items vertical list on a 1366x768 resolution.
- */
-* {
-    main-color:       #afcfee;
-    background:       #1c1c1c;
-    background-alt:   #1f1f1f;
-    background-light: #282828;
-    foreground:       #e2e2e2;
-    /* Base values for all */
-    background-color: @background;
-    text-color:       @foreground;
-}
+@import "colors"
 /* Input window */
 inputbar,
 prompt,

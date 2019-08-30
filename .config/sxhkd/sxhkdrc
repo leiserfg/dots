@@ -38,7 +38,7 @@ super + {_,shift + }q
 super + f
     state=fullscreen; \
     bspc query -N -n "focused.$state" && state=$(bspc query -T -n | jq -r .client.lastState); \
-    bspc node -t "$state"
+    bspc node -t $state
 
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
 super + y

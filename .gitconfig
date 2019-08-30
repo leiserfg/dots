@@ -25,7 +25,7 @@
 	co              = checkout
 	br              = branch
         down            = clone --depth=1
-        delouse         = "!f(){curr_sha=$(git sha); git reset HEAD~1;git commit --allow-empty --no-verify -C \"$curr_sha\";}; f"
+        delouse         = "!f() { curr_sha=`git sha`; git reset HEAD~1;git commit --allow-empty --no-verify -C \"$curr_sha\"; }; f"
 	cp              = cherry-pick
 	cps             = cherry-pick -s
 	today           = diff @{yesterday}.. --stat
