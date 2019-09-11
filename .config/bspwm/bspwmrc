@@ -21,8 +21,8 @@ bspc rule -a gmic_qt  follow=on focus=on state=floating
 bspc rule -a Dragon-drag-and-drop sticky=on
 
 #Don't run if it's running
-run_once(){
-   pidof "$1" || "$@" &
+run_once () {
+   pidof "$1" || eval "$@" " &; disown"
 }
 
 #Those operation are idempotent
