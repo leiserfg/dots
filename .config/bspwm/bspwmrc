@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 export SXHKD_SHELL=/usr/bin/sh
 bspc monitor -d ₁ ₂ ₃ ₄ ₅    
 bspc config window_gap 6
