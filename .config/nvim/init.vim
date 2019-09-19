@@ -72,8 +72,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
+Plug 'ruanyl/vim-fixmyjs', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 call plug#end()

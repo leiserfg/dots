@@ -21,19 +21,22 @@ bspc rule -a gmic_qt  follow=on focus=on state=floating
 bspc rule -a Dragon-drag-and-drop sticky=on
 
 #Don't run if it's running
+run_disowned () {
+    nohup "$@" > /dev/null 2>&1 &
+}
+
 run_once () {
-   pidof "$1" || eval "$@" " &; disown"
+    pidof "$(basename $1)" || run_disowned "$@"
 }
 
 #Those operation are idempotent
-if pidof sxhkd
-then
-    pkill -USR1 -x sxhkd 
-else
-    sxhkd &
-fi
 
-~/.config/polybar/launch.sh > /dev/null 2>&1 
+# Reload sxhkd manually cause using USR1 hangs the keyboard frome time to time
+pkill sxhkd
+run_disowned sxhkd
+
+
+~/.config/polybar/launch.sh > /dev/null 2>&1 &
 pkill compton; compton -b
 nitrogen --restore
 xset s 120 180
