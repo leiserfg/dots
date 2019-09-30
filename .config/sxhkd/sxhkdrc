@@ -16,6 +16,9 @@ super + {minus,equal}
 super + d
         rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons
 
+super + d
+        rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons
+
 # make sxhkd reload its configuration files:
 super + r
         sh ~/.config/bspwm/bspwmrc

@@ -17,6 +17,7 @@ bspc rule -a "Firefox Developer Edition" desktop='^1' follow=on
 bspc rule -a "TelegramDesktop" desktop='^4' follow=on
 # bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
+bspc rule -a PureRef state=floating
 bspc rule -a gmic_qt  follow=on focus=on state=floating
 bspc rule -a Dragon-drag-and-drop sticky=on
 
@@ -44,7 +45,7 @@ fix_xcursor
 
 run_once pulseaudio --start
 run_once telegram-desktop
-run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 3
+run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once unclutter -b
 

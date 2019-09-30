@@ -49,8 +49,7 @@ Xft.autohint:  false
 *color7:                          #d8d8d8
 *color15:                         #f8f8f8
 
-Xcursor.theme: xcursor-breeze
-
 rofi.run-command: fish -c '{cmd}'
 rofi.run-list-command: 'fish -c functions'
 
+Xcursor.theme: Adwaita
