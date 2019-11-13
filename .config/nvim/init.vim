@@ -63,6 +63,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'pest-parser/pest.vim'
 
+
+Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 Plug 'itchyny/lightline.vim'
 Plug 'aonemd/kuroi.vim'
 Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
@@ -306,6 +308,13 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+
+""Enable emojis
+
+au FileType html,php,markdown,mmd,text,mail,gitcommit
+    \ runtime macros/emoji-ab.vim
+
+
 let g:nv_search_paths = ['~/txts']
 let g:suda_smart_edit = 1
 " ----------------------------------------------------------------------------

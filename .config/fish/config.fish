@@ -32,7 +32,8 @@ export NODE_VERSION_PREFIX=''
 
 #PIPENV
 eval (pipenv --completion)
-
+#pipx
+register-python-argcomplete --shell fish pipx | .
 direnv hook fish|source
 
 set -g __fish_git_prompt_show_informative_status 1

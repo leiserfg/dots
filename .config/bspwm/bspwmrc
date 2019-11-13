@@ -13,12 +13,13 @@ bspc config single_monocle  true
 # remove all rules first
 bspc rule -r '*:*'
 # bspc rule -a "Brave-browser" desktop='^1' follow=on
-bspc rule -a "Firefox Developer Edition" desktop='^1' follow=on
+bspc rule -a "*:Navigator" desktop='^1' follow=on
 bspc rule -a "TelegramDesktop" desktop='^4' follow=on
 # bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
 bspc rule -a PureRef state=floating
 bspc rule -a gmic_qt  follow=on focus=on state=floating
+bspc rule -a Pavucontrol state=floating
 bspc rule -a Dragon-drag-and-drop sticky=on
 
 #Don't run if it's running
