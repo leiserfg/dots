@@ -39,11 +39,14 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'lambdalisue/gina.vim'
 
 Plug 'alok/notational-fzf-vim'
+
 "Completion
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+
+
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
@@ -61,13 +64,15 @@ Plug 'tpope/vim-eunuch'
 Plug 'direnv/direnv.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
-Plug 'pest-parser/pest.vim'
+" Plug 'pest-parser/pest.vim'
 
 
+Plug 'plasticboy/vim-markdown'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
+
 Plug 'itchyny/lightline.vim'
 Plug 'aonemd/kuroi.vim'
-Plug 'francoiscabrol/ranger.vim' | Plug 'rbgrouleff/bclose.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -495,6 +500,7 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 let g:prettier#autoformat = 0
 
 " LSP {{{	
+
 let g:LanguageClient_serverCommands = {
             \ 'Dockerfile': ['docker-langserver', '--stdio'],
             \ 'python': ['pyls'],
