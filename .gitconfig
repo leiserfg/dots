@@ -4,6 +4,7 @@
 	excludesfile    = ~/.gitignore_global
 	autocrlf        = input
 	quotepath       = false
+        pager           = delta --dark
 [color]
 	ui              = auto
 [color "branch"]

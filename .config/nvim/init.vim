@@ -50,11 +50,11 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+" Plug 'ncm2/ncm2-ultisnips'
 
 
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jceb/emmet.snippets'
 
@@ -509,6 +509,7 @@ let g:LanguageClient_serverCommands = {
             \'javascript': ['/usr/bin/javascript-typescript-stdio'],
             \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
             \'typescript': ['/usr/bin/javascript-typescript-stdio'],
+            \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
             \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
@@ -545,7 +546,7 @@ autocmd FileType  *  call LC_maps()
 let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
+" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger= '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger= '<c-k>'
@@ -608,4 +609,5 @@ command! EX if !empty(expand('%'))
 set termguicolors
 set background=dark
 colorscheme kuroi
+
 " }}}
