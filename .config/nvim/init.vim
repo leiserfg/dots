@@ -14,7 +14,9 @@ Plug 'semanser/vim-outdated-plugins'
 " Extra operators
 Plug 'tpope/vim-commentary'  "gc
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'  "ys, ds, cs
+" Plug 'tpope/vim-surround'  "ys, ds, cs
+Plug 'machakann/vim-sandwich'
+
 Plug 'junegunn/vim-easy-align'  "ga
 Plug 'vim-scripts/ReplaceWithRegister'  " gr
 Plug 'vim-scripts/vis'  " :'<,'>B
@@ -50,11 +52,11 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-github'
-" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-" Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+Plug 'ncm2/ncm2-ultisnips'
 
 
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jceb/emmet.snippets'
 
@@ -313,6 +315,27 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+" Make sandwich work like vim-surround
+runtime macros/sandwich/keymap/surround.vim
+" Textobjects to select a text surrounded by braket or same characters user input.
+
+xmap is <Plug>(textobj-sandwich-query-i)
+xmap as <Plug>(textobj-sandwich-query-a)
+omap is <Plug>(textobj-sandwich-query-i)
+omap as <Plug>(textobj-sandwich-query-a)
+
+" Textobjects to select a text surrounded by same characters user input.
+
+xmap im <Plug>(textobj-sandwich-literal-query-i)
+xmap am <Plug>(textobj-sandwich-literal-query-a)
+omap im <Plug>(textobj-sandwich-literal-query-i)
+omap am <Plug>(textobj-sandwich-literal-query-a)
+
+"Textobjects to select the nearest surrounded text automatically.
+xmap iss <Plug>(textobj-sandwich-auto-i)
+xmap ass <Plug>(textobj-sandwich-auto-a)
+omap iss <Plug>(textobj-sandwich-auto-i)
+omap ass <Plug>(textobj-sandwich-auto-a)
 
 ""Enable emojis
 
@@ -546,7 +569,7 @@ autocmd FileType  *  call LC_maps()
 let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 
-" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger= '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger= '<c-k>'
