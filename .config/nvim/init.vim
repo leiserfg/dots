@@ -43,11 +43,15 @@ Plug 'lambdalisue/gina.vim'
 Plug 'alok/notational-fzf-vim'
 
 "Completion
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'ncm2/ncm2-vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
@@ -119,6 +123,7 @@ set splitright
 
 set nojoinspaces " remove spaces while joining
 set foldenable
+set foldlevel=1
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
@@ -315,23 +320,23 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
-" Make sandwich work like vim-surround
+"" Make sandwich work like vim-surround
 runtime macros/sandwich/keymap/surround.vim
-" Textobjects to select a text surrounded by braket or same characters user input.
+"" Textobjects to select a text surrounded by braket or same characters user input.
 
 xmap is <Plug>(textobj-sandwich-query-i)
 xmap as <Plug>(textobj-sandwich-query-a)
 omap is <Plug>(textobj-sandwich-query-i)
 omap as <Plug>(textobj-sandwich-query-a)
 
-" Textobjects to select a text surrounded by same characters user input.
+"" Textobjects to select a text surrounded by same characters user input.
 
 xmap im <Plug>(textobj-sandwich-literal-query-i)
 xmap am <Plug>(textobj-sandwich-literal-query-a)
 omap im <Plug>(textobj-sandwich-literal-query-i)
 omap am <Plug>(textobj-sandwich-literal-query-a)
 
-"Textobjects to select the nearest surrounded text automatically.
+""Textobjects to select the nearest surrounded text automatically.
 xmap iss <Plug>(textobj-sandwich-auto-i)
 xmap ass <Plug>(textobj-sandwich-auto-a)
 omap iss <Plug>(textobj-sandwich-auto-i)
@@ -547,22 +552,35 @@ let g:LanguageClient_diagnosticsDisplay = {
             \         'virtualTexthl': 'WarningMsg',
             \     }
             \ }
+
  " The default value brake the quickfix list	
-let g:LanguageClient_diagnosticsList = 'Location' 	
+" let g:LanguageClient_diagnosticsList = 'Location' 	
 
-function! LC_maps()	
-    if has_key(g:LanguageClient_serverCommands, &filetype)	
-        nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
-        nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
-        nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'vsplit' })<CR>	
-        nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
-        nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>
-    endif
-endfunction
+" function! LC_maps()	
+"     if has_key(g:LanguageClient_serverCommands, &filetype)	
+"         nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
+"         nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
+"         nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'vsplit' })<CR>	
+"         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
+"         nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>
+"     endif
+" endfunction
 
-autocmd FileType  *  call LC_maps()	
+" autocmd FileType  *  call LC_maps()	
 
  " }}}
+
+
+let g:lsp_signs_error = {'text': '💥'}
+let g:lsp_signs_warning = {'text': '❗'}
+let g:lsp_signs_hint = {'text': '🔔'}
+
+highlight link LspErrorText ErrorMsg
+highlight link LspWarningHighlight WarningMsg
+
+nnoremap <Leader>=  :LspDocumentFormat<CR>
+nnoremap gd  :LspDefinition<CR>
+nnoremap K  :LspHover<CR>
 
 " UltiSnips {{{
 
