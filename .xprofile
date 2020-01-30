@@ -1,8 +1,12 @@
+if [ $( xrandr | grep \* | cut -d' ' -f4|cut -d'x' -f2 ) -gt 2000 ]; then
+xrdb -merge ~/.Xresources_hdpi
+
 export QT_AUTO_SCREEN_SCALE_FACTOR=0.5
 export GDK_SCALE=2
-
 ##Downscale text
 export GDK_DPI_SCALE=0.5
+fi
+
 export TERMINAL=$TERMCMD
 
 export PATH=$HOME/.local/bin/:$PATH

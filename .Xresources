@@ -1,5 +1,3 @@
-Xft.dpi:       216
-*dpi:          216
 Xft.antialias: true
 Xcursor.size:                     48
 /* Xcursor.size:                     64 */
