@@ -25,7 +25,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
-Plug 'andymass/vim-matchup'
+" Plug 'andymass/vim-matchup'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'

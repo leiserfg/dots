@@ -10,7 +10,7 @@ if not functions -q fisher
     fish -c fisher
 end
 
-set PATH ~/bin/ $PATH
+set PATH ~/bin/ (yarn global dir) $PATH
 
 # if status --is-interactive
     # cat ~/.cache/wal/sequences  ^ /dev/null
