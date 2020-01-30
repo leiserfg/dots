@@ -8,5 +8,7 @@ ttf-nerd-fonts-symbols fzf ripgrep youtube-dl\
 python-pipx mpv firefox-developer-edition telegram-desktop  network-manager-applet\
 blueman
 
+sudo chsh -s /usr/bin/fish
+
 pipx install python-language-server
 pipx inject python-language-server pyls-black pyls-isort pyflakes rope
