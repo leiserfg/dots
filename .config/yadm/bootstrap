@@ -4,7 +4,7 @@ yay
 yay -S  rofi nvim-drop-in python-neovim kitty compton dunst\
 bsdwm sxhkd dashbinsh i3-scrot i3lock-fancy-rapid\
 polkit-gnome xss-lock rofi ttf-iosevka-ss07 ttf-iosevka-term-ss07\
-ttf-nerd-fonts-symbols fzf ripgrep youtube-dl\
+ttf-nerd-fonts-symbols  fzf ripgrep youtube-dl\
 python-pipx mpv firefox-developer-edition telegram-desktop  network-manager-applet\
 blueman git-lfs direnv git-hub
 
