@@ -6,7 +6,8 @@ bspwm sxhkd dashbinsh i3-scrot i3lock-fancy-rapid-git \
 polkit-gnome xss-lock rofi ttf-iosevka-ss07 ttf-iosevka-term-ss07 \
 ttf-nerd-fonts-symbols  fzf ripgrep youtube-dl \
 python-pipx mpv firefox-developer-edition telegram-desktop  network-manager-applet \
-blueman git-lfs direnv git-hub git-delta-bin fish python-pipx neovim-symlinks xsel  kernel-update-hook
+blueman git-lfs direnv git-hub git-delta-bin fish python-pipx neovim-symlinks xsel \
+kernel-update-hook polybar
 
 sudo chsh -s /usr/bin/fish
 
