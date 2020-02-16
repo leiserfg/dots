@@ -40,7 +40,7 @@ run_disowned sxhkd
 
 
 ~/.config/polybar/launch.sh > /dev/null 2>&1 &
-pkill compton; compton -b
+pkill picom; picom -b
 nitrogen --restore
 xset s 120 180
 fix_xcursor
@@ -50,4 +50,4 @@ run_once telegram-desktop
 run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once unclutter -b
-
+run_once nm-applet
