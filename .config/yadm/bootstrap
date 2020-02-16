@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 sudo pacman -S yay
 yay
-yay -S  rofi nvim-drop-in python-neovim kitty compton dunst\
-bsdwm sxhkd dashbinsh i3-scrot i3lock-fancy-rapid\
-polkit-gnome xss-lock rofi ttf-iosevka-ss07 ttf-iosevka-term-ss07\
-ttf-nerd-fonts-symbols  fzf ripgrep youtube-dl\
-python-pipx mpv firefox-developer-edition telegram-desktop  network-manager-applet\
-blueman git-lfs direnv git-hub git-delta-bin
+yay -S  rofi python-neovim kitty compton dunst \
+bspwm sxhkd dashbinsh i3-scrot i3lock-fancy-rapid-git \
+polkit-gnome xss-lock rofi ttf-iosevka-ss07 ttf-iosevka-term-ss07 \
+ttf-nerd-fonts-symbols  fzf ripgrep youtube-dl \
+python-pipx mpv firefox-developer-edition telegram-desktop  network-manager-applet \
+blueman git-lfs direnv git-hub git-delta-bin fish python-pipx neovim-symlinks xsel  kernel-update-hook
 
 sudo chsh -s /usr/bin/fish
 

@@ -30,8 +30,6 @@ set PATH "$HOME/.cargo/bin/" $PATH
 export NODE_VERSIONS=$HOME/.config/nvm/
 export NODE_VERSION_PREFIX=''
 
-#PIPENV
-eval (pipenv --completion)
 #pipx
 register-python-argcomplete --shell fish pipx | .
 direnv hook fish|source
