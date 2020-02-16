@@ -1,5 +1,5 @@
 Xft.antialias: true
-Xcursor.size:                     48
+/* Xcursor.size:                     48 */
 /* Xcursor.size:                     64 */
 Xft.hinting:   true
 Xft.rgba:      rgb
