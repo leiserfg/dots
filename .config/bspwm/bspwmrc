@@ -1,8 +1,8 @@
 #!/usr/bin/sh
 export SXHKD_SHELL=/usr/bin/sh
 bspc monitor -d ₁ ₂ ₃ ₄ ₅    
-bspc config window_gap 6
-bspc config border_width         3
+bspc config window_gap 3
+bspc config border_width         1
 bspc config focused_border_color  '#afcfee'
 bspc config presel_feedback_color  '#afcfee'
 bspc config split_ratio          0.52
@@ -40,7 +40,7 @@ run_disowned sxhkd
 
 
 ~/.config/polybar/launch.sh > /dev/null 2>&1 &
-pkill compton; compton -b
+pkill picom; picom -b
 nitrogen --restore
 xset s 120 180
 fix_xcursor
@@ -50,4 +50,4 @@ run_once telegram-desktop
 run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once unclutter -b
-
+run_once nm-applet
