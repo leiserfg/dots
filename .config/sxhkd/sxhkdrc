@@ -24,7 +24,7 @@ super + r
         sh ~/.config/bspwm/bspwmrc
 
 super + {_,shift +,ctrl +} + @Print
-  scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'"
+  scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'" -q 100
 #
 # bspwm hotkeys
 #
@@ -164,3 +164,6 @@ XF86MonBrightnessUp
 
 XF86MonBrightnessDown 
        xbacklight -dec 10 
+
+XF86Search
+       xdotool key Num_Lock
