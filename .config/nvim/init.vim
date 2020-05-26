@@ -29,7 +29,7 @@ Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
 Plug 'AndrewRadev/switch.vim'    " -
 " Plug 'andymass/vim-matchup'
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'Olical/vim-enmasse'
@@ -125,7 +125,7 @@ set splitright
 
 set nojoinspaces " remove spaces while joining
 set foldenable
-set foldlevel=1
+set foldlevel=2
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
@@ -322,6 +322,9 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+
+autocmd FileType direnv setlocal commentstring=#\ %s
+
 "" Make sandwich work like vim-surround
 runtime macros/sandwich/keymap/surround.vim
 "" Textobjects to select a text surrounded by braket or same characters user input.
@@ -351,6 +354,7 @@ au FileType html,php,markdown,mmd,text,mail,gitcommit
 
 
 let g:nv_search_paths = ['~/txts']
+nnoremap <silent> <leader>n :NV<CR>
 let g:suda_smart_edit = 1
 " ----------------------------------------------------------------------------
 " vim-plug extension
@@ -457,29 +461,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
 let $FZF_DEFAULT_OPTS .=' --layout=reverse '
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, 'number', 'no')
-
-  let height = float2nr(&lines/2)
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  "let width = &columns
-  let row = float2nr(&lines / 3)
-  let col = float2nr((&columns - width) / 3)
-
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': row,
-        \ 'col': col,
-        \ 'width': width,
-        \ 'height':height,
-        \ }
-  let win =  nvim_open_win(buf, v:true, opts)
-  call setwinvar(win, '&number', 0)
-  call setwinvar(win, '&relativenumber', 0)
-endfunction
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
 " Hide statusline of terminal buffer
 autocmd! FileType fzf

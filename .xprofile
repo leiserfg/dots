@@ -5,6 +5,10 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0.5
 export GDK_SCALE=2
 ##Downscale text
 export GDK_DPI_SCALE=0.5
+
+export MESA_LOADER_DRIVER_OVERRIDE=i965
+export MESA_LOADER_DRIVER_OVERRIDE=iris
+
 fi
 
 export TERMINAL=$TERMCMD
@@ -14,3 +18,4 @@ export PATH=$HOME/.local/bin/:$PATH
 #Apps
 export BROWSER=firefox-developer-edition
 export TERMCMD=kitty
+
