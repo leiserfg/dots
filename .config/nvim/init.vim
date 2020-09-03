@@ -33,6 +33,7 @@ Plug 'AndrewRadev/switch.vim'    " -
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'Olical/vim-enmasse'
+Plug 'junegunn/vim-peekaboo'  " show registers
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -45,15 +46,15 @@ Plug 'lambdalisue/gina.vim'
 Plug 'alok/notational-fzf-vim'
 
 "Completion
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
+Plug 'autozimu/LanguageClient-neovim', {
+     \ 'branch': 'next',
+     \ 'do': 'bash install.sh',
+     \ }
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ncm2/ncm2-vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'ncm2/ncm2-vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
@@ -522,6 +523,7 @@ let g:LanguageClient_serverCommands = {
             \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
             \'typescript': ['/usr/bin/javascript-typescript-stdio'],
             \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
+            \'gdscript3': ['tcp://localhost:6008'],
             \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
@@ -537,34 +539,38 @@ let g:LanguageClient_diagnosticsDisplay = {
             \     }
             \ }
 
- " The default value brake the quickfix list	
-" let g:LanguageClient_diagnosticsList = 'Location' 	
+" The default value brake the quickfix list	
+let g:LanguageClient_diagnosticsList = 'Location'
 
 " function! LC_maps()	
 "     if has_key(g:LanguageClient_serverCommands, &filetype)	
 "         nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
 "         nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
-"         nnoremap <buffer> <silent> gvD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'vsplit' })<CR>	
 "         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
 "         nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>
 "     endif
 " endfunction
 
 " autocmd FileType  *  call LC_maps()	
+nmap <F5> <Plug>(lcn-menu)
 
+nmap <silent> K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
+nmap <silent> <Leader>= <Plug>(lcn-format-sync)
  " }}}
 
 
-let g:lsp_signs_error = {'text': '💥'}
-let g:lsp_signs_warning = {'text': '❗'}
-let g:lsp_signs_hint = {'text': '🔔'}
+" let g:lsp_signs_error = {'text': '💥'}
+" let g:lsp_signs_warning = {'text': '❗'}
+" let g:lsp_signs_hint = {'text': '🔔'}
 
-highlight link LspErrorText ErrorMsg
-highlight link LspWarningHighlight WarningMsg
+" highlight link LspErrorText ErrorMsg
+" highlight link LspWarningHighlight WarningMsg
 
-nnoremap <Leader>=  :LspDocumentFormat<CR>
-nnoremap gd  :LspDefinition<CR>
-nnoremap K  :LspHover<CR>
+" nnoremap <Leader>=  :LspDocumentFormat<CR>
+" nnoremap gd  :LspDefinition<CR>
+" nnoremap K  :LspHover<CR>
 
 " UltiSnips {{{
 
