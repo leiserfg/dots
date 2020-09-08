@@ -5,14 +5,12 @@
 " Automatic Download {{{
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " }}}
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'semanser/vim-outdated-plugins'
-
 " Extra operators
 Plug 'tpope/vim-commentary'  "gc
 Plug 'tpope/vim-unimpaired'
@@ -31,13 +29,13 @@ Plug 'AndrewRadev/switch.vim'    " -
 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'
-
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rhubarb'
+
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
 Plug 'rhysd/git-messenger.vim'
@@ -46,15 +44,18 @@ Plug 'lambdalisue/gina.vim'
 Plug 'alok/notational-fzf-vim'
 
 "Completion
-Plug 'autozimu/LanguageClient-neovim', {
-     \ 'branch': 'next',
-     \ 'do': 'bash install.sh',
-     \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"      \ 'branch': 'next',
+"      \ 'do': 'bash install.sh',
+"      \ }
 
 " Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'ncm2/ncm2-vim-lsp'
 " Plug 'mattn/vim-lsp-settings'
+
+Plug 'neovim/nvim-lsp'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
@@ -69,31 +70,49 @@ Plug 'jceb/emmet.snippets'
 
 Plug 'lambdalisue/suda.vim'
 Plug 'tpope/vim-eunuch'
+" https://google.com/search?btnI=1&q=
 
 Plug 'direnv/direnv.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
 " Plug 'pest-parser/pest.vim'
+Plug 'leiserfg/codi.vim'
 
-
-Plug 'plasticboy/vim-markdown'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
 
 Plug 'itchyny/lightline.vim'
-Plug 'aonemd/kuroi.vim'
+Plug 'sainnhe/gruvbox-material'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
+" Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
 
-Plug 'ruanyl/vim-fixmyjs', {
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+" Plug 'ruanyl/vim-fixmyjs', {
+"       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+"Lisp
+Plug 'Olical/AnsiEsc'
+Plug 'Olical/aniseed', {'branch': 'develop'}
+Plug 'Olical/conjure', {'branch': 'develop'}
+Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
+" Look and feel
+Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 " }}}
-"
+" treesitter {{{ "
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "markdown" },  -- list of language that will be disabled
+  },
+}
+EOF
+" }}} treesitter "
+
 " User interface {{{
 " Show line numbers
 set number
@@ -125,14 +144,14 @@ set splitbelow
 set splitright
 
 set nojoinspaces " remove spaces while joining
-set foldenable
+" set foldenable
 set foldlevel=2
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
 
 augroup vimrc
-    autocmd!
+  autocmd!
 augroup END
 
 autocmd vimrc InsertEnter * set nohlsearch
@@ -211,12 +230,10 @@ au vimrc BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 " }}}
 
 " Editing mappings {{{
-map <F1> <Esc><Esc>
-imap <F1> <Esc><Esc>
-
 
 " Remap leader
 let mapleader=' '
+let maplocalleader=' '
 
 "Move current lines
 nmap <M-j> mz:m+<cr>`z
@@ -224,22 +241,11 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-vnoremap <silent> <C-h> <<
-vnoremap <silent> <C-l> >>
-nnoremap <silent> <C-h> <<
-nnoremap <silent> <C-l> >>
-
 " Make Y behave like other capitals
 nnoremap Y y$
 
 " qq to record, Q to replay
 nnoremap Q @q
-
-
-" jk | Escaping 
-inoremap jk <Esc>
-" xnorecmap ii <Esc>
-cnoremap jk <C-c>
 
 nnoremap <leader>w :w<cr>
 
@@ -325,6 +331,21 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " Plugins {{{
 
 autocmd FileType direnv setlocal commentstring=#\ %s
+" function! s:qalc_clear(line)
+" " Remove empty lines
+"   return a:line
+" endfunction
+let g:codi#interpreters = {
+      \ 'qalc': {
+      \ 'bin':['qalc' ,'-t'],
+      \ 'prompt': '^> ',
+      \ },
+      \ }
+
+" " \ 'preprocess': function('s:qalc_clear'),
+" let g:codi#raw=1
+" let g:codi#log="/tmp/codi.log"
+" let g:codi#virtual_text=0
 
 "" Make sandwich work like vim-surround
 runtime macros/sandwich/keymap/surround.vim
@@ -350,10 +371,10 @@ omap ass <Plug>(textobj-sandwich-auto-a)
 
 ""Enable emojis
 
-au FileType html,php,markdown,mmd,text,mail,gitcommit
-    \ runtime macros/emoji-ab.vim
+" au FileType html,php,markdown,mmd,text,mail,gitcommit runtime macros/emoji-ab.vim
+let g:polyglot_disabled = ['markdown']
 
-
+" Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
 let g:suda_smart_edit = 1
@@ -364,14 +385,14 @@ function! s:plug_gx()
   let line = getline('.')
   let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
   let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
-                      \ : getline(search('^- .*:$', 'bn'))[2:-2]
+        \ : getline(search('^- .*:$', 'bn'))[2:-2]
   let uri  = get(get(g:plugs, name, {}), 'uri', '')
   if uri !~ 'github.com'
     return
   endif
   let repo = matchstr(uri, '[^:/]*/'.name)
   let url  = empty(sha) ? 'https://github.com/'.repo
-                      \ : printf('https://github.com/%s/commit/%s', repo, sha)
+        \ : printf('https://github.com/%s/commit/%s', repo, sha)
   call netrw#BrowseX(url, 0)
 endfunction
 
@@ -411,19 +432,18 @@ endfunction
 autocmd vimrc FileType vim-plug call s:setup_extra_keys()
 
 
-let g:outdated_plugins_silent_mode = 1
 " lightline
 set noshowmode  " we don't need it any more because of the status line
 let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'fugitive#head'
-            \ },
-            \ }
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gina#component#repo#branch'
+      \ },
+      \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -447,27 +467,28 @@ let g:signify_sign_changedelete = '│'
 " ============================================================================
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', '#5f5f87'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', '#5f5f87'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
 let $FZF_DEFAULT_OPTS .=' --layout=reverse '
-" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " Hide statusline of terminal buffer
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 function! s:plug_help_sink(line)
   let dir = g:plugs[a:line].dir
@@ -483,82 +504,95 @@ function! s:plug_help_sink(line)
 endfunction
 
 command! PlugHelp call fzf#run(fzf#wrap({
-  \ 'source': sort(keys(g:plugs)),
-  \ 'sink':   function('s:plug_help_sink')}))
+      \ 'source': sort(keys(g:plugs)),
+      \ 'sink':   function('s:plug_help_sink')}))
 
 noremap <leader>/ :Rg 
 " }}} FZF "
 
- " switch.vim {{{
+" switch.vim {{{
 let g:switch_mapping = '-'
 let g:switch_custom_definitions = [
-\   ['MON', 'TUE', 'WED', 'THU', 'FRI'],
-\   ['staging', 'production'],
-\   ['true', 'false']
-\ ]
+      \   ['MON', 'TUE', 'WED', 'THU', 'FRI'],
+      \   ['staging', 'production'],
+      \   ['true', 'false']
+      \ ]
 
 
 autocmd FileType python let b:switch_custom_definitions =
-\ [
-\ ['True', 'False']
-\ ]
+      \ [
+      \ ['True', 'False']
+      \ ]
 
 autocmd FileType gitrebase let b:switch_custom_definitions =
-\ [
-\   [ 'pick', 'reword', 'edit', 'squash', 'fixup', 'exec' ]
-\ ]
+      \ [
+      \   [ 'pick', 'reword', 'edit', 'squash', 'fixup', 'exec' ]
+      \ ]
 " }}} "
-
-" Preattier 
-let g:prettier#autoformat = 0
 
 " LSP {{{	
 
 let g:LanguageClient_serverCommands = {
-            \ 'Dockerfile': ['docker-langserver', '--stdio'],
-            \ 'python': ['pyls'],
-            \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-            \ 'json': ['json-languageserver', '--stdio' ],
-            \'javascript': ['/usr/bin/javascript-typescript-stdio'],
-            \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-            \'typescript': ['/usr/bin/javascript-typescript-stdio'],
-            \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
-            \'gdscript3': ['tcp://localhost:6008'],
-            \ }
+      \ 'Dockerfile': ['docker-langserver', '--stdio'],
+      \ 'python': ['pyls'],
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ 'json': ['json-languageserver', '--stdio' ],
+      \'javascript': ['/usr/bin/javascript-typescript-stdio'],
+      \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+      \'typescript': ['/usr/bin/javascript-typescript-stdio'],
+      \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
+      \'gdscript3': ['tcp://localhost:6008'],
+      \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
-            \     1: {
-            \         'name': 'Error',
-            \         'signText': '💥',
-            \         'virtualTexthl': 'ErrorMsg',
-            \     },
-            \     2: {
-            \         'name': 'Warning',
-            \         'signText': '❗',
-            \         'virtualTexthl': 'WarningMsg',
-            \     }
-            \ }
+      \     1: {
+      \         'name': 'Error',
+      \         'signText': '💥',
+      \         'virtualTexthl': 'ErrorMsg',
+      \     },
+      \     2: {
+      \         'name': 'Warning',
+      \         'signText': '❗',
+      \         'virtualTexthl': 'WarningMsg',
+      \     }
+      \ }
 
 " The default value brake the quickfix list	
 let g:LanguageClient_diagnosticsList = 'Location'
 
-" function! LC_maps()	
-"     if has_key(g:LanguageClient_serverCommands, &filetype)	
-"         nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>	
-"         nnoremap <buffer> <silent> gD :call LanguageClient#textDocument_definition({ 'gotoCmd': 'split' })<CR>	
-"         nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<CR>
-"         nnoremap <buffer> <Leader>= :call LanguageClient#textDocument_formatting()<CR>
-"     endif
-" endfunction
+" nmap <F5> <Plug>(lcn-menu)
 
-" autocmd FileType  *  call LC_maps()	
-nmap <F5> <Plug>(lcn-menu)
+" nmap <silent> K <Plug>(lcn-hover)
+" nmap <silent> gd <Plug>(lcn-definition)
+" nmap <silent> <F2> <Plug>(lcn-rename)
+" nmap <silent> <Leader>= <Plug>(lcn-format-sync)
 
-nmap <silent> K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
-nmap <silent> <Leader>= <Plug>(lcn-format-sync)
- " }}}
+
+
+
+
+lua <<EOF
+local nvim_lsp = require('nvim_lsp')
+local ncm2 = require('ncm2')
+nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
+nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
+EOF
+
+nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+
+sign define LspDiagnosticsErrorSign text=💥 texthl=LspDiagnosticsError linehl= numhl=
+sign define LspDiagnosticsWarningSign text=❗ texthl=LspDiagnosticsWarning linehl= numhl=
+sign define LspDiagnosticsInformationSign text=❕ texthl=LspDiagnosticsInformation linehl= numhl=
+sign define LspDiagnosticsHintSign text=🔔 texthl=LspDiagnosticsHint linehl= numhl=
 
 
 " let g:lsp_signs_error = {'text': '💥'}
@@ -595,9 +629,6 @@ set completeopt=noinsert,menuone,noselect
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
-
-
-" Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 " }}}
@@ -626,19 +657,22 @@ let g:gh_use_canonical = 1
 " EX | chmod +x
 " ----------------------------------------------------------------------------
 command! EX if !empty(expand('%'))
-         \|   write
-         \|   call system('chmod +x '.expand('%'))
-         \|   silent e
-         \| else
-         \|   echohl WarningMsg
-         \|   echo 'Save the file first'
-         \|   echohl None
-         \| endif
+      \|   write
+      \|   call system('chmod +x '.expand('%'))
+      \|   silent e
+      \| else
+        \|   echohl WarningMsg
+        \|   echo 'Save the file first'
+        \|   echohl None
+        \| endif
 " }}} Operators "
 
 " Theme {{{
 set termguicolors
 set background=dark
-colorscheme kuroi
-
+let g:gruvbox_material_sign_column_background = 'none' 
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_enable_italic = 1
+colorscheme gruvbox-material
+let g:lightline.colorscheme = 'gruvbox_material'
 " }}}
