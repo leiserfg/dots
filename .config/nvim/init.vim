@@ -23,14 +23,20 @@ Plug 'vim-scripts/vis'  " :'<,'>B
 
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
-Plug 'AndrewRadev/splitjoin.vim' " gS/gJ
+
+Plug 'AndrewRadev/splitjoin.vim'
+  let g:splitjoin_split_mapping = ''
+  let g:splitjoin_join_mapping = ''
+  nnoremap gss :SplitjoinSplit<cr>
+  nnoremap gsj :SplitjoinJoin<cr>
+
 Plug 'AndrewRadev/switch.vim'    " -
 " Plug 'andymass/vim-matchup'
 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-Plug 'machakann/vim-highlightedyank'
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
+Plug 'tpope/vim-vinegar'  " show registers
 
 " Git
 " Plug 'tpope/vim-fugitive'
@@ -70,16 +76,19 @@ Plug 'jceb/emmet.snippets'
 
 Plug 'lambdalisue/suda.vim'
 Plug 'tpope/vim-eunuch'
-" https://google.com/search?btnI=1&q=
 
 Plug 'direnv/direnv.vim'
+Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
 " Plug 'pest-parser/pest.vim'
 Plug 'leiserfg/codi.vim'
 
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'https://gitlab.com/gi1242/vim-emoji-ab'
+Plug 'junegunn/vim-emoji'
+  command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
+
+Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
@@ -103,13 +112,13 @@ call plug#end()
 " }}}
 " treesitter {{{ "
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "markdown" },  -- list of language that will be disabled
-  },
-}
+ require'nvim-treesitter.configs'.setup {
+   ensure_installed = "all",     -- one of "all", "language", or a list of languages
+   highlight = {
+     enable = true,              -- false will disable the whole extension
+     disable = { "markdown" },  -- list of language that will be disabled
+   },
+ }
 EOF
 " }}} treesitter "
 
@@ -155,6 +164,7 @@ augroup vimrc
 augroup END
 
 autocmd vimrc InsertEnter * set nohlsearch
+
 " }}}
 
 " General {{{
@@ -208,6 +218,7 @@ autocmd FileType gitcommit setlocal spell spelllang=en_us
 " File, backups and undo {{{
 set nobackup
 set noswapfile
+
 " }}}
 " Moving around, tabs, windows and buffers {{{
 " ----------------------------------------------------------------------------
@@ -371,6 +382,7 @@ omap ass <Plug>(textobj-sandwich-auto-a)
 
 ""Enable emojis
 
+autocmd FileType lisp,clojure,scheme RainbowParentheses
 " au FileType html,php,markdown,mmd,text,mail,gitcommit runtime macros/emoji-ab.vim
 let g:polyglot_disabled = ['markdown']
 
@@ -532,30 +544,30 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 " LSP {{{	
 
-let g:LanguageClient_serverCommands = {
-      \ 'Dockerfile': ['docker-langserver', '--stdio'],
-      \ 'python': ['pyls'],
-      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-      \ 'json': ['json-languageserver', '--stdio' ],
-      \'javascript': ['/usr/bin/javascript-typescript-stdio'],
-      \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-      \'typescript': ['/usr/bin/javascript-typescript-stdio'],
-      \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
-      \'gdscript3': ['tcp://localhost:6008'],
-      \ }
+" let g:LanguageClient_serverCommands = {
+"       \ 'Dockerfile': ['docker-langserver', '--stdio'],
+"       \ 'python': ['pyls'],
+"       \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+"       \ 'json': ['json-languageserver', '--stdio' ],
+"       \'javascript': ['/usr/bin/javascript-typescript-stdio'],
+"       \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+"       \'typescript': ['/usr/bin/javascript-typescript-stdio'],
+"       \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
+"       \'gdscript3': ['tcp://localhost:6008'],
+"       \ }
 
-let g:LanguageClient_diagnosticsDisplay = {
-      \     1: {
-      \         'name': 'Error',
-      \         'signText': '💥',
-      \         'virtualTexthl': 'ErrorMsg',
-      \     },
-      \     2: {
-      \         'name': 'Warning',
-      \         'signText': '❗',
-      \         'virtualTexthl': 'WarningMsg',
-      \     }
-      \ }
+" let g:LanguageClient_diagnosticsDisplay = {
+"       \     1: {
+"       \         'name': 'Error',
+"       \         'signText': '💥',
+"       \         'virtualTexthl': 'ErrorMsg',
+"       \     },
+"       \     2: {
+"       \         'name': 'Warning',
+"       \         'signText': '❗',
+"       \         'virtualTexthl': 'WarningMsg',
+"       \     }
+"       \ }
 
 " The default value brake the quickfix list	
 let g:LanguageClient_diagnosticsList = 'Location'
@@ -566,16 +578,14 @@ let g:LanguageClient_diagnosticsList = 'Location'
 " nmap <silent> gd <Plug>(lcn-definition)
 " nmap <silent> <F2> <Plug>(lcn-rename)
 " nmap <silent> <Leader>= <Plug>(lcn-format-sync)
-
-
-
+"  }}} "
 
 
 lua <<EOF
-local nvim_lsp = require('nvim_lsp')
-local ncm2 = require('ncm2')
-nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
-nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
+  local nvim_lsp = require('nvim_lsp')
+  local ncm2 = require('ncm2')
+  nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
+  nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
 EOF
 
 nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -638,16 +648,10 @@ let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_commentstring='//%s'
 " }}}
-
-" Netrw {{{
-let g:netrw_banner = 0
-let g:netrw_winsize = 15
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-" }}}
-
+nmap <Leader>- <Plug>VinegarUp
 let g:highlightedyank_highlight_duration = 100
+
+au TextYankPost * silent! lua require'vim.highlight'.on_yank()
 
 let g:gh_use_canonical = 1
 " }}} "
@@ -665,6 +669,22 @@ command! EX if !empty(expand('%'))
         \|   echo 'Save the file first'
         \|   echohl None
         \| endif
+
+" ----------------------------------------------------------------------------
+" <Leader>?/! | Google it / Feeling lucky
+" ----------------------------------------------------------------------------
+function! s:goog(pat, lucky)
+  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+  let q = substitute(q, '[[:punct:] ]',
+       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+  call system(printf('open "https://www.google.com/search?%sq=%s"',
+                   \ a:lucky ? 'btnI&' : '', q))
+endfunction
+nnoremap <leader>? :call <SID>goog(expand("<cWORD>"), 0)<cr>
+nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
+xnoremap <leader>? "gy:call <SID>goog(@g, 0)<cr>gv
+xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
+
 " }}} Operators "
 
 " Theme {{{
