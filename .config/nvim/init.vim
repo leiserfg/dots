@@ -34,6 +34,7 @@ Plug 'AndrewRadev/switch.vim'    " -
 " Plug 'andymass/vim-matchup'
 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'machakann/vim-highlightedyank'
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
 Plug 'tpope/vim-vinegar'  " show registers
@@ -61,7 +62,7 @@ Plug 'alok/notational-fzf-vim'
 " Plug 'mattn/vim-lsp-settings'
 
 Plug 'neovim/nvim-lsp'
-Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
@@ -102,8 +103,8 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './insta
 
 "Lisp
 Plug 'Olical/AnsiEsc'
-Plug 'Olical/aniseed', {'branch': 'develop'}
-Plug 'Olical/conjure', {'branch': 'develop'}
+Plug 'Olical/aniseed'
+Plug 'Olical/conjure'
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
@@ -111,15 +112,16 @@ Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 " }}}
 " treesitter {{{ "
-lua <<EOF
- require'nvim-treesitter.configs'.setup {
-   ensure_installed = "all",     -- one of "all", "language", or a list of languages
-   highlight = {
-     enable = true,              -- false will disable the whole extension
-     disable = { "markdown" },  -- list of language that will be disabled
-   },
- }
-EOF
+" DISABLED UNTIL IT WORKS FINE
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "all",     -- one of "all", "language", or a list of languages
+"   highlight = {
+"     enable = true,              -- false will disable the whole extension
+"     disable = { "markdown" },  -- list of language that will be disabled
+"   },
+" }
+" EOF
 " }}} treesitter "
 
 " User interface {{{
@@ -383,9 +385,7 @@ omap ass <Plug>(textobj-sandwich-auto-a)
 ""Enable emojis
 
 autocmd FileType lisp,clojure,scheme RainbowParentheses
-" au FileType html,php,markdown,mmd,text,mail,gitcommit runtime macros/emoji-ab.vim
-let g:polyglot_disabled = ['markdown']
-
+"
 " Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
@@ -544,30 +544,30 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 " LSP {{{	
 
-" let g:LanguageClient_serverCommands = {
-"       \ 'Dockerfile': ['docker-langserver', '--stdio'],
-"       \ 'python': ['pyls'],
-"       \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-"       \ 'json': ['json-languageserver', '--stdio' ],
-"       \'javascript': ['/usr/bin/javascript-typescript-stdio'],
-"       \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-"       \'typescript': ['/usr/bin/javascript-typescript-stdio'],
-"       \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
-"       \'gdscript3': ['tcp://localhost:6008'],
-"       \ }
+let g:LanguageClient_serverCommands = {
+      \ 'Dockerfile': ['docker-langserver', '--stdio'],
+      \ 'python': ['pyls'],
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ 'json': ['json-languageserver', '--stdio' ],
+      \'javascript': ['/usr/bin/javascript-typescript-stdio'],
+      \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+      \'typescript': ['/usr/bin/javascript-typescript-stdio'],
+      \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
+      \'gdscript3': ['tcp://localhost:6008'],
+      \ }
 
-" let g:LanguageClient_diagnosticsDisplay = {
-"       \     1: {
-"       \         'name': 'Error',
-"       \         'signText': '💥',
-"       \         'virtualTexthl': 'ErrorMsg',
-"       \     },
-"       \     2: {
-"       \         'name': 'Warning',
-"       \         'signText': '❗',
-"       \         'virtualTexthl': 'WarningMsg',
-"       \     }
-"       \ }
+let g:LanguageClient_diagnosticsDisplay = {
+      \     1: {
+      \         'name': 'Error',
+      \         'signText': '💥',
+      \         'virtualTexthl': 'ErrorMsg',
+      \     },
+      \     2: {
+      \         'name': 'Warning',
+      \         'signText': '❗',
+      \         'virtualTexthl': 'WarningMsg',
+      \     }
+      \ }
 
 " The default value brake the quickfix list	
 let g:LanguageClient_diagnosticsList = 'Location'
@@ -578,14 +578,16 @@ let g:LanguageClient_diagnosticsList = 'Location'
 " nmap <silent> gd <Plug>(lcn-definition)
 " nmap <silent> <F2> <Plug>(lcn-rename)
 " nmap <silent> <Leader>= <Plug>(lcn-format-sync)
-"  }}} "
+
+
+
 
 
 lua <<EOF
-  local nvim_lsp = require('nvim_lsp')
-  local ncm2 = require('ncm2')
-  nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
-  nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
+local nvim_lsp = require('nvim_lsp')
+local ncm2 = require('ncm2')
+nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
+nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
 EOF
 
 nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -648,10 +650,16 @@ let g:terraform_align=1
 let g:terraform_fold_sections=1
 let g:terraform_commentstring='//%s'
 " }}}
-nmap <Leader>- <Plug>VinegarUp
-let g:highlightedyank_highlight_duration = 100
 
-au TextYankPost * silent! lua require'vim.highlight'.on_yank()
+" Netrw {{{
+let g:netrw_banner = 0
+let g:netrw_winsize = 15
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+" }}}
+
+let g:highlightedyank_highlight_duration = 100
 
 let g:gh_use_canonical = 1
 " }}} "
