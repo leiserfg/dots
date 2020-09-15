@@ -31,21 +31,18 @@ Plug 'AndrewRadev/splitjoin.vim'
   nnoremap gsj :SplitjoinJoin<cr>
 
 Plug 'AndrewRadev/switch.vim'    " -
-" Plug 'andymass/vim-matchup'
 
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'machakann/vim-highlightedyank'
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
-Plug 'tpope/vim-vinegar'  " show registers
+Plug 'tpope/vim-vinegar'  " improbe netrw UI
 
-" Git
+" Git using Gina by now
 " Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-rhubarb'
 
 Plug 'mhinz/vim-signify'
 Plug 'ruanyl/vim-gh-line'
-Plug 'rhysd/git-messenger.vim'
 Plug 'lambdalisue/gina.vim'
 
 Plug 'alok/notational-fzf-vim'
@@ -62,7 +59,7 @@ Plug 'alok/notational-fzf-vim'
 " Plug 'mattn/vim-lsp-settings'
 
 Plug 'neovim/nvim-lsp'
-" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter'  " Wait until it works
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
@@ -83,7 +80,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
 Plug 'tweekmonster/django-plus.vim'
 " Plug 'pest-parser/pest.vim'
-Plug 'leiserfg/codi.vim'
+Plug 'metakirby5/codi.vim'
 
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'junegunn/vim-emoji'
@@ -96,8 +93,6 @@ Plug 'sainnhe/gruvbox-material'
 
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Plug 'leiserfg/qalc.vim', {'do': ':UpdateRemotePlugins' }
-
 " Plug 'ruanyl/vim-fixmyjs', {
 "       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
@@ -106,6 +101,8 @@ Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
 Plug 'Olical/conjure'
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'junegunn/rainbow_parentheses.vim'
+
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -177,7 +174,7 @@ let g:python_host_prog='/usr/bin/python3'
 let g:python3_host_prog='/usr/bin/python3'
 
 
-set diffopt+=internal,algorithm:histogram,indent-heuristic
+set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
 
 syntax enable
 set encoding=utf8
@@ -259,8 +256,6 @@ nnoremap Y y$
 
 " qq to record, Q to replay
 nnoremap Q @q
-
-nnoremap <leader>w :w<cr>
 
 " ----------------------------------------------------------------------------
 " Readline-style key bindings in command-line (excerpt from rsi.vim)
@@ -344,22 +339,6 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " Plugins {{{
 
 autocmd FileType direnv setlocal commentstring=#\ %s
-" function! s:qalc_clear(line)
-" " Remove empty lines
-"   return a:line
-" endfunction
-let g:codi#interpreters = {
-      \ 'qalc': {
-      \ 'bin':['qalc' ,'-t'],
-      \ 'prompt': '^> ',
-      \ },
-      \ }
-
-" " \ 'preprocess': function('s:qalc_clear'),
-" let g:codi#raw=1
-" let g:codi#log="/tmp/codi.log"
-" let g:codi#virtual_text=0
-
 "" Make sandwich work like vim-surround
 runtime macros/sandwich/keymap/surround.vim
 "" Textobjects to select a text surrounded by braket or same characters user input.
@@ -382,13 +361,12 @@ xmap ass <Plug>(textobj-sandwich-auto-a)
 omap iss <Plug>(textobj-sandwich-auto-i)
 omap ass <Plug>(textobj-sandwich-auto-a)
 
-""Enable emojis
-
-autocmd FileType lisp,clojure,scheme RainbowParentheses
+autocmd FileType lisp,clojure,scheme,fennel RainbowParentheses
 "
 " Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
+
 let g:suda_smart_edit = 1
 " ----------------------------------------------------------------------------
 " vim-plug extension
@@ -447,7 +425,6 @@ autocmd vimrc FileType vim-plug call s:setup_extra_keys()
 " lightline
 set noshowmode  " we don't need it any more because of the status line
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -469,7 +446,6 @@ xmap <Leader>ga   <Plug>(LiveEasyAlign)
 " ----------------------------------------------------------------------------
 " vim-signify
 " ----------------------------------------------------------------------------
-let g:signify_vcs_list = ['git']
 let g:signify_skip_filetype = { 'journal': 1 }
 let g:signify_sign_add          = '│'
 let g:signify_sign_change       = '│'
