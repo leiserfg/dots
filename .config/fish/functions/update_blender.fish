@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.a06wY7/update_blender.fish @ line 2
+# Defined in /tmp/fish.Tkbqgv/update_blender.fish @ line 2
 function update_blender
 	set base https://builder.blender.org
     set download (curl -s $base/download/ |pup '.linux:last-child > a attr{href}')
@@ -14,7 +14,7 @@ function update_blender
     end
     
     #Clean all but 2 latest
-    set all (ls -t|grep "blender-....-")
+    set all (ls -t|grep "blender-.*-")
     echo "Removing" $all[3..-1]
     rm -rf $all[3..-1]
     cd  $HOME"/.config/blender/"(string match --regex '\d.\d\d' $latest)"/scripts/addons"
@@ -23,6 +23,7 @@ function update_blender
         echo "Updating " $addon
         git reset --hard HEAD
         git pull
+        git submodule update --init --recursive
         cd ..
     end
     popd

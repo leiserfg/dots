@@ -35,20 +35,11 @@
 	wshow           = show --word-diff=color
 	lasttag         = describe --tags --abbrev=0
 	branches        = branch -vv
-	sync            = !git pull && git push
 	comerge         = "!x() { target=`git symbolic-ref HEAD`; git co $1; git merge $target; }; x"
 	ours            = "!f() { git checkout --ours -- $@ && git add -- $@; }; f"
 	theirs          = "!f() { git checkout --theirs -- $@ && git add -- $@; }; f"
-	; assume       = update-index --assume-unchanged
-	; unassume     = update-index --no-assume-unchanged
-	; unassumeall  = "!git assumed | xargs git update-index --no-assume-unchanged"
-	; assumed      = "!git ls-files -v | grep ^h | cut -c 3-"
-	; authors      = shortlog -sn
-	; addpr        = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"
-	; patdiff      = difftool -y -x patdiff
 	ignore          = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-        yolo            = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
-        readd           = !git add $(git diff --name-only --cached)
+	yolo            = !git add -A && git commit -m \"$(curl --silent --fail https://raw.githubusercontent.com/ngerakines/commitment/master/commit_messages.txt| shuf -n 1 -)\"
         cached          = diff --cached
 	uncommit        = reset --soft HEAD~1
 	show-patch      = format-patch -1 --stdout
@@ -85,6 +76,11 @@
 [diff]
 	algorithm       = histogram
 	indentheuristic = true
+[status]
+	short = true
+[pull]
+	rebase = true
+
 [user]
 	email           = leiserfg@gmail.com
 	name            = leiserfg
@@ -97,7 +93,3 @@
 	insteadOf       = git@github.com:
 [url "https://"]
 	insteadOf = git://
-[status]
-	short = true
-[rerere]
-	enabled = true

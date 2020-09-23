@@ -163,8 +163,8 @@
     # "mod3" and "mod4" (windows-key).
     # Xev might be helpful to find names for keys.
     
-    close = mod4+period
-    close_all = mod4+period
+    close = mod4+mod1+period
+    close_all = mod4+mod1+period
     history = mod4+shift+period
     context = mod4+ctrl+period
 

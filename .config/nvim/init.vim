@@ -100,8 +100,9 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './insta
 Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
 Plug 'Olical/conjure'
-Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
+" Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
@@ -170,7 +171,12 @@ autocmd vimrc InsertEnter * set nohlsearch
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
 set clipboard+=unnamedplus
-let g:python_host_prog='/usr/bin/python3'
+" Disable unused loaders
+let g:loaded_python_provider = 0 " Don't use python2
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
+
 let g:python3_host_prog='/usr/bin/python3'
 
 
@@ -337,6 +343,9 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 " }}} Custom Text Objects "
 
 " Plugins {{{
+
+let g:sexp_filetypes = 'clojure,scheme,lisp,timl,fennel,janet'
+
 
 autocmd FileType direnv setlocal commentstring=#\ %s
 "" Make sandwich work like vim-surround

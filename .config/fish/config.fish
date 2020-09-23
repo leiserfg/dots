@@ -9,8 +9,8 @@ if not functions -q fisher
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
 end
-# (yarn global dir) 
-set PATH ~/bin/ $PATH (yarn global bin 2>/dev/null)
+
+set PATH ~/bin/ (yarn global dir) ~/.emacs.d/bin $PATH
 
 # if status --is-interactive
     # cat ~/.cache/wal/sequences  ^ /dev/null

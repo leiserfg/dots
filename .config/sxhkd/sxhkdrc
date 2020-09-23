@@ -21,7 +21,7 @@ super + r
         sh ~/.config/bspwm/bspwmrc
 
 super + {_,shift +,ctrl +} + @Print
-  scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'" -q 100
+  scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'"
 #
 # bspwm hotkeys
 #
@@ -50,7 +50,7 @@ super + b
         bspc node -B
 
 #Tilt focused (usually parent)
-super + t
+super + v
         bspc node -R 90
 
 # zoom (swap to biggest window)
@@ -88,6 +88,9 @@ super + {_,shift + }c
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+
+super + e
+	bspc node -f any.urgent
 
 # focus the last node/desktop
 super + {grave,Tab}
@@ -161,6 +164,3 @@ XF86MonBrightnessUp
 
 XF86MonBrightnessDown 
        xbacklight -dec 10 
-
-XF86Search
-       xdotool key Num_Lock
