@@ -11,9 +11,9 @@ alert = #bd2c40
 
 [bar/top]
 ; monitor = ${env:MONITOR:HDMI-0}
-dpi=-1
+dpi=${xrdb:Xft.dpi}
 width = 100%
-height = 28
+height = 2.8%
 offset-x = 0
 offset-y = 0
 radius = 0
@@ -35,9 +35,9 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 1
 
-font-0 = Iosevka SS07:style=Regular;5
-font-1 = Symbols Nerd Font:style=2048-em;5
-font-2 = EmojiOne:style=Regular:scale=10;5
+font-0 = Victor Mono:style=SemiBold
+font-1 = Symbols Nerd Font:style=2048-em
+font-2 = EmojiOne:style=Regular:scale=10
 
 modules-left = bspwm
 modules-center = xwindow
@@ -45,7 +45,7 @@ modules-right =  wifi pulseaudio battery date
 
 tray-position = right
 tray-padding = 2
-tray-maxsize = 96
+tray-maxsize = 100
 
 cuy-scale = 1.0
 cursor-click = pointer
