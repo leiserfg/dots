@@ -8,27 +8,27 @@ entry {
 }
 inputbar {
     children: [prompt, textbox-prompt-colon, entry];
-    margin: 4px 0px;
+    margin: 0.2em 0px;
 }
 prompt {
-    padding: 10px 20px;
+    padding: 0.2em 0.4em;
     background-color: @main-color;
     text-color: @background;
 }
 textbox-prompt-colon {
     expand: false;
     str: "∷";
-    padding: 10px;
+    padding: 0.2em;
 }
 entry {
     text-color: @main-color;
-    padding: 10px 10px 10px 0px;
+    padding: 0.2em 0.2em 0.2em 0px;
 }
 /* List of entries */
 element {
-    padding: 12px;
-    margin: 4px 0px;
-    border: 0px 0px 0px 8px;
+    padding: 0.2em;
+    margin: 0.1em 0px;
+    border: 0px 0px 0px 0.1em;
 }
 element.normal {
     background-color: @background-alt;
@@ -39,5 +39,3 @@ element.selected {
     text-color: @main-color;
     border-color: @main-color;
 }
-
-
