@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-dpi=$(xrandr | grep -w connected| head -n1| sed -E 's|.*primary ([0-9]+)x.* ([0-9]+)mm x.*|scale=0;(\1/(\2/25.4))|'|bc)
+dpi=$(xrandr | grep -w connected| head -n1| sed -E 's|.* ([0-9]+)x.* ([0-9]+)mm x.*|scale=0;(\1/(\2/25.4))|'|bc)
 ratio=$(echo $dpi/96|bc)
 if [ $ratio -gt 2 ]; then
     #if it's too big then limit it (that one works on my laptop)
