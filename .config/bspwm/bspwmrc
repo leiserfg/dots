@@ -42,10 +42,11 @@ pkill sxhkd
 run_disowned sxhkd
 
 
-~/.config/polybar/launch.sh > /dev/null 2>&1 &
 pkill picom; picom -b
 nitrogen --restore
 xset s 120 180
+pkill polybar
+run_disowned polybar
 
 run_once pulseaudio --start
 run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
