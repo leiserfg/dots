@@ -62,10 +62,11 @@ Plug 'neovim/nvim-lsp'
 " Plug 'nvim-treesitter/nvim-treesitter'  " Wait until it works
 
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-github'
+" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
+" Plug 'ncm2/ncm2-ultisnips'
+Plug 'nvim-lua/completion-nvim'
 
 
 Plug 'SirVer/ultisnips'
@@ -570,10 +571,14 @@ let g:LanguageClient_diagnosticsList = 'Location'
 
 lua <<EOF
 local nvim_lsp = require('nvim_lsp')
-local ncm2 = require('ncm2')
-nvim_lsp.pyls.setup{on_init = ncm2.register_lsp_source}
-nvim_lsp.gdscript.setup{on_init = ncm2.register_lsp_source}
+for _, lsp in pairs{'pyls','gdscript'} do
+  nvim_lsp[lsp].setup{}
+end
 EOF
+
+let g:completion_enable_snippet='UltiSnips'
+autocmd BufEnter * lua require'completion'.on_attach()
+let g:completion_matching_strategy_list=['exact', 'fuzzy']
 
 nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
@@ -581,7 +586,6 @@ nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
@@ -608,7 +612,7 @@ sign define LspDiagnosticsHintSign text=🔔 texthl=LspDiagnosticsHint linehl= n
 let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
+" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger= '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger= '<c-k>'
@@ -617,7 +621,7 @@ let g:UltiSnipsRemoveSelectModeMappings=0
 
 " Completion {{{
 let g:ncm2#matcher='substrfuzzy'
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 " When the <Enter> key is pressed while the popup menu is visible, it only
 " hides the menu. Use this mapping to close the menu and also start a new
 " line.
