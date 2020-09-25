@@ -47,25 +47,9 @@ Plug 'lambdalisue/gina.vim'
 
 Plug 'alok/notational-fzf-vim'
 
-"Completion
-" Plug 'autozimu/LanguageClient-neovim', {
-"      \ 'branch': 'next',
-"      \ 'do': 'bash install.sh',
-"      \ }
-
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'ncm2/ncm2-vim-lsp'
-" Plug 'mattn/vim-lsp-settings'
-
 Plug 'neovim/nvim-lsp'
 " Plug 'nvim-treesitter/nvim-treesitter'  " Wait until it works
 
-Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-github'
-" Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-" Plug 'ncm2/ncm2-ultisnips'
 Plug 'nvim-lua/completion-nvim'
 
 
@@ -78,11 +62,12 @@ Plug 'tpope/vim-eunuch'
 Plug 'direnv/direnv.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
-Plug 'tweekmonster/django-plus.vim'
 " Plug 'pest-parser/pest.vim'
 Plug 'metakirby5/codi.vim'
 
-Plug 'dhruvasagar/vim-table-mode'
+Plug 'dhruvasagar/vim-table-mode', {
+      \ 'for': ['markdown'],
+      \ }
 Plug 'junegunn/vim-emoji'
   command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
@@ -534,57 +519,18 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
       \ ]
 " }}} "
 
-" LSP {{{	
-
-let g:LanguageClient_serverCommands = {
-      \ 'Dockerfile': ['docker-langserver', '--stdio'],
-      \ 'python': ['pyls'],
-      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-      \ 'json': ['json-languageserver', '--stdio' ],
-      \'javascript': ['/usr/bin/javascript-typescript-stdio'],
-      \'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-      \'typescript': ['/usr/bin/javascript-typescript-stdio'],
-      \'typescriptreact': ['/usr/bin/javascript-typescript-stdio'],
-      \'gdscript3': ['tcp://localhost:6008'],
-      \ }
-
-let g:LanguageClient_diagnosticsDisplay = {
-      \     1: {
-      \         'name': 'Error',
-      \         'signText': '💥',
-      \         'virtualTexthl': 'ErrorMsg',
-      \     },
-      \     2: {
-      \         'name': 'Warning',
-      \         'signText': '❗',
-      \         'virtualTexthl': 'WarningMsg',
-      \     }
-      \ }
-
-" The default value brake the quickfix list	
-let g:LanguageClient_diagnosticsList = 'Location'
-
-" nmap <F5> <Plug>(lcn-menu)
-
-" nmap <silent> K <Plug>(lcn-hover)
-" nmap <silent> gd <Plug>(lcn-definition)
-" nmap <silent> <F2> <Plug>(lcn-rename)
-" nmap <silent> <Leader>= <Plug>(lcn-format-sync)
-
-
-
-
+" LSP and completion.nvim {{{	
 
 lua <<EOF
 local nvim_lsp = require('nvim_lsp')
-for _, lsp in pairs{'pyls','gdscript'} do
+for _, lsp in pairs{'pyls', 'gdscript', 'vimls'} do
   nvim_lsp[lsp].setup{}
 end
 EOF
-
 let g:completion_enable_snippet='UltiSnips'
-autocmd BufEnter * lua require'completion'.on_attach()
 let g:completion_matching_strategy_list=['exact', 'fuzzy']
+
+autocmd BufEnter * lua require'completion'.on_attach()
 
 nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
@@ -600,18 +546,7 @@ sign define LspDiagnosticsErrorSign text=💥 texthl=LspDiagnosticsError linehl=
 sign define LspDiagnosticsWarningSign text=❗ texthl=LspDiagnosticsWarning linehl= numhl=
 sign define LspDiagnosticsInformationSign text=❕ texthl=LspDiagnosticsInformation linehl= numhl=
 sign define LspDiagnosticsHintSign text=🔔 texthl=LspDiagnosticsHint linehl= numhl=
-
-
-" let g:lsp_signs_error = {'text': '💥'}
-" let g:lsp_signs_warning = {'text': '❗'}
-" let g:lsp_signs_hint = {'text': '🔔'}
-
-" highlight link LspErrorText ErrorMsg
-" highlight link LspWarningHighlight WarningMsg
-
-" nnoremap <Leader>=  :LspDocumentFormat<CR>
-" nnoremap gd  :LspDefinition<CR>
-" nnoremap K  :LspHover<CR>
+" }}} "
 
 " UltiSnips {{{
 
@@ -626,11 +561,6 @@ let g:UltiSnipsRemoveSelectModeMappings=0
 " }}}
 
 " Completion {{{
-let g:ncm2#matcher='substrfuzzy'
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
 
