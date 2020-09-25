@@ -83,7 +83,7 @@
 
 [user]
 	email           = leiserfg@gmail.com
-	name            = leiserfg
+	name = leiserfg
 [filter "lfs"]
 	clean           = git-lfs clean -- %f
 	smudge          = git-lfs smudge -- %f

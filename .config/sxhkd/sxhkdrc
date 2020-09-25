@@ -148,17 +148,17 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # multimedia
-XF86AudioMute 
+XF86AudioMute
        pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-XF86AudioRaiseVolume  
+XF86AudioRaiseVolume
        pactl set-sink-volume @DEFAULT_SINK@ +5%; notify-send 'Volume up'
 
-XF86AudioLowerVolume  
+XF86AudioLowerVolume
        pactl set-sink-volume @DEFAULT_SINK@ -5%; notify-send 'Volume down'
 
-XF86MonBrightnessUp 
-       xbacklight -inc 10 
+XF86MonBrightnessUp
+       xbacklight -inc 10
 
-XF86MonBrightnessDown 
-       xbacklight -dec 10 
+XF86MonBrightnessDown
+       xbacklight -dec 10

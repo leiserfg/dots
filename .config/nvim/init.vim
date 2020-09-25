@@ -69,8 +69,7 @@ Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'nvim-lua/completion-nvim'
 
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
 Plug 'jceb/emmet.snippets'
 
 Plug 'lambdalisue/suda.vim'
@@ -100,10 +99,10 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './insta
 "Lisp
 Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
-Plug 'Olical/conjure'
+Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
 " Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
 
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
@@ -169,6 +168,13 @@ autocmd vimrc InsertEnter * set nohlsearch
 " }}}
 
 " General {{{
+
+"I don't like to hardcode it but it's faster than calling git several times like in vim-snipp
+
+let g:snips_author = 'leiserfg'
+let g:snips_email = 'leiserfg@gmail.com'
+let g:snips_github = "https://github.com/leiserfg"
+
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
 set clipboard+=unnamedplus
