@@ -46,7 +46,7 @@ pkill picom; picom -b
 nitrogen --restore
 xset s 120 180
 pkill polybar
-run_disowned polybar
+run_disowned polybar top
 
 run_once pulseaudio --start
 run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
