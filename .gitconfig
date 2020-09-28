@@ -93,3 +93,5 @@
 	insteadOf       = git@github.com:
 [url "https://"]
 	insteadOf = git://
+[protocol]
+	version = 2
