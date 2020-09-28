@@ -123,7 +123,7 @@ animation-charging-framerate = 750
 
 [module/wifi]
 type = internal/network
-interface = wlp3s0
+interface = ${env:DEFAULT_NETWORK_INTERFACE}
 interval = 10.0
 
 format-connected = <label-connected>
