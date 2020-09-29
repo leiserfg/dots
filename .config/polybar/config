@@ -129,7 +129,7 @@ interval = 10.0
 format-connected = <label-connected>
 ; format-connected = <ramp-signal> <label-connected>
 ; label-connected = %essid% %{F#66}%local_ip%
-label-connected = %essid% %{F#66}%downspeed% %upspeed%
+label-connected = %ifname% %{F#66}%downspeed% %upspeed%
 label-disconnected = %{F#666}%{F#ccfafafa} not connected
 
 ; ramp-signal-0 = 😱
