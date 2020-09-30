@@ -523,7 +523,7 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 lua <<EOF
 local nvim_lsp = require('nvim_lsp')
-for _, lsp in pairs{'pyls', 'gdscript', 'vimls'} do
+for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua'} do
   nvim_lsp[lsp].setup{}
 end
 EOF
@@ -542,10 +542,10 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
 
-sign define LspDiagnosticsErrorSign text=💥 texthl=LspDiagnosticsError linehl= numhl=
-sign define LspDiagnosticsWarningSign text=❗ texthl=LspDiagnosticsWarning linehl= numhl=
-sign define LspDiagnosticsInformationSign text=❕ texthl=LspDiagnosticsInformation linehl= numhl=
-sign define LspDiagnosticsHintSign text=🔔 texthl=LspDiagnosticsHint linehl= numhl=
+sign define LspDiagnosticsErrorSign text=🩸 texthl=LspDiagnosticsError linehl= numhl=
+sign define LspDiagnosticsWarningSign text=🟥 texthl=LspDiagnosticsWarning linehl= numhl=
+sign define LspDiagnosticsInformationSign text=🟨 texthl=LspDiagnosticsInformation linehl= numhl=
+sign define LspDiagnosticsHintSign text=🔸 texthl=LspDiagnosticsHint linehl= numhl=
 " }}} "
 
 " UltiSnips {{{
