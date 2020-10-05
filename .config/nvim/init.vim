@@ -170,14 +170,13 @@ let g:loaded_node_provider = 0
 let g:loaded_perl_provider = 0
 
 let g:python3_host_prog='/usr/bin/python3'
-
-
 set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
 
 syntax enable
 set encoding=utf8
 scriptencoding utf-8
-
+" highlight lua on vim files
+let g:vimsyn_embed = 'l'
 " Use spaces instead of tabs
 set expandtab
 set smarttab
@@ -522,11 +521,12 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 " LSP and completion.nvim {{{	
 
 lua <<EOF
-local nvim_lsp = require('nvim_lsp')
-for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua'} do
-  nvim_lsp[lsp].setup{}
-end
+  local nvim_lsp = require('nvim_lsp')
+  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua'} do
+    nvim_lsp[lsp].setup{}
+  end
 EOF
+
 let g:completion_enable_snippet='UltiSnips'
 let g:completion_matching_strategy_list=['exact', 'fuzzy']
 
