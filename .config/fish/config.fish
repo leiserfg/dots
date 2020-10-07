@@ -10,7 +10,8 @@ if not functions -q fisher
     fish -c fisher
 end
 
-set PATH ~/bin/ (yarn global dir) (yarn global bin 2>/dev/null) $PATH
+# set PATH ~/bin/ (yarn global bin 2>/dev/null) $PATH
+set PATH $HOME/bin/ ~HOME/.yarn/bin $PATH
 
 # if status --is-interactive
     # cat ~/.cache/wal/sequences  ^ /dev/null
@@ -54,5 +55,3 @@ set -g __fish_git_prompt_color_stagedstate yellow
 set -g __fish_git_prompt_color_invalidstate red
 set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green
-
-thefuck --alias | source
