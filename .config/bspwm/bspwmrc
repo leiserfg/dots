@@ -42,7 +42,7 @@ pkill sxhkd
 run_disowned sxhkd
 
 
-pkill picom; picom -b
+pkill -9 picom; picom -b
 nitrogen --restore
 xset s 120 180
 export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
