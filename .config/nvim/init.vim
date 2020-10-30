@@ -322,8 +322,8 @@ onoremap <silent> io :<c-u>call <SID>indent_object('==', 0, line('.'), line('.')
 " ----------------------------------------------------------------------------
 " ?ie | entire object
 " ----------------------------------------------------------------------------
-xnoremap <silent> ie gg0oG$
-onoremap <silent> ie :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>
+" xnoremap <silent> ie gg0oG$
+" onoremap <silent> ie :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>
 
 " ----------------------------------------------------------------------------
 " ?il | inner line
@@ -526,7 +526,7 @@ lua <<EOF
     nvim_lsp[lsp].setup{}
   end
 EOF
-
+let g:completion_matching_ignore_case = 1
 let g:completion_enable_snippet='UltiSnips'
 let g:completion_matching_strategy_list=['exact', 'fuzzy']
 

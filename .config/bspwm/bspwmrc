@@ -50,7 +50,7 @@ pkill polybar
 run_disowned polybar top
 
 run_once pulseaudio --start
-run_once xss-lock -n dim-screen.sh -- i3lock-fancy-rapid 5 pixel
+run_once xss-lock -- i3lock-fancy-rapid 5 pixel
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once nm-applet
 run_once telegram-desktop
