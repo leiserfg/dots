@@ -11,7 +11,7 @@ if not functions -q fisher
 end
 
 # set PATH ~/bin/ (yarn global bin 2>/dev/null) $PATH
-set PATH $HOME/bin/ ~HOME/.yarn/bin $PATH
+set PATH $HOME/bin/ $HOME/.yarn/bin $PATH
 
 # if status --is-interactive
     # cat ~/.cache/wal/sequences  ^ /dev/null

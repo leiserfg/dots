@@ -20,7 +20,10 @@ super + d
 super + r
         sh ~/.config/bspwm/bspwmrc
 
-super + {_,shift +,ctrl +} + @Print
+{_,shift +,ctrl +} + @Print
+  scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'"
+
+{_,shift +,ctrl +} + @XF86Calculator
   scrot {_,-u,-s} -e "notify-send -i image 'scrot' 'image saved as \n\$f'"
 #
 # bspwm hotkeys
