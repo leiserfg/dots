@@ -47,7 +47,7 @@ Plug 'lambdalisue/gina.vim'
 
 Plug 'alok/notational-fzf-vim'
 
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'  " Wait until it works
 Plug 'nvim-treesitter/playground'
 
@@ -529,7 +529,7 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 lua <<EOF
   local nvim_lsp = require('nvim_lsp')
-  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua'} do
+  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua', 'rust_analyzer'} do
     nvim_lsp[lsp].setup{}
   end
 EOF
