@@ -536,7 +536,7 @@ EOF
 let g:completion_matching_ignore_case = 1
 let g:completion_enable_snippet='UltiSnips'
 let g:completion_matching_strategy_list=['exact', 'fuzzy']
-
+let g:completion_enable_auto_hover = 0
 autocmd BufEnter * lua require'completion'.on_attach()
 
 nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
