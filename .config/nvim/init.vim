@@ -528,9 +528,9 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 " LSP and completion.nvim {{{	
 
 lua <<EOF
-  local nvim_lsp = require('nvim_lsp')
+  local lspconfig = require('lspconfig')
   for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua', 'rust_analyzer'} do
-    nvim_lsp[lsp].setup{}
+    lspconfig[lsp].setup{}
   end
 EOF
 let g:completion_matching_ignore_case = 1
