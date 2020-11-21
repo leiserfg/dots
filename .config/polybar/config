@@ -36,7 +36,7 @@ module-margin-left = 0
 module-margin-right = 1
 
 font-0 = Victor Mono:style=SemiBold
-font-1 = Symbols Nerd Font:style=2048-em
+font-1 = NotoSansMono Nerd Font:style=Regular
 font-2 = EmojiOne:style=Regular:scale=10
 
 modules-left = bspwm
