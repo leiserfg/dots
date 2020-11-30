@@ -50,6 +50,7 @@ Plug 'alok/notational-fzf-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'  " Wait until it works
 Plug 'nvim-treesitter/playground'
+Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'nvim-lua/completion-nvim'
 
@@ -103,6 +104,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { "markdown" },  -- list of language that will be disabled
+  },
+  indent = {
+    enable = true
   },
   playground = {
     enable = true,
