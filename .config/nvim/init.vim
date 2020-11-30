@@ -553,10 +553,10 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
 
-sign define LspDiagnosticsErrorSign text=🩸 texthl=LspDiagnosticsError linehl= numhl=
-sign define LspDiagnosticsWarningSign text=🟥 texthl=LspDiagnosticsWarning linehl= numhl=
-sign define LspDiagnosticsInformationSign text=🟨 texthl=LspDiagnosticsInformation linehl= numhl=
-sign define LspDiagnosticsHintSign text=🔸 texthl=LspDiagnosticsHint linehl= numhl=
+sign define LspDiagnosticsSignError text=🩸 texthl=LspDiagnosticsDefaultError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=🟥 texthl=LspDiagnosticsDefaultWarning linehl= numhl=
+sign define LspDiagnosticsSignInformation text=🟨 texthl=LspDiagnosticsDefaultInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=🔸 texthl=LspDiagnosticsDefaultHint linehl= numhl=
 " }}} "
 
 " UltiSnips {{{
