@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldlevel=0 nomodeline:
+
 
 " Plug Setup{{{
 
@@ -96,64 +96,8 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 " }}}
-" treesitter {{{ "
-" DISABLED UNTIL IT WORKS FINE
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "markdown" },  -- list of language that will be disabled
-  },
-  indent = {
-    enable = true
-  },
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false -- Whether the query persists across vim sessions
-  }
-}
-EOF
-" }}} treesitter "
 
-" User interface {{{
-" Show line numbers
-set number
-set relativenumber
-set wildmenu
-set ruler " Show current position
-set modelines=2 "Allow modelines
-" Setup backspace
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
 
-set synmaxcol=500 "Make vim faster sometimes
-
-set ignorecase smartcase " Ignore case when searching
-set smartcase " Smart cases when searching
-set hlsearch " Highlight search results
-set incsearch " Make search act as in modern browsers
-set hidden
-set showmatch " Show matching brackets
-set matchtime=2 " Length of blink for matching brackets
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set timeoutlen=500
-
-" More natural split
-set splitbelow
-set splitright
-
-set nojoinspaces " remove spaces while joining
-" set foldenable
-set foldlevel=2
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-set autoread " autoreload file changes
-set nocursorline " cursorline is slow
 
 augroup vimrc
   autocmd!
@@ -343,6 +287,101 @@ xnoremap <silent> il <Esc>^vg_
 onoremap <silent> il :<C-U>normal! ^vg_<CR>
 
 " }}} Custom Text Objects "
+
+" need to be migrated
+set number
+set relativenumber
+lua <<EOF
+
+local o = vim.o
+
+-- :lua dump(something)      whenever you want
+function _G.dump(...)
+    local objects = vim.tbl_map(vim.inspect, {...})
+    print(unpack(objects))
+end
+-- List to comma separated string
+local function l(t)
+    return table.concat(t, ',')
+end
+
+-- concat
+local function c(t)
+    return table.concat(t, '')
+end
+
+o.number         = true
+o.relativenumber = true
+
+-- command completion wild west
+o.wildmenu       = true
+o.wildignore     = l{'__pycache__', '*.o' , '*~', '*.pyc', '*pycache*' }
+o.wildmode       = l{'longest', 'list', 'full'}
+
+-- Show current position
+o.ruler          = true
+o.modelines      = 2 -- Allow modelines
+
+
+o.backspace      = 'eol,start,indent'
+o.whichwrap      = l{'b','s', '<','>','h','l'}
+o.synmaxcol      = 500  -- Limit the search column
+o.ignorecase     = true -- Ignore the case while searching
+o.smartcase      = true -- unless using capitals
+o.hlsearch       = true -- Highlight search results
+o.incsearch      = true -- Make search act as in modern browsers
+o.hidden         = true
+o.showmatch      = true -- Show matching brackets
+o.matchtime      = 2 -- Length of blink for matching brackets
+o.timeoutlen     = 500
+
+-- No annoying sound on errors
+o.errorbells     = false
+o.visualbell     = false
+
+-- More natural split
+o.splitbelow     = true
+o.splitright     = true
+o.joinspaces     = false -- remove spaces while joining
+
+-- o.foldenable     = true
+o.foldlevel      = 2
+-- o.foldmethod     = "marker"
+o.grepprg        = "rg --vimgrep --no-heading --smart-case"
+o.autoread       = true -- autoreload file changes
+o.cursorline     = false -- cursorline is slow
+
+o.formatoptions = c{
+    -- 'a',   -- Auto formatting is BAD.
+    -- 't',   -- Don't auto format my code. I got linters for that.
+    'c', -- In general, I like it when comments respect textwidth
+    'q', -- Allow formatting comments w/ gq
+    -- 'o',     -- O and o, don't continue comments
+    'r', -- But do continue when pressing enter.
+    'n', -- Indent past the formatlistpat, not underneath it.
+    'j', -- Auto-remove comments if possible.
+}
+
+-- " treesitter {{{1 "
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "markdown" },  -- list of language that will be disabled
+  },
+  indent = {
+    enable = true
+  },
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false -- Whether the query persists across vim sessions
+  }
+}
+-- " 1}}} "
+EOF
+
 
 " Plugins {{{
 
