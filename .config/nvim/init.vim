@@ -333,8 +333,8 @@ o.formatoptions  = flags{
     'j', -- Auto-remove comments if possible.
 }
 
-o.backup         = true
-o.swapfile       = true
+o.backup         = false
+o.swapfile       = false
 
 o.clipboard = 'unnamedplus'
 o.diffopt = l{
