@@ -1,4 +1,4 @@
-
+" vim: set foldmethod=marker foldlevel=0 nomodeline:
 
 " Plug Setup{{{
 
@@ -96,8 +96,64 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 " }}}
+" treesitter {{{ "
+" DISABLED UNTIL IT WORKS FINE
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "markdown" },  -- list of language that will be disabled
+  },
+  indent = {
+    enable = true
+  },
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false -- Whether the query persists across vim sessions
+  }
+}
+EOF
+" }}} treesitter "
 
+" User interface {{{
+" Show line numbers
+set number
+set relativenumber
+set wildmenu
+set ruler " Show current position
+set modelines=2 "Allow modelines
+" Setup backspace
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
 
+set synmaxcol=500 "Make vim faster sometimes
+
+set ignorecase smartcase " Ignore case when searching
+set smartcase " Smart cases when searching
+set hlsearch " Highlight search results
+set incsearch " Make search act as in modern browsers
+set hidden
+set showmatch " Show matching brackets
+set matchtime=2 " Length of blink for matching brackets
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set timeoutlen=500
+
+" More natural split
+set splitbelow
+set splitright
+
+set nojoinspaces " remove spaces while joining
+" set foldenable
+set foldlevel=2
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+set autoread " autoreload file changes
+set nocursorline " cursorline is slow
 
 augroup vimrc
   autocmd!
@@ -109,14 +165,50 @@ autocmd vimrc InsertEnter * set nohlsearch
 
 " General {{{
 
+"I don't like to hardcode it but it's faster than calling git several times like in vim-snipp
+
+let g:snips_author = 'leiserfg'
+let g:snips_email = 'leiserfg@gmail.com'
+let g:snips_github = "https://github.com/leiserfg"
 
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
+set clipboard+=unnamedplus
+" Disable unused loaders
+let g:loaded_python_provider = 0 " Don't use python2
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
 
+let g:python3_host_prog='/usr/bin/python3'
+set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
+
+syntax enable
+set encoding=utf8
+scriptencoding utf-8
 " highlight lua on vim files
 let g:vimsyn_embed = 'l'
+" Use spaces instead of tabs
+set expandtab
+set smarttab
+" show tabs and trailing spaces
+set list
+set showbreak=↪\ 
+set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set virtualedit=block "Flexible block selection
+" tab per 4 spaces
+set shiftwidth=4
+set softtabstop=4
 
+" Linebreak on
+set linebreak
+set textwidth=100
 
+set autoindent
+set smartindent
+set wrap! "Wrap lines
+
+set signcolumn=yes
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -130,6 +222,11 @@ autocmd BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
 autocmd FileType gitcommit setlocal spell spelllang=en_us
 " }}}
 
+" File, backups and undo {{{
+set nobackup
+set noswapfile
+
+" }}}
 " Moving around, tabs, windows and buffers {{{
 " ----------------------------------------------------------------------------
 " Buffers
@@ -247,171 +344,6 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 
 " }}} Custom Text Objects "
 
-" TODO WINDOW LVL
-set number
-set relativenumber
-set list
-set wrap! "Wrap lines
-set signcolumn=yes
-
-" TODO BUFFER LVL
-"-- Use spaces instead of tabs
-set expandtab
-set smarttab
-
-set autoindent
-set smartindent
-lua <<EOF
-
-local o = vim.o
-local g = vim.g
-
--- :lua dump(something)      whenever you want
-function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
-    print(unpack(objects))
-end
-
--- List to comma separated string
-local function l(t)
-    return table.concat(t, ',')
-end
-
--- help to create vim flags
-local function flags(t)
-    return table.concat(t, '')
-end
-
-o.number         = true
-o.relativenumber = true
-
--- command completion wild west
-o.wildmenu       = true
-o.wildignore     = l{'__pycache__', '*.o' , '*~', '*.pyc', '*pycache*' }
-
--- Show current position
-o.ruler          = true
-o.modelines      = 2 -- Allow modelines
-
-
-o.backspace      = 'eol,start,indent'
-o.whichwrap      = l{'b','s', '<','>','h','l'}
-o.synmaxcol      = 500  -- Limit the search column
-o.ignorecase     = true -- Ignore the case while searching
-o.smartcase      = true -- unless using capitals
-o.hlsearch       = true -- Highlight search results
-o.incsearch      = true -- Make search act as in modern browsers
-o.hidden         = true
-o.showmatch      = true -- Show matching brackets
-o.matchtime      = 2 -- Length of blink for matching brackets
-o.timeoutlen     = 500
-
--- No annoying sound on errors
-o.errorbells     = false
-o.visualbell     = false
-
--- More natural split
-o.splitbelow     = true
-o.splitright     = true
-o.joinspaces     = false -- remove spaces while joining
-
--- o.foldenable     = true
-o.foldlevel      = 2
--- o.foldmethod     = "marker"
-o.grepprg        = "rg --vimgrep --no-heading --smart-case"
-o.autoread       = true -- autoreload file changes
-o.cursorline     = false -- cursorline is slow
-
-o.formatoptions  = flags{
-    -- 'a',   -- Auto formatting is BAD.
-    -- 't',   -- Don't auto format my code. I got linters for that.
-    'c', -- In general, I like it when comments respect textwidth
-    'q', -- Allow formatting comments w/ gq
-    -- 'o',     -- O and o, don't continue comments
-    'r', -- But do continue when pressing enter.
-    'n', -- Indent past the formatlistpat, not underneath it.
-    'j', -- Auto-remove comments if possible.
-}
-
-o.backup         = false
-o.swapfile       = false
-
-o.clipboard = 'unnamedplus'
-o.diffopt = l{
-    'internal',
-    'filler',
-    'closeoff',
-    'algorithm:histogram',
-    'indent-heuristic',
-    'vertical'
-}
-
--- show tabs and trailing spaces
-o.showbreak   = '↪ '
-o.listchars   = l{'tab:→ ', 'nbsp:␣', 'trail:•', 'extends:⟩', 'precedes:⟨'}
-o.virtualedit = 'block' --Flexible block selection
-
--- tab per 4 spaces
-o.shiftwidth=4
-o.softtabstop=4
-
--- " Linebreak on
-o.linebreak=true
-o.textwidth=100
-
--- " lightline
-o.showmode = true --  " we don't need it any more because of the status line
-g.lightline = {
-   active = {
-         left = {
-            { 'mode', 'paste'},
-            { 'gitbranch', 'readonly', 'filename', 'modified'}
-         }
-   },
-   component_function = {
-     gitbranch= 'gina#component#repo#branch'
-   },
-}
-
-
--- " treesitter {{{1 "
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "markdown" },  -- list of language that will be disabled
-  },
-  indent = {
-    enable = true
-  },
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false -- Whether the query persists across vim sessions
-  }
-}
-
--- Loaders
-g.loaded_python_provider = 0 -- Don't use python2
-g.loaded_ruby_provider = 0
-g.loaded_node_provider = 0
-g.loaded_perl_provider = 0
-
-g.python3_host_prog='/usr/bin/python3' -- Avoid using venvs
-
-
-
--- I don't like to hardcode it but it's faster than calling git several times like in vim-snipp
-g.snips_author = 'leiserfg'
-g.snips_email = 'leiserfg@gmail.com'
-g.snips_github = "https://github.com/leiserfg"
-
--- " 1}}} "
-
-EOF
-
-
 " Plugins {{{
 
 let g:sexp_filetypes = 'clojure,scheme,lisp,timl,fennel,janet'
@@ -501,6 +433,17 @@ endfunction
 autocmd vimrc FileType vim-plug call s:setup_extra_keys()
 
 
+" lightline
+set noshowmode  " we don't need it any more because of the status line
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gina#component#repo#branch'
+      \ },
+      \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -594,7 +537,6 @@ lua <<EOF
     lspconfig[lsp].setup{}
   end
 EOF
-
 let g:completion_matching_ignore_case = 1
 let g:completion_enable_snippet='UltiSnips'
 let g:completion_matching_strategy_list=['exact', 'fuzzy']
@@ -667,10 +609,10 @@ command! EX if !empty(expand('%'))
       \|   call system('chmod +x '.expand('%'))
       \|   silent e
       \| else
-      \|   echohl WarningMsg
-      \|   echo 'Save the file first'
-      \|   echohl None
-      \| endif
+        \|   echohl WarningMsg
+        \|   echo 'Save the file first'
+        \|   echohl None
+        \| endif
 
 " ----------------------------------------------------------------------------
 " <Leader>?/! | Google it / Feeling lucky
