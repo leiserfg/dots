@@ -543,15 +543,21 @@ let g:completion_matching_strategy_list=['exact', 'fuzzy']
 let g:completion_enable_auto_hover = 0
 autocmd BufEnter * lua require'completion'.on_attach()
 
-nnoremap <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+function! s:lsp_setup()
+    if empty(luaeval('vim.inspect(vim.lsp.buf_get_clients())'))
+        return
+    end
+    nnoremap <buffer> <silent> <c-]>   <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <buffer> <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <buffer> <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <buffer> <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <buffer> <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <buffer> <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+    nnoremap <buffer> <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+    nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+endfunction
+autocmd BufEnter * call s:lsp_setup()
 
 sign define LspDiagnosticsSignError text=🩸 texthl=LspDiagnosticsDefaultError linehl= numhl=
 sign define LspDiagnosticsSignWarning text=🟥 texthl=LspDiagnosticsDefaultWarning linehl= numhl=

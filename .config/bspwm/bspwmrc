@@ -19,6 +19,7 @@ bspc rule -a "TelegramDesktop" desktop='^4' follow=on
 # bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
 bspc rule -a PureRef state=floating
+bspc rule -a MEGAsync state=floating
 bspc rule -a gmic_qt  follow=on focus=on state=floating
 bspc rule -a Pavucontrol state=floating
 bspc rule -a Dragon-drag-and-drop sticky=on
