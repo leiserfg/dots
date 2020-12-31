@@ -105,9 +105,9 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { "markdown" },  -- list of language that will be disabled
   },
-  indent = {
+  --[[ indent = {
     enable = true
-  },
+  },]]
   playground = {
     enable = true,
     disable = {},
