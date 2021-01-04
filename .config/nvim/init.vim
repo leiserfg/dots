@@ -31,19 +31,17 @@ Plug 'AndrewRadev/splitjoin.vim'
   nnoremap gsj :SplitjoinJoin<cr>
 
 Plug 'AndrewRadev/switch.vim'    " -
-
-Plug 'machakann/vim-highlightedyank'
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
 Plug 'tpope/vim-vinegar'  " improbe netrw UI
 
-" Git using Gina by now
-" Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 Plug 'mhinz/vim-signify'
-Plug 'ruanyl/vim-gh-line'
-Plug 'lambdalisue/gina.vim'
+" Plug 'ruanyl/vim-gh-line'
+" Plug 'lambdalisue/gina.vim'
 
 Plug 'alok/notational-fzf-vim'
 
@@ -80,20 +78,15 @@ Plug 'sainnhe/gruvbox-material'
 
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Plug 'ruanyl/vim-fixmyjs', {
-"       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
 "Lisp
 Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
 Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
-" Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
 
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
-
 call plug#end()
 " }}}
 " treesitter {{{ "
@@ -182,7 +175,7 @@ let g:loaded_perl_provider = 0
 
 let g:python3_host_prog='/usr/bin/python3'
 set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
-
+let g:fugitive_dynamic_colors = 0
 syntax enable
 set encoding=utf8
 scriptencoding utf-8
@@ -346,8 +339,13 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 
 " Plugins {{{
 
-let g:sexp_filetypes = 'clojure,scheme,lisp,timl,fennel,janet'
 
+let g:codi#interpreters = {
+   \ 'rink': {
+       \ 'prompt': '^> ',
+       \ 'bin': 'rink',
+       \ },
+   \ }
 
 autocmd FileType direnv setlocal commentstring=#\ %s
 "" Make sandwich work like vim-surround
@@ -432,18 +430,18 @@ endfunction
 
 autocmd vimrc FileType vim-plug call s:setup_extra_keys()
 
-
 " lightline
 set noshowmode  " we don't need it any more because of the status line
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gina#component#repo#branch'
-      \ },
-      \ }
+ let g:lightline = {
+       \ 'active': {
+       \   'left': [ [ 'mode', 'paste' ],
+       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+       \ },
+       \ 'component_function': {
+       \   'gitbranch_2': 'gina#component#repo#branch',
+       \   'gitbranch': 'FugitiveHead'
+       \ },
+       \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -602,8 +600,7 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 " }}}
 
-let g:highlightedyank_highlight_duration = 100
-
+au vimrc TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
 let g:gh_use_canonical = 1
 " }}} "
 
