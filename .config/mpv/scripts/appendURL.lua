@@ -88,4 +88,4 @@ function get_clipboard(primary)
   return nil
 end
 
-mp.add_key_binding("a", "appendURL", append)
+mp.add_key_binding(nil, "appendURL", append)
