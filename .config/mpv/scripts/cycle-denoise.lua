@@ -1,8 +1,3 @@
--- settings
--- key_binding: press the key specified below 
---      to cycle between denoise filters below
-local key_binding = "n"
-
 -- denoisers: specify names of denoise libavfilter filters
 --     from `mpv --vf=lavfi=help` command
 --     where the last 3 filters (dctdnoiz, owdenoise, nlmeans)
@@ -59,4 +54,4 @@ function cycle_denoise()
     filter_index = filter_index + 1
 end
 
-mp.add_key_binding(key_binding, "denoise", cycle_denoise)
+mp.add_key_binding(nil, "denoise", cycle_denoise)

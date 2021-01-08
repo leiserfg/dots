@@ -558,10 +558,10 @@ function! s:lsp_setup()
 endfunction
 autocmd BufEnter * call s:lsp_setup()
 
-sign define LspDiagnosticsSignError text=🩸 texthl=LspDiagnosticsDefaultError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=🟥 texthl=LspDiagnosticsDefaultWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=🟨 texthl=LspDiagnosticsDefaultInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=🔸 texthl=LspDiagnosticsDefaultHint linehl= numhl=
+sign define LspDiagnosticsSignError text=🩸 linehl= numhl=
+sign define LspDiagnosticsSignWarning text=🔸  linehl= numhl=
+sign define LspDiagnosticsSignInformation text=🔹 linehl= numhl=
+sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
 " }}} "
 
 " UltiSnips {{{
