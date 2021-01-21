@@ -46,7 +46,7 @@ Plug 'mhinz/vim-signify'
 Plug 'alok/notational-fzf-vim'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter',{'do': ':TSUpdate'} 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 
