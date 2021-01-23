@@ -152,8 +152,7 @@ super + {Left,Down,Up,Right}
 
 # lauch game in lutris
 super + g
-    lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i| cut -f 1 -d '|'  | xargs -I__ lutris
-    lutris:rungameid/__
+    lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i| cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__
 # multimedia
 XF86AudioMute
        pactl set-sink-mute @DEFAULT_SINK@ toggle
