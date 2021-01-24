@@ -52,7 +52,6 @@ Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'nvim-lua/completion-nvim'
 
-
 Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
 Plug 'jceb/emmet.snippets'
 
@@ -175,7 +174,10 @@ let g:loaded_perl_provider = 0
 
 let g:python3_host_prog='/usr/bin/python3'
 set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
+
 let g:fugitive_dynamic_colors = 0
+autocmd vimrc FileType fugitiveblame lua require"blame_color".highlight_hashes()
+
 syntax enable
 set encoding=utf8
 scriptencoding utf-8
@@ -531,7 +533,7 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 lua <<EOF
   local lspconfig = require('lspconfig')
-  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'sumneko_lua', 'rust_analyzer'} do
+  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'rust_analyzer'} do
     lspconfig[lsp].setup{}
   end
 EOF
