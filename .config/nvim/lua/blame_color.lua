@@ -1,4 +1,4 @@
-local hsy2rgb(h,s,y)
+-- local hsy2rgb(h,s,y)
 
  -- Hue/Saturation/Luma to Red/Green/Blue
  -- These algorithms were taken from KDE Krita's source code.
@@ -123,7 +123,7 @@ local hsy2rgb(h,s,y)
   -- return [r, g, b];
 -- }
 
-end
+--end
 
 
 local function hsi2rgb(h,s,i)
