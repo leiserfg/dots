@@ -1,3 +1,131 @@
+local hsy2rgb(h,s,y)
+
+ -- Hue/Saturation/Luma to Red/Green/Blue
+ -- These algorithms were taken from KDE Krita's source code.
+ -- https://github.com/KDE/krita/blob/fcf9a431b0af9f51546f986499b9621d5ccdf489/libs/pigment/KoColorConversions.cpp#L630-L841
+ --
+  --Luma correction
+  -- local R,G,B = {0.2126, 0.7152, 0.0722}
+  -- const hue = h % 1;
+  -- const sat = clampBetween(s, 0, 1);
+  -- const lum = clampBetween(y, 0, 1);
+  -- const segment = 0.16666666666666666; // 1 / 6
+  -- let r, g, b;
+
+  -- let maxSat, m, fract, lumB, chroma, x;
+
+  -- if (hue >= 0 && hue < segment) {
+  --   maxSat = R + G * hue * 6;
+
+  --   if (lum <= maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / ( 1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r = chroma; g = x; b = 0;
+  --   m = lum - ( R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else if ( hue >= segment && hue < 2 * segment) {
+  --   maxSat = G + R - R * (hue - segment) * 6;
+
+  --   if (lum < maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / (1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r =  x; g = chroma; b = 0;
+  --   m = lum - (R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else if (hue >= 2 * segment && hue < 3 * segment) {
+  --   maxSat = G + B * (hue - 2 * segment) * 6;
+
+  --   if (lum < maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / (1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6.0;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r = 0; g = chroma; b = x;
+  --   m = lum - (R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else if (hue >= 3 * segment && hue < 4 * segment) {
+  --   maxSat = G + B - G * (hue - 3 * segment) * 6;
+
+  --   if (lum < maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / (1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r = 0; g = x; b = chroma;
+  --   m = lum - (R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else if (hue >= 4 * segment && hue < 5 * segment) {
+  --   maxSat = B + R * (hue - 4 * segment) * 6;
+
+  --   if (lum < maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / (1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r = x; g = 0; b = chroma;
+  --   m = lum - (R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else if (hue >= 5 * segment && hue <= 1) {
+  --   maxSat = B + R - B * (hue - 5 * segment) * 6;
+
+  --   if (lum < maxSat) {
+  --     lumB = lum / maxSat * 0.5;
+  --     chroma = sat * 2 * lumB;
+  --   } else {
+  --     lumB = (lum - maxSat) / (1 - maxSat) * 0.5 + 0.5;
+  --     chroma = sat * (2 - 2 * lumB);
+  --   }
+
+  --   fract = hue * 6;
+  --   x = (1 - Math.abs(fract % 2 - 1)) * chroma;
+  --   r = chroma; g = 0; b = x;
+  --   m = lum - (R * r + G * g + B * b);
+  --   r += m; g += m; b += m;
+  -- } else {
+  --   r = 0;
+  --   g = 0;
+  --   b = 0;
+  -- }
+
+  -- r = clampBetween(r, 0, 1);
+  -- g = clampBetween(g, 0, 1);
+  -- b = clampBetween(b, 0, 1);
+
+  -- return [r, g, b];
+-- }
+
+end
+
+
 local function hsi2rgb(h,s,i)
     -- h,s,i ∈ [0, 1]
     -- r,g,b ∈ [0, 1]
