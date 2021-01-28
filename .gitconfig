@@ -94,3 +94,5 @@
 	version = 2
 [init]
 	defaultBranch = master
+[rerere]
+	enabled = true

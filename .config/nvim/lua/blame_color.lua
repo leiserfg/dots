@@ -210,7 +210,7 @@ local function create_highlight(hsi, mode)
         if mode == 'foreground' then
             ex({"highlight", highlight_name, "guifg=#"..rgb_hex})
         else
-      local fg_color = (hsi.i) > 0.5 and "Black" or "White"
+      local fg_color = (hsi.i) >= 0.5 and "Black" or "White"
             ex({"highlight", highlight_name, "guifg="..fg_color, "guibg=#"..rgb_hex})
         end
         HIGHLIGHT_CACHE[rgb_hex] = highlight_name
