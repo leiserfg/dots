@@ -12,8 +12,10 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 " Extra operators
-Plug 'tpope/vim-commentary'  "gc
+" Plug 'tpope/vim-commentary' 
+Plug 'b3nj5m1n/kommentary',{'branch': 'main'}  "gc 
 Plug 'tpope/vim-unimpaired'
+
 " Plug 'tpope/vim-surround'  "ys, ds, cs
 Plug 'machakann/vim-sandwich'
 
