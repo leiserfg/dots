@@ -72,7 +72,6 @@ Plug 'dhruvasagar/vim-table-mode', {
 Plug 'junegunn/vim-emoji'
   command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
-Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
@@ -83,7 +82,7 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './insta
 Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
 Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
 
 " Look and feel
@@ -99,6 +98,9 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { "markdown" },  -- list of language that will be disabled
   },
+  rainbow = {
+     enable=true
+   },
   --[[ indent = {
     enable = true
   },]]

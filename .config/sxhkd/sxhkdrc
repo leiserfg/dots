@@ -107,7 +107,7 @@ super + {o,i}
 super + shift + {1-9}
 	bspc node -d '^{1-9}'
 
-super + {1-9}
+@super + {1-9}
         focused_desktop=$(bspc query -d focused -D);\
         target_desktop=$(bspc query -d ^{1-9} -D);\
         bspc desktop -f $([ $focused_desktop = $target_desktop ] && echo "last" || echo $target_desktop)
