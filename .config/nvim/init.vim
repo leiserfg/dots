@@ -537,7 +537,7 @@ autocmd FileType gitrebase let b:switch_custom_definitions =
 
 lua <<EOF
   local lspconfig = require('lspconfig')
-  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'rust_analyzer'} do
+  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'rust_analyzer', 'tsserver'} do
     lspconfig[lsp].setup{}
   end
 EOF
