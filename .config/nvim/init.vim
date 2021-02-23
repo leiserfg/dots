@@ -73,7 +73,7 @@ Plug 'junegunn/vim-emoji'
   command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
 
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
 
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -85,6 +85,8 @@ Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
 
+Plug 'leiserfg/nvim-hardline', {'branch': 'theme'}
+
 " Look and feel
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
@@ -92,6 +94,8 @@ call plug#end()
 " treesitter {{{ "
 " DISABLED UNTIL IT WORKS FINE
 lua <<EOF
+require('hardline').setup {}
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
