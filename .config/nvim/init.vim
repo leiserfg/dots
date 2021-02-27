@@ -380,8 +380,6 @@ xmap ass <Plug>(textobj-sandwich-auto-a)
 omap iss <Plug>(textobj-sandwich-auto-i)
 omap ass <Plug>(textobj-sandwich-auto-a)
 
-autocmd FileType lisp,clojure,scheme,fennel RainbowParentheses
-"
 " Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
