@@ -45,13 +45,13 @@ run_disowned sxhkd
 
 pkill -9 picom; picom -b
 nitrogen --restore
-xset s 120 180
 
 export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
 pkill polybar
 run_disowned polybar top
 
-run_once xss-lock -- 'pidof i3lock-fancy-rapid || i3lock-fancy-rapid 5 pixel'
+run_once light-locker
+# run_once xss-lock -- 'pidof i3lock-fancy-rapid || i3lock-fancy-rapid 5 pixel'
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once nm-applet
 run_once telegram-desktop
