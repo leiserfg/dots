@@ -42,7 +42,7 @@ run_once () {
 pkill sxhkd
 run_disowned sxhkd
 
-
+xset -b
 pkill -9 picom; picom -b
 nitrogen --restore
 
