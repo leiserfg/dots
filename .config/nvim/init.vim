@@ -35,7 +35,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'    " -
 Plug 'Olical/vim-enmasse'
 Plug 'junegunn/vim-peekaboo'  " show registers
-Plug 'tpope/vim-vinegar'  " improbe netrw UI
+
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -73,7 +75,7 @@ Plug 'junegunn/vim-emoji'
   command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 
 
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
 
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -82,20 +84,16 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './insta
 Plug 'Olical/AnsiEsc'
 Plug 'Olical/aniseed'
 Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
-Plug 'p00f/nvim-ts-rainbow'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
 
-Plug 'leiserfg/nvim-hardline', {'branch': 'theme'}
-
 " Look and feel
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 " }}}
 " treesitter {{{ "
 " DISABLED UNTIL IT WORKS FINE
 lua <<EOF
-require('hardline').setup {}
-
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
@@ -384,6 +382,9 @@ omap ass <Plug>(textobj-sandwich-auto-a)
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
 
+
+
+nnoremap <leader>t :NvimTreeToggle<CR>
 let g:suda_smart_edit = 1
 " ----------------------------------------------------------------------------
 " vim-plug extension
@@ -459,7 +460,6 @@ nmap ga <Plug>(EasyAlign)
 nmap gaa ga_
 
 xmap <Leader>ga   <Plug>(LiveEasyAlign)
-
 " ----------------------------------------------------------------------------
 " vim-signify
 " ----------------------------------------------------------------------------
