@@ -1,6 +1,6 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 
-" Plug Setup{{{
+"z Plug Setup{{{
 
 " Automatic Download {{{
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -89,6 +89,11 @@ Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel',
 " Look and feel
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 " }}}
 " treesitter {{{ "
