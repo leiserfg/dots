@@ -1,125 +1,9 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 
-"z Plug Setup{{{
+"Plug Setup{{{
+lua require"my/plugins"
 
-" Automatic Download {{{
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" }}}
-
-call plug#begin('~/.config/nvim/plugged')
-" Extra operators
-" Plug 'tpope/vim-commentary' 
-Plug 'b3nj5m1n/kommentary',{'branch': 'main'}  "gc 
-Plug 'tpope/vim-unimpaired'
-
-" Plug 'tpope/vim-surround'  "ys, ds, cs
-Plug 'machakann/vim-sandwich'
-
-Plug 'junegunn/vim-easy-align'  "ga
-Plug 'vim-scripts/ReplaceWithRegister'  " gr
-Plug 'vim-scripts/vis'  " :'<,'>B
-
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-repeat'
-
-Plug 'AndrewRadev/splitjoin.vim'
-  let g:splitjoin_split_mapping = ''
-  let g:splitjoin_join_mapping = ''
-  nnoremap gss :SplitjoinSplit<cr>
-  nnoremap gsj :SplitjoinJoin<cr>
-
-Plug 'AndrewRadev/switch.vim'    " -
-Plug 'Olical/vim-enmasse'
-Plug 'junegunn/vim-peekaboo'  " show registers
-
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
-
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-Plug 'mhinz/vim-signify'
-" Plug 'ruanyl/vim-gh-line'
-" Plug 'lambdalisue/gina.vim'
-
-Plug 'alok/notational-fzf-vim'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-Plug 'nvim-treesitter/playground'
-Plug 'romgrk/nvim-treesitter-context'
-
-Plug 'nvim-lua/completion-nvim'
-
-Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-Plug 'jceb/emmet.snippets'
-
-Plug 'lambdalisue/suda.vim'
-Plug 'tpope/vim-eunuch'
-
-Plug 'direnv/direnv.vim'
-Plug 'hashivim/vim-terraform'
-Plug 'sheerun/vim-polyglot'
-" Plug 'pest-parser/pest.vim'
-Plug 'metakirby5/codi.vim'
-
-Plug 'dhruvasagar/vim-table-mode', {
-      \ 'for': ['markdown'],
-      \ }
-Plug 'junegunn/vim-emoji'
-  command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
-
-
-Plug 'itchyny/lightline.vim'
-Plug 'sainnhe/gruvbox-material'
-
-Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-"Lisp
-Plug 'Olical/AnsiEsc'
-Plug 'Olical/aniseed'
-Plug 'Olical/conjure', {'for': ['fennel', 'clojure']}
-Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['fennel', 'janet', 'clojure']}
-
-" Look and feel
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'norcalli/nvim-colorizer.lua'
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-call plug#end()
-" }}}
-" treesitter {{{ "
-" DISABLED UNTIL IT WORKS FINE
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "markdown" },  -- list of language that will be disabled
-  },
-  rainbow = {
-     enable=true
-   },
-  --[[ indent = {
-    enable = true
-  },]]
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false -- Whether the query persists across vim sessions
-  }
-}
-EOF
-" }}} treesitter "
+autocmd BufWritePost plugins.lua PackerCompile
 
 " User interface {{{
 " Show line numbers
@@ -386,63 +270,7 @@ omap ass <Plug>(textobj-sandwich-auto-a)
 " Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
-
-
-
 nnoremap <leader>t :NvimTreeToggle<CR>
-let g:suda_smart_edit = 1
-" ----------------------------------------------------------------------------
-" vim-plug extension
-" ----------------------------------------------------------------------------
-function! s:plug_gx()
-  let line = getline('.')
-  let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
-  let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
-        \ : getline(search('^- .*:$', 'bn'))[2:-2]
-  let uri  = get(get(g:plugs, name, {}), 'uri', '')
-  if uri !~ 'github.com'
-    return
-  endif
-  let repo = matchstr(uri, '[^:/]*/'.name)
-  let url  = empty(sha) ? 'https://github.com/'.repo
-        \ : printf('https://github.com/%s/commit/%s', repo, sha)
-  call netrw#BrowseX(url, 0)
-endfunction
-
-function! s:scroll_preview(down)
-  silent! wincmd P
-  if &previewwindow
-    execute 'normal!' a:down ? "\<c-e>" : "\<c-y>"
-    wincmd p
-  endif
-endfunction
-
-function! s:plug_doc()
-  let name = matchstr(getline('.'), '^- \zs\S\+\ze:')
-  if has_key(g:plugs, name)
-    for doc in split(globpath(g:plugs[name].dir, 'doc/*.txt'), '\n')
-      execute 'tabe' doc
-    endfor
-  endif
-endfunction
-
-function! s:setup_extra_keys()
-  " PlugDiff
-  nnoremap <silent> <buffer> J :call <sid>scroll_preview(1)<cr>
-  nnoremap <silent> <buffer> K :call <sid>scroll_preview(0)<cr>
-  nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
-  nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
-  nmap <silent> <buffer> <c-j> <c-n>o
-  nmap <silent> <buffer> <c-k> <c-p>o
-
-  " gx
-  nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
-
-  " helpdoc
-  nnoremap <buffer> <silent> H  :call <sid>plug_doc()<cr>
-endfunction
-
-autocmd vimrc FileType vim-plug call s:setup_extra_keys()
 
 " lightline
 set noshowmode  " we don't need it any more because of the status line
@@ -476,20 +304,20 @@ let g:signify_sign_changedelete = '│'
 " FZF {{{
 " ============================================================================
 " Customize fzf colors to match your color scheme
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', '#5f5f87'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+let g:fzf_colors = {
+  \ "fg":      ["fg", "Normal"],
+  \ "bg":      ["bg", "Normal"],
+  \ "hl":      ["fg", "IncSearch"],
+  \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
+  \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
+  \ "hl+":     ["fg", "IncSearch"],
+  \ "info":    ["fg", "IncSearch"],
+  \ "border":  ["fg", "Ignore"],
+  \ "prompt":  ["fg", "Comment"],
+  \ "pointer": ["fg", "IncSearch"],
+  \ "marker":  ["fg", "IncSearch"],
+  \ "spinner": ["fg", "IncSearch"],
+  \ "header":  ["fg", "WildMenu"] }
 
 let $FZF_DEFAULT_OPTS .= ' --inline-info'
 let $FZF_DEFAULT_OPTS .=' --layout=reverse '
@@ -521,38 +349,25 @@ noremap <leader>/ :Rg
 " }}} FZF "
 
 " switch.vim {{{
-let g:switch_mapping = '-'
+"
+" Don't use default mappings
+let g:speeddating_no_mappings = 1
+
+" Avoid issues because of us remapping <c-a> and <c-x> below
+nnoremap <Plug>SpeedDatingFallbackUp <c-a>
+nnoremap <Plug>SpeedDatingFallbackDown <c-x>
+" Manually invoke speeddating in case switch didn't work
+nnoremap <silent> <c-a> :if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<cr>
+nnoremap <silent> <c-x> :if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<cr>
+
 let g:switch_custom_definitions = [
       \   ['MON', 'TUE', 'WED', 'THU', 'FRI'],
       \   ['staging', 'production'],
       \   ['true', 'false']
       \ ]
-
-
-autocmd FileType python let b:switch_custom_definitions =
-      \ [
-      \ ['True', 'False']
-      \ ]
-
-autocmd FileType gitrebase let b:switch_custom_definitions =
-      \ [
-      \   [ 'pick', 'reword', 'edit', 'squash', 'fixup', 'exec' ]
-      \ ]
 " }}} "
 
 " LSP and completion.nvim {{{	
-
-lua <<EOF
-  local lspconfig = require('lspconfig')
-  for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'rust_analyzer', 'tsserver'} do
-    lspconfig[lsp].setup{}
-  end
-EOF
-let g:completion_matching_ignore_case = 1
-let g:completion_enable_snippet='UltiSnips'
-let g:completion_matching_strategy_list=['exact', 'fuzzy']
-let g:completion_enable_auto_hover = 0
-autocmd BufEnter * lua require'completion'.on_attach()
 
 function! s:lsp_setup()
     if empty(luaeval('vim.inspect(vim.lsp.buf_get_clients())'))
@@ -577,18 +392,6 @@ sign define LspDiagnosticsSignInformation text=🔹 linehl= numhl=
 sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
 " }}} "
 
-" UltiSnips {{{
-
-let g:UltiSnipsSnippetDirectories=['~/.config/nvim/UltiSnips', 'UltiSnips']
-
-
-" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or('<CR>', 'n')
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsJumpForwardTrigger= '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger= '<c-k>'
-let g:UltiSnipsRemoveSelectModeMappings=0
-" }}}
-
 " Completion {{{
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
@@ -597,12 +400,6 @@ set completeopt=noinsert,menuone,noselect
 inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
-" }}}
-
-" Terraform {{{
-let g:terraform_align=1
-let g:terraform_fold_sections=1
-let g:terraform_commentstring='//%s'
 " }}}
 
 " Netrw {{{
@@ -654,6 +451,5 @@ set background=dark
 let g:gruvbox_material_sign_column_background = 'none' 
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_enable_italic = 1
-colorscheme gruvbox-material
 let g:lightline.colorscheme = 'gruvbox_material'
 " }}}
