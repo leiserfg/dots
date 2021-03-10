@@ -71,7 +71,7 @@ let g:python3_host_prog='/usr/bin/python3'
 set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
 
 let g:fugitive_dynamic_colors = 0
-autocmd vimrc FileType fugitiveblame lua require"blame_color".highlight_hashes()
+autocmd vimrc FileType fugitiveblame lua require"my/blame_color".highlight_hashes()
 
 syntax enable
 set encoding=utf8
