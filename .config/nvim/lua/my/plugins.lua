@@ -22,7 +22,25 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use { 'b3nj5m1n/kommentary', branch = 'main'}  -- "gc
     use 'tpope/vim-unimpaired'
+    use {
+        'machakann/vim-sandwich',
+        config=function() 
+        vim.cmd[[
+            runtime macros/sandwich/keymap/surround.vim
+            " Text objects to select a text surrounded by brackets or user-specified characters.
+            xmap is <Plug>(textobj-sandwich-query-i)
+            xmap as <Plug>(textobj-sandwich-query-a)
+            omap is <Plug>(textobj-sandwich-query-i)
+            omap as <Plug>(textobj-sandwich-query-a)
 
+            " Text objects to select the nearest surrounded text automatically.
+            xmap im <Plug>(textobj-sandwich-literal-query-i)
+            xmap am <Plug>(textobj-sandwich-literal-query-a)
+            omap im <Plug>(textobj-sandwich-literal-query-i)
+            omap am <Plug>(textobj-sandwich-literal-query-a)
+        ]]
+        end
+    }
     use 'junegunn/vim-easy-align'  --ga
     use 'vim-scripts/ReplaceWithRegister'  -- gr
     use 'vim-scripts/vis'        -- :'<,'>B
@@ -130,7 +148,13 @@ return require('packer').startup(function(use)
     use { 'lambdalisue/suda.vim', config="vim.g.suda_smart_edit=1"}
     use 'tpope/vim-eunuch'
 
-    use 'direnv/direnv.vim'
+    use {'direnv/direnv.vim', config=function()
+        vim.cmd [[
+        autocmd FileType direnv setlocal commentstring=#\ %s
+        ]]
+     end
+    }
+
     use {
         'hashivim/vim-terraform', 
         config=function()
