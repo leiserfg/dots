@@ -25,20 +25,26 @@ return require('packer').startup(function(use)
     use {
         'machakann/vim-sandwich',
         config=function() 
-        vim.cmd[[
-            runtime macros/sandwich/keymap/surround.vim
-            " Text objects to select a text surrounded by brackets or user-specified characters.
-            xmap is <Plug>(textobj-sandwich-query-i)
-            xmap as <Plug>(textobj-sandwich-query-a)
-            omap is <Plug>(textobj-sandwich-query-i)
-            omap as <Plug>(textobj-sandwich-query-a)
+            vim.cmd [[runtime macros/sandwich/keymap/surround.vim]]
+                --[[  Make sandwich work like vim-surround
+                 Textobjects to select a text surrounded by braket or same characters user input. ]]
+                vim.cmd[[xmap is <Plug>(textobj-sandwich-query-i)]]
+                vim.cmd[[xmap as <Plug>(textobj-sandwich-query-a)]]
+                vim.cmd[[omap is <Plug>(textobj-sandwich-query-i)]]
+                vim.cmd[[omap as <Plug>(textobj-sandwich-query-a)]]
 
-            " Text objects to select the nearest surrounded text automatically.
-            xmap im <Plug>(textobj-sandwich-literal-query-i)
-            xmap am <Plug>(textobj-sandwich-literal-query-a)
-            omap im <Plug>(textobj-sandwich-literal-query-i)
-            omap am <Plug>(textobj-sandwich-literal-query-a)
-        ]]
+                --  Textobjects to select a text surrounded by same characters user input.
+
+                vim.cmd[[xmap im <Plug>(textobj-sandwich-literal-query-i)]]
+                vim.cmd[[xmap am <Plug>(textobj-sandwich-literal-query-a)]]
+                vim.cmd[[omap im <Plug>(textobj-sandwich-literal-query-i)]]
+                vim.cmd[[omap am <Plug>(textobj-sandwich-literal-query-a)]]
+
+                -- Textobjects to select the nearest surrounded text automatically.
+                vim.cmd[[xmap iss <Plug>(textobj-sandwich-auto-i)]]
+                vim.cmd[[xmap ass <Plug>(textobj-sandwich-auto-a)]]
+                vim.cmd[[omap iss <Plug>(textobj-sandwich-auto-i)]]
+                vim.cmd[[omap ass <Plug>(textobj-sandwich-auto-a)]]
         end
     }
     use 'junegunn/vim-easy-align'  --ga
@@ -61,16 +67,10 @@ return require('packer').startup(function(use)
     use 'Olical/vim-enmasse'
     use 'junegunn/vim-peekaboo'  --" show registers
 
-    -- use 'kyazdani42/nvim-web-devicons' --" for file icons
-    -- use 'kyazdani42/nvim-tree.lua'
-
     use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
 
-    -- use 'mhinz/vim-signify'
-    --[[ " use 'ruanyl/vim-gh-line'
-    " use 'lambdalisue/gina.vim' ]]
     use {
         'lewis6991/gitsigns.nvim',
         branch='yadm',
@@ -96,7 +96,9 @@ return require('packer').startup(function(use)
 
     }
     use {
-        'nvim-treesitter/nvim-treesitter', 
+        'nvim-treesitter/nvim-treesitter',
+        {'nvim-treesitter/playground'},
+        {'romgrk/nvim-treesitter-context'},
          run=':TSUpdate',
          config=function()
              require'nvim-treesitter.configs'.setup {
@@ -120,8 +122,6 @@ return require('packer').startup(function(use)
              }
          end
     }
-    use 'nvim-treesitter/playground'
-    use 'romgrk/nvim-treesitter-context'
 
     use { 'nvim-lua/completion-nvim', 
     config = function()
@@ -170,11 +170,44 @@ return require('packer').startup(function(use)
 
     use {'dhruvasagar/vim-table-mode', ft='markdown'}
 
+    use {
+        'hoob3rt/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        config = function()
+            require('lualine').status{
+                options = {
+                    theme = 'gruvbox_material',
+                    section_separators = '',
+                    component_separators = '',
+                    icons_enabled = false,
+                },
+                extensions = { 'fzf' }
+            }
+        end
+    }
+    use {'sainnhe/gruvbox-material', config=function() vim.cmd[[colorscheme gruvbox-material]] end }
 
-    use 'itchyny/lightline.vim'
-    use {'sainnhe/gruvbox-material', config=function() vim.cmd 'colorscheme gruvbox-material'  end}
+    use {
+        'junegunn/fzf.vim', 
+        config=function()
+            vim.g.fzf_layout = { window={ width=0.9, height=0.6 } }
+            vim.cmd[[noremap <leader>/ :Rg ]]
+        end
+    }
 
-    use 'junegunn/fzf.vim'
+    use {
+        'lambdalisue/fern.vim',
+        requires={
+        'antoinemadec/FixCursorHold.nvim',
+        'lambdalisue/fern-hijack.vim'
+        },
+        config=function() 
+        vim.cmd[[nnoremap <silent> <leader>t :Fern . -drawer -toggle<CR>]]
+        end
+     }
+
+
+
     -- Lisp
     use 'Olical/AnsiEsc'
     use 'Olical/aniseed'

@@ -1,9 +1,13 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 
+augroup vimrc
+  autocmd!
+augroup END
+
 "Plug Setup{{{
 lua require"my/plugins"
 
-autocmd BufWritePost plugins.lua PackerCompile
+au vimrc BufWritePost plugins.lua PackerCompile
 
 " User interface {{{
 " Show line numbers
@@ -42,11 +46,9 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set autoread " autoreload file changes
 set nocursorline " cursorline is slow
 
-augroup vimrc
-  autocmd!
-augroup END
+set noshowmode  " we don't need it because of the status line
 
-autocmd vimrc InsertEnter * set nohlsearch
+au vimrc InsertEnter * set nohlsearch
 
 " }}}
 
@@ -71,7 +73,7 @@ let g:python3_host_prog='/usr/bin/python3'
 set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
 
 let g:fugitive_dynamic_colors = 0
-autocmd vimrc FileType fugitiveblame lua require"my/blame_color".highlight_hashes()
+au vimrc FileType fugitiveblame lua require"my/blame_color".highlight_hashes()
 
 syntax enable
 set encoding=utf8
@@ -108,8 +110,8 @@ tnoremap <Esc> <C-\><C-n>
 " interactive replace
 set inccommand=split
 
-autocmd BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
-autocmd FileType gitcommit setlocal spell spelllang=en_us
+au vimrc BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
+au vimrc FileType gitcommit setlocal spell spelllang=en_us
 " }}}
 
 " File, backups and undo {{{
@@ -236,33 +238,9 @@ onoremap <silent> il :<C-U>normal! ^vg_<CR>
 
 " Plugins {{{
 
-
-let g:codi#interpreters = {
-   \ 'rink': {
-       \ 'prompt': '^> ',
-       \ 'bin': 'rink',
-       \ },
-   \ }
-
-
-
 " Notational vim
 let g:nv_search_paths = ['~/txts']
 nnoremap <silent> <leader>n :NV<CR>
-nnoremap <leader>t :NvimTreeToggle<CR>
-
-" lightline
-set noshowmode  " we don't need it any more because of the status line
- let g:lightline = {
-       \ 'active': {
-       \   'left': [ [ 'mode', 'paste' ],
-       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-       \ },
-       \ 'component_function': {
-       \   'gitbranch_2': 'gina#component#repo#branch',
-       \   'gitbranch': 'FugitiveHead'
-       \ },
-       \ }
 
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
@@ -272,60 +250,7 @@ nmap ga <Plug>(EasyAlign)
 nmap gaa ga_
 
 xmap <Leader>ga   <Plug>(LiveEasyAlign)
-" ----------------------------------------------------------------------------
-" vim-signify
-" ----------------------------------------------------------------------------
-let g:signify_skip_filetype = { 'journal': 1 }
-let g:signify_sign_add          = '│'
-let g:signify_sign_change       = '│'
-let g:signify_sign_changedelete = '│'
 
-" FZF {{{
-" ============================================================================
-" Customize fzf colors to match your color scheme
-let g:fzf_colors = {
-  \ "fg":      ["fg", "Normal"],
-  \ "bg":      ["bg", "Normal"],
-  \ "hl":      ["fg", "IncSearch"],
-  \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
-  \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
-  \ "hl+":     ["fg", "IncSearch"],
-  \ "info":    ["fg", "IncSearch"],
-  \ "border":  ["fg", "Ignore"],
-  \ "prompt":  ["fg", "Comment"],
-  \ "pointer": ["fg", "IncSearch"],
-  \ "marker":  ["fg", "IncSearch"],
-  \ "spinner": ["fg", "IncSearch"],
-  \ "header":  ["fg", "WildMenu"] }
-
-let $FZF_DEFAULT_OPTS .= ' --inline-info'
-let $FZF_DEFAULT_OPTS .=' --layout=reverse '
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-" Hide statusline of terminal buffer
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-function! s:plug_help_sink(line)
-  let dir = g:plugs[a:line].dir
-  for pat in ['doc/*.txt', 'README.md']
-    let match = get(split(globpath(dir, pat), "\n"), 0, '')
-    if len(match)
-      execute 'tabedit' match
-      return
-    endif
-  endfor
-  tabnew
-  execute 'Explore' dir
-endfunction
-
-command! PlugHelp call fzf#run(fzf#wrap({
-      \ 'source': sort(keys(g:plugs)),
-      \ 'sink':   function('s:plug_help_sink')}))
-
-noremap <leader>/ :Rg 
-" }}} FZF "
 
 " switch.vim {{{
 "
@@ -390,22 +315,7 @@ let g:netrw_altv = 1
 " }}}
 
 au vimrc TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-let g:gh_use_canonical = 1
 " }}} "
-
-" Operators {{{
-" ----------------------------------------------------------------------------
-" EX | chmod +x
-" ----------------------------------------------------------------------------
-command! EX if !empty(expand('%'))
-      \|   write
-      \|   call system('chmod +x '.expand('%'))
-      \|   silent e
-      \| else
-        \|   echohl WarningMsg
-        \|   echo 'Save the file first'
-        \|   echohl None
-        \| endif
 
 " ----------------------------------------------------------------------------
 " <Leader>?/! | Google it / Feeling lucky
@@ -430,5 +340,4 @@ set background=dark
 let g:gruvbox_material_sign_column_background = 'none' 
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_enable_italic = 1
-let g:lightline.colorscheme = 'gruvbox_material'
 " }}}
