@@ -102,7 +102,7 @@ return require('packer').startup(function(use)
          run=':TSUpdate',
          config=function()
              require'nvim-treesitter.configs'.setup {
-              ensure_installed = "all",     -- one of "all", "language", or a list of languages
+              -- ensure_installed = "all",     -- one of "all", "language", or a list of languages
               highlight = {
                 enable = true,              -- false will disable the whole extension
                 disable = { "markdown" },  -- list of language that will be disabled
