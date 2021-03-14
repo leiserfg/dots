@@ -123,18 +123,38 @@ return require('packer').startup(function(use)
          end
     }
 
-    use { 'nvim-lua/completion-nvim', 
+    --[[ use { 'nvim-lua/completion-nvim', 
     config = function()
         vim.g.completion_matching_ignore_case = 1
         vim.g.completion_enable_snippet='UltiSnips'
         vim.g.completion_matching_strategy_list={'exact', 'fuzzy'}
         vim.g.completion_enable_auto_hover = 0
         vim.cmd [[ autocmd BufEnter * lua require'completion'.on_attach() ]]
-    end
+    --[[ end
 
-    }
+    } ]]
+
     use {
-        'honza/vim-snippets', requires='SirVer/ultisnips', 
+        "hrsh7th/nvim-compe",
+        config=function()
+            require'compe'.setup({
+                    enabled = true,
+                    source = {
+                        path = true,
+                        buffer = true,
+                        nvim_lsp = true,
+                        calc=true,
+                        spell=true,
+                        ultisnips=true,
+                        nvim_lua = true,
+                    }
+                })
+            vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
+        end
+    }
+
+    use {
+        'honza/vim-snippets', requires='SirVer/ultisnips',
         config=function()
             vim.g.UltiSnipsSnippetDirectories={'~/.config/nvim/UltiSnips', 'UltiSnips'}
             vim.g.UltiSnipsExpandTrigger = '<c-j>'

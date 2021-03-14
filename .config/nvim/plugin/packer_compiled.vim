@@ -52,11 +52,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/codi.vim"
   },
-  ["completion-nvim"] = {
-    config = { "\27LJ\1\2±\2\0\0\2\0\n\0\0214\0\0\0007\0\1\0'\1\1\0:\1\2\0004\0\0\0007\0\1\0%\1\4\0:\1\3\0004\0\0\0007\0\1\0003\1\6\0:\1\5\0004\0\0\0007\0\1\0'\1\0\0:\1\a\0004\0\0\0007\0\b\0%\1\t\0>\0\2\1G\0\1\0= autocmd BufEnter * lua require'completion'.on_attach() \bcmd!completion_enable_auto_hover\1\3\0\0\nexact\nfuzzy&completion_matching_strategy_list\14UltiSnips\30completion_enable_snippet$completion_matching_ignore_case\6g\bvim\0" },
-    loaded = true,
-    path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/completion-nvim"
-  },
   conjure = {
     loaded = false,
     needs_bufread = false,
@@ -111,6 +106,11 @@ _G.packer_plugins = {
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+  },
+  ["nvim-compe"] = {
+    config = { "\27LJ\1\2ß\1\0\0\3\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\0014\0\6\0007\0\a\0%\1\b\0>\0\2\1G\0\1\0<inoremap <silent><expr> <CR>      compe#confirm('<CR>')\bcmd\bvim\vsource\1\0\a\nspell\2\14ultisnips\2\rnvim_lsp\2\vbuffer\2\rnvim_lua\2\tcalc\2\tpath\2\1\0\1\fenabled\2\nsetup\ncompe\frequire\0" },
+    loaded = true,
+    path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     config = { "\27LJ\1\2Œ\1\0\0\b\0\5\0\0144\0\0\0%\1\1\0>\0\2\0024\1\2\0003\2\3\0>\1\2\4D\4\4€6\6\5\0007\6\4\0062\a\0\0>\6\2\1B\4\3\3N\4úG\0\1\0\nsetup\1\6\0\0\tpyls\rgdscript\nvimls\18rust_analyzer\rtsserver\npairs\14lspconfig\frequire\0" },
@@ -250,24 +250,24 @@ _G.packer_plugins = {
 try_loadstring("\27LJ\1\2¢\2\0\0\2\0\n\0\0214\0\0\0007\0\1\0003\1\3\0:\1\2\0004\0\0\0007\0\1\0%\1\5\0:\1\4\0004\0\0\0007\0\1\0%\1\5\0:\1\6\0004\0\0\0007\0\1\0%\1\b\0:\1\a\0004\0\0\0007\0\1\0'\1\0\0:\1\t\0G\0\1\0&UltiSnipsRemoveSelectModeMappings\n<c-k>!UltiSnipsJumpBackwardTrigger UltiSnipsJumpForwardTrigger\n<c-j>\27UltiSnipsExpandTrigger\1\3\0\0\29~/.config/nvim/UltiSnips\14UltiSnips UltiSnipsSnippetDirectories\6g\bvim\0", "config", "vim-snippets")
 -- Config for: vim-sandwich
 try_loadstring("\27LJ\1\2›\6\0\0\2\0\15\00054\0\0\0007\0\1\0%\1\2\0>\0\2\0014\0\0\0007\0\1\0%\1\3\0>\0\2\0014\0\0\0007\0\1\0%\1\4\0>\0\2\0014\0\0\0007\0\1\0%\1\5\0>\0\2\0014\0\0\0007\0\1\0%\1\6\0>\0\2\0014\0\0\0007\0\1\0%\1\a\0>\0\2\0014\0\0\0007\0\1\0%\1\b\0>\0\2\0014\0\0\0007\0\1\0%\1\t\0>\0\2\0014\0\0\0007\0\1\0%\1\n\0>\0\2\0014\0\0\0007\0\1\0%\1\v\0>\0\2\0014\0\0\0007\0\1\0%\1\f\0>\0\2\0014\0\0\0007\0\1\0%\1\r\0>\0\2\0014\0\0\0007\0\1\0%\1\14\0>\0\2\1G\0\1\0-omap ass <Plug>(textobj-sandwich-auto-a)-omap iss <Plug>(textobj-sandwich-auto-i)-xmap ass <Plug>(textobj-sandwich-auto-a)-xmap iss <Plug>(textobj-sandwich-auto-i)5omap am <Plug>(textobj-sandwich-literal-query-a)5omap im <Plug>(textobj-sandwich-literal-query-i)5xmap am <Plug>(textobj-sandwich-literal-query-a)5xmap im <Plug>(textobj-sandwich-literal-query-i)-omap as <Plug>(textobj-sandwich-query-a)-omap is <Plug>(textobj-sandwich-query-i)-xmap as <Plug>(textobj-sandwich-query-a)-xmap is <Plug>(textobj-sandwich-query-i)0runtime macros/sandwich/keymap/surround.vim\bcmd\bvim\0", "config", "vim-sandwich")
--- Config for: completion-nvim
-try_loadstring("\27LJ\1\2±\2\0\0\2\0\n\0\0214\0\0\0007\0\1\0'\1\1\0:\1\2\0004\0\0\0007\0\1\0%\1\4\0:\1\3\0004\0\0\0007\0\1\0003\1\6\0:\1\5\0004\0\0\0007\0\1\0'\1\0\0:\1\a\0004\0\0\0007\0\b\0%\1\t\0>\0\2\1G\0\1\0= autocmd BufEnter * lua require'completion'.on_attach() \bcmd!completion_enable_auto_hover\1\3\0\0\nexact\nfuzzy&completion_matching_strategy_list\14UltiSnips\30completion_enable_snippet$completion_matching_ignore_case\6g\bvim\0", "config", "completion-nvim")
--- Config for: fern.vim
-try_loadstring("\27LJ\1\2[\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0<nnoremap <silent> <leader>t :Fern . -drawer -toggle<CR>\bcmd\bvim\0", "config", "fern.vim")
--- Config for: suda.vim
-vim.g.suda_smart_edit=1
+-- Config for: fzf.vim
+try_loadstring("\27LJ\1\2\1\0\0\3\0\b\0\v4\0\0\0007\0\1\0003\1\4\0003\2\3\0:\2\5\1:\1\2\0004\0\0\0007\0\6\0%\1\a\0>\0\2\1G\0\1\0\27noremap <leader>/ :Rg \bcmd\vwindow\1\0\0\1\0\2\nwidth\4Í™³æ\fÌ™³ÿ\3\vheight\4³æÌ™\3³æŒÿ\3\15fzf_layout\6g\bvim\0", "config", "fzf.vim")
 -- Config for: gruvbox-material
 try_loadstring("\27LJ\1\2@\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0!colorscheme gruvbox-material\bcmd\bvim\0", "config", "gruvbox-material")
+-- Config for: suda.vim
+vim.g.suda_smart_edit=1
+-- Config for: gitsigns.nvim
+try_loadstring("\27LJ\1\2U\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0003\2\3\0:\2\5\1>\0\2\1G\0\1\0\tyadm\1\0\0\1\0\1\venable\2\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 -- Config for: lualine.nvim
 try_loadstring("\27LJ\1\2»\1\0\0\3\0\b\0\v4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0003\2\3\0:\2\5\0013\2\6\0:\2\a\1>\0\2\1G\0\1\0\15extensions\1\2\0\0\bfzf\foptions\1\0\0\1\0\4\25component_separators\5\23section_separators\5\18icons_enabled\1\ntheme\21gruvbox_material\vstatus\flualine\frequire\0", "config", "lualine.nvim")
 -- Config for: vim-terraform
 try_loadstring("\27LJ\1\2†\1\0\0\2\0\6\0\r4\0\0\0007\0\1\0'\1\1\0:\1\2\0004\0\0\0007\0\1\0'\1\1\0:\1\3\0004\0\0\0007\0\1\0%\1\5\0:\1\4\0G\0\1\0\t//%s\28terraform_commentstring\28terraform_fold_sections\20terraform_align\6g\bvim\0", "config", "vim-terraform")
--- Config for: fzf.vim
-try_loadstring("\27LJ\1\2\1\0\0\3\0\b\0\v4\0\0\0007\0\1\0003\1\4\0003\2\3\0:\2\5\1:\1\2\0004\0\0\0007\0\6\0%\1\a\0>\0\2\1G\0\1\0\27noremap <leader>/ :Rg \bcmd\vwindow\1\0\0\1\0\2\nwidth\4Í™³æ\fÌ™³ÿ\3\vheight\4³æÌ™\3³æŒÿ\3\15fzf_layout\6g\bvim\0", "config", "fzf.vim")
+-- Config for: nvim-compe
+try_loadstring("\27LJ\1\2ß\1\0\0\3\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\0014\0\6\0007\0\a\0%\1\b\0>\0\2\1G\0\1\0<inoremap <silent><expr> <CR>      compe#confirm('<CR>')\bcmd\bvim\vsource\1\0\a\nspell\2\14ultisnips\2\rnvim_lsp\2\vbuffer\2\rnvim_lua\2\tcalc\2\tpath\2\1\0\1\fenabled\2\nsetup\ncompe\frequire\0", "config", "nvim-compe")
 -- Config for: direnv.vim
 try_loadstring("\27LJ\1\2i\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0J        autocmd FileType direnv setlocal commentstring=#\\ %s\n        \bcmd\bvim\0", "config", "direnv.vim")
--- Config for: gitsigns.nvim
-try_loadstring("\27LJ\1\2U\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0003\2\3\0:\2\5\1>\0\2\1G\0\1\0\tyadm\1\0\0\1\0\1\venable\2\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+-- Config for: fern.vim
+try_loadstring("\27LJ\1\2[\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0<nnoremap <silent> <leader>t :Fern . -drawer -toggle<CR>\bcmd\bvim\0", "config", "fern.vim")
 -- Config for: nvim-lspconfig
 try_loadstring("\27LJ\1\2Œ\1\0\0\b\0\5\0\0144\0\0\0%\1\1\0>\0\2\0024\1\2\0003\2\3\0>\1\2\4D\4\4€6\6\5\0007\6\4\0062\a\0\0>\6\2\1B\4\3\3N\4úG\0\1\0\nsetup\1\6\0\0\tpyls\rgdscript\nvimls\18rust_analyzer\rtsserver\npairs\14lspconfig\frequire\0", "config", "nvim-lspconfig")
 
