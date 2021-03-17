@@ -98,7 +98,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         {'nvim-treesitter/playground'},
-        {'romgrk/nvim-treesitter-context'},
+        -- {'romgrk/nvim-treesitter-context'},
          run=':TSUpdate',
          config=function()
              require'nvim-treesitter.configs'.setup {
@@ -194,7 +194,7 @@ return require('packer').startup(function(use)
         'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
         config = function()
-            require('lualine').status{
+            require('lualine').setup{
                 options = {
                     theme = 'gruvbox_material',
                     section_separators = '',
