@@ -147,6 +147,7 @@ return require('packer').startup(function(use)
                         spell=true,
                         ultisnips=true,
                         nvim_lua = true,
+                        emoji = true,
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]

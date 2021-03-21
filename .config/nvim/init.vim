@@ -299,7 +299,8 @@ sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
 " Completion {{{
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-
+" limit amount of completion entries
+set pumheight=20
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'

@@ -8,11 +8,11 @@ printf "Xft.dpi: $nice_dpi\n*dpi: $nice_dpi"|xrdb -merge
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCALE_FACTOR=$(echo "scale=2;$nice_dpi/96"|bc)
 
-export TERMINAL=$TERMCMD
 
 export PATH=$HOME/.local/bin/:$PATH
 
 #Apps
 export BROWSER=firefox-developer-edition
 export TERMCMD=kitty
+export TERMINAL=$TERMCMD
 
