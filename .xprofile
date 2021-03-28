@@ -13,6 +13,6 @@ export PATH=$HOME/.local/bin/:$PATH
 
 #Apps
 export BROWSER=firefox-developer-edition
-export TERMCMD=kitty
+export TERMCMD="kitty"
 export TERMINAL=$TERMCMD
 
