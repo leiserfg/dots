@@ -133,7 +133,18 @@ return require('packer').startup(function(use)
     --[[ end
 
     } ]]
-
+    use {
+        "L3MON4D3/LuaSnip",
+        config=function()
+        -- Load snippets
+        require("my/snippets")
+    vim.cmd[[imap <silent><expr> <c-j> <cmd>lua require'luasnip'.expand_or_jump()<Cr>]]
+    vim.cmd[[inoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
+    vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']]
+    vim.cmd[[snoremap <silent> <Tab> <cmd>lua ls.jump(1)<Cr>]]
+    vim.cmd[[snoremap <silent> <S-Tab> <cmd>lua ls.jump(-1)<Cr>]]
+    end
+    }
     use {
         "hrsh7th/nvim-compe",
         config=function()
@@ -145,16 +156,17 @@ return require('packer').startup(function(use)
                         nvim_lsp = true,
                         calc=true,
                         spell=true,
-                        ultisnips=true,
+                        ultisnips=false,
                         nvim_lua = true,
                         emoji = true,
+                        luasnip = true,
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
         end
     }
 
-    use {
+    --[[ use {
         'honza/vim-snippets', requires='SirVer/ultisnips',
         config=function()
             vim.g.UltiSnipsSnippetDirectories={'~/.config/nvim/UltiSnips', 'UltiSnips'}
@@ -163,8 +175,8 @@ return require('packer').startup(function(use)
             vim.g.UltiSnipsJumpBackwardTrigger= '<c-k>'
             vim.g.UltiSnipsRemoveSelectModeMappings=0
         end
-    }
-    use 'jceb/emmet.snippets'
+    } ]]
+    -- use 'jceb/emmet.snippets'
 
     use { 'lambdalisue/suda.vim', config="vim.g.suda_smart_edit=1"}
     use 'tpope/vim-eunuch'
