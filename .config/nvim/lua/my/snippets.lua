@@ -24,22 +24,21 @@ local function copy(args, a1, a2)
 	return args[1]
 end
 
-local function sf(trig, body, regexTrig) 
-   local wordTrig = true
-    if regexTrig then
-        wordTrig = false
-    else
-        wordTrig = true
-        regexTrig = false
-    end
+local LOREM_IPSUM = [[Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
+ Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+ Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+]]
 
-    return s({trig = trig, wordTrig = true},
+local function sf(trig, body, regexTrig)
+    return s({trig = trig, wordTrig=true, regexTrig=regexTrig},
         {f(body, {}), i(0)}
      )
 end
 
 ls.snippets = {
-	all = {
+ all = {
     sf("date", function() return {os.date("%Y-%m-%d")} end),
     sf("uuid", function() return {uuid()} end),
  }
