@@ -6,7 +6,7 @@ printf "Xft.dpi: $nice_dpi\n*dpi: $nice_dpi"|xrdb -merge
 
 #Set the QT scale by hand
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-# export QT_SCALE_FACTOR=$(echo "scale=2;$nice_dpi/96"|bc)
+export QT_SCALE_FACTOR=$(echo "scale=1;96/$nice_dpi"|bc)
 
 
 export PATH=$HOME/.local/bin/:$PATH
