@@ -305,8 +305,6 @@ set pumheight=20
 inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
-snoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
-snoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 
 " }}}
 
