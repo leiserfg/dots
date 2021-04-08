@@ -77,45 +77,5 @@ s({trig = "sbox", wordTrig=true},
  },
 }
 
-
-
--- LOAD ALL THE SNIPPETS
-local Path = require'plenary.path'.Path
-
-local function json_decode(data)
-  local status, result = pcall(vim.fn.json_decode, data)
-  if status then
-    return result
-  else
-    return nil, result
-  end
-end
-
-
-local function load_sniped_file(lang, snippet_set_path)
-    if not snippet_set_path.exist() then return end
-    local lang_snips = ls.snippets[lang] or {}
-
-    local snippet_set_data = json_decode(snippet_set_path.read())
-    for name, parts in ipair(snippet_set_data) do 
-        -- TODO parse snippet only works with sitrings
-        -- parts.body is a list, this will fail
-        lang_snips.insert(ls.parser.parse_snippet({trig=parts.prefix, name=name, wordTrig=true}, parts.body))
-    end
-    ls.snippets[lang] = lang_snips
-end
-local function load_snippet_folder(root)
-    local package = root / 'package.json'
-    if not package.exist() then return end
-    local package_data = json_decode(package.read())
-    if not (package_data and package.contribute and package_data.contribute.snippets)  then return end
-
-    for _, snippet_entry in ipairs(package_data.contribute.snippets) do
-        load_snippet_file(snippet_entry.language, root/snippet_entry.path)
-    end
-end
-
---[[ for path in vim.o.runtimepath:gmatch('([^,]+)') do
-    load_snippet_folder(Path(path))
-end ]]
+require("my/load_vscode_snippets").load()
 
