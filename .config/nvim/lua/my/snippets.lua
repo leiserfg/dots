@@ -71,8 +71,10 @@ s({trig = "sbox", wordTrig=true},
         f(replace_each("-"), {1}),
         t{"*"},
         i(0)}
- )
- }
+ ),
+ ls.parser.parse_snippet({trig="if", wordTrig=true}, "if ${1:expression}:\n\t${2:pass}")
+
+ },
 }
 
 
