@@ -135,16 +135,15 @@ return require('packer').startup(function(use)
     } ]]
     use {
         "L3MON4D3/LuaSnip",
+        requires = {"rafamadriz/friendly-snippets"},
         config=function()
         -- Load snippets
         require("my/snippets")
-        if false then
-            vim.cmd[[imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ]]
-            vim.cmd[[inoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
-            vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<c-e>']]
-            vim.cmd[[snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>]]
-            vim.cmd[[snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
-        end
+        vim.cmd[[imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ]]
+        vim.cmd[[inoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
+        vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<c-e>']]
+        vim.cmd[[snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>]]
+        vim.cmd[[snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
     end
     }
     use {
@@ -161,7 +160,7 @@ return require('packer').startup(function(use)
                         ultisnips=false,
                         nvim_lua = true,
                         emoji = true,
-                        -- luasnip = true,
+                        luasnip = true,
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
