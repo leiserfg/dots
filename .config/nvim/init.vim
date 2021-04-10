@@ -305,6 +305,7 @@ set pumheight=20
 inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+
 " }}}
 
 " Netrw {{{

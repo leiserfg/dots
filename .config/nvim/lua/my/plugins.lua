@@ -123,17 +123,19 @@ return require('packer').startup(function(use)
          end
     }
 
-    --[[ use { 'nvim-lua/completion-nvim', 
-    config = function()
-        vim.g.completion_matching_ignore_case = 1
-        vim.g.completion_enable_snippet='UltiSnips'
-        vim.g.completion_matching_strategy_list={'exact', 'fuzzy'}
-        vim.g.completion_enable_auto_hover = 0
-        vim.cmd [[ autocmd BufEnter * lua require'completion'.on_attach() ]]
-    --[[ end
-
-    } ]]
-
+    use {
+        "L3MON4D3/LuaSnip",
+        requires = {"rafamadriz/friendly-snippets"},
+        config=function()
+        -- Load snippets
+        require("my/snippets")
+        vim.cmd[[imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ]]
+        vim.cmd[[inoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
+        vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<c-e>']]
+        vim.cmd[[snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>]]
+        vim.cmd[[snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
+    end
+    }
     use {
         "hrsh7th/nvim-compe",
         config=function()
@@ -145,16 +147,17 @@ return require('packer').startup(function(use)
                         nvim_lsp = true,
                         calc=true,
                         spell=true,
-                        ultisnips=true,
+                        ultisnips=false,
                         nvim_lua = true,
                         emoji = true,
+                        luasnip = true,
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
         end
     }
 
-    use {
+    --[[ use {
         'honza/vim-snippets', requires='SirVer/ultisnips',
         config=function()
             vim.g.UltiSnipsSnippetDirectories={'~/.config/nvim/UltiSnips', 'UltiSnips'}
@@ -163,8 +166,8 @@ return require('packer').startup(function(use)
             vim.g.UltiSnipsJumpBackwardTrigger= '<c-k>'
             vim.g.UltiSnipsRemoveSelectModeMappings=0
         end
-    }
-    use 'jceb/emmet.snippets'
+    } ]]
+    -- use 'jceb/emmet.snippets'
 
     use { 'lambdalisue/suda.vim', config="vim.g.suda_smart_edit=1"}
     use 'tpope/vim-eunuch'
