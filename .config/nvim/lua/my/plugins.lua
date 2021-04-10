@@ -87,10 +87,19 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig', 
         config=function()
              local lspconfig = require('lspconfig')
-             for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'rust_analyzer', 'tsserver'} do
+
+
+             for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'tsserver'} do
                lspconfig[lsp].setup{}
              end
-        end
+
+             local capabilities = vim.lsp.protocol.make_client_capabilities()
+             capabilities.textDocument.completion.completionItem.snippetSupport = true
+             for _, lsp in pairs{'rust_analyzer'} do
+                 lspconfig[lsp].setup {
+                     capabilities = capabilities,
+                 }
+             end
 
 
     }
