@@ -72,10 +72,9 @@ s({trig = "sbox", wordTrig=true},
         t{"*"},
         i(0)}
  ),
- ls.parser.parse_snippet({trig="if", wordTrig=true}, "if ${1:expression}:\n\t${2:pass}")
-
+ ls.parser.parse_snippet({trig="if", wordTrig=true}, "if ${1:expression}:\n\t${2:pass}"),
  },
 }
 
-require("my/load_vscode_snippets").load()
+require('loaders/from_vscode').load()
 

@@ -123,16 +123,6 @@ return require('packer').startup(function(use)
          end
     }
 
-    --[[ use { 'nvim-lua/completion-nvim', 
-    config = function()
-        vim.g.completion_matching_ignore_case = 1
-        vim.g.completion_enable_snippet='UltiSnips'
-        vim.g.completion_matching_strategy_list={'exact', 'fuzzy'}
-        vim.g.completion_enable_auto_hover = 0
-        vim.cmd [[ autocmd BufEnter * lua require'completion'.on_attach() ]]
-    --[[ end
-
-    } ]]
     use {
         "L3MON4D3/LuaSnip",
         requires = {"rafamadriz/friendly-snippets"},
