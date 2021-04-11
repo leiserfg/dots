@@ -101,7 +101,7 @@ return require('packer').startup(function(use)
                  }
              end
 
-
+    end
     }
     use {
         'nvim-treesitter/nvim-treesitter',
