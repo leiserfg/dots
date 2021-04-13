@@ -66,7 +66,6 @@ return require('packer').startup(function(use)
     use 'AndrewRadev/switch.vim'    -- " -
     use 'Olical/vim-enmasse'
     use 'junegunn/vim-peekaboo'  --" show registers
-
     use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'

@@ -75,6 +75,11 @@ s({trig = "sbox", wordTrig=true},
  ls.parser.parse_snippet({trig="if", wordTrig=true}, "if ${1:expression}:\n\t${2:pass}"),
  },
 }
+-- One of the two will fail
+pcall(function()
+    require('luasnip/loaders/from_vscode').load()
+end)
 
-require('loaders/from_vscode').load()
-
+pcall(function()
+    require('loaders/from_vscode').load()
+end)
