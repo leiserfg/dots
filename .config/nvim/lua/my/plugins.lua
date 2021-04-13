@@ -136,9 +136,18 @@ return require('packer').startup(function(use)
         config=function()
         -- Load snippets
         require("my/snippets")
+        function _G.__jump_back_or(key)
+           local ls = require"luasnip"
+           if ls.jumpable(-1) then
+               return ls.jump(-1)
+           else
+               return key
+           end
+
+        end
         vim.cmd[[imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ]]
-        vim.cmd[[inoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
-        vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<c-e>']]
+        vim.cmd[[inoremap <silent><expr> <c-k> v:lua.__jump_back_or('<c-k>')]]
+        vim.cmd[[imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice': '<c-e>']]
         vim.cmd[[snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>]]
         vim.cmd[[snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>]]
     end
