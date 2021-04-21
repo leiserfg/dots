@@ -86,8 +86,6 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig', 
         config=function()
              local lspconfig = require('lspconfig')
-
-
              for _, lsp in pairs{'pyls', 'gdscript', 'vimls', 'tsserver'} do
                lspconfig[lsp].setup{}
              end
@@ -99,7 +97,6 @@ return require('packer').startup(function(use)
                      capabilities = capabilities,
                  }
              end
-
     end
     }
     use {
@@ -244,6 +241,9 @@ return require('packer').startup(function(use)
         config=function() 
         vim.cmd[[nnoremap <silent> <leader>t :Fern . -drawer -toggle<CR>]]
         end
+     }
+     use {
+        "gennaro-tedesco/nvim-jqx"
      }
 
 
