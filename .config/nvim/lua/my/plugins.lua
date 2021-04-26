@@ -200,7 +200,14 @@ return require('packer').startup(function(use)
             vim.g.terraform_commentstring='//%s'
         end
     }
-    use 'sheerun/vim-polyglot'
+    use {
+        'sheerun/vim-polyglot',
+        config=function()
+            vim.g.polyglot_disabled = {
+            'fennel' --Prefer the one in aniseed
+        }
+        end
+    }
     use 'tikhomirov/vim-glsl'
     -- use 'pest-parser/pest.vim'
     use {
