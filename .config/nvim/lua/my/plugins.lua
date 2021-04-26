@@ -203,7 +203,17 @@ return require('packer').startup(function(use)
     use 'sheerun/vim-polyglot'
     use 'tikhomirov/vim-glsl'
     -- use 'pest-parser/pest.vim'
-    use 'metakirby5/codi.vim'
+    use {
+        'metakirby5/codi.vim',
+        config=function()
+        vim.g["codi#interpreters"] = {
+            rink = {
+                bin = "rink",
+                prompt = "> "
+            }
+        }
+        end
+    }
 
     use {'dhruvasagar/vim-table-mode', ft='markdown'}
 
