@@ -1,23 +1,5 @@
 local cmd = vim.api.md
 local fn = vim.fn
-if not pcall(require, 'packer') then
-    local directory = string.format(
-        '%s/site/pack/packer/start/',
-        vim.fn.stdpath('data')
-        )
-
-  vim.fn.mkdir(directory, 'p')
-
-  local out = vim.fn.system(string.format(
-    'git clone %s %s',
-    'https://github.com/wbthomason/packer.nvim',
-    directory .. '/packer.nvim'
-  ))
-
-  print(out)
-  print("Downloading packer.nvim...")
-end
-
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use { 'b3nj5m1n/kommentary', branch = 'main'}  -- "gc

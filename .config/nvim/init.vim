@@ -1,5 +1,40 @@
 " vim: set foldmethod=marker foldlevel=0 nomodeline:
 
+lua << EOF
+
+-- Entrypoint for my Neovim configuration!
+-- We simply bootstrap packer and Aniseed here.
+-- It's then up to Aniseed to compile and load fnl/init.fnl
+
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+local pack_path = fn.stdpath("data") .. "/site/pack"
+local fmt = string.format
+
+function ensure (user, repo)
+  -- Ensures a given github.com/USER/REPO is cloned in the pack/packer/start directory.
+  local install_path = fmt("%s/packer/start/%s", pack_path, repo, repo)
+  if fn.empty(fn.glob(install_path)) > 0 then
+    execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
+    execute(fmt("packadd %s", repo))
+  end
+end
+
+-- Bootstrap essential plugins required for installing and loading the rest.
+ensure("wbthomason", "packer.nvim")
+ensure("Olical", "aniseed")
+
+-- Enable Aniseed's automatic compilation and loading of Fennel source code.
+vim.g["aniseed#env"] = {
+  module = "my.init",
+  compile = true
+}
+
+
+EOF
+
+
 augroup vimrc
   autocmd!
 augroup END
@@ -9,60 +44,15 @@ lua require"my/plugins"
 
 au vimrc BufWritePost plugins.lua PackerCompile
 
-" User interface {{{
-" Show line numbers
-set number
-set relativenumber
-set wildmenu
-set ruler " Show current position
-set modelines=2 "Allow modelines
-" Setup backspace
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-set synmaxcol=500 "Make vim faster sometimes
-
-set ignorecase smartcase " Ignore case when searching
-set smartcase " Smart cases when searching
-set hlsearch " Highlight search results
-set incsearch " Make search act as in modern browsers
-set hidden
-set showmatch " Show matching brackets
-set matchtime=2 " Length of blink for matching brackets
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set timeoutlen=500
-
-" More natural split
-set splitbelow
-set splitright
-
-set nojoinspaces " remove spaces while joining
-" set foldenable
-set foldlevel=2
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-set autoread " autoreload file changes
-set nocursorline " cursorline is slow
-
-set noshowmode  " we don't need it because of the status line
-
 au vimrc InsertEnter * set nohlsearch
 
 " }}}
 
 " General {{{
 
-"I don't like to hardcode it but it's faster than calling git several times like in vim-snipp
-
-let g:snips_author = 'leiserfg'
-let g:snips_email = 'leiserfg@gmail.com'
-let g:snips_github = "https://github.com/leiserfg"
 
 " Extend %% as current file's folder 
 cabbr <expr> %% expand('%:p:h')
-set clipboard+=unnamedplus
 " Disable unused loaders
 let g:loaded_python_provider = 0 " Don't use python2
 let g:loaded_ruby_provider = 0
@@ -70,37 +60,15 @@ let g:loaded_node_provider = 0
 let g:loaded_perl_provider = 0
 
 let g:python3_host_prog='/usr/bin/python3'
-set diffopt+=internal,algorithm:histogram,indent-heuristic,vertical
 
 let g:fugitive_dynamic_colors = 0
 au vimrc FileType fugitiveblame lua require"my/blame_color".highlight_hashes()
 
 syntax enable
-set encoding=utf8
 scriptencoding utf-8
 " highlight lua on vim files
 let g:vimsyn_embed = 'l'
 " Use spaces instead of tabs
-set expandtab
-set smarttab
-" show tabs and trailing spaces
-set list
-set showbreak=↪\ 
-set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-set virtualedit=block "Flexible block selection
-" tab per 4 spaces
-set shiftwidth=4
-set softtabstop=4
-
-" Linebreak on
-set linebreak
-set textwidth=100
-
-set autoindent
-set smartindent
-set wrap! "Wrap lines
-
-set signcolumn=yes
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -108,15 +76,11 @@ nmap <leader>w :w!<cr>
 " Easier shortcut for exiting the terminal
 tnoremap <Esc> <C-\><C-n>
 " interactive replace
-set inccommand=split
 
 au vimrc BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
 au vimrc FileType gitcommit setlocal spell spelllang=en_us
 " }}}
 
-" File, backups and undo {{{
-set nobackup
-set noswapfile
 
 " }}}
 " Moving around, tabs, windows and buffers {{{
@@ -297,10 +261,7 @@ sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
 " }}} "
 
 " Completion {{{
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
 " limit amount of completion entries
-set pumheight=20
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
@@ -337,8 +298,6 @@ xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
 " }}} Operators "
 
 " Theme {{{
-set termguicolors
-set background=dark
 let g:gruvbox_material_sign_column_background = 'none' 
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_enable_italic = 1
