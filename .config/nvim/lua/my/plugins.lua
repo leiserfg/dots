@@ -116,7 +116,7 @@ return require('packer').startup(function(use)
               },
               rainbow = {
                  enable=true
-               },
+              },
               --[[ indent = {
                 enable = true
               },]]
@@ -154,6 +154,7 @@ return require('packer').startup(function(use)
     }
     use {
         "hrsh7th/nvim-compe",
+        require={"tami5/compe-conjure"},
         config=function()
             require'compe'.setup({
                     enabled = true,
@@ -167,12 +168,12 @@ return require('packer').startup(function(use)
                         nvim_lua = true,
                         emoji = true,
                         luasnip = true,
+                        conjure = true
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
         end
     }
-
     --[[ use {
         'honza/vim-snippets', requires='SirVer/ultisnips',
         config=function()
