@@ -101,19 +101,22 @@ return require('packer').startup(function(use)
     }
     use {
         'nvim-treesitter/nvim-treesitter',
-        {'nvim-treesitter/playground'},
+        requires = {
+            'nvim-treesitter/playground',
+            'p00f/nvim-ts-rainbow',
+        },
         -- {'romgrk/nvim-treesitter-context'},
          run=':TSUpdate',
          config=function()
              require'nvim-treesitter.configs'.setup {
-              -- ensure_installed = "all",     -- one of "all", "language", or a list of languages
+              ensure_installed = "all",     -- one of "all", "language", or a list of languages
               highlight = {
                 enable = true,              -- false will disable the whole extension
-                disable = { "markdown" },  -- list of language that will be disabled
+                -- disable = { "markdown" },  -- list of language that will be disabled
               },
               rainbow = {
                  enable=true
-               },
+              },
               --[[ indent = {
                 enable = true
               },]]
@@ -151,6 +154,7 @@ return require('packer').startup(function(use)
     }
     use {
         "hrsh7th/nvim-compe",
+        require={"tami5/compe-conjure"},
         config=function()
             require'compe'.setup({
                     enabled = true,
@@ -164,12 +168,12 @@ return require('packer').startup(function(use)
                         nvim_lua = true,
                         emoji = true,
                         luasnip = true,
+                        conjure = true
                     }
                 })
             vim.cmd[[inoremap <silent><expr> <CR>      compe#confirm('<CR>')]]
         end
     }
-
     --[[ use {
         'honza/vim-snippets', requires='SirVer/ultisnips',
         config=function()
@@ -272,7 +276,6 @@ return require('packer').startup(function(use)
     use {'eraserhd/parinfer-rust', run='cargo build --release', ft={'fennel', 'janet', 'clojure'}}
 
     -- Look and feel
-    use 'p00f/nvim-ts-rainbow'
     use 'norcalli/nvim-colorizer.lua'
 
     --[[ use 'nvim-lua/popup.nvim'
