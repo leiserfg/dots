@@ -1,6 +1,3 @@
-(fn warn [message]
-  (vim.api.nvim_out_write (.. "my: " message "\n")))
-
 (fn get-scope [o]
   "get scope for option 'o'"
   (let [(okay? info) (pcall vim.api.nvim_get_option_info o)]
@@ -18,7 +15,7 @@
     :buf    `(do
               (tset vim.o ,o ,v)
               (tset vim.bo ,o ,v))
-    _       (warn (.. "se- invalid scope '" s "' for option '" o "'"))))
+    _       (print (.. "se- invalid scope '" s "' for option '" o "'"))))
 
 (fn se- [o v]
   "set option sym 'o' to value 'v'"
@@ -29,6 +26,11 @@
       `,(set-option o v s)
       (= "no" (o:sub 1 2))
       (se- (o:sub 3) false)
-      (warn (.. "se- option '" o "' not found")))))
+      (print (.. "se- option '" o "' not found")))))
 
-{: se-}
+(fn cmd [arg]
+  `(vim.cmd ,arg))
+
+(fn le- [k v] 
+  `(tset vim.g ,k ,v))
+{: se- : cmd : le-}
