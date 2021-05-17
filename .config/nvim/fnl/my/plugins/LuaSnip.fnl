@@ -1,11 +1,11 @@
 (require-macros :my.macros)
 (require :my/snippets)
+(local ls (require :luasnip))
 
 (fn _G.__jump_back_or [key]
- (let [ls (require :luasnip)]
    (if (ls.jumpable -1)
      (ls.jump -1)
-     (key))))
+     key))
 
 (cmd "imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ")
 (cmd "inoremap <silent><expr> <c-k> v:lua.__jump_back_or('<c-k>')")
