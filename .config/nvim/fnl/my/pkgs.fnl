@@ -25,6 +25,7 @@
 
 (packer.startup
   (fn [use]
+    (use- :Olical/aniseed)
     (use- :wbthomason/packer.nvim)
     (use- :tpope/vim-unimpaired) ; gc
     (use- :tpope/vim-rsi) ; readline
@@ -52,8 +53,10 @@
     (use- :lewis6991/gitsigns.nvim 
           :requires  [:nvim-lua/plenary.nvim])
     (use- :neovim/nvim-lspconfig)
-    (use- :nvim-treesitter/nvim-treesitter
-          :requires [:nvim-treesitter/playground :p00f/nvim-ts-rainbow])
+
+    ; Treesitter is still buggy
+    ; (use- :nvim-treesitter/nvim-treesitter
+    ;       :requires [:nvim-treesitter/playground :p00f/nvim-ts-rainbow])
 
     (use- :L3MON4D3/LuaSnip
           :requires [:rafamadriz/friendly-snippets])
@@ -81,5 +84,4 @@
     (use- :eraserhd/parinfer-rust
           :run "cargo build --release"
           :ft [:fennel :janet :clojure])
-    (use- :Olical/aniseed)
     (use- :sainnhe/gruvbox-material :config #(cmd "colorscheme gruvbox-material"))))

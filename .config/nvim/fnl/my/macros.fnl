@@ -31,6 +31,6 @@
 (fn cmd [arg]
   `(vim.cmd ,arg))
 
-(fn le- [k v] 
+(fn le- [k v]
   `(tset vim.g ,k ,v))
 {: se- : cmd : le-}

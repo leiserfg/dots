@@ -27,6 +27,9 @@ vim.g["aniseed#env"] = {
   compile = true
 }
 
+-- my/init get's called after some plugins (nvim stuff) so I have to be sure it's set before
+vim.g["mapleader"] = " "
+vim.g["maplocalleader"] = " "
 
 
 

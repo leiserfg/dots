@@ -1,6 +1,4 @@
 (require-macros :my.macros)
-(le- :mapleader " ")
-(le- :maplocalleaderr " ")
 
 ;  ================================ VIMSCRIPT AREA  ====================================
 
