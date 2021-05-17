@@ -62,19 +62,19 @@
 
 ; Wrap lines
 (se- wrap)
-
+(se- signcolumn :yes)
 ; interactive replace
-(se- inccommand "split")
+(se- inccommand :split)
 
 ;  File, backups and undo 
-(se- backup false)
+(se- nobackup)
 (se- noswapfile)
 
 
 ; eye-candy
 
 (se- termguicolors)
-(se- background "dark")
+(se- background :dark)
 
 
 (se- shortmess "filnxtToOFAc")
