@@ -5,11 +5,7 @@
       [:true :false]])
 
 
-
-
-
 ; Don't use default mappings
-(le- :speeddating_no_mappings 1)
 
 (cmd "nnoremap <Plug>SpeedDatingFallbackUp <c-a>")
 (cmd "nnoremap <Plug>SpeedDatingFallbackDown <c-x>")
