@@ -2,6 +2,6 @@
 (ts.setup
   {:ensure_installed  :all
    :highlight {:enable  true :disable [:markdown]}
-   :rainbow  {:enable true}
+   ; :rainbow  {:enable true}
    :playground  {:enable  true
                  :persist_queries false}})

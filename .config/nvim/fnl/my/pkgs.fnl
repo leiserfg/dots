@@ -37,10 +37,27 @@
     (use- :AndrewRadev/switch.vim
           :requires {1 :tpope/vim-speeddating :opt true :config "vim.g.speeddating_no_mappings=1"}) 
     
+    (use- :Olical/vim-enmasse :cmd :EnMasse)
+    (use- :junegunn/vim-peekaboo)
+    (use- :tpope/vim-fugitive)
+    (use- :tpope/vim-rhubarb)
+    (use- :tpope/vim-eunuch)
+    (use- :sheerun/vim-polyglot)
+    (use- :norcalli/nvim-colorizer.lua)
+    (use- :direnv/direnv.vim)
+    (use- :machakann/vim-sandwich)
+    (use- :AndrewRadev/splitjoin.vim
+          :cmd [:SplitjoinSplit :SplitjoinJoin])
+    (use- :tpope/vim-dispatch
+          :cmd [:Dispatch :Make :Focus :Start])
+    (use- :lewis6991/gitsigns.nvim 
+          :requires  [:nvim-lua/plenary.nvim])
+    (use- :neovim/nvim-lspconfig)
 
     ; Treesitter is still buggy
     (use- :nvim-treesitter/nvim-treesitter
-          :requires [:nvim-treesitter/playground :p00f/nvim-ts-rainbow])
+          :requires [:nvim-treesitter/playground])
+                     ;:p00f/nvim-ts-rainbow])
 
     (use- :L3MON4D3/LuaSnip
           :requires [:rafamadriz/friendly-snippets])

@@ -47,6 +47,7 @@
 (se- list)
 (se- showbreak "↪ ")
 (se- listchars "tab:→ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨")
+(se- fcs "eob: ") ; Hide the ~ from the gutter
 ; ; Flexible block selection
 (se- virtualedit "block")
 ;  tab per 4 spaces
