@@ -72,6 +72,7 @@
     (use- :dhruvasagar/vim-table-mode :ft :markdown)
 
     (use- :hoob3rt/lualine.nvim
+          :after :material.nvim
           :requires {1 :kyazdani42/nvim-web-devicons :opt true})
     (use- :junegunn/fzf.vim)
 
@@ -85,4 +86,7 @@
     (use- :eraserhd/parinfer-rust
           :run "cargo build --release"
           :ft [:fennel :janet :clojure])
-    (use- :sainnhe/gruvbox-material :config #(cmd "colorscheme gruvbox-material"))))
+    ; (use- :sainnhe/gruvbox-material :config #(cmd "colorscheme gruvbox-material"))
+    (use- :marko-cerovac/material.nvim :config #(do 
+                                                  (set vim.g.material_style "darker")
+                                                  (cmd "colorscheme material")))))

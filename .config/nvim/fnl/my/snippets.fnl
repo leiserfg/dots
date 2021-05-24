@@ -62,7 +62,7 @@
                 (i 0)]]})
 
 (local loader (require :luasnip/loaders/from_vscode))
-(vim.schedule_wrap loader.load)
+(loader.load)
 
 
 {}
