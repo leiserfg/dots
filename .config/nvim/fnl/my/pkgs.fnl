@@ -28,7 +28,7 @@
     (use- :Olical/aniseed)
     (use- :wbthomason/packer.nvim)
     (use- :tpope/vim-unimpaired) ; gc
-    (use- :tpope/vim-rsi) ; readline
+    (use- :ryvnf/readline.vim)
     (use- :b3nj5m1n/kommentary :keys :gc)
     (use- :junegunn/vim-easy-align :keys :ga)
     (use- :vim-scripts/ReplaceWithRegister :keys :gr)

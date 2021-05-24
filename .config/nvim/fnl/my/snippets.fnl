@@ -6,6 +6,7 @@
 (local f ls.f)
 (local c ls.c)
 (local d ls.d)
+
 (math.randomseed (os.time))
 (fn uuid []
   (let [random math.random
@@ -21,20 +22,27 @@
 
 (local LOREM_IPSUM "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 
-(fn sf [trig body reg-trig]
-  (s {: trig :wordTrig true :regTrig reg-trig} [(f body {}) (i 0)]))
+(fn sf [trig body regTrig]
+  (s {: trig :wordTrig true : regTrig} 
+     [(f body {})
+      (t [" "])
+      (i 0)]))
 
 (fn replace-each [replacer]
   (fn [args]
     (let [len (length (. (. args 1) 1))]
       [(replacer:rep len)])))
 
+(fn emmet [arg1]
+    (local content (. arg1 1 1))
+    (sn nil [(t ["asdf" content "asdf"])]))
+
 (set ls.snippets
      {:all [(sf :date #[(os.date "%Y-%m-%d")])
             (sf :uuid #[(uuid)])
             (sf "lorem(%d*)"
                 (fn [args]
-                  (local amount (tonumber (. (. (. args 1) :captures) 1)))
+                  (local amount (tonumber (. args 1 :captures 1)))
                   (if (= amount nil) [LOREM_IPSUM]
                       [(LOREM_IPSUM:sub 1 (+ amount 1))]))
                 true)
@@ -55,14 +63,20 @@
                 (t ["|" "*"])
                 (f (replace-each "-") [1])
                 (t ["*"])
+                (i 0)])
+            (s {:trig :ee :wordTrig true}
+               [(f #["asdf"] [])
                 (i 0)])]
-      :direnv [s {:trig :lay :wordTrig true}
-               [(t "layout ")
-                (i 1 :python)
-                (i 0)]]})
+
+      :direnv [(s {:trig :lay :wordTrig true}
+                 [(t ["layout "])
+                  (i 1 [:python])
+                  (i 0)])]})
+
+
 
 (local loader (require :luasnip/loaders/from_vscode))
 (loader.load)
 
 
-{}
+; {}
