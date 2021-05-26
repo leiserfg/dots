@@ -72,7 +72,7 @@
     (use- :dhruvasagar/vim-table-mode :ft :markdown)
 
     (use- :hoob3rt/lualine.nvim
-          :after :material.nvim
+          :after :gruvbox-flat.nvim
           :requires {1 :kyazdani42/nvim-web-devicons :opt true})
     (use- :junegunn/fzf.vim)
 
@@ -87,6 +87,7 @@
           :run "cargo build --release"
           :ft [:fennel :janet :clojure])
     ; (use- :sainnhe/gruvbox-material :config #(cmd "colorscheme gruvbox-material"))
-    (use- :marko-cerovac/material.nvim :config #(do 
-                                                  (set vim.g.material_style "darker")
-                                                  (cmd "colorscheme material")))))
+    (use- :eddyekofo94/gruvbox-flat.nvim
+          :config #(do
+                     (set vim.g.gruvbox_flat_style "dark")
+                     (cmd "colorscheme gruvbox-flat")))))
