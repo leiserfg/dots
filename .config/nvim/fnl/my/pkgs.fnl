@@ -74,9 +74,9 @@
     (use- :hoob3rt/lualine.nvim
           :after :gruvbox-flat.nvim
           :requires {1 :kyazdani42/nvim-web-devicons :opt true})
-    ; (use- :junegunn/fzf.vim)
-    (use- :nvim-telescope/telescope.nvim
-      :requires [:nvim-lua/popup.nvim :nvim-lua/plenary.nvim])
+    (use- :junegunn/fzf.vim)
+    ; (use- :nvim-telescope/telescope.nvim
+    ;   :requires [:nvim-lua/popup.nvim :nvim-lua/plenary.nvim])
 
     (use- :lambdalisue/fern.vim
           :requires [:antoinemadec/FixCursorHold.nvim :lambdalisue/fern-hijack.vim]
