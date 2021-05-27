@@ -52,9 +52,9 @@
 (se- virtualedit "block")
 ;  tab per 4 spaces
 (se- shiftwidth 4)
-(se- softtabstop 4
+(se- softtabstop 4)
 
- Linebreak on)
+ ; Linebreak on)
 (se- linebreak)
 (se- textwidth 100)
 

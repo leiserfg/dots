@@ -74,7 +74,9 @@
     (use- :hoob3rt/lualine.nvim
           :after :gruvbox-flat.nvim
           :requires {1 :kyazdani42/nvim-web-devicons :opt true})
-    (use- :junegunn/fzf.vim)
+    ; (use- :junegunn/fzf.vim)
+    (use- :nvim-telescope/telescope.nvim
+      :requires [:nvim-lua/popup.nvim :nvim-lua/plenary.nvim])
 
     (use- :lambdalisue/fern.vim
           :requires [:antoinemadec/FixCursorHold.nvim :lambdalisue/fern-hijack.vim]
@@ -86,7 +88,6 @@
     (use- :eraserhd/parinfer-rust
           :run "cargo build --release"
           :ft [:fennel :janet :clojure])
-    ; (use- :sainnhe/gruvbox-material :config #(cmd "colorscheme gruvbox-material"))
     (use- :eddyekofo94/gruvbox-flat.nvim
           :config #(do
                      (set vim.g.gruvbox_flat_style "dark")
