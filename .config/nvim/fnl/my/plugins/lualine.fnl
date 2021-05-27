@@ -1,9 +1,8 @@
-(var ll (require :lualine))
+(local ll (require :lualine))
 (ll.setup
   {:options
-   {:theme  "gruvbox-flat"
-    ; :theme  "gruvbox_material"
+   {:theme :gruvbox-flat
     :section_separators  ""
     :component_separators  ""
     :icons_enabled false
-    :extensions  ["fzf"]}})
+    :extensions [:fzf :quickfix]}})

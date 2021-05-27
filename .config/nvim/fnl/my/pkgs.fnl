@@ -72,16 +72,13 @@
     (use- :dhruvasagar/vim-table-mode :ft :markdown)
 
     (use- :hoob3rt/lualine.nvim
-          :after :gruvbox-flat.nvim
-          :requires {1 :kyazdani42/nvim-web-devicons :opt true})
+          :after :gruvbox-flat.nvim)
     (use- :junegunn/fzf.vim)
-    ; (use- :nvim-telescope/telescope.nvim
-    ;   :requires [:nvim-lua/popup.nvim :nvim-lua/plenary.nvim])
 
-    (use- :lambdalisue/fern.vim
-          :requires [:antoinemadec/FixCursorHold.nvim :lambdalisue/fern-hijack.vim]
-          :config
-          #(cmd "nnoremap <silent> <leader>t :Fern . -drawer -toggle<CR>"))
+    (use- :kyazdani42/nvim-tree.lua
+          :requires :kyazdani42/nvim-web-devicons
+          :keys "<leader>t"
+          :config #(cmd "nnoremap <silent> <leader>t :NvimTreeToggle<CR>"))
 
     (use- :Olical/conjure
           :ft [:fennel :clojure])
