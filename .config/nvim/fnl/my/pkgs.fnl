@@ -74,6 +74,10 @@
     (use- :hoob3rt/lualine.nvim
           :after :gruvbox-flat.nvim)
     (use- :junegunn/fzf.vim)
+    ; (use- :nvim-telescope/telescope.nvim
+    ;       :requires [:nvim-lua/popup.nvim
+    ;                  :nvim-lua/plenary.nvim
+    ;                  :nvim-telescope/telescope-fzy-native.nvim])
 
     (use- :kyazdani42/nvim-tree.lua
           :requires :kyazdani42/nvim-web-devicons
