@@ -1,0 +1,37 @@
+@import "colors"
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: "serif 80";
+}
+#window {
+  children: [ horibox ];
+}
+
+#horibox {
+  children: [ listview ];
+}
+
+#listview {
+  layout: horizontal;
+}
+
+#element {
+  padding: 3%;
+  background-color: @background-light;
+}
+
+#element.selected {
+  background-color: @accent;
+  text-color: @background;
+}
+
+#listview {
+  lines: 6;
+}
+
+#window {
+  width: 100%;
+  height: 20%;
+}

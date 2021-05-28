@@ -1,3 +1,0 @@
-rofi.theme: ~/.config/rofi/basic.rasi
-rofi.ssh-command:   kitty -T {host} kitty +kitten ssh {host}
-
