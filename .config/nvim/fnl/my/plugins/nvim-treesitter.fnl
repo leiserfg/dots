@@ -1,4 +1,4 @@
-(var ts (require :nvim-treesitter.configs))
+(local ts (require :nvim-treesitter.configs))
 (ts.setup
   {:ensure_installed  :all
    :highlight {:enable  true :disable [:markdown]}

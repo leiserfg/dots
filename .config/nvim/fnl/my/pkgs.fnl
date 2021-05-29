@@ -36,7 +36,7 @@
     (use- :tpope/vim-repeat)
     (use- :AndrewRadev/switch.vim
           :requires {1 :tpope/vim-speeddating :opt true :config "vim.g.speeddating_no_mappings=1"}) 
-    
+
     (use- :Olical/vim-enmasse :cmd :EnMasse)
     (use- :junegunn/vim-peekaboo)
     (use- :tpope/vim-fugitive)
