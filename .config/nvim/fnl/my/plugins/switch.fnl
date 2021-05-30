@@ -4,7 +4,7 @@
       [:staging :production]
       [:true :false]])
 
-
+(le- "speeddating_no_mappings" 1)
 ; Don't use default mappings
 
 (cmd "nnoremap <Plug>SpeedDatingFallbackUp <c-a>")

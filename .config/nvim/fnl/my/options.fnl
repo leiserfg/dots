@@ -83,7 +83,7 @@
 (se= background :dark)
 
 
-(se+ shortmess "c")
+(se+ shortmess "Ic")
 (se= completeopt "noinsert,menuone,noselect")
 (se= pumheight 20)
 

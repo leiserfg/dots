@@ -1,6 +1,6 @@
 (require-macros :my.macros)
 
-(var packer (require :packer))
+(local packer (require :packer))
 
 (macro use- [name ...]
   (let [opts [...]
@@ -10,9 +10,8 @@
                 (: :gsub "[.].*" "")))
         args [name]]
 
-
     (tset args :config (..
-                         "local k, v = pcall(require, '" 
+                         "local k, v = pcall(require, '"
                          path
                          "') ; if not k and v:find('module') == nil then print('"
                          path
@@ -35,7 +34,8 @@
     (use- :vim-scripts/vis)        ; :'<,'>B
     (use- :tpope/vim-repeat)
     (use- :AndrewRadev/switch.vim
-          :requires {1 :tpope/vim-speeddating :opt true :config "vim.g.speeddating_no_mappings=1"}) 
+          :requires {1 :tpope/vim-speeddating
+                     :keys ["<Plug>SpeedDatingFallbackUp" "<Plug>SpeedDatingFallbackDown"]})
 
     (use- :Olical/vim-enmasse :cmd :EnMasse)
     (use- :junegunn/vim-peekaboo)
@@ -47,10 +47,12 @@
     (use- :direnv/direnv.vim)
     (use- :machakann/vim-sandwich)
     (use- :AndrewRadev/splitjoin.vim
-          :cmd [:SplitjoinSplit :SplitjoinJoin])
+          :keys [:gS :gJ])
+
     (use- :tpope/vim-dispatch
           :cmd [:Dispatch :Make :Focus :Start])
-    (use- :lewis6991/gitsigns.nvim 
+
+    (use- :lewis6991/gitsigns.nvim
           :requires  [:nvim-lua/plenary.nvim])
     (use- :neovim/nvim-lspconfig)
 
@@ -65,11 +67,14 @@
     (use- :hrsh7th/nvim-compe
           :require [:tami5/compe-conjure])
 
-    (use- :lambdalisue/suda.vim :config "vim.g.suda_smart_edit=1")
+    (use- :lambdalisue/suda.vim
+          :config "vim.g.suda_smart_edit=1")
 
-    (use- :metakirby5/codi.vim)
+    (use- :metakirby5/codi.vim
+          :cmd :Codi)
 
-    (use- :dhruvasagar/vim-table-mode :ft :markdown)
+    (use- :dhruvasagar/vim-table-mode
+          :ft :markdown)
 
     (use- :hoob3rt/lualine.nvim
           :after :gruvbox-flat.nvim)
@@ -93,3 +98,6 @@
           :config #(do
                      (set vim.g.gruvbox_flat_style "dark")
                      (cmd "colorscheme gruvbox-flat")))))
+    ; (use- :folke/which-key.nvim
+    ;       :config #((. (require :which-key) :setup) {}))))
+

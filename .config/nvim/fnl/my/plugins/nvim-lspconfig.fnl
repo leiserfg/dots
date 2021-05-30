@@ -1,16 +1,15 @@
 (require-macros :my.macros)
-(var lspconfig (require :lspconfig))
-(each [_ lsp (pairs [:pyls :gdscript :vimls :tsserver])]
+(local lspconfig (require :lspconfig))
+(each [_ lsp (ipairs [:pyls :gdscript :vimls :tsserver])]
   ((. lspconfig lsp :setup) {}))
 
 (let [capabilities  (vim.lsp.protocol.make_client_capabilities)]
   (set capabilities.textDocument.completion.completionItem.snippetSupport  true)
-  (each [_ lsp (pairs [:rust_analyzer])]
+  (each [_ lsp (ipairs [:rust_analyzer])]
     ((. lspconfig lsp :setup) {: capabilities})))
 
-;====================== VIMSCRIPT AREA
+; ====================== VIMSCRIPT AREA
 (cmd "
-
 augroup lsp
 autocmd!
 augroup END
@@ -28,6 +27,9 @@ function! LspSetup()
     nnoremap <buffer> <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
     nnoremap <buffer> <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <buffer> <silent> <Leader>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+    nnoremap <buffer> <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+    nnoremap <buffer> <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
     nnoremap <buffer> <silent> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 endfunction
 au lsp BufEnter * call LspSetup()
