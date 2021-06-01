@@ -1,6 +1,7 @@
 (require-macros :my.macros)
 (require :my/snippets)
-
+(local ls (require :luasnip))
+(ls.config.set_config {:updateevents "TextChanged,TextChangedI"})
 
 (cmd "imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>' ")
 (cmd "imap <silent><expr> <c-k>  luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev': '<c-k>'")
