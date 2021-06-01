@@ -86,8 +86,7 @@
 
     (use- :kyazdani42/nvim-tree.lua
           :requires :kyazdani42/nvim-web-devicons
-          :keys "<leader>t"
-          :config #(cmd "nnoremap <silent> <leader>t :NvimTreeToggle<CR>"))
+          :keys "<leader>t")
 
     (use- :Olical/conjure
           :ft [:fennel :clojure])
