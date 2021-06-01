@@ -80,7 +80,8 @@
 ; eye-candy
 
 (se= termguicolors)
-(se= background :dark)
+; This is inferred from the terminal theme
+; (se= background :dark)
 
 
 (se+ shortmess "Ic")

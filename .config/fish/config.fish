@@ -3,8 +3,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 # set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
-#Python local installed packages
-set PATH (python3 -m site --user-base)/bin $PATH 
+set PATH $HOME/.local/bin $PATH
 
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
@@ -57,3 +56,6 @@ set -g __fish_git_prompt_color_stagedstate yellow
 set -g __fish_git_prompt_color_invalidstate red
 set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green
+
+export DOCKER_BUILDKIT=1
+
