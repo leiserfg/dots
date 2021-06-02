@@ -5,4 +5,4 @@
     :section_separators  ""
     :component_separators  ""
     :icons_enabled false
-    :extensions [:fzf :quickfix]}})
+    :extensions [:quickfix]}})
