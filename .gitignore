@@ -1,2 +1,6 @@
 .config/pcmanfm-qt/default/settings.conf
 .config/nvim/lua/
+
+
+# Avoid any kind of office leak
+inventorum
