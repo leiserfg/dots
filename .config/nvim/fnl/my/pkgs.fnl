@@ -43,7 +43,7 @@
     (use- :tpope/vim-rhubarb)
     (use- :tpope/vim-eunuch)
     (use- :sheerun/vim-polyglot)
-    (use- :norcalli/nvim-colorizer.lua)
+    (use- :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
     (use- :direnv/direnv.vim)
     (use- :machakann/vim-sandwich)
     (use- :AndrewRadev/splitjoin.vim
