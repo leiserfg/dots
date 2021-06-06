@@ -1,14 +1,14 @@
-# Defined in /tmp/fish.Tkbqgv/update_blender.fish @ line 2
+# Defined in /tmp/fish.VMCncR/update_blender.fish @ line 2
 function update_blender
-	set base https://builder.blender.org
-    set download (curl -s $base/download/ |pup '.linux:last-child > a attr{href}')
+    set base https://builder.blender.org
+    set download (curl -s $base/download/daily/ |pup '.linux:last-child > a attr{href}' |sed s/.sha256//)
     pushd ~/installed/
     set latest (basename -s .tar.xz $download)
     echo Latest is $latest
     if test -d $latest
         echo $latest "exists"
     else
-        curl -s $base$download|tar -xJf -
+        curl -s $download|tar -xJf -
         ln -sf $PWD/$latest/blender ~/.local/bin/
         echo "Downloading" $download
     end

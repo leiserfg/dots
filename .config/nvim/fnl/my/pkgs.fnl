@@ -58,7 +58,8 @@
 
     ; Treesitter is still buggy
     (use- :nvim-treesitter/nvim-treesitter
-          :requires [:nvim-treesitter/playground])
+          :requires [:nvim-treesitter/playground 
+                     :nvim-treesitter/nvim-treesitter-textobjects])
                      ;:p00f/nvim-ts-rainbow])
 
     (use- :L3MON4D3/LuaSnip
