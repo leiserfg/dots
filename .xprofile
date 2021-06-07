@@ -3,6 +3,7 @@
 dpi=$(xrandr |grep -w "connected.*x"| head -n1| sed -E 's|.*x([0-9]+)\+.* ([0-9]+)mm$|scale=0;(\1*25.4/\2)|'|bc)
 nice_dpi=$(echo "scale=0;$dpi/16*16"|bc)
 printf "Xft.dpi: $nice_dpi\n*dpi: $nice_dpi"|xrdb -merge
+xrandr --dpi $nice_dpi
 
 #Set the QT scale by hand
 export QT_AUTO_SCREEN_SCALE_FACTOR=0

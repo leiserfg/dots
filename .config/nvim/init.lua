@@ -30,6 +30,7 @@ vim.g["aniseed#env"] = {
 -- my/init get's called after some plugins (nvim stuff) so I have to be sure it's set before
 vim.g["mapleader"] = " "
 vim.g["maplocalleader"] = " "
+vim.opt.termguicolors = true
 
 
 

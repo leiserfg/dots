@@ -1,6 +1,8 @@
 (require-macros :my.macros)
 (var compe (require :compe))
 
+(se= termguicolors)
+
 (compe.setup
   {:enabled true
    :source
