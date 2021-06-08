@@ -41,6 +41,7 @@ run_once () {
 # Reload sxhkd manually cause using USR1 hangs the keyboard frome time to time
 pkill sxhkd
 run_disowned sxhkd
+run_once xsettingsd
 
 xset -b
 pkill -9 picom; picom -b
