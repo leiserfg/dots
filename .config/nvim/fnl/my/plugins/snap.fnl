@@ -104,8 +104,8 @@
     [:<Leader>m]
     (fn []
       (snap.run {:prompt :Grep
-                 :initial_filter (vim.fn.expand :<cword>)
-                 :producer (limit 10000 producer-vimgrep)
+                 :initial_filter (vim.fn.input "Grep> ")
+                 :producer (fzy (limit 1000 producer-vimgrep))
                  :select select-vimgrep.select
                  :multiselect select-vimgrep.multiselect
                  :views [preview-vimgrep]})))
