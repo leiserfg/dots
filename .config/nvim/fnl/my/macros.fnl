@@ -17,7 +17,7 @@
 (fn cmd [arg]
   `(vim.cmd ,arg))
 
-(fn le- [o v]
+(fn g [o v]
    (let [o (if (= :string (type o)) o `,(tostring o))]
     `(tset vim.g ,o ,v)))
-{: se= : cmd : le- : se- : se+  : se^}
+{: se= : cmd : g : se- : se+  : se^}

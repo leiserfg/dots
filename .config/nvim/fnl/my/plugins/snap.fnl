@@ -66,15 +66,15 @@
                  :views [preview-jumplist]})))
 
   ;; Grep
-  (snap.register.map
-    [:n]
-    [:<Leader>ff]
-    (fn []
-      (snap.run {:prompt :Grep
-                 :producer (limit 50000 producer-vimgrep)
-                 :select select-vimgrep.select
-                 :multiselect select-vimgrep.multiselect
-                 :views [preview-vimgrep]})))
+  ; (snap.register.map
+  ;   [:n]
+  ;   [:<Leader>ff]
+  ;   (fn []
+  ;     (snap.run {:prompt :Grep
+  ;                :producer (limit 50000 producer-vimgrep)
+  ;                :select select-vimgrep.select
+  ;                :multiselect select-vimgrep.multiselect
+  ;                :views [preview-vimgrep]})))
 
   ;; Buffers
   (snap.register.map
@@ -110,11 +110,13 @@
                  :multiselect select-vimgrep.multiselect
                  :views [preview-vimgrep]})))
  
-  ;; Action system
   (snap.register.map
-    [:n]
-    [:<Leader>fa]
-    (fn []
-      (snap.run {:prompt :Action
-                 :producer (fzy (fn [] (vim.tbl_keys actions)))
-                 :select (fn [action] (vim.schedule (. actions (tostring action))))}))))
+     [:n]
+     [:<Leader>ff]
+     (fn []
+       (snap.run {:prompt :Grep
+                  :producer (limit 50000 producer-vimgrep)
+                  :next {:consumer fzf :config {:prompt :FZF}}
+                  :select select-vimgrep.select
+                  :multiselect select-vimgrep.multiselect
+                  :views [preview-vimgrep]}))))

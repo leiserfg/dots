@@ -94,22 +94,22 @@
 (se= clipboard "unnamedplus")
 
 ; Netrw
-(le- netrw_banner  0)
-(le- netrw_winsize  15)
-(le- netrw_liststyle  3)
-(le- netrw_browse_split  4)
-(le- netrw_altv  1)
+(g netrw_banner  0)
+(g netrw_winsize  15)
+(g netrw_liststyle  3)
+(g netrw_browse_split  4)
+(g netrw_altv  1)
 
 ; Disable loaders to speed-up startup
-(le- loaded_python_provider 0)
-(le- loaded_ruby_provider 0)
-(le- loaded_node_provider 0)
-(le- loaded_perl_provider 0)
-(le- loaded_python3_provider 0)
+(g loaded_python_provider 0)
+(g loaded_ruby_provider 0)
+(g loaded_node_provider 0)
+(g loaded_perl_provider 0)
+(g loaded_python3_provider 0)
 
 
 ; highlight lua on vim files
-(le- vimsyn_embed  "l")
+(g vimsyn_embed  "l")
 
 ;  ==================================  VIMSRIPT AREA 
 (cmd "augroup vimrc")

@@ -1,10 +1,10 @@
 (require-macros :my.macros)
-(le- :switch_custom_definitions
+(g :switch_custom_definitions
      [[:MON :TUE :WED :THU :FRI]
       [:staging :production]
       [:true :false]])
 
-(le- "speeddating_no_mappings" 1)
+(g "speeddating_no_mappings" 1)
 ; Don't use default mappings
 
 (cmd "nnoremap <Plug>SpeedDatingFallbackUp <c-a>")

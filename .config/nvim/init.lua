@@ -17,15 +17,15 @@ function ensure (user, repo)
   end
 end
 
--- Bootstrap essential plugins required for installing and loading the rest.
-ensure("wbthomason", "packer.nvim")
-ensure("Olical", "aniseed")
-
--- Enable Aniseed's automatic compilation and loading of Fennel source code.
 vim.g["aniseed#env"] = {
   module = "my.init",
   compile = true
 }
+
+-- Bootstrap essential plugins required for installing and loading the rest.
+ensure("wbthomason", "packer.nvim")
+ensure("Olical", "aniseed")
+-- Enable Aniseed's automatic compilation and loading of Fennel source code.
 
 -- my/init get's called after some plugins (nvim stuff) so I have to be sure it's set before
 vim.g["mapleader"] = " "
