@@ -2,6 +2,7 @@
 
 (se= number)
 (se= relativenumber)
+(se= numberwidth 2)
 (se= wildmenu)
 
 (se= ruler) ;Show current position
