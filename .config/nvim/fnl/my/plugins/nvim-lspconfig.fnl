@@ -1,6 +1,6 @@
 (require-macros :my.macros)
 (local lspconfig (require :lspconfig))
-(each [_ lsp (ipairs [:pyls :gdscript :vimls :tsserver :clangd])]
+(each [_ lsp (ipairs [:pylsp :gdscript :vimls :tsserver :clangd])]
   ((. lspconfig lsp :setup) {}))
 
 (let [capabilities  (vim.lsp.protocol.make_client_capabilities)]
