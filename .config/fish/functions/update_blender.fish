@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.VMCncR/update_blender.fish @ line 2
+# Defined in /tmp/fish.LY5z7D/update_blender.fish @ line 2
 function update_blender
     set base https://builder.blender.org
     set download (curl -s $base/download/daily/ |pup '.linux:last-child > a attr{href}' |sed s/.sha256//)
@@ -12,12 +12,14 @@ function update_blender
         ln -sf $PWD/$latest/blender ~/.local/bin/
         echo "Downloading" $download
     end
-    
+
     #Clean all but 2 latest
     set all (ls -t|grep "blender-.*-")
     echo "Removing" $all[3..-1]
     rm -rf $all[3..-1]
-    cd  $HOME"/.config/blender/"(string match --regex '\d.\d\d' $latest)"/scripts/addons"
+
+    string match --regex "blender-(?<blender_version>\d.\d\d?).*" $latest
+    cd  $HOME"/.config/blender/"$blender_version"/scripts/addons"
     for addon in (ls)
         cd $addon
         echo "Updating " $addon
