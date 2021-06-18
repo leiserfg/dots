@@ -25,7 +25,6 @@
 (fn sf [trig body regTrig]
   (s {: trig :wordTrig true : regTrig} 
      [(f body {})
-      (t [" "])
       (i 0)]))
 
 (fn replace-each [replacer]
