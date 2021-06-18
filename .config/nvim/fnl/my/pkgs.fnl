@@ -97,8 +97,8 @@
     (use- :eddyekofo94/gruvbox-flat.nvim
           :config #(do
                      (set vim.g.gruvbox_flat_style "dark")
-                     (cmd "colorscheme gruvbox-flat")))))
+                     (cmd "colorscheme gruvbox-flat")))
     ; (use- :folke/which-key.nvim
     ;       :config #((. (require :which-key) :setup) {}))))
-    ; (use- :camspiers/snap
-    ;       :rocks [:fzy])))
+    (use- :camspiers/snap
+          :rocks [:fzy])))
