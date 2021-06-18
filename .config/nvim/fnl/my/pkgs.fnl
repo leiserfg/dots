@@ -101,4 +101,6 @@
     ; (use- :folke/which-key.nvim
     ;       :config #((. (require :which-key) :setup) {}))))
     (use- :camspiers/snap
-          :rocks [:fzy])))
+          :rocks [:fzy])
+
+    (use- :nanotee/zoxide.vim)))

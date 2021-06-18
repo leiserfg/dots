@@ -58,4 +58,4 @@ set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green
 
 export DOCKER_BUILDKIT=1
-
+zoxide init fish | source

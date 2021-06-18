@@ -19,7 +19,7 @@
       preview-file (snap.get :preview.file)
       preview-vimgrep (snap.get :preview.vimgrep)
       preview-jumplist (snap.get :preview.jumplist)]
-    (print :a))
+    (print :a)
 
   ;; File finder
   ; (snap.register.map
@@ -106,13 +106,14 @@
   ;                :multiselect select-vimgrep.multiselect
   ;                :views [preview-vimgrep]})))
  
-  ; (snap.register.map
-  ;    [:n]
-  ;    [:<Leader>ff]
-  ;    (fn []
-  ;      (snap.run {:prompt :Grep
-  ;                 :producer (limit 50000 producer-vimgrep)
-  ;                 :next {:consumer fzf :config {:prompt :FZF}}
-  ;                 :select select-vimgrep.select
-  ;                 :multiselect select-vimgrep.multiselect
-  ;                 :views [preview-vimgrep]}))))
+  (snap.register.map
+     [:n]
+     [:<Leader>ff]
+     (fn []
+       (snap.run {:prompt :Grep
+                  :producer producer-vimgrep
+                  :steps [{:consumer fzy :config {:prompt "FZY> "}}]
+                  :initial_filter (vim.fn.input "Grep> ")
+                  :select select-vimgrep.select
+                  :multiselect select-vimgrep.multiselect
+                  :views [preview-vimgrep]}))))
