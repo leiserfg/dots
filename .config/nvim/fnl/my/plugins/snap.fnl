@@ -111,7 +111,7 @@
      [:<Leader>ff]
      (fn []
        (snap.run {:prompt :Grep
-                  :producer producer-vimgrep
+                  :producer (limit 50000 producer-vimgrep)
                   :steps [{:consumer fzy :config {:prompt "FZY> "}}]
                   :initial_filter (vim.fn.input "Grep> ")
                   :select select-vimgrep.select
