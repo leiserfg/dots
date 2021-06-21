@@ -103,4 +103,7 @@
     (use- :camspiers/snap
           :rocks [:fzy])
 
+    ; Use this if I have to setup custom linters/formatters
+    ; (use- :jose-elias-alvarez/null-ls.nvim :requires :plenary.nvim)
+
     (use- :nanotee/zoxide.vim)))
