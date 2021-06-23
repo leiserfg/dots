@@ -54,7 +54,8 @@
 
     (use- :lewis6991/gitsigns.nvim
           :requires  [:nvim-lua/plenary.nvim])
-    (use- :neovim/nvim-lspconfig)
+    (use- :ray-x/lsp_signature.nvim :config "require'lsp_signature'.on_attach()")
+    (use- :neovim/nvim-lspconfig :after [:lsp_signature.nvim])
 
     ; Treesitter is still buggy
     (use- :nvim-treesitter/nvim-treesitter
