@@ -75,7 +75,7 @@
 
 
 (local loader (require :luasnip/loaders/from_vscode))
-(loader.load)
+(loader.load {:include ["python"]})
 
 
 ; {}
