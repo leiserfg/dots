@@ -26,7 +26,7 @@
   (fn [use]
     (use- :Olical/aniseed)
     (use- :wbthomason/packer.nvim)
-    (use- :tpope/vim-unimpaired) ; gc
+    (use- :tpope/vim-unimpaired :event :BufRead)
     (use- :ryvnf/readline.vim)
     (use- :b3nj5m1n/kommentary :keys :gc)
     (use- :junegunn/vim-easy-align :keys :ga)
@@ -53,9 +53,15 @@
           :cmd [:Dispatch :Make :Focus :Start])
 
     (use- :lewis6991/gitsigns.nvim
+          :event :BufRead
           :requires  [:nvim-lua/plenary.nvim])
-    (use- :ray-x/lsp_signature.nvim :config "require'lsp_signature'.on_attach()")
-    (use- :neovim/nvim-lspconfig :after [:lsp_signature.nvim])
+
+    (use- :ray-x/lsp_signature.nvim 
+          :event :BufRead
+          :config "require'lsp_signature'.on_attach()")
+    (use- :neovim/nvim-lspconfig
+          :event :BufRead
+          :after [:lsp_signature.nvim])
 
     ; Treesitter is still buggy
     (use- :nvim-treesitter/nvim-treesitter
@@ -64,12 +70,15 @@
                      ;:p00f/nvim-ts-rainbow])
 
     (use- :L3MON4D3/LuaSnip
+          :event :InsertEnter
           :requires [:rafamadriz/friendly-snippets])
 
     (use- :hrsh7th/nvim-compe
+          :event :InsertEnter
           :require [:tami5/compe-conjure])
 
     (use- :lambdalisue/suda.vim
+          :event :VimEnter
           :config "vim.g.suda_smart_edit=1")
 
     (use- :metakirby5/codi.vim
@@ -102,9 +111,11 @@
     ; (use- :folke/which-key.nvim
     ;       :config #((. (require :which-key) :setup) {}))))
     (use- :camspiers/snap
+          :event :VimEnter
           :rocks [:fzy])
 
     ; Use this if I have to setup custom linters/formatters
     ; (use- :jose-elias-alvarez/null-ls.nvim :requires :plenary.nvim)
 
-    (use- :nanotee/zoxide.vim)))
+    (use- :nanotee/zoxide.vim :cmd :Z)
+    (use- :tweekmonster/startuptime.vim :cmd :StartupTime)))
