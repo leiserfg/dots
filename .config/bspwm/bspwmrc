@@ -56,5 +56,4 @@ run_once light-locker
 # run_once xss-lock -- 'pidof i3lock-fancy-rapid || i3lock-fancy-rapid 5 pixel'
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once nm-applet
-run_once telegram-desktop
 run_once unclutter -b #hide the cursor when not moving it
