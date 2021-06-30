@@ -57,10 +57,8 @@
           :requires  [:nvim-lua/plenary.nvim])
 
     (use- :ray-x/lsp_signature.nvim 
-          :event :BufRead
           :config "require'lsp_signature'.on_attach()")
     (use- :neovim/nvim-lspconfig
-          :event :BufRead
           :after [:lsp_signature.nvim])
 
     ; Treesitter is still buggy
