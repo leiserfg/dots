@@ -68,7 +68,6 @@
                      ;:p00f/nvim-ts-rainbow])
 
     (use- :L3MON4D3/LuaSnip
-          :event :InsertEnter
           :requires [:rafamadriz/friendly-snippets])
 
     (use- :hrsh7th/nvim-compe

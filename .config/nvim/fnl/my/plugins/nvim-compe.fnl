@@ -10,7 +10,7 @@
     :buffer true
     :nvim_lsp true
     :calc true
-    :spell true
+    :spell {:filetypes [:markdown]}
     :ultisnips false
     :nvim_lua true
     :emoji true

@@ -75,7 +75,21 @@
 
 
 (local loader (require :luasnip/loaders/from_vscode))
-(loader.load {:include ["python"]})
+(loader.load {:include ["all"]})
 
+(local loaded {})
+(fn _G.load_snips []
+  (let [ft vim.bo.filetype]
+    (if (not (. loaded ft))
+       (do
+         (tset loaded ft true)
+         (loader.load {:include [ft]})))))
 
-; {}
+(vim.cmd "
+augroup my_snips
+autocmd!
+augroup END
+
+au my_snips BufEnter * lua _G.load_snips()
+")
+
