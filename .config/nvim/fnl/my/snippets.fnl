@@ -88,8 +88,7 @@
 (vim.cmd "
 augroup my_snips
 autocmd!
+au BufEnter * lua _G.load_snips()
 augroup END
-
-au my_snips BufEnter * lua _G.load_snips()
 ")
 
