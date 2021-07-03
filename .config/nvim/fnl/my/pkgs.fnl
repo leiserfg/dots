@@ -4,115 +4,124 @@
 
 (macro use- [name ...]
   (let [opts [...]
-        path (.. :my.plugins/
-              (-> name
-                (: :gsub ".*/" "")
-                (: :gsub "[.].*" "")))
         args [name]]
 
-    (tset args :config (..
-                         "local k, v = pcall(require, '"
-                         path
-                         "') ; if not k and v:find('module') == nil then print('"
-                         path
-                         "',  v) end"))
-    (for [i 1 (length opts) 2]
-      (tset args
-            (. opts i)
-            (. opts (+ i 1))))
-    `(use ,args)))
+    (if (= 0 (length opts))
+      `,name
+      (do
+        (for [i 1 (length opts) 2]
+          (tset args
+                (. opts i)
+                (. opts (+ i 1))))
 
-(packer.startup
-  (fn [use]
-    (use- :Olical/aniseed)
-    (use- :wbthomason/packer.nvim)
-    (use- :tpope/vim-unimpaired :event :BufRead)
-    (use- :ryvnf/readline.vim)
-    (use- :b3nj5m1n/kommentary :keys :gc)
-    (use- :junegunn/vim-easy-align :keys :ga)
-    (use- :vim-scripts/ReplaceWithRegister :keys :gr)
-    (use- :vim-scripts/vis)        ; :'<,'>B
-    (use- :tpope/vim-repeat)
-    (use- :AndrewRadev/switch.vim
-          :requires {1 :tpope/vim-speeddating
-                     :keys ["<Plug>SpeedDatingFallbackUp" "<Plug>SpeedDatingFallbackDown"]})
+        `,args))))
 
-    (use- :Olical/vim-enmasse :cmd :EnMasse)
-    (use- :junegunn/vim-peekaboo)
-    (use- :tpope/vim-fugitive)
-    (use- :tpope/vim-rhubarb)
-    (use- :tpope/vim-eunuch)
-    (use- :sheerun/vim-polyglot)
-    (use- :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
-    (use- :direnv/direnv.vim)
-    (use- :machakann/vim-sandwich)
-    (use- :AndrewRadev/splitjoin.vim
-          :keys [:gS :gJ])
+(fn extend-package [pkg]
+  (let [expkg (if (= "string" (type pkg)) [pkg] pkg)
+        path (.. :my.plugins/
+              (-> (. expkg 1)
+                (: :gsub ".*/" "")
+                (: :gsub "[.].*" "")))]
+    (if (not (. expkg :config))
+      (tset expkg :config (..
+                            "local k, v = pcall(require, '"
+                            path
+                            "') ; if not k and v:find('module') == nil then print('"
+                            path
+                            "',  v) end")))
+    expkg))
 
-    (use- :tpope/vim-dispatch
-          :cmd [:Dispatch :Make :Focus :Start])
+(fn packages [...]
+  (local packs [...])
+  (packer.startup
+    (fn setup [use]
+      (each [_ p (ipairs packs)]
+        (use (extend-package p))))))
 
-    (use- :lewis6991/gitsigns.nvim
-          :event :BufRead
-          :requires  [:nvim-lua/plenary.nvim])
+(packages (use- :Olical/aniseed)
+  (use- :wbthomason/packer.nvim)
+  (use- :tpope/vim-unimpaired :event :BufRead)
+  (use- :ryvnf/readline.vim)
+  (use- :b3nj5m1n/kommentary :keys :gc)
+  (use- :junegunn/vim-easy-align :keys :ga)
+  (use- :vim-scripts/ReplaceWithRegister :keys :gr)
+  (use- :vim-scripts/vis)        ; :'<,'>B
+  (use- :tpope/vim-repeat)
+  (use- :AndrewRadev/switch.vim
+        :requires {1 :tpope/vim-speeddating
+                   :keys ["<Plug>SpeedDatingFallbackUp" "<Plug>SpeedDatingFallbackDown"]})
 
-    (use- :ray-x/lsp_signature.nvim 
-          :config "require'lsp_signature'.on_attach()")
-    (use- :neovim/nvim-lspconfig
-          :after [:lsp_signature.nvim])
+  (use- :Olical/vim-enmasse :cmd :EnMasse)
+  (use- :junegunn/vim-peekaboo)
+  (use- :tpope/vim-fugitive)
+  (use- :tpope/vim-rhubarb)
+  (use- :tpope/vim-eunuch)
+  (use- :sheerun/vim-polyglot)
+  (use- :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
+  (use- :direnv/direnv.vim)
+  (use- :machakann/vim-sandwich)
+  (use- :AndrewRadev/splitjoin.vim
+        :keys [:gS :gJ])
 
-    ; Treesitter is still buggy
-    (use- :nvim-treesitter/nvim-treesitter
-          :requires [:nvim-treesitter/playground 
-                     :nvim-treesitter/nvim-treesitter-textobjects])
-                     ;:p00f/nvim-ts-rainbow])
+  (use- :tpope/vim-dispatch
+        :cmd [:Dispatch :Make :Focus :Start])
 
-    (use- :L3MON4D3/LuaSnip
-          :requires [:rafamadriz/friendly-snippets])
+  (use- :lewis6991/gitsigns.nvim
+        :event :BufRead
+        :requires  [:nvim-lua/plenary.nvim])
 
-    (use- :hrsh7th/nvim-compe
-          :event :InsertEnter
-          :require [:tami5/compe-conjure])
+  (use- :ray-x/lsp_signature.nvim 
+        :config "require'lsp_signature'.on_attach()")
+  (use- :neovim/nvim-lspconfig
+        :after [:lsp_signature.nvim])
 
-    (use- :lambdalisue/suda.vim
-          :event :VimEnter
-          :config "vim.g.suda_smart_edit=1")
+  ; Treesitter is still buggy
+  (use- :nvim-treesitter/nvim-treesitter
+        :requires [:nvim-treesitter/playground 
+                   :nvim-treesitter/nvim-treesitter-textobjects])
+                   ;:p00f/nvim-ts-rainbow))
 
-    (use- :metakirby5/codi.vim
-          :cmd :Codi)
+  (use- :L3MON4D3/LuaSnip
+        :requires [:rafamadriz/friendly-snippets])
 
-    (use- :dhruvasagar/vim-table-mode
-          :ft :markdown)
+  (use- :hrsh7th/nvim-compe
+        :event :InsertEnter
+        :require [:tami5/compe-conjure])
 
-    (use- :hoob3rt/lualine.nvim
-          :after :gruvbox-flat.nvim)
-    (use- :junegunn/fzf.vim)
-    ; (use- :nvim-telescope/telescope.nvim
-    ;       :requires [:nvim-lua/popup.nvim
-    ;                  :nvim-lua/plenary.nvim
-    ;                  :nvim-telescope/telescope-fzy-native.nvim])
+  (use- :lambdalisue/suda.vim
+        :event :VimEnter
+        :config "vim.g.suda_smart_edit=1")
 
-    (use- :kyazdani42/nvim-tree.lua
-          :requires :kyazdani42/nvim-web-devicons
-          :keys "<leader>t")
+  (use- :metakirby5/codi.vim
+        :cmd :Codi)
 
-    (use- :Olical/conjure
-          :ft [:fennel :clojure])
-    (use- :eraserhd/parinfer-rust
-          :run "cargo build --release"
-          :ft [:fennel :janet :clojure])
-    (use- :eddyekofo94/gruvbox-flat.nvim
-          :config #(do
-                     (set vim.g.gruvbox_flat_style "dark")
-                     (cmd "colorscheme gruvbox-flat")))
-    ; (use- :folke/which-key.nvim
-    ;       :config #((. (require :which-key) :setup) {}))))
-    (use- :camspiers/snap
-          :event :VimEnter
-          :rocks [:fzy])
+  (use- :dhruvasagar/vim-table-mode
+        :ft :markdown)
 
-    ; Use this if I have to setup custom linters/formatters
-    ; (use- :jose-elias-alvarez/null-ls.nvim :requires :plenary.nvim)
+  (use- :hoob3rt/lualine.nvim
+        :after :gruvbox-flat.nvim)
+  (use- :junegunn/fzf.vim)
 
-    (use- :nanotee/zoxide.vim :cmd :Z)
-    (use- :tweekmonster/startuptime.vim :cmd :StartupTime)))
+  (use- :kyazdani42/nvim-tree.lua
+        :requires :kyazdani42/nvim-web-devicons
+        :keys "<leader>t")
+
+  (use- :Olical/conjure
+        :ft [:fennel :clojure])
+  (use- :eraserhd/parinfer-rust
+        :run "cargo build --release"
+        :ft [:fennel :janet :clojure])
+  (use- :eddyekofo94/gruvbox-flat.nvim
+        :config "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')"
+        
+        #(do
+           (set vim.g.gruvbox_flat_style "dark")
+           (cmd "colorscheme gruvbox-flat")))
+  ; (use- :folke/which-key.nvim
+  ;       :config #((. (require :which-key) :setup) {}))))
+  (use- :camspiers/snap
+        :event :VimEnter
+        :rocks [:fzy])
+
+  (use- :nanotee/zoxide.vim :cmd :Z)
+  (use- :tweekmonster/startuptime.vim :cmd :StartupTime))
