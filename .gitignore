@@ -1,5 +1,5 @@
 .config/pcmanfm-qt/default/settings.conf
-.config/nvim/lua/
+.config/nvim/fnl/
 
 
 # Avoid any kind of office leak

@@ -1,0 +1,15 @@
+local ts = require "nvim-treesitter.configs"
+return ts.setup {
+  ensure_installed = "all",
+  highlight = { disable = { "markdown" }, enable = true },
+  playground = { enable = true, persist_queries = false },
+  textobjects = {
+    enable = true,
+    keymaps = {
+      ["if"] = "@function.inner",
+      ac = "@class.outer",
+      af = "@function.outer",
+      ic = "@class.inner",
+    },
+  },
+}

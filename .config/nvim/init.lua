@@ -5,10 +5,10 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local pack_path = fn.stdpath("data") .. "/site/pack"
+local pack_path = fn.stdpath "data" .. "/site/pack"
 local fmt = string.format
 
-function ensure (user, repo)
+function ensure(user, repo)
   -- Ensures a given github.com/USER/REPO is cloned in the pack/packer/start directory.
   local install_path = fmt("%s/packer/start/%s", pack_path, repo, repo)
   if fn.empty(fn.glob(install_path)) > 0 then
@@ -17,25 +17,12 @@ function ensure (user, repo)
   end
 end
 
-vim.g["aniseed#env"] = {
-  module = "my.init",
-  compile = true
-}
-
 -- Bootstrap essential plugins required for installing and loading the rest.
 ensure("wbthomason", "packer.nvim")
-ensure("Olical", "aniseed")
--- Enable Aniseed's automatic compilation and loading of Fennel source code.
 
--- my/init get's called after some plugins (nvim stuff) so I have to be sure it's set before
-vim.g["mapleader"] = " "
-vim.g["maplocalleader"] = " "
-vim.opt.termguicolors = true
-
+require "my.options"
+require "my.mapping"
+require "my.pkgs"
 
 --[[ require"jit.p".start("10,i1,s,m0,G", "/tmp/output.log")
 vim.cmd[[au VimLeave * lua require'jit.p'.stop()]]
-
-
-
-
