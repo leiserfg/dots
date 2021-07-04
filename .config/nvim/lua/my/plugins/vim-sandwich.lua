@@ -1,13 +1,15 @@
-vim.cmd "runtime macros/sandwich/keymap/surround.vim"
-vim.cmd "xmap is <Plug>(textobj-sandwich-query-i)"
-vim.cmd "xmap as <Plug>(textobj-sandwich-query-a)"
-vim.cmd "omap is <Plug>(textobj-sandwich-query-i)"
-vim.cmd "omap as <Plug>(textobj-sandwich-query-a)"
-vim.cmd "xmap im <Plug>(textobj-sandwich-literal-query-i)"
-vim.cmd "xmap am <Plug>(textobj-sandwich-literal-query-a)"
-vim.cmd "omap im <Plug>(textobj-sandwich-literal-query-i)"
-vim.cmd "omap am <Plug>(textobj-sandwich-literal-query-a)"
-vim.cmd "xmap iss <Plug>(textobj-sandwich-auto-i)"
-vim.cmd "xmap ass <Plug>(textobj-sandwich-auto-a)"
-vim.cmd "omap iss <Plug>(textobj-sandwich-auto-i)"
-vim.cmd "omap ass <Plug>(textobj-sandwich-auto-a)"
+vim.cmd [[
+ runtime macros/sandwich/keymap/surround.vim
+ xmap is <Plug>(textobj-sandwich-query-i)
+ xmap as <Plug>(textobj-sandwich-query-a)
+ omap is <Plug>(textobj-sandwich-query-i)
+ omap as <Plug>(textobj-sandwich-query-a)
+ xmap im <Plug>(textobj-sandwich-literal-query-i)
+ xmap am <Plug>(textobj-sandwich-literal-query-a)
+ omap im <Plug>(textobj-sandwich-literal-query-i)
+ omap am <Plug>(textobj-sandwich-literal-query-a)
+ xmap iss <Plug>(textobj-sandwich-auto-i)
+ xmap ass <Plug>(textobj-sandwich-auto-a)
+ omap iss <Plug>(textobj-sandwich-auto-i)
+ omap ass <Plug>(textobj-sandwich-auto-a)
+]]

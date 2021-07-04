@@ -26,10 +26,11 @@ local function packages(...)
     end
     return nil
   end
-  return packer.startup(setup)
+  packer.startup(setup)
 end
-return packages(
-  "Olical/aniseed",
+
+packages(
+  { "Olical/aniseed", ft = "fennel" },
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
   "ryvnf/readline.vim",

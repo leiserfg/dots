@@ -1,20 +1,21 @@
-local _ = "Extend %% as current file's folder"
-vim.cmd "cabbr <expr> %% expand('%:p:h')"
-local _0 = "Easier shortcut for exiting the terminal"
-local _1 = "Fast saving"
-vim.cmd "nmap <leader>w :w!<cr>"
-local _2 = "; ; cd to current dir"
-vim.cmd "map <leader>cd :cd %:p:h<cr>:pwd<cr>"
-local _3 = "; CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead."
-vim.cmd "inoremap <c-c> <ESC>"
-vim.cmd "inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'"
-vim.cmd "inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'"
-local _4 = ";    Move current lines"
-vim.cmd "nmap <M-j> mz:m+<cr>`z"
-vim.cmd "nmap <M-k> mz:m-2<cr>`z"
-vim.cmd "vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z"
-vim.cmd "vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z"
-local _5 = "; Make Y behave like other capitals"
-vim.cmd "nnoremap Y y$"
-local _6 = "; qq to record, Q to replay"
-vim.cmd "nnoremap Q @q"
+cmd = vim.cmd
+-- Extend %% as current file's folder
+cmd "cabbr <expr> %% expand('%:p:h')"
+-- Easier shortcut for exiting the terminal
+-- Fast saving
+cmd "nmap <leader>w :w!<cr>"
+--  cd to current dir
+cmd "map <leader>cd :cd %:p:h<cr>:pwd<cr>"
+--  CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+cmd "inoremap <c-c> <ESC>"
+cmd "inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'"
+cmd "inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'"
+--   Move current lines
+cmd "nmap <M-j> mz:m+<cr>`z"
+cmd "nmap <M-k> mz:m-2<cr>`z"
+cmd "vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z"
+cmd "vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z"
+--  Make Y behave like other capitals
+cmd "nnoremap Y y$"
+--  qq to record, Q to replay
+cmd "nnoremap Q @q"
