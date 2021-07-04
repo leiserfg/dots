@@ -81,19 +81,4 @@ ls.snippets = {
     s({ trig = "lay", wordTrig = true }, { t { "layout " }, i(1, { "python" }), i(0) }),
   },
 }
-local loader = require "luasnip/loaders/from_vscode"
-loader.load { include = { "all" } }
-local loaded = {}
-_G.load_snips = function()
-  local ft = vim.bo.filetype
-  if not loaded[ft] then
-    loaded[ft] = true
-    loader.load { include = { ft } }
-  end
-end
-vim.cmd [[
-  augroup my_snips
-  autocmd!
-  au BufEnter * lua _G.load_snips()
-  augroup END
-]]
+require("luasnip/loaders/from_vscode").lazy_load()
