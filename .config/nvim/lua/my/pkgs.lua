@@ -1,11 +1,11 @@
-local execute = vim.api.nvim_command
+local cmd = vim.cmd
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+  fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
+  cmd "packadd packer.nvim"
 end
 
 local packer = require "packer"
@@ -29,7 +29,7 @@ local function extend_package(pkg)
     expkg = pkg
   end
   local path = ("my.plugins/" .. (expkg[1]):gsub(".*/", ""):gsub("[.].*", ""))
-  if not expkg.config  and module_exists(path) then
+  if not expkg.config and module_exists(path) then
     expkg["config"] = (
         "local k, v = pcall(require, '"
         .. path
@@ -59,7 +59,7 @@ packages(
   { "b3nj5m1n/kommentary", keys = "gc" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
-  "vim-scripts/vis",
+  -- "vim-scripts/vis",
   "tpope/vim-repeat",
   {
     "AndrewRadev/switch.vim",
@@ -73,7 +73,7 @@ packages(
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "tpope/vim-eunuch",
-  -- "sheerun/vim-polyglot",
+  { "sheerun/vim-polyglot", event = "VimEnter" },
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",
