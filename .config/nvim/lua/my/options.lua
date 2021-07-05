@@ -81,7 +81,7 @@ autocmd!
 au InsertEnter * set nohlsearch
 au BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
 au FileType gitcommit setlocal spell spelllang=en_us
-au BufReadPost * silent! normal! g`\"zv
+au BufReadPost * silent! normal! g`"zv
 au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=150}
 augroup END
 ]]
