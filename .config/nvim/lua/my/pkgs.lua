@@ -60,6 +60,7 @@ packages(
   { "lewis6991/gitsigns.nvim", event = "BufRead", requires = { "nvim-lua/plenary.nvim" } },
   { "ray-x/lsp_signature.nvim", config = "require'lsp_signature'.on_attach()" },
   { "neovim/nvim-lspconfig", after = { "lsp_signature.nvim" } },
+  { "simrat39/rust-tools.nvim", ft = { "rust" }, config = "require('rust-tools').setup(opts)" },
   {
     "nvim-treesitter/nvim-treesitter",
     requires = {
