@@ -1,26 +1,20 @@
--- Entrypoint for my Neovim configuration!
+--[[ require("jit.p").start("10,i1,s,m0,G", "/tmp/output.log")
+vim.cmd [[
+	au VimLeave * lua require'jit.p'.stop()
+]]
 
+-- Entrypoint for my Neovim configuration!
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local pack_path = fn.stdpath "data" .. "/site/pack"
-local fmt = string.format
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
-function ensure(user, repo)
-  -- Ensures a given github.com/USER/REPO is cloned in the pack/packer/start directory.
-  local install_path = fmt("%s/packer/start/%s", pack_path, repo, repo)
-  if fn.empty(fn.glob(install_path)) > 0 then
-    execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
-    execute(fmt("packadd %s", repo))
-  end
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
 end
-
--- Bootstrap essential plugins required for installing and loading the rest.
-ensure("wbthomason", "packer.nvim")
-
 require "my.options"
 require "my.mapping"
-require "my.pkgs"
+-- require "my.pkgs"
 
---[[ require"jit.p".start("10,i1,s,m0,G", "/tmp/output.log")
-vim.cmd[[au VimLeave * lua require'jit.p'.stop()]]
+vim.cmd [[ au VimEnter * ++once lua require "my.pkgs"]]

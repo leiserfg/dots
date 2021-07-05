@@ -1,4 +1,16 @@
 local packer = require "packer"
+
+local function module_exists(name)
+  for _, searcher in ipairs(package.searchers or package.loaders) do
+    local loader = searcher(name)
+    if type(loader) == "function" then
+      package.preload[name] = loader
+      return true
+    end
+  end
+  return false
+end
+
 local function extend_package(pkg)
   local expkg
   if "string" == type(pkg) then
@@ -7,7 +19,7 @@ local function extend_package(pkg)
     expkg = pkg
   end
   local path = ("my.plugins/" .. (expkg[1]):gsub(".*/", ""):gsub("[.].*", ""))
-  if not expkg.config then
+  if not expkg.config  and module_exists(path) then
     expkg["config"] = (
         "local k, v = pcall(require, '"
         .. path
@@ -51,7 +63,7 @@ packages(
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "tpope/vim-eunuch",
-  "sheerun/vim-polyglot",
+  -- "sheerun/vim-polyglot",
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",
@@ -60,7 +72,11 @@ packages(
   { "lewis6991/gitsigns.nvim", event = "BufRead", requires = { "nvim-lua/plenary.nvim" } },
   { "ray-x/lsp_signature.nvim", config = "require'lsp_signature'.on_attach()" },
   { "neovim/nvim-lspconfig", after = { "lsp_signature.nvim" } },
-  { "simrat39/rust-tools.nvim", ft = { "rust" }, config = "require('rust-tools').setup(opts)" },
+  {
+    "simrat39/rust-tools.nvim",
+    ft = { "rust" },
+    config = "require('rust-tools').setup(opts)",
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     requires = {
