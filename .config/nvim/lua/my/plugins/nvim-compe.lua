@@ -11,8 +11,9 @@ compe.setup {
     nvim_lsp = true,
     nvim_lua = true,
     path = true,
-    spell = { filetypes = { "markdown" } },
+    spell = { filetypes = { "markdown", "org", "orgagenda" } },
     ultisnips = false,
+    orgmode = true,
   },
 }
 vim.cmd "inoremap <silent><expr> <CR>  compe#confirm('<CR>')"

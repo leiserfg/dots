@@ -118,5 +118,10 @@ packages(
   },
   { "camspiers/snap", event = "VimEnter", rocks = { "fzy" } },
   { "nanotee/zoxide.vim", cmd = "Z" },
-  { "tweekmonster/startuptime.vim", cmd = "StartupTime" }
+  { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
+  {
+    "kristijanhusak/orgmode.nvim",
+    keys = { "<Leader>oa", "<Leader>oc" },
+    ft = { "org", "orgagenda" },
+  }
 )
