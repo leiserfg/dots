@@ -40,8 +40,7 @@ local function extend_package(pkg)
   end
   return expkg
 end
-local function packages(...)
-  local packs = { ... }
+local function packages(packs)
   local function setup(use)
     for _, p in ipairs(packs) do
       use(extend_package(p))
@@ -51,7 +50,7 @@ local function packages(...)
   packer.startup(setup)
 end
 
-packages(
+packages {
   { "Olical/aniseed", ft = "fennel" },
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
@@ -123,5 +122,5 @@ packages(
     "kristijanhusak/orgmode.nvim",
     keys = { "<Leader>oa", "<Leader>oc" },
     ft = { "org", "orgagenda" },
-  }
-)
+  },
+}
