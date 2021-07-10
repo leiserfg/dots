@@ -79,12 +79,12 @@ packages {
   { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
   { "tpope/vim-dispatch", cmd = { "Dispatch", "Make", "Focus", "Start" } },
   { "lewis6991/gitsigns.nvim", event = "BufRead", requires = { "nvim-lua/plenary.nvim" } },
-  { "ray-x/lsp_signature.nvim", config = "require'lsp_signature'.on_attach()" },
+  { "ray-x/lsp_signature.nvim", config = 'require"lsp_signature".setup()' },
   { "neovim/nvim-lspconfig", after = { "lsp_signature.nvim" } },
   {
     "simrat39/rust-tools.nvim",
     ft = { "rust" },
-    config = "require('rust-tools').setup(opts)",
+    config = "require('rust-tools').setup()",
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -95,9 +95,9 @@ packages {
   },
   { "L3MON4D3/LuaSnip", requires = { "rafamadriz/friendly-snippets" } },
   { "hrsh7th/nvim-compe", event = "InsertEnter", require = { "tami5/compe-conjure" } },
-  { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1", event = "VimEnter" },
+  { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1"},
   { "metakirby5/codi.vim", cmd = "Codi" },
-  { "dhruvasagar/vim-table-mode", ft = "markdown" },
+  { "dhruvasagar/vim-table-mode", ft = { "markdown",  "org", "orgagenda" } },
   { "hoob3rt/lualine.nvim", after = "gruvbox-flat.nvim" },
   "junegunn/fzf.vim",
   {
