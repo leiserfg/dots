@@ -1,4 +1,7 @@
 local ls = require "luasnip"
+local l = require "luasnip.extras".l
+
+-- local _1 = require "luasnip.util.lambda"._1
 local s = ls.s
 local sn = ls.sn
 local t = ls.t
@@ -76,9 +79,17 @@ ls.snippets = {
       t { "*" },
       i(0),
     }),
-  },
+    s({ trig = "csv", wordTrig = true }, {
+      i(1, { "content" }),
+      t{"", "separator", ""} ,
+      i(2, { "|" }),
+      t{"", ">>", ""} ,
+      l( l._1:gsub(",", l._2), {1,2}),
+
+    }),
   direnv = {
     s({ trig = "lay", wordTrig = true }, { t { "layout " }, i(1, { "python" }), i(0) }),
+  },
   },
 }
 require("luasnip/loaders/from_vscode").lazy_load()
