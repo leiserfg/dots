@@ -84,7 +84,7 @@ ls.snippets = {
       t{"", "separator", ""} ,
       i(2, { "|" }),
       t{"", ">>", ""} ,
-      l( l._1:gsub(",", l._2), {1,2}),
+      l( l._1:gsub(",", l._2) or "adsf" , {1,2}),
 
     }),
   direnv = {
