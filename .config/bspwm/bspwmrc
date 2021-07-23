@@ -48,7 +48,7 @@ pkill -9 picom; picom -b
 nitrogen --restore
 
 export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
-pkill polybar
+pkill -9 polybar
 run_disowned polybar top
 
 xset s 300 600

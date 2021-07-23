@@ -65,6 +65,7 @@ g.netrw_winsize = 15
 g.netrw_liststyle = 3
 g.netrw_browse_split = 4
 g.netrw_altv = 1
+g.netrw_silent = 1
 g.loaded_python_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0

@@ -79,6 +79,7 @@ ls.snippets = {
       t { "*" },
       i(0),
     }),
+    s('foo', {t({'bar','','baz'})}),
     s({ trig = "csv", wordTrig = true }, {
       i(1, { "content" }),
       t{"", "separator", ""} ,
