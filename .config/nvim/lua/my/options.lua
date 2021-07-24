@@ -75,6 +75,9 @@ g.loaded_python3_provider = 0
 g.mapleader = " "
 g.maplocalleader = " "
 o.termguicolors = true
+g.loaded_zipPlugin= 1
+g.loaded_zip      = 1
+
 
 vim.cmd [[
 augroup vimrc
