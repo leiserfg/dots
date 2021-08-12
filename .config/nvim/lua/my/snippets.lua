@@ -1,4 +1,5 @@
 local ls = require "luasnip"
+local parser = require "luasnip.util.parser".parser
 local l = require "luasnip.extras".l
 
 -- local _1 = require "luasnip.util.lambda"._1
@@ -87,7 +88,6 @@ ls.snippets = {
       t { "*" },
       i(0),
     }),
-    ls.parser.parse_snippet({trig='foo'}, [[console.log('${TM_SELECTED_TEXT}', $TM_SELECTED_TEXT$1);]]),
     s({ trig = "csv", wordTrig = true }, {
       i(1, { "content" }),
       t{"", "separator", ""} ,
