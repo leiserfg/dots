@@ -1,6 +1,23 @@
 require "my/snippets"
 local ls = require "luasnip"
-ls.config.set_config { updateevents = "TextChanged,TextChangedI", store_selection_keys = "<c-j>" }
+local types = require("luasnip.util.types")
+
+ls.config.set_config { 
+  updateevents = "TextChanged,TextChangedI", 
+  store_selection_keys = "<c-j>",
+  ext_opts = {
+    [types.insertNode] = {
+      passive = {
+        hl_group = "Substitute"
+      }
+    },
+    [types.choiceNode] = {
+      active = {
+        virt_text = {{"choiceNode", "IncSearch"}}
+      }
+    },
+  },
+}
 
 vim.cmd [[
   imap <silent><expr> <c-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>'

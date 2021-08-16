@@ -59,7 +59,15 @@ ls.snippets = {
     sf("date", _1_),
     sf("uuid", _2_),
     sf("lorem(%d*)", _3_, true),
-    s({ trig = "bbox", wordTrig = true }, {
+
+    s({ trig = "tt", wordTrig = true }, { 
+      t { "╔" },
+      f(function() return "0" end, {}),
+      t { "1", "2" },
+      i(0),
+    }),
+
+    s({ trig = "bbox"}, {
       t { "╔" },
       f(replace_each "═", { 1 }),
       t { "╗", "║" },
