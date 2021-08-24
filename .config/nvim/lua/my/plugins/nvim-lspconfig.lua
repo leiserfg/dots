@@ -15,9 +15,27 @@ local function on_attach()
     ]]
 end
 
+
+-- Advertice cmp capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
 local lspconfig = require "lspconfig"
 for _, lsp in ipairs { "pylsp", "gdscript", "vimls", "tsserver", "clangd" } do
-  lspconfig[lsp].setup {on_attach=on_attach}
+  lspconfig[lsp].setup {on_attach=on_attach, capabilities = capabilities}
 end
 
 local runtime_path = vim.split(package.path, ';')
@@ -25,18 +43,16 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 require'lspconfig'.sumneko_lua.setup {
-  cmd = {"/usr/bin/lua-language-server"};
-  on_attach=on_attach;
+  cmd = {"/usr/bin/lua-language-server"},
+  on_attach=on_attach,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        -- Setup your lua path
         path = runtime_path,
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
         globals = {'vim'},
       },
       workspace = {

@@ -94,7 +94,22 @@ packages {
     },
   },
   { "L3MON4D3/LuaSnip", requires = { "rafamadriz/friendly-snippets" } },
-  { "hrsh7th/nvim-compe", event = "InsertEnter", require = { "tami5/compe-conjure" } },
+  -- { "hrsh7th/nvim-compe", event = "InsertEnter", require = { "tami5/compe-conjure" } },
+  {
+    "hrsh7th/nvim-cmp",
+    requires={
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-emoji',
+      'onsails/lspkind-nvim',
+      'saadparwaiz1/cmp_luasnip',
+      'L3MON4D3/LuaSnip',
+    }
+  },
+
   { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1"},
   { "metakirby5/codi.vim", cmd = "Codi" },
   { "dhruvasagar/vim-table-mode", ft = { "markdown",  "org", "orgagenda" } },
