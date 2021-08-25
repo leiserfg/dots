@@ -18,6 +18,7 @@ end
 
 -- Advertice cmp capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
 capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
@@ -42,10 +43,33 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require'lspconfig'.sumneko_lua.setup {
+
+local aw_runtime = { '/usr/share/awesome/lib/' }
+local awesome_config_root = vim.env.HOME .. '/.config/awesome'
+
+lspconfig.sumneko_lua.setup {
   cmd = {"/usr/bin/lua-language-server"},
   on_attach=on_attach,
   capabilities = capabilities,
+  root_dir=function(fname)
+    local fname_abs = vim.api.nvim_call_function('fnamemodify', {fname, 'p'})
+    if vim.startswith(fname_abs, awesome_config_root) then
+      return awesome_config_root
+    end
+    return lspconfig.sumneko_lua.document_config.default_config.root_dir()
+  end,
+  on_new_config = function(new_config, root_dir)
+    if root_dir == awesome_config_root then
+      new_config.settings.Lua = {
+        runtime={
+          version = 'Lua 5.3',
+          path=aw_runtime
+        },
+      workspace = {},
+    }
+    end
+    return new_config
+  end,
   settings = {
     Lua = {
       runtime = {
@@ -53,7 +77,7 @@ require'lspconfig'.sumneko_lua.setup {
         path = runtime_path,
       },
       diagnostics = {
-        globals = {'vim'},
+        globals = {'vim', "client", "awesome", "root"},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -73,6 +97,3 @@ vim.cmd [[
   sign define LspDiagnosticsSignInformation text=🔹 linehl= numhl=
   sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
 ]]
-
-
-

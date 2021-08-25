@@ -25,9 +25,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 awful.util.shell = "sh" -- Make it faster by not using fish
-
 -- }}}
-
 -- {{{ Error handling
 
 -- Check if awesome encountered an error during startup and fell back to
