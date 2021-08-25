@@ -3,7 +3,7 @@ local lspkind = require'lspkind'
 
 cmp.setup {
   formatting = {
-    format = function(entry, vim_item)
+    format = function(_, vim_item)
       vim_item.kind = lspkind.presets.default[vim_item.kind]
       return vim_item
     end
@@ -30,7 +30,7 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'buffer'},
     { name = 'path'},
-    { name = 'nvim-lsp'},
+    { name = 'nvim_lsp'},
     { name = 'calc'},
     { name = 'emoji'},
     { name = 'nvim_lua'},
