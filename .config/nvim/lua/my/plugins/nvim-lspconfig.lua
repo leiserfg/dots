@@ -35,14 +35,36 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local lspconfig = require "lspconfig"
-for _, lsp in ipairs { "pylsp", "gdscript", "vimls", "tsserver", "clangd" } do
+for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd" } do
   lspconfig[lsp].setup {on_attach=on_attach, capabilities = capabilities}
 end
+
+
+
+
+lspconfig.pylsp.setup {
+    on_attach=on_attach,
+    capabilities = capabilities,
+    on_init = function(client)
+      local venv = vim.env.VIRTUAL_ENV or ''
+      if venv:find('python-2', 1, true) then
+        client.config.settings.pylsp.plugins.jedi.extra_paths = {
+          ('%s/lib/python2.7/site-packages/'):format(venv)
+        }
+      end
+    client.notify("workspace/didChangeConfiguration")
+    return true
+  end,
+}
+
+
+
+
+--- LUA
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-
 
 local aw_runtime = { '/usr/share/awesome/lib/' }
 local awesome_config_root = vim.env.HOME .. '/.config/awesome'
