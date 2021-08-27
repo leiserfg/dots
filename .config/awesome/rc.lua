@@ -382,8 +382,6 @@ local globalkeys = mytable.join(
               {description = "delete tag", group = "tag"}), ]]
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey            }, "0", function () awful.spawn("rofi_power") end,
@@ -692,6 +690,7 @@ awful.rules.rules = {
           "pinentry",
         },
         class = {
+          "Pavucontrol",
           "Arandr",
           "Blueman-manager",
           "Gpick",
