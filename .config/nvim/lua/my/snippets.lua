@@ -88,6 +88,13 @@ ls.snippets = {
       t { "*" },
       i(0),
     }),
+    ls.parser.parse_snippet({trig='boo'},
+      [[
+   \\section{${1:section name}} % (fold)
+   \\label{sec:${2:${1/(\\w+)(\\W+$)?|\\W+/${1:?${1:/asciify/downcase}:_}/g}}}
+   "${0:$TM_SELECTED_TEXT}",
+    % section $2 (end)
+    ]]),
     ls.parser.parse_snippet({trig='foo'},
   [[
   ${$TM_SELECTED_TEXT} --  TM_SELECTED_TEXT The currently selected text or the empty string

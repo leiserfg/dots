@@ -627,7 +627,12 @@ for i = 1, 9 do
 		awful.key({ modkey }, "#" .. i + 9, function()
 			local screen = awful.screen.focused()
 			local tag = screen.tags[i]
-			if tag then
+      if not tag then return end
+
+      local current_tag = screen.selected_tag
+			if tag == current_tag then
+        awful.tag.history.restore(1)
+      else
 				tag:view_only()
 			end
 		end, {
