@@ -138,4 +138,5 @@ packages {
     keys = { "<Leader>oa", "<Leader>oc" },
     ft = { "org", "orgagenda" },
   },
+	 {'lewis6991/impatient.nvim', rocks = 'mpack'}
 }
