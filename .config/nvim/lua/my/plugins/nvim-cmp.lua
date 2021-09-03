@@ -8,6 +8,9 @@ cmp.setup {
       return vim_item
     end
   },
+  experimental = {
+    ghost_text = true
+  },
    snippet = {
         expand = function(args)
           require'luasnip'.lsp_expand(args.body)

@@ -1,5 +1,5 @@
 export EDITOR=nvim
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER='nvim +Man!'
 
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 # set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
