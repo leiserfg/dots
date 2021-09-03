@@ -122,9 +122,8 @@ packages {
   },
   { "Olical/conjure", ft = { "fennel", "clojure" } },
   {
-    "eraserhd/parinfer-rust",
+    "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
-    run = "cargo build --release",
   },
   {
     "eddyekofo94/gruvbox-flat.nvim",
