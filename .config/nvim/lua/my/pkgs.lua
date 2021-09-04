@@ -113,7 +113,7 @@ packages {
   { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1"},
   { "metakirby5/codi.vim", cmd = "Codi" },
   { "dhruvasagar/vim-table-mode", ft = { "markdown",  "org", "orgagenda" } },
-  { "hoob3rt/lualine.nvim", after = "gruvbox-flat.nvim" },
+  { "shadmansaleh/lualine.nvim", after = "gruvbox-flat.nvim" },
   "junegunn/fzf.vim",
   {
     "kyazdani42/nvim-tree.lua",
