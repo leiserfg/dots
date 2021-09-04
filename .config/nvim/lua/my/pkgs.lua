@@ -55,7 +55,7 @@ packages {
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
   "ryvnf/readline.vim",
-  { "b3nj5m1n/kommentary", keys = "gc" },
+  { "terrortylor/nvim-comment", keys = "gc", config="require('nvim_comment').setup()"},
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
   -- "vim-scripts/vis",
