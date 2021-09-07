@@ -1,5 +1,5 @@
 local function on_attach()
-   vim.cmd[[
+  vim.cmd[[
     nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <buffer> <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
     nnoremap <buffer> <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
@@ -8,6 +8,7 @@ local function on_attach()
     nnoremap <buffer> <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
     nnoremap <buffer> <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+    xnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.range_formatting()<CR>
     nnoremap <buffer> <silent> <Leader>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
     nnoremap <buffer> <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
     nnoremap <buffer> <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

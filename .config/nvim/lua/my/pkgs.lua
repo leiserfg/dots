@@ -30,13 +30,14 @@ local function extend_package(pkg)
   end
   local path = ("my.plugins/" .. (expkg[1]):gsub(".*/", ""):gsub("[.].*", ""))
   if not expkg.config and module_exists(path) then
-    expkg["config"] = (
-        "local k, v = pcall(require, '"
-        .. path
-        .. "') ; if not k and v:find('module') == nil then print('"
-        .. path
-        .. "',  v) end"
-      )
+    expkg["config"] = "require('" .. path .. "')"
+    -- (
+    --     "local k, v = pcall(require, '"
+    --     .. path
+    --     .. "') ; if not k and v:find('module') == nil then print('"
+    --     .. path
+    --     .. "',  v) end"
+    --   )
   end
   return expkg
 end
