@@ -80,7 +80,7 @@ packages {
   { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
   { "tpope/vim-dispatch", cmd = { "Dispatch", "Make", "Focus", "Start" } },
   { "lewis6991/gitsigns.nvim", event = "BufRead", requires = { "nvim-lua/plenary.nvim" } },
-  { "ray-x/lsp_signature.nvim", config = 'require"lsp_signature".setup()' },
+  { "ray-x/lsp_signature.nvim", config = 'require"lsp_signature".setup({floating_window=false})' },
   { "neovim/nvim-lspconfig", after = { "lsp_signature.nvim" } },
   {
     "simrat39/rust-tools.nvim",
