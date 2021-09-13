@@ -130,7 +130,6 @@ packages {
     "eddyekofo94/gruvbox-flat.nvim",
     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
   },
-  { "camspiers/snap", event = "VimEnter", rocks = { "fzy" } },
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   {
