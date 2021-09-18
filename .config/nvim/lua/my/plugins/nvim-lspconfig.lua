@@ -115,8 +115,8 @@ lspconfig.sumneko_lua.setup {
 }
 
 vim.cmd [[
-  sign define LspDiagnosticsSignError text=🩸 linehl= numhl=
-  sign define LspDiagnosticsSignWarning text=🔸 linehl= numhl=
-  sign define LspDiagnosticsSignInformation text=🔹 linehl= numhl=
-  sign define LspDiagnosticsSignHint text=👉 linehl= numhl=
+  sign define DiagnosticSignError text=🩸 linehl= numhl=
+  sign define DiagnosticSignWarning text=🔸 linehl= numhl=
+  sign define DiagnosticSignInformation text=🔹 linehl= numhl=
+  sign define DiagnosticSignHint text=👉 linehl= numhl=
 ]]
