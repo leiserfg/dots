@@ -1,7 +1,7 @@
 function update_blender
     set base https://builder.blender.org
-    # set download (curl -s $base/download/daily/ |pup '.linux:last-child > a attr{href}' |sed s/.sha256//)
-    set download (curl -s $base/download/experimental/ |pup '.linux > a[href*=cycles] attr{href}' |sed -e "s/.sha256//" -e "1d")
+    set download (curl -s $base/download/daily/ |pup '.linux:last-child > a attr{href}' |sed s/.sha256//)
+    # set download (curl -s $base/download/experimental/ |pup '.linux > a[href*=cycles] attr{href}' |sed -e "s/.sha256//" -e "1d")
     pushd ~/installed/
     set latest (basename -s .tar.xz $download)
     echo Latest is $latest
