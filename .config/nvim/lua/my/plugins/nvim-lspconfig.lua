@@ -79,7 +79,7 @@ lspconfig.sumneko_lua.setup {
     if vim.startswith(fname_abs, awesome_config_root) then
       return awesome_config_root
     end
-    return lspconfig.sumneko_lua.document_config.default_config.root_dir()
+    return lspconfig.sumneko_lua.document_config.default_config.root_dir(fname)
   end,
   on_new_config = function(new_config, root_dir)
     if root_dir == awesome_config_root then
