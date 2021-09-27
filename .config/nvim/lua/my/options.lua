@@ -89,3 +89,6 @@ au BufReadPost * silent! normal! g`"zv
 au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=150}
 augroup END
 ]]
+
+
+g.did_load_filetypes = 1
