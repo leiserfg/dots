@@ -115,7 +115,7 @@ packages {
   { "metakirby5/codi.vim", cmd = "Codi" },
   { "dhruvasagar/vim-table-mode", ft = { "markdown",  "org", "orgagenda" } },
   { "shadmansaleh/lualine.nvim", after = "gruvbox-flat.nvim" },
-  "junegunn/fzf.vim",
+  -- "junegunn/fzf.vim",
   {
     "kyazdani42/nvim-tree.lua",
     keys = "<leader>t",
@@ -126,6 +126,13 @@ packages {
     "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
   },
+ {
+   'nvim-telescope/telescope.nvim',
+   requires = {
+  'nvim-lua/plenary.nvim', 
+    'nvim-telescope/telescope-fzy-native.nvim' 
+   }
+ },
   {
     "eddyekofo94/gruvbox-flat.nvim",
     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
