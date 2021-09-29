@@ -4,7 +4,12 @@ local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
+  fn.system {
+    "git",
+    "clone",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  }
   cmd "packadd packer.nvim"
 end
 
@@ -56,7 +61,7 @@ packages {
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
   "ryvnf/readline.vim",
-  { "terrortylor/nvim-comment", keys = "gc", config="require('nvim_comment').setup()"},
+  { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
   -- "vim-scripts/vis",
@@ -79,8 +84,15 @@ packages {
   "machakann/vim-sandwich",
   { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
   { "tpope/vim-dispatch", cmd = { "Dispatch", "Make", "Focus", "Start" } },
-  { "lewis6991/gitsigns.nvim", event = "BufRead", requires = { "nvim-lua/plenary.nvim" } },
-  { "ray-x/lsp_signature.nvim", config = 'require"lsp_signature".setup({floating_window=false})' },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "BufRead",
+    requires = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = 'require"lsp_signature".setup({floating_window=false})',
+  },
   { "neovim/nvim-lspconfig", after = { "lsp_signature.nvim" } },
   {
     "simrat39/rust-tools.nvim",
@@ -98,22 +110,22 @@ packages {
   -- { "hrsh7th/nvim-compe", event = "InsertEnter", require = { "tami5/compe-conjure" } },
   {
     "hrsh7th/nvim-cmp",
-    requires={
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-emoji',
-      'onsails/lspkind-nvim',
-      'saadparwaiz1/cmp_luasnip',
-      'L3MON4D3/LuaSnip',
-    }
+    requires = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-emoji",
+      "onsails/lspkind-nvim",
+      "saadparwaiz1/cmp_luasnip",
+      "L3MON4D3/LuaSnip",
+    },
   },
 
-  { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1"},
+  { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1" },
   { "metakirby5/codi.vim", cmd = "Codi" },
-  { "dhruvasagar/vim-table-mode", ft = { "markdown",  "org", "orgagenda" } },
+  { "dhruvasagar/vim-table-mode", ft = { "markdown", "org", "orgagenda" } },
   { "shadmansaleh/lualine.nvim", after = "gruvbox-flat.nvim" },
   -- "junegunn/fzf.vim",
   {
@@ -126,13 +138,13 @@ packages {
     "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
   },
- {
-   'nvim-telescope/telescope.nvim',
-   requires = {
-  'nvim-lua/plenary.nvim', 
-    'nvim-telescope/telescope-fzy-native.nvim' 
-   }
- },
+  {
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim",
+    },
+  },
   {
     "eddyekofo94/gruvbox-flat.nvim",
     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
@@ -144,6 +156,6 @@ packages {
     keys = { "<Leader>oa", "<Leader>oc" },
     ft = { "org", "orgagenda" },
   },
-  'lewis6991/impatient.nvim',
-  'nathom/filetype.nvim'
+  "lewis6991/impatient.nvim",
+  "nathom/filetype.nvim",
 }

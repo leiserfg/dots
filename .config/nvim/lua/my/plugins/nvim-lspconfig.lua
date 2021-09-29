@@ -1,5 +1,5 @@
 local function on_attach()
-  vim.cmd[[
+  vim.cmd [[
     nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <buffer> <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
     nnoremap <buffer> <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
@@ -16,7 +16,6 @@ local function on_attach()
     ]]
 end
 
-
 -- Advertice cmp capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -29,53 +28,47 @@ capabilities.textDocument.completion.completionItem.commitCharactersSupport = tr
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
 
 local lspconfig = require "lspconfig"
 for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd" } do
-  lspconfig[lsp].setup {on_attach=on_attach, capabilities = capabilities}
+  lspconfig[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
 
-
-
-
 lspconfig.pylsp.setup {
-    on_attach=on_attach,
-    capabilities = capabilities,
-    on_init = function(client)
-      local venv = vim.env.VIRTUAL_ENV or ''
-      if venv:find('python-2', 1, true) then
-        client.config.settings.pylsp.plugins.jedi.extra_paths = {
-          ('%s/lib/python2.7/site-packages/'):format(venv)
-        }
-      end
-    client.notify("workspace/didChangeConfiguration")
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = function(client)
+    local venv = vim.env.VIRTUAL_ENV or ""
+    if venv:find("python-2", 1, true) then
+      client.config.settings.pylsp.plugins.jedi.extra_paths = {
+        ("%s/lib/python2.7/site-packages/"):format(venv),
+      }
+    end
+    client.notify "workspace/didChangeConfiguration"
     return true
   end,
 }
 
-
-
-
 --- LUA
 
-local runtime_path = vim.split(package.path, ';')
+local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-local aw_runtime = { '/usr/share/awesome/lib/' }
-local awesome_config_root = vim.env.HOME .. '/.config/awesome'
+local aw_runtime = { "/usr/share/awesome/lib/" }
+local awesome_config_root = vim.env.HOME .. "/.config/awesome"
 
 lspconfig.sumneko_lua.setup {
-  cmd = {"/usr/bin/lua-language-server"},
-  on_attach=on_attach,
+  cmd = { "/usr/bin/lua-language-server" },
+  on_attach = on_attach,
   capabilities = capabilities,
-  root_dir=function(fname)
-    local fname_abs = vim.api.nvim_call_function('fnamemodify', {fname, 'p'})
+  root_dir = function(fname)
+    local fname_abs = vim.api.nvim_call_function("fnamemodify", { fname, "p" })
     if vim.startswith(fname_abs, awesome_config_root) then
       return awesome_config_root
     end
@@ -84,23 +77,23 @@ lspconfig.sumneko_lua.setup {
   on_new_config = function(new_config, root_dir)
     if root_dir == awesome_config_root then
       new_config.settings.Lua = {
-        runtime={
-          version = 'Lua 5.3',
-          path=aw_runtime
+        runtime = {
+          version = "Lua 5.3",
+          path = aw_runtime,
         },
-      workspace = {},
-    }
+        workspace = {},
+      }
     end
     return new_config
   end,
   settings = {
     Lua = {
       runtime = {
-        version = 'LuaJIT',
+        version = "LuaJIT",
         path = runtime_path,
       },
       diagnostics = {
-        globals = {'vim', "client", "awesome", "root"},
+        globals = { "vim", "client", "awesome", "root" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files

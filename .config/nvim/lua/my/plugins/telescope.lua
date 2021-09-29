@@ -1,24 +1,25 @@
-local tele = require("telescope")
-local telepv = require( "telescope.previewers")
-local actions = require('telescope.actions')
+local tele = require "telescope"
+local telepv = require "telescope.previewers"
+local actions = require "telescope.actions"
 
 tele.setup {
-    extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-        }
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
     },
- grep_previewer = telepv.vim_buffer_vimgrep.new,
- defaults  = {
- mappings = {
-     i = {
-         ["<C-j>"] = actions.move_selection_next,
-         ["<C-k>"] = actions.move_selection_previous
-     },
-   }
- },
+  },
+  grep_previewer = telepv.vim_buffer_vimgrep.new,
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  },
 }
+
 tele.load_extension "fzy_native"
 
 vim.cmd [[

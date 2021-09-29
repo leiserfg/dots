@@ -2,7 +2,7 @@
 vim.cmd [[
 	au VimLeave * lua require'jit.p'.stop()
 ]]
-pcall(require, 'impatient')
+pcall(require, "impatient")
 
 require "my.options"
 require "my.mapping"

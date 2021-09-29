@@ -75,9 +75,8 @@ g.loaded_python3_provider = 0
 g.mapleader = " "
 g.maplocalleader = " "
 o.termguicolors = true
-g.loaded_zipPlugin= 1
-g.loaded_zip      = 1
-
+g.loaded_zipPlugin = 1
+g.loaded_zip = 1
 
 vim.cmd [[
 augroup vimrc
@@ -89,6 +88,5 @@ au BufReadPost * silent! normal! g`"zv
 au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=150}
 augroup END
 ]]
-
 
 g.did_load_filetypes = 1

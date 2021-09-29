@@ -1,20 +1,20 @@
 require "my/snippets"
 local ls = require "luasnip"
-local types = require("luasnip.util.types")
+local types = require "luasnip.util.types"
 
-ls.config.set_config { 
-  updateevents = "TextChanged,TextChangedI", 
+ls.config.set_config {
+  updateevents = "TextChanged,TextChangedI",
   store_selection_keys = "<c-j>",
   ext_opts = {
     [types.insertNode] = {
       passive = {
-        hl_group = "Substitute"
-      }
+        hl_group = "Substitute",
+      },
     },
     [types.choiceNode] = {
       active = {
-        virt_text = {{"choiceNode", "IncSearch"}}
-      }
+        virt_text = { { "choiceNode", "IncSearch" } },
+      },
     },
   },
 }
@@ -26,12 +26,3 @@ vim.cmd [[
   snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>
   snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>
 ]]
-
-
-
-
-
-
-
-
-

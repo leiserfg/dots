@@ -1,6 +1,6 @@
 local ls = require "luasnip"
-local parser = require "luasnip.util.parser".parser
-local l = require "luasnip.extras".l
+local parser = require("luasnip.util.parser").parser
+local l = require("luasnip.extras").l
 
 -- local _1 = require "luasnip.util.lambda"._1
 local s = ls.s
@@ -61,14 +61,16 @@ ls.snippets = {
     sf("uuid", _2_),
     sf("lorem(%d*)", _3_, true),
 
-    s({ trig = "tt", wordTrig = true }, { 
+    s({ trig = "tt", wordTrig = true }, {
       t { "╔" },
-      f(function() return "0" end, {}),
+      f(function()
+        return "0"
+      end, {}),
       t { "1", "2" },
       i(0),
     }),
 
-    s({ trig = "bbox"}, {
+    s({ trig = "bbox" }, {
       t { "╔" },
       f(replace_each "═", { 1 }),
       t { "╗", "║" },
@@ -88,8 +90,9 @@ ls.snippets = {
       t { "*" },
       i(0),
     }),
-    ls.parser.parse_snippet({trig='foo'},
-  [[
+    ls.parser.parse_snippet(
+      { trig = "foo" },
+      [[
   ${$TM_SELECTED_TEXT} --  TM_SELECTED_TEXT The currently selected text or the empty string
   ${$TM_CURRENT_LINE} --  TM_CURRENT_LINE The contents of the current line
   ${$TM_CURRENT_WORD} --  TM_CURRENT_WORD The contents of the word under cursor or the empty string
@@ -121,14 +124,14 @@ ls.snippets = {
   ${$BLOCK_COMMENT_START} --  BLOCK_COMMENT_START Example output: in PHP /* or in HTML <!--
   ${$BLOCK_COMMENT_END} --  BLOCK_COMMENT_END Example output: in PHP */ or in HTML -->
   ${$LINE_COMMENT} --  LINE_COMMENT Example output: in PHP //
-    ]]),
+    ]]
+    ),
     s({ trig = "csv", wordTrig = true }, {
       i(1, { "content" }),
-      t{"", "separator", ""} ,
+      t { "", "separator", "" },
       i(2, { "|" }),
-      t{"", ">>", ""} ,
-      l( l._1:gsub(",", l._2) or "adsf" , {1,2}),
-
+      t { "", ">>", "" },
+      l(l._1:gsub(",", l._2) or "adsf", { 1, 2 }),
     }),
   },
   direnv = {

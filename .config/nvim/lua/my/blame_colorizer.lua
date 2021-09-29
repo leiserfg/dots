@@ -64,7 +64,12 @@ local function create_highlight(hsi, mode)
       local fg_color = (((hsi.i >= 0.5) and "Black") or "White")
       vim.api.nvim_command(
         table.concat(
-          { "highlight", highlight_name, ("guifg=" .. fg_color), ("guibg=#" .. rgb_hex) },
+          {
+            "highlight",
+            highlight_name,
+            ("guifg=" .. fg_color),
+            ("guibg=#" .. rgb_hex),
+          },
           " "
         )
       )
