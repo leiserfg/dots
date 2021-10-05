@@ -138,12 +138,17 @@ packages {
     "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
   },
-  {
-    "nvim-telescope/telescope.nvim",
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope-fzy-native.nvim",
+  --   },
+  -- },
+  { 'ibhagwan/fzf-lua',
     requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-fzy-native.nvim",
-    },
+      'vijaymarupudi/nvim-fzf',
+      'kyazdani42/nvim-web-devicons' } -- optional for icons
   },
   {
     "eddyekofo94/gruvbox-flat.nvim",
