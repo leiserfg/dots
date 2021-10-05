@@ -162,5 +162,5 @@ packages {
     ft = { "org", "orgagenda" },
   },
   "lewis6991/impatient.nvim",
-  { "nathom/filetype.nvim", config='require"mappings".literal[".envrc"] = "direnv"' }
+  { "nathom/filetype.nvim", config='require"filetype".setup{literal = {[".envrc"] = "direnv"}}'}
 }
