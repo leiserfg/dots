@@ -37,9 +37,6 @@ cmp.setup {
     { name = "emoji" },
     { name = "nvim_lua" },
     { name = "luasnip" },
+    { name = 'orgmode' }
   },
 }
-
---[[ vim.cmd[[
-autocmd FileType lua lua require'cmp'.setup.buffer{sources = {{ name = 'nvim_lua' }}}
-]]

@@ -162,6 +162,8 @@ packages {
     keys = { "<Leader>oa", "<Leader>oc" },
     ft = { "org", "orgagenda" },
   },
+"tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
+  { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
   "lewis6991/impatient.nvim",
   { "nathom/filetype.nvim", config='require"filetype".setup{literal = {[".envrc"] = "direnv"}}'}
 }
