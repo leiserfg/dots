@@ -149,7 +149,8 @@ packages {
   { 'ibhagwan/fzf-lua',
     requires = {
       'vijaymarupudi/nvim-fzf',
-      'kyazdani42/nvim-web-devicons' } -- optional for icons
+      'kyazdani42/nvim-web-devicons'
+    }
   },
   {
     "eddyekofo94/gruvbox-flat.nvim",
@@ -159,8 +160,7 @@ packages {
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   {
     "kristijanhusak/orgmode.nvim",
-    keys = { "<Leader>oa", "<Leader>oc" },
-    ft = { "org", "orgagenda" },
+    config="require'orgmode'.setup{}"
   },
 "tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
   { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
