@@ -1,5 +1,5 @@
-o = vim.opt
-g = vim.g
+local o = vim.opt
+local g = vim.g
 
 o.number = true
 o.relativenumber = true
