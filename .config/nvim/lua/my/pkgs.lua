@@ -60,8 +60,8 @@ packages {
   { "Olical/aniseed", ft = "fennel" },
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
-  "ryvnf/readline.vim",
-  -- { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
+   "ryvnf/readline.vim",
+   -- { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
   { "numToStr/Comment.nvim", keys = "gc", config = "require('Comment').setup()" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
@@ -79,7 +79,7 @@ packages {
   { "tpope/vim-fugitive", cmd = { "G" }, event = "BufRead" },
   { "tpope/vim-rhubarb", after = "vim-fugitive" },
   "tpope/vim-eunuch",
-  { "sheerun/vim-polyglot", event = "VimEnter" },
+  -- { "sheerun/vim-polyglot", event = "VimEnter" },
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",
@@ -146,24 +146,25 @@ packages {
   --     "nvim-telescope/telescope-fzy-native.nvim",
   --   },
   -- },
-  { 'ibhagwan/fzf-lua',
-    requires = {
-      'vijaymarupudi/nvim-fzf',
-      'kyazdani42/nvim-web-devicons'
-    }
-  },
-  {
-    "eddyekofo94/gruvbox-flat.nvim",
-    config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
-  },
-  { "nanotee/zoxide.vim", cmd = "Z" },
-  { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
-  {
-    "kristijanhusak/orgmode.nvim",
-    config="require'orgmode'.setup{}"
-  },
-"tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
-  { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
-  "lewis6991/impatient.nvim",
-  { "nathom/filetype.nvim", config='require"filetype".setup{literal = {[".envrc"] = "direnv"}}'}
+
+   { 'ibhagwan/fzf-lua',
+     requires = {
+       'vijaymarupudi/nvim-fzf',
+       'kyazdani42/nvim-web-devicons' } -- optional for icons
+   },
+   {
+     "eddyekofo94/gruvbox-flat.nvim",
+     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
+   },
+   { "nanotee/zoxide.vim", cmd = "Z" },
+   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
+   {
+     "kristijanhusak/orgmode.nvim",
+     keys = { "<Leader>oa", "<Leader>oc" },
+     ft = { "org", "orgagenda" },
+   },
+ "tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
+   { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
+   "lewis6991/impatient.nvim",
+   { "nathom/filetype.nvim", config='require"filetype".setup{literal = {[".envrc"] = "direnv"}}'}
 }
