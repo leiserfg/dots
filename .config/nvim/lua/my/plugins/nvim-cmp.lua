@@ -10,6 +10,7 @@ cmp.setup {
   },
   experimental = {
     ghost_text = true,
+    native_menu = false,
   },
   snippet = {
     expand = function(args)
@@ -29,10 +30,9 @@ cmp.setup {
     },
   },
   sources = {
-    { name = "buffer" },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
-    { name = "nvim_lsp" },
     { name = "calc" },
     { name = "emoji" },
     { name = "nvim_lua" },
