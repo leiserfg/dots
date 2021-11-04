@@ -167,4 +167,11 @@ packages {
  "tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
    { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
    "lewis6991/impatient.nvim",
-   { "nathom/filetype.nvim", config='require"filetype".setup { overrides={literal = {[".envrc"] = "direnv"}}}'} }
+   { "nathom/filetype.nvim", config=[[
+    require"filetype".setup { overrides={ 
+        literal = {[".envrc"] = "direnv"},
+        extensions = {tf="terraform"}
+    }} 
+
+    ]]
+} }
