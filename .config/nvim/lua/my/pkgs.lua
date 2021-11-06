@@ -80,6 +80,7 @@ packages {
   { "tpope/vim-rhubarb", after = "vim-fugitive" },
   "tpope/vim-eunuch",
   -- { "sheerun/vim-polyglot", event = "VimEnter" },
+  {"Vimjas/vim-python-pep8-indent", ft='python'},
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",

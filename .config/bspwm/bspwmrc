@@ -45,6 +45,7 @@ run_once xsettingsd
 
 xset -b
 pkill -9 picom; picom -b
+
 nitrogen --restore
 
 export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
