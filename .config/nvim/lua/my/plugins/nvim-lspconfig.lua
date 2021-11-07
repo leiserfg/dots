@@ -17,7 +17,9 @@ local function on_attach()
 end
 
 -- Advertice cmp capabilities
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 local lspconfig = require "lspconfig"
 for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls" } do

@@ -135,7 +135,11 @@ ls.snippets = {
     }),
   },
   direnv = {
-    s({ trig = "lay", wordTrig = true }, { t { "layout " }, i(1, { "python" }), i(0) }),
+    s({ trig = "lay", wordTrig = true }, {
+      t { "layout " },
+      i(1, { "python" }),
+      i(0),
+    }),
   },
 }
 require("luasnip/loaders/from_vscode").lazy_load()

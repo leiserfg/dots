@@ -37,6 +37,6 @@ cmp.setup {
     { name = "emoji" },
     { name = "nvim_lua" },
     { name = "luasnip" },
-    { name = 'orgmode' }
+    { name = "orgmode" },
   },
 }

@@ -60,8 +60,8 @@ packages {
   { "Olical/aniseed", ft = "fennel" },
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
-   "ryvnf/readline.vim",
-   -- { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
+  "ryvnf/readline.vim",
+  -- { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
   { "numToStr/Comment.nvim", keys = "gc", config = "require('Comment').setup()" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
@@ -75,12 +75,12 @@ packages {
     },
   },
   { "Olical/vim-enmasse", cmd = "EnMasse" },
-  "junegunn/vim-peekaboo",
+  -- "junegunn/vim-peekaboo",
   { "tpope/vim-fugitive", cmd = { "G" }, event = "BufRead" },
   { "tpope/vim-rhubarb", after = "vim-fugitive" },
   "tpope/vim-eunuch",
   -- { "sheerun/vim-polyglot", event = "VimEnter" },
-  {"Vimjas/vim-python-pep8-indent", ft='python'},
+  { "Vimjas/vim-python-pep8-indent", ft = "python" },
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",
@@ -107,9 +107,9 @@ packages {
       "nvim-treesitter/playground",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    run = ":TSUpdate",
   },
   { "L3MON4D3/LuaSnip", requires = { "rafamadriz/friendly-snippets" } },
-  -- { "hrsh7th/nvim-compe", event = "InsertEnter", require = { "tami5/compe-conjure" } },
   {
     "hrsh7th/nvim-cmp",
     requires = {
@@ -129,7 +129,6 @@ packages {
   { "metakirby5/codi.vim", cmd = "Codi" },
   { "dhruvasagar/vim-table-mode", ft = { "markdown", "org", "orgagenda" } },
   { "nvim-lualine/lualine.nvim", after = "gruvbox-flat.nvim" },
-  -- "junegunn/fzf.vim",
   {
     "kyazdani42/nvim-tree.lua",
     keys = "<leader>t",
@@ -140,39 +139,39 @@ packages {
     "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
   },
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   requires = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope-fzy-native.nvim",
-  --   },
-  -- },
 
-   { 'ibhagwan/fzf-lua',
-     requires = {
-       'vijaymarupudi/nvim-fzf',
-       'kyazdani42/nvim-web-devicons' } -- optional for icons
-   },
-   {
-     "eddyekofo94/gruvbox-flat.nvim",
-     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
-   },
-   { "nanotee/zoxide.vim", cmd = "Z" },
-   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
-   {
-     "kristijanhusak/orgmode.nvim",
-     keys = { "<Leader>oa", "<Leader>oc" },
-     ft = { "org", "orgagenda" },
-   },
-   { "folke/which-key.nvim", config="require('which-key').setup{}" },
- "tpope/vim-dadbod", 'kristijanhusak/vim-dadbod-completion',
-   { "kristijanhusak/vim-dadbod-ui", setup="vim.g.db_ui_env_variable_url = 'DATABASE_URL'" },
-   "lewis6991/impatient.nvim",
+  {
+    "ibhagwan/fzf-lua",
+    requires = {
+      "vijaymarupudi/nvim-fzf",
+      "kyazdani42/nvim-web-devicons",
+    }, -- optional for icons
+  },
+  {
+    "eddyekofo94/gruvbox-flat.nvim",
+    config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
+  },
+  { "nanotee/zoxide.vim", cmd = "Z" },
+  { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
+  {
+    "kristijanhusak/orgmode.nvim",
+    keys = { "<Leader>oa", "<Leader>oc" },
+    ft = { "org", "orgagenda" },
+  },
+  { "folke/which-key.nvim", config = "require('which-key').setup{}" },
+  "tpope/vim-dadbod",
+  "kristijanhusak/vim-dadbod-completion",
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    setup = "vim.g.db_ui_env_variable_url = 'DATABASE_URL'",
+    cmd = "DBUI",
+  },
+  "lewis6991/impatient.nvim",
    { "nathom/filetype.nvim", config=[[
     require"filetype".setup { overrides={ 
         literal = {[".envrc"] = "direnv"},
         extensions = {tf="terraform"}
     }} 
 
-    ]]
-} }
+    ]]}
+}
