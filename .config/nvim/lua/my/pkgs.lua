@@ -36,13 +36,6 @@ local function extend_package(pkg)
   local path = ("my.plugins/" .. (expkg[1]):gsub(".*/", ""):gsub("[.].*", ""))
   if not expkg.config and module_exists(path) then
     expkg["config"] = "require('" .. path .. "')"
-    -- (
-    --     "local k, v = pcall(require, '"
-    --     .. path
-    --     .. "') ; if not k and v:find('module') == nil then print('"
-    --     .. path
-    --     .. "',  v) end"
-    --   )
   end
   return expkg
 end
@@ -61,11 +54,9 @@ packages {
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
   "ryvnf/readline.vim",
-  -- { "terrortylor/nvim-comment", keys = "gc", config = "require('nvim_comment').setup()" },
   { "numToStr/Comment.nvim", keys = "gc", config = "require('Comment').setup()" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
-  -- "vim-scripts/vis",
   "tpope/vim-repeat",
   {
     "AndrewRadev/switch.vim",
@@ -75,17 +66,14 @@ packages {
     },
   },
   { "Olical/vim-enmasse", cmd = "EnMasse" },
-  -- "junegunn/vim-peekaboo",
   { "tpope/vim-fugitive", cmd = { "G" }, event = "BufRead" },
   { "tpope/vim-rhubarb", after = "vim-fugitive" },
   "tpope/vim-eunuch",
-  -- { "sheerun/vim-polyglot", event = "VimEnter" },
   { "Vimjas/vim-python-pep8-indent", ft = "python" },
   { "norcalli/nvim-colorizer.lua", config = "require'colorizer'.setup()" },
   "direnv/direnv.vim",
   "machakann/vim-sandwich",
   { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
-  { "tpope/vim-dispatch", cmd = { "Dispatch", "Make", "Focus", "Start" } },
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
@@ -139,7 +127,6 @@ packages {
     "gpanders/nvim-parinfer",
     ft = { "fennel", "janet", "clojure" },
   },
-
   {
     "ibhagwan/fzf-lua",
     requires = {
