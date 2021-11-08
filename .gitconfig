@@ -71,6 +71,7 @@
 	fgrep           = !sh -c 'FILES=`git grep -l -A 0 -B 0 $1 $2 | fzf -x -m` &&  $EDITOR `echo ${FILES} | cut -d':' -f1 | xargs`' -
 	fedlog          = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && nvim ${FILES}
         freset          = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
+	pr = !gh pr
 
 [push]
 	default         = current

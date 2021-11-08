@@ -140,11 +140,7 @@ packages {
   },
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
-  {
-    "kristijanhusak/orgmode.nvim",
-    keys = { "<Leader>oa", "<Leader>oc" },
-    ft = { "org", "orgagenda" },
-  },
+  "kristijanhusak/orgmode.nvim",
   { "folke/which-key.nvim", config = "require('which-key').setup{}" },
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",
