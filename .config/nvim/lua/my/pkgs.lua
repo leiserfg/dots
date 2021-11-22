@@ -76,7 +76,7 @@ packages {
   { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufRead",
+    event = "VimEnter",
     requires = { "nvim-lua/plenary.nvim" },
   },
   {
