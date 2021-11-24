@@ -53,7 +53,7 @@ pkill -9 polybar
 run_disowned polybar top
 
 xset s 300 600
-run_once light-locker
+run_once light-locker --lock-on-lid
 # run_once xss-lock -- 'pidof i3lock-fancy-rapid || i3lock-fancy-rapid 5 pixel'
 run_once /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run_once nm-applet
