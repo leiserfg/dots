@@ -4,7 +4,7 @@ export MANPAGER='nvim +Man!'
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 # set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
 set PATH $HOME/.local/bin $PATH
-
+set PATH $HOME/.nimble/bin $PATH
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
