@@ -150,7 +150,7 @@ packages {
     cmd = "DBUI",
   },
   "lewis6991/impatient.nvim",
-   { "leiserfg/filetype.nvim", config=[[
+   { "nathom/filetype.nvim", config=[[
     require"filetype".setup { overrides={ 
         literal = {[".envrc"] = "direnv"},
         extensions = {tf="terraform"}
