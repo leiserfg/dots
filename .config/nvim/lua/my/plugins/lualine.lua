@@ -5,6 +5,7 @@ return ll.setup {
     extensions = { "quickfix" },
     icons_enabled = false,
     section_separators = "",
-    theme = "gruvbox-flat",
+    -- theme = "gruvbox-flat",
+    theme = "kanagawa",
   },
 }
