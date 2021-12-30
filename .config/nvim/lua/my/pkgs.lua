@@ -141,6 +141,13 @@ packages {
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   "kristijanhusak/orgmode.nvim",
+  {
+    "akinsho/org-bullets.nvim",
+    config = [[
+  require("org-bullets").setup {
+    symbols = { "◉", "○", "✸", "✿" }
+  }]],
+  },
   { "folke/which-key.nvim", config = "require('which-key').setup{}" },
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",
@@ -150,11 +157,14 @@ packages {
     cmd = "DBUI",
   },
   "lewis6991/impatient.nvim",
-   { "nathom/filetype.nvim", config=[[
+  {
+    "nathom/filetype.nvim",
+    config = [[
     require"filetype".setup { overrides={ 
         literal = {[".envrc"] = "direnv"},
         extensions = {tf="terraform"}
     }} 
 
-    ]]}
+    ]],
+  },
 }
