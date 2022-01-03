@@ -116,7 +116,7 @@ packages {
   { "lambdalisue/suda.vim", config = "vim.g.suda_smart_edit=1" },
   { "metakirby5/codi.vim", cmd = "Codi" },
   { "dhruvasagar/vim-table-mode", ft = { "markdown", "org", "orgagenda" } },
-  { "nvim-lualine/lualine.nvim", after = "kanagawa.nvim" },
+  { "nvim-lualine/lualine.nvim", after = "gruvbox-flat.nvim" },
   {
     "kyazdani42/nvim-tree.lua",
     keys = "<leader>t",
@@ -134,11 +134,10 @@ packages {
       "kyazdani42/nvim-web-devicons",
     }, -- optional for icons
   },
-  -- {
-  --   "eddyekofo94/gruvbox-flat.nvim",
-  --   config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
-  -- },
-  { "rebelot/kanagawa.nvim", config='vim.cmd("colorscheme kanagawa")' },
+  {
+    "eddyekofo94/gruvbox-flat.nvim",
+    config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
+  },
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
   "kristijanhusak/orgmode.nvim",
