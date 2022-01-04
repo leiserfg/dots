@@ -148,7 +148,7 @@ packages {
     symbols = { "◉", "○", "✸", "✿" }
   }]],
   },
-  { "folke/which-key.nvim", config = "require('which-key').setup{}" },
+  -- { "folke/which-key.nvim", config = "require('which-key').setup{}" },
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",
   {
