@@ -11,7 +11,7 @@ parser_config.org = {
 }
 
 ts.setup {
-  ensure_installed = "all",
+  ensure_installed = "maintained",
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = { "org" }, -- Enable conceal

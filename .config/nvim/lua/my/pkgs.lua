@@ -161,7 +161,9 @@ packages {
     "nathom/filetype.nvim",
     config = [[
     require"filetype".setup { overrides={ 
-        literal = {[".envrc"] = "direnv"},
+        literal = {[".envrc"] = "direnv",
+Jenkinsfile="groovy"
+    },
         extensions = {tf="terraform"}
     }} 
 

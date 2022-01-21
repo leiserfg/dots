@@ -1,7 +1,8 @@
---[[ require("jit.p").start("10,i1,s,m0,G", "/tmp/output.log")
-vim.cmd [[
-	au VimLeave * lua require'jit.p'.stop()
-]]
+-- require("jit.p").start("10,i1,s,m0,G", "/tmp/output.log")
+-- vim.cmd [[
+-- 	au VimLeave * lua require'jit.p'.stop()
+-- ]]
+
 pcall(require, "impatient")
 
 require "my.options"
