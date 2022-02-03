@@ -12,7 +12,7 @@ case $question in
         systemctl suspend
         ;;
     **)
-        bspc quit
+        bspc quit || qtile cmd-obj -o cmd -f shutdown
         ;;
     **)
         systemctl reboot
