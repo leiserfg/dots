@@ -12,7 +12,8 @@ case $question in
         systemctl suspend
         ;;
     **)
-        bspc quit || qtile cmd-obj -o cmd -f shutdown
+        # bspc quit || qtile cmd-obj -o cmd -f shutdown
+        loginctl terminate-session $XDG_SESSION_ID
         ;;
     **)
         systemctl reboot
