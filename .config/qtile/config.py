@@ -1,15 +1,21 @@
-from libqtile import bar, layout, widget
+import os
+import signal
+import subprocess
+
+from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile import hook
-import os
-import subprocess
-
 
 mod = "mod4"
-
 terminal = guess_terminal()
+
+
+@lazy.function
+def kill_app(qtile):
+    pid = qtile.current_window.get_pid()
+    os.kill(pid, signal.SIGTERM)
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -48,9 +54,11 @@ keys = [
     # Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
     #     desc="Toggle between split and unsplit sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
     # Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "q", kill_app, desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Togle fullscreen"),
     # Globals
     Key([mod], "r", lazy.restart(), desc="Reload the config"),
@@ -143,7 +151,6 @@ screens = [
                 ),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.Notify(),
             ],
             24,
         ),
