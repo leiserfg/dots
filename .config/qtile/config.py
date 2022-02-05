@@ -57,6 +57,17 @@ keys = [
     Key([mod], "0", lazy.spawn("rofi_power"), desc="Power management"),
     Key(
         [mod],
+        "g",
+        lazy.spawn(
+            """
+        sh -c "lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i|
+        cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__"
+    """
+        ),
+        desc="Games List",
+    ),
+    Key(
+        [mod],
         "d",
         lazy.spawn(
             "rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons"
@@ -68,7 +79,9 @@ keys = [
     #     desc="Spawn a command using a prompt widget"),
 ]
 groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
-groups = [Group(i) for i in groups_names]
+groups_rules = {1: [Match(wm_class="Firefox")], 4: [Match(wm_class="TelegramDesktop")]}
+
+groups = [Group(n, matches=groups_rules.get(i + 1)) for i, n in enumerate(groups_names)]
 
 for i, g in enumerate(groups):
     key = str(i + 1)
@@ -108,7 +121,12 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(hide_unused=True, rounded=False, this_current_screen_border="AAAACC"),
+                widget.GroupBox(
+                    hide_unused=True,
+                    highlight_method="line",
+                    rounded=False,
+                    this_current_screen_border="AAAACC",
+                ),
                 widget.Prompt(),
                 widget.Spacer(),
                 widget.WindowName(width=bar.CALCULATED),
@@ -119,12 +137,13 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+                # widget.Net(prefix='M'),
                 widget.PulseVolume(
-                    emoji=True,
-                    mouse_callbacks={ "Button3": lazy.spawn("pavucontrol") }
+                    emoji=True, mouse_callbacks={"Button3": lazy.spawn("pavucontrol")}
                 ),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Notify(),
             ],
             24,
         ),
@@ -181,4 +200,3 @@ startup_script = os.path.expanduser("~/.config/qtile/autostart.sh")
 @hook.subscribe.startup
 def autostart():
     subprocess.run([startup_script])
-
