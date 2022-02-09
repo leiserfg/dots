@@ -134,6 +134,14 @@ packages {
       "kyazdani42/nvim-web-devicons",
     }, -- optional for icons
   },
+  --
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope-fzy-native.nvim",
+  --   },
+  -- },
   {
     "eddyekofo94/gruvbox-flat.nvim",
     config = "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')",
