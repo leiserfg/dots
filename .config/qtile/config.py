@@ -113,7 +113,10 @@ for i, g in enumerate(groups):
     )
 
 
-layout_config = dict(single_border_width=0, border_focus="#AAAACC", margin=2)
+layout_config = dict(
+    single_border_width=0, single_margin=0, border_focus="#AAAACC", margin=2
+)
+
 layouts = [
     layout.MonadTall(**layout_config),
 ]
