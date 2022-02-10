@@ -5,8 +5,9 @@ fzf.setup {
 fzf.register_ui_select()
 
 vim.cmd [[
-  nnoremap <leader>/ <cmd>lua require('fzf-lua').grep()<CR>
+  nnoremap <leader>/ <cmd>lua require('fzf-lua').grep({no_esc=true})<CR>
   nnoremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
+  nnoremap <leader>fr <cmd>lua require('fzf-lua').registers()<CR>
   nnoremap <leader>fb <cmd>lua require('fzf-lua').buffers()<CR>
   nnoremap <leader>fh <cmd>lua require('fzf-lua').help_tags()<CR>
   nnoremap <leader>fz <cmd>lua require('fzf-lua').builtin()<CR>

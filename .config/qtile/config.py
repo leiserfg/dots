@@ -140,7 +140,7 @@ screens = [
                 ),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.WindowName(width=bar.CALCULATED),
+                widget.WindowName(width=bar.CALCULATED, max_chars=60),
                 widget.Spacer(),
                 widget.Chord(
                     chords_colors={
