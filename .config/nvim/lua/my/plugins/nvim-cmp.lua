@@ -8,9 +8,11 @@ cmp.setup {
       return vim_item
     end,
   },
+  view = {
+    entries = 'native'
+  },
   experimental = {
     ghost_text = true,
-    native_menu = false,
   },
   snippet = {
     expand = function(args)
