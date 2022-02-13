@@ -25,4 +25,7 @@ vim.cmd [[
   imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice': '<c-e>'
   snoremap <silent> <c-j> <cmd>lua require'luasnip'.jump(1)<Cr>
   snoremap <silent> <c-k> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+  vnoremap <c-f>  "ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>
+  inoremap <c-f>  <cmd>lua require('luasnip.extras.otf').on_the_fly('e')<cr>
 ]]

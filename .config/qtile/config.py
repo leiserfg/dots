@@ -160,7 +160,6 @@ screens = [
     ),
 ]
 
-# Drag floating layouts.
 mouse = [
     Drag(
         [mod],
@@ -175,10 +174,11 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
+dgroups_app_rules = []
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
+# Drag floating layouts.
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -187,6 +187,7 @@ floating_layout = layout.Floating(
         Match(title="PureRef"),
         Match(title="MEGAsync"),
         Match(title="gmic_qt"),
+        Match(wm_class="vokoscreenNG"),
         # Match(wm_class='ssh-askpass'),  # ssh-askpass
         # Match(title='branchdialog'),  # gitk
         # Match(title='pinentry'),  # GPG key password entry
