@@ -53,7 +53,12 @@ keys = [
     # multiple stack panes
     # Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
     #     desc="Toggle between split and unsplit sides of stack"),
-    Key([mod], "Return", lazy.spawn(f"sh -c 'cd $(xcwd);exec {terminal}'"), desc="Launch terminal"),
+    Key(
+        [mod],
+        "Return",
+        lazy.spawn(f"sh -c 'cd $(xcwd);exec {terminal}'"),
+        desc="Launch terminal",
+    ),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
     # Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -87,7 +92,10 @@ keys = [
     #     desc="Spawn a command using a prompt widget"),
 ]
 groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
-groups_rules = {1: [Match(wm_class="Firefox")], 4: [Match(wm_class="TelegramDesktop")]}
+groups_rules = {
+    1: [Match(wm_class="Navigator")],
+    4: [Match(wm_class="TelegramDesktop")],
+}
 
 groups = [Group(n, matches=groups_rules.get(i + 1)) for i, n in enumerate(groups_names)]
 
