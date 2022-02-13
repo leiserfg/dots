@@ -53,7 +53,7 @@ keys = [
     # multiple stack panes
     # Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
     #     desc="Toggle between split and unsplit sides of stack"),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(f"sh -c 'cd $(xcwd);exec {terminal}'"), desc="Launch terminal"),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
     # Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
