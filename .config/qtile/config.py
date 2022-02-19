@@ -158,7 +158,8 @@ screens = [
                 ),
                 # widget.Net(prefix='M'),
                 widget.PulseVolume(
-                    emoji=True, mouse_callbacks={"Button3": lazy.spawn("pavucontrol")}
+                    update_interval=0.2,
+                    volume_app="pavucontrol",
                 ),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
