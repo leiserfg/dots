@@ -22,9 +22,12 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(
 )
 
 local lspconfig = require "lspconfig"
-for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls" } do
+
+for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls"} do
   lspconfig[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
+
+lspconfig.elixirls.setup { on_attach = on_attach, capabilities = capabilities, cmd={'elixir-ls' }}
 
 lspconfig.pylsp.setup {
   on_attach = on_attach,

@@ -53,7 +53,6 @@ packages {
   { "Olical/aniseed", ft = "fennel" },
   "wbthomason/packer.nvim",
   { "tpope/vim-unimpaired", event = "BufRead" },
-  "ryvnf/readline.vim",
   { "numToStr/Comment.nvim", keys = "gc", config = "require('Comment').setup()" },
   { "junegunn/vim-easy-align", keys = "ga" },
   { "vim-scripts/ReplaceWithRegister", keys = "gr" },
