@@ -2,15 +2,12 @@ local cmp = require "cmp"
 local lspkind = require "lspkind"
 
 cmp.setup {
-  formatting = {
-    format = function(_, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind]
-      return vim_item
-    end,
-  },
-  view = {
-    entries = 'native'
-  },
+    formatting = {
+        format = lspkind.cmp_format()
+    },
+  -- view = {
+  --   entries = 'native'
+  -- },
   experimental = {
     ghost_text = true,
   },
@@ -42,3 +39,11 @@ cmp.setup {
     { name = "orgmode" },
   },
 }
+
+cmp.setup.cmdline(':', {
+    sources = {
+        { name = 'cmdline' },
+        { name = 'path' }
+    },
+    view = { entries = {name = 'wildmenu',  separator = '|' }}
+})
