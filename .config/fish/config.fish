@@ -1,6 +1,7 @@
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 
+set -U FZF_LEGACY_KEYBINDINGS 0
 export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 # set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
 set PATH $HOME/.local/bin $PATH
