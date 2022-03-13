@@ -60,3 +60,4 @@ set -g __fish_git_prompt_color_cleanstate green
 
 export DOCKER_BUILDKIT=1
 zoxide init fish | source
+bass source  $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
