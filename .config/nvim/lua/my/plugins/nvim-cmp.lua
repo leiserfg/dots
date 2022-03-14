@@ -39,11 +39,3 @@ cmp.setup {
     { name = "orgmode" },
   },
 }
-
-cmp.setup.cmdline(':', {
-    sources = {
-        { name = 'cmdline' },
-        { name = 'path' }
-    },
-    view = { entries = {name = 'wildmenu',  separator = '|' }}
-})
