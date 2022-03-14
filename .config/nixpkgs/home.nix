@@ -18,23 +18,11 @@
   # changes in each release.
   home.stateVersion = "22.05";
 
-  home.sessionVariables = with pkgs; let
-        mesa-drivers = [ mesa.drivers ]
-          ++ lib.optional true pkgsi686Linux.mesa.drivers;
-        intel-driver = [ intel-media-driver vaapiIntel ]
-          # Note: intel-media-driver is disabled for i686 until https://github.com/NixOS/nixpkgs/issues/140471 is fixed
-          ++ [driversi686Linux.vaapiIntel ];
-        libvdpau = [ libvdpau-va-gl  pkgsi686Linux.libvdpau-va-gl];
-        glxindirect = runCommand "mesa_glxindirect" { } (''
-          mkdir -p $out/lib
-          ln -s ${mesa.drivers}/lib/libGLX_mesa.so.0 $out/lib/libGLX_indirect.so.0
-        '');
-      in {
-       # VK_ICD_FILENAMES="${nvidiaLibsOnly}/share/vulkan/icd.d/nvidia_icd.x86_64.json"
-      LD_LIBRARY_PATH="${lib.makeLibraryPath mesa-drivers}:${lib.makeSearchPathOutput "lib" "lib/vdpau" libvdpau}:${glxindirect}/lib:${lib.makeLibraryPath [libglvnd]}";
-      LIBGL_DRIVERS_PATH="${lib.makeSearchPathOutput "lib" "lib/dri" mesa-drivers}";
-      LIBVA_DRIVERS_PATH="${lib.makeSearchPathOutput "out" "lib/dri" intel-driver}";
-};
+  home.sessionVariables = let
+  hardware = pkgs.callPackage ./hardware.nix {};
+  in
+    if hardware.productName == "MS-7A38" then  hardware.nvidiaVars else hardware.intelVars;
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
       (import (
@@ -47,6 +35,15 @@
     neovim-nightly
     pcmanfm
     krita
+    (writeScriptBin "vim" ''
+     exec ${ neovim-nightly }/bin/nvim "$@"
+     '')
+    (writeScriptBin "vi" ''
+     exec ${ neovim-nightly }/bin/nvim "$@"
+     '')
+    (writeScriptBin "vimdiff" ''
+     exec ${ neovim-nightly }/bin/nvim -d "$@"
+     '')
  ];
 
   # Let Home Manager install and manage itself.
