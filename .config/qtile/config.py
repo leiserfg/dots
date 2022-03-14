@@ -157,6 +157,9 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 # widget.Net(prefix='M'),
+                widget.Battery(
+                    format='{char} {percent:2.0%}'
+                ),
                 widget.PulseVolume(
                     update_interval=0.2,
                     volume_app="pavucontrol",
