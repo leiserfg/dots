@@ -37,6 +37,7 @@ let
     neovim-nightly
     pcmanfm
     krita
+    poetry
  ]
  ++ pkgs.lib.optionals  hasNvidia [blender_3_1];
 
