@@ -48,6 +48,9 @@ let
       enable = true;
       scripts = [pkgs.mpvScripts.mpris];
   };
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
  gtk = {
      enable = true;
      iconTheme = {
