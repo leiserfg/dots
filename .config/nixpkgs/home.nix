@@ -1,4 +1,8 @@
 { config, pkgs, ... }:
+let
+  hardware = pkgs.callPackage ./hardware.nix {};
+  hasNvidia = hardware.productName == "MS-7A38";
+ in
 {
   targets.genericLinux.enable = true;  # I don't use NixOS nor MacOS
   # Home Manager needs a bit of information about you and the
@@ -20,14 +24,12 @@
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
     }))
+
     (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlay
-  ];
+    ];
 
 
-  home.sessionVariables = let
-  hardware = pkgs.callPackage ./hardware.nix {};
-  in
-    if hardware.productName == "MS-7A38" then  hardware.nvidiaVars else hardware.intelVars;
+  home.sessionVariables = if hasNvidia then  hardware.nvidiaVars else hardware.intelVars;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -35,8 +37,8 @@
     neovim-nightly
     pcmanfm
     krita
-    blender_3_1
- ];
+ ]
+ ++ pkgs.lib.optionals  hasNvidia [blender_3_1];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
