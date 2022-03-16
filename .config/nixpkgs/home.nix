@@ -9,15 +9,6 @@ let
   # paths it should manage.
   home.username = "leiserfg";
   home.homeDirectory = "/home/leiserfg";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "22.05";
 
  nixpkgs.overlays = [
@@ -35,10 +26,10 @@ let
     pcmanfm
     krita
     poetry
- ] 
- # ++ builtins.map pkgs.callPackage [
- #    ./packages/glslviwer.nix
- # ]
+ ]
+ ++ builtins.map (x: pkgs.callPackage x {}) [
+    ./packages/glslviwer.nix
+ ]
  ++ pkgs.lib.optionals  hasNvidia [blender_3_1 lutris-unwrapped];
 
   # Let Home Manager install and manage itself.

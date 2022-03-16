@@ -1,5 +1,5 @@
 {
-    stdenv, cmake, ninja, lib,
+    stdenv, cmake, ninja, lib, fetchFromGitHub,
     libX11, libXrandr, libXinerama, libXcursor, libXi, libXext, libGLU, ffmpeg
 }:
 
