@@ -21,11 +21,8 @@ let
   home.stateVersion = "22.05";
 
  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-
     (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlay
+    (builtins.getFlake github:nix-community/neovim-nightly-overlay).overlay
     ];
 
 
@@ -38,8 +35,11 @@ let
     pcmanfm
     krita
     poetry
- ]
- ++ pkgs.lib.optionals  hasNvidia [blender_3_1];
+ ] 
+ # ++ builtins.map pkgs.callPackage [
+ #    ./packages/glslviwer.nix
+ # ]
+ ++ pkgs.lib.optionals  hasNvidia [blender_3_1 lutris-unwrapped];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

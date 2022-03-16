@@ -1,5 +1,6 @@
 local ls = require "luasnip"
 local l = require("luasnip.extras").l
+local fmt = require("luasnip.extras.fmt").fmt
 
 -- local _1 = require "luasnip.util.lambda"._1
 local s = ls.s
@@ -68,7 +69,6 @@ ls.snippets = {
       t { "1", "2" },
       i(0),
     }),
-
     s({ trig = "bbox" }, {
       t { "╔" },
       f(replace_each "═", { 1 }),
