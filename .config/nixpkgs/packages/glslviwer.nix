@@ -26,6 +26,5 @@ stdenv.mkDerivation rec {
       homepage = "http://patriciogonzalezvivo.com/2015/glslViewer/";
       license = licenses.bsd3;
       platforms = platforms.linux;
-      # maintainers = [ maintainers.hodapp ];
   };
 }
