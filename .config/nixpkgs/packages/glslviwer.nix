@@ -1,4 +1,5 @@
 {
+    withFFMPG ? true,
     stdenv, cmake, ninja, lib, fetchFromGitHub,
     libX11, libXrandr, libXinerama, libXcursor, libXi, libXext, libGLU, ffmpeg
 }:
@@ -14,7 +15,15 @@ stdenv.mkDerivation rec {
       sha256 = "sha256-Jrj8WlKrkPpmME50oVcZLQZs0bqbODAYibLJGPF7ock=";
   };
   nativeBuildInputs = [cmake ninja];
-  buildInputs = [libX11 libXrandr libXinerama libXcursor libXi libXext libGLU ffmpeg];
+  buildInputs = [
+      libX11
+      libXrandr
+      libXinerama
+      libXcursor
+      libXi
+      libXext
+      libGLU
+  ] ++ lib.optional withFFMPG ffmpeg;
 
   cmakeFlags = [
       "-DCMAKE_BUILD_TYPE='Release'"
@@ -26,5 +35,6 @@ stdenv.mkDerivation rec {
       homepage = "http://patriciogonzalezvivo.com/2015/glslViewer/";
       license = licenses.bsd3;
       platforms = platforms.linux;
+      maintainers = [ maintainers.hodapp ];
   };
 }
