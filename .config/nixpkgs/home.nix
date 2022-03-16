@@ -26,6 +26,7 @@ let
     pcmanfm
     krita
     poetry
+    nix-du
  ]
  ++ builtins.map (x: pkgs.callPackage x {}) [
     ./packages/glslviwer.nix
