@@ -27,7 +27,6 @@ in
     krita
     poetry
     nix-du
-    rnix-lsp
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
