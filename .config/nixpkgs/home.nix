@@ -26,7 +26,10 @@ in
     pcmanfm
     krita
     poetry
-    nix-du
+    # nix-du
+    nix-index
+    python310Packages.ipython
+    vulkan-loader
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
