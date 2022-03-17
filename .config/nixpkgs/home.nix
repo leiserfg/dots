@@ -31,7 +31,7 @@ in
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
                  (attrNames (readDir ./packages)))
-  ++ pkgs.lib.optionals hasNvidia [ blender_3_1 lutris-unwrapped ];
+  ++ pkgs.lib.optionals hasNvidia [ winePackages.unstable blender_3_1 lutris-unwrapped dxvk];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -33,7 +33,7 @@ rec {
             VK_LAYER_PATH="${vulkan-validation-layers}/share/vulkan/explicit_layer.d";
             VK_ICD_FILENAMES=''${nvidiaLibsOnly}/share/vulkan/icd.d/nvidia_icd.x86_64.json${
                   lib.optionalString enable32bits
-                  ":${nvidiaLibsOnly.lib32}/share/vulkan/icd.d/nvidia_icd.json"
+                  ":${nvidiaLibsOnly.lib32}/share/vulkan/icd.d/nvidia_icd.i686.json"
                 }'';
             LD_LIBRARY_PATH=''${
                 lib.makeLibraryPath ([ libglvnd nvidiaLibsOnly  vulkan-validation-layers]
