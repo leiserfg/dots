@@ -23,12 +23,13 @@ in
 
   home.packages = with pkgs; with builtins; with lib; [
     neovim-nightly
+    gcc # This has to be available for treesitter to build the parsers
     pcmanfm
     krita
     poetry
-    nix-du
-    # nix-du
     (getAttr system (builtins.getFlake github:bennofs/nix-index).defaultPackage)
+    pandoc
+    nix-update
     python310Packages.ipython
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
