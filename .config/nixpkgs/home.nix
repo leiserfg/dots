@@ -27,9 +27,9 @@ in
     krita
     poetry
     nix-du
-    nix-index
+    # nix-du
+    (getAttr system (builtins.getFlake github:bennofs/nix-index).defaultPackage)
     python310Packages.ipython
-    vulkan-loader
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
