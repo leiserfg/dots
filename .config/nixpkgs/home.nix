@@ -34,7 +34,7 @@ in
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
                  (attrNames (readDir ./packages)))
-  ++ pkgs.lib.optionals hasNvidia [ winePackages.unstable blender_3_1 lutris-unwrapped dxvk];
+  ++ pkgs.lib.optionals hasNvidia [ winePackages.unstable blender_3_1 lutris dxvk];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -53,6 +53,10 @@ in
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
+    };
+    font = {
+        package=pkgs.lato;
+        name = "Lato";
     };
   };
   qt.enable = true;

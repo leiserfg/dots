@@ -3,7 +3,7 @@ enable32bits ? true
 , runCommand, linuxPackages
 , fetchurl, lib, runtimeShell, libglvnd, vulkan-validation-layers
 , mesa, libvdpau-va-gl, intel-media-driver, vaapiIntel, pkgsi686Linux, driversi686Linux,
-vulkan-loader , xorg }:
+vulkan-loader , xorg, libICE  }:
 rec {
     /*
     It contains the builder for different nvidia configuration, parametrized by
@@ -40,6 +40,7 @@ rec {
                     nvidiaLibsOnly.lib32
                     pkgsi686Linux.libglvnd
                     vulkan-loader
+                    libICE
                   ])
               }'' ;
 
@@ -74,7 +75,7 @@ rec {
         LIBGL_DRIVERS_PATH=lib.makeSearchPathOutput "lib" "lib/dri" mesa-drivers;
         LIBVA_DRIVERS_PATH=lib.makeSearchPathOutput "out" "lib/dri" intel-driver;
         LD_LIBRARY_PATH=''${lib.makeLibraryPath mesa-drivers}:${lib.makeSearchPathOutput "lib"
-        "lib/vdpau" libvdpau}:${lib.makeLibraryPath [glxindirect libglvnd  vulkan-loader]}'';
+        "lib/vdpau" libvdpau}:${lib.makeLibraryPath [glxindirect libglvnd  vulkan-loader libICE]}'';
         VK_LAYER_PATH=''${vulkan-validation-layers}/share/vulkan/explicit_layer.d'';
         VK_ICD_FILENAMES="$(cat ${icd})";
     };
