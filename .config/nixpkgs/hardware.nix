@@ -3,7 +3,7 @@ enable32bits ? true
 , runCommand, linuxPackages
 , fetchurl, lib, runtimeShell, libglvnd, vulkan-validation-layers
 , mesa, libvdpau-va-gl, intel-media-driver, vaapiIntel, pkgsi686Linux, driversi686Linux,
-vulkan-loader , xorg, libICE  }:
+vulkan-loader , xorg, libICE, intel-ocl }:
 rec {
     /*
     It contains the builder for different nvidia configuration, parametrized by
@@ -34,6 +34,7 @@ rec {
                   lib.optionalString enable32bits
                   ":${nvidiaLibsOnly.lib32}/share/vulkan/icd.d/nvidia_icd.i686.json"
                 }'';
+            OCL_ICD_VENDORS="${nvidiaLibsOnly}/etc/OpenCL/vendors/";
             LD_LIBRARY_PATH=''${
                 lib.makeLibraryPath ([ libglvnd nvidiaLibsOnly  vulkan-validation-layers]
                   ++ lib.optionals enable32bits [
@@ -78,6 +79,7 @@ rec {
         "lib/vdpau" libvdpau}:${lib.makeLibraryPath [glxindirect libglvnd  vulkan-loader libICE]}'';
         VK_LAYER_PATH=''${vulkan-validation-layers}/share/vulkan/explicit_layer.d'';
         VK_ICD_FILENAMES="$(cat ${icd})";
+        OCL_ICD_VENDORS="${intel-ocl}/etc/OpenCL/vendors/";
     };
     productName = builtins.replaceStrings ["\n"] [""] (lib.readFile "/sys/class/dmi/id/product_name");
 }

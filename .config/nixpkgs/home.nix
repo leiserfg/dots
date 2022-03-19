@@ -31,11 +31,17 @@ in
     pandoc
     nix-update
     python310Packages.ipython
+    darktable
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
                  (attrNames (readDir ./packages)))
-  ++ pkgs.lib.optionals hasNvidia [ wineWowPackages.unstable blender_3_1 lutris dxvk];
+  ++ pkgs.lib.optionals hasNvidia [
+        wineWowPackages.unstable
+        blender_3_1
+        lutris
+        dxvk
+    ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
