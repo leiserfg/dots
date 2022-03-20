@@ -14,6 +14,14 @@ in
   nixpkgs.overlays = [
     (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlay
     (builtins.getFlake github:nix-community/neovim-nightly-overlay).overlay
+    # (self: super: {
+    #     qtile = python3.withPackages(_: [super.qtile.unwrapped]).overrideAttrs (_: {
+    #       otherwise will be exported as "env", this restores `nix search` behavior
+    #       name = "${unwrapped.pname}-${unwrapped.version}";
+    #       # export underlying qtile package
+    #       passthru = { inherit unwrapped; };
+    #     }
+    # })
   ];
 
 
@@ -30,9 +38,11 @@ in
     (getAttr system (builtins.getFlake github:bennofs/nix-index).defaultPackage)
     pandoc
     nix-update
+    firefox
     python310Packages.ipython
     darktable
     fish
+    rofi
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -68,4 +78,10 @@ in
     };
   };
   qt.enable = true;
+
+  xsession = {
+    enable = true;
+    windowManager.command = "${pkgs.qtile}/bin/qtile start";
+  };
+
 }
