@@ -1,0 +1,1 @@
+/nix/store/6v4hi3ap84ks0xxkll3dynah1k6bsri2-home-manager-files/.xsession
