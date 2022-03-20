@@ -164,8 +164,8 @@ packages {
     setup = "vim.g.db_ui_env_variable_url = 'DATABASE_URL'",
     cmd = "DBUI",
   },
-  -- "lewis6991/impatient.nvim",
-  {"rktjmp/hotpot.nvim", branch="picante"},
+  "lewis6991/impatient.nvim",
+  -- {"rktjmp/hotpot.nvim", branch="picante"},
   {
     "nathom/filetype.nvim",
     config = [[

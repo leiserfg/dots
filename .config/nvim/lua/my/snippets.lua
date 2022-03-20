@@ -37,17 +37,13 @@ local function replace_each(replacer)
   end
   return wrapper
 end
-local function emmet(arg1)
-  local content = (arg1)[1][1]
-  return sn(nil, { t { "asdf", content, "asdf" } })
-end
-local function _1_()
+local function date()
   return { os.date "%Y-%m-%d" }
 end
-local function _2_()
+local function uuid_()
   return { uuid() }
 end
-local function _3_(args)
+local function lorem(args)
   local amount = tonumber(args[1].captures[1])
   if amount == nil then
     return { LOREM_IPSUM }
@@ -55,11 +51,11 @@ local function _3_(args)
     return { LOREM_IPSUM:sub(1, (amount + 1)) }
   end
 end
-ls.snippets = {
+ls.add_snippets(nil, {
   all = {
-    sf("date", _1_),
-    sf("uuid", _2_),
-    sf("lorem(%d*)", _3_, true),
+    sf("date", date),
+    sf("uuid", uuid_),
+    sf("lorem(%d*)", lorem, true),
 
     s({ trig = "tt", wordTrig = true }, {
       t { "╔" },
@@ -104,7 +100,7 @@ ls.snippets = {
       i(0),
     }),
   },
-}
+})
 require("luasnip/loaders/from_vscode").lazy_load()
 
   --   ls.parser.parse_snippet(
