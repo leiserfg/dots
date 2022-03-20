@@ -32,6 +32,7 @@ in
     nix-update
     python310Packages.ipython
     darktable
+    fish
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
