@@ -52,6 +52,7 @@ in
     pasystray
     pavucontrol
     tdesktop
+    zathura
     # bluetooth_battery
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
