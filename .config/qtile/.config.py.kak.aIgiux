@@ -1,0 +1,147 @@
+from os.path import expanduser
+from subprocess import call
+
+from libqtile import bar, hook, layout, widget
+from libqtile.command import lazy
+from libqtile.config import (
+    Click,
+    Drag,
+    DropDown,
+    EzKey,
+    Group,
+    Key,
+    Match,
+    ScratchPad,
+    Screen,
+)
+
+mod = "mod4"
+
+keys = [
+    EzKey(*k)
+    for k in [
+        # Switch between windows in current stack pane
+        ("M-p", lazy.layout.up()),
+        ("M-n", lazy.layout.down()),
+        ("M-b", lazy.layout.left()),
+        ("M-f", lazy.layout.right()),
+        ("M-S-b", lazy.layout.swap_left()),
+        ("M-S-n", lazy.layout.swap_down()),
+        ("M-S-p", lazy.layout.swap_up()),
+        ("M-S-f", lazy.layout.swap_right()),
+        ("M-i", lazy.layout.grow()),
+        ("M-m", lazy.layout.shrink()),
+        ("M-z", lazy.window.toggle_fullscreen()),
+        ("M-o", lazy.layout.maximize()),
+        ("M-S-<space>", lazy.layout.flip()),
+        ("M-C-f", lazy.window.toggle_floating()),
+        # Toggle between different layouts as defined below
+        ("M-r", lazy.next_layout()),
+        # Back and forth between groups
+        ("M-<Left>", lazy.screen.prev_group()),
+        ("M-<Right>", lazy.screen.next_group()),
+        ("M-<Tab>", lazy.screen.toggle_group()),
+        # Qtile commands
+        ("M-C-r", lazy.restart()),
+        ("M-C-q", lazy.shutdown()),
+        ("M-q", lazy.window.kill()),
+        ("M-S-q", lazy.spawn("xkill")),
+        ("M-<Return>", lazy.spawn("kitty")),
+        (
+            "M-<semicolon>",
+            lazy.spawn(
+                "rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons"
+            ),
+        ),
+        # Volume keys
+        ("<XF86AudioMute>", lazy.spawn("amixer sset Master toggle")),
+        ("<XF86AudioLowerVolume>", lazy.spawn("amixer sset Master 5%-")),
+        ("<XF86AudioRaiseVolume>", lazy.spawn("amixer sset Master 5%+")),
+        ("M-l", lazy.spawn(expanduser("~/.config/qtile/shutdown.sh"))),
+        ("M-s", lazy.spawn("flameshot gui")),
+    ]
+]
+
+groups = [
+    Group("1", label="₁", matches=[Match(wm_class=["Navigator"])]),
+    Group("2", label="₂", matches=[Match(wm_class=["Emacs"])]),
+    Group("3", label="₃"),
+    Group("4", label="₄"),
+    Group("5", label="₅", matches=[Match(wm_class=["Thunar"])]),
+]
+
+for group in groups:
+    keys.extend(
+        [
+            EzKey(f"M-{group.name}", lazy.group[group.name].toscreen()),
+            EzKey(f"M-S-{group.name}", lazy.window.togroup(group.name)),
+        ]
+    )
+
+
+layouts = [
+    layout.MonadTall(border_focus="#404040", border_normal="#282828"),
+    layout.Max(border_focus="#404040", border_normal="#282828"),
+]
+
+widget_defaults = dict(font="Iosevka SS07", fontsize=48, padding=2)
+
+extension_defaults = widget_defaults.copy()
+
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(urgent_alert_method="line", highlight_method="line"),
+                widget.WindowName(),
+                widget.Systray(icon_size=48),
+                widget.Clock(format="%a %d, %I:%M%p "),
+                widget.ThermalSensor(),
+            ],
+            50,
+        )
+    ),
+    Screen(
+        top=bar.Bar(
+            [widget.GroupBox(urgent_alert_method="line", highlight_method="line")], 27
+        )
+    ),
+]
+
+mouse = [
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
+]
+
+floating_layout = layout.Floating(
+    a_loat_types=["notification", "toolbar", "splash", "dialog"]
+)
+
+
+# Fuck Java
+wmname = "LG3D"
+
+
+@hook.subscribe.startup_complete
+def autostart():
+    call([expanduser("~/.config/qtile/autostart.sh")])
+
+
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# λ
+# 
+# 
