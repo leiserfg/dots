@@ -77,10 +77,10 @@ in
         package=pkgs.lato;
         name = "Lato";
     };
-    cursorTheme = {
-        package = pkgs.gnome.adwaita-icon-theme;
-        name = "Adwaita";
-    };
+    # cursorTheme = {
+    #     package = pkgs.gnome.adwaita-icon-theme;
+    #     name = "Adwaita";
+    # };
   };
   qt.enable = true;
 
