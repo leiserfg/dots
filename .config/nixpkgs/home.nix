@@ -2,7 +2,7 @@
 let
   hardware = pkgs.callPackage ./hardware.nix { };
   isThePc = "MS-7A38" == hardware.productName;
-  isTheThinkpad = (pkgs.lib.hasPrefix "20TH" hardware.productName) != null;
+  isTheThinkpad = pkgs.lib.hasPrefix "20TH" hardware.productName ;
 in
 {
   targets.genericLinux.enable = true; # I don't use NixOS nor MacOS
@@ -51,6 +51,7 @@ in
     unclutter
     pasystray
     pavucontrol
+    tdesktop
     # bluetooth_battery
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
