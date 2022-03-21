@@ -35,7 +35,7 @@ in
     pcmanfm
     krita
     poetry
-    (getAttr system (builtins.getFlake github:bennofs/nix-index).defaultPackage)
+    (getAttr system (getFlake github:bennofs/nix-index).defaultPackage)
     pandoc
     nix-update
     firefox
@@ -48,6 +48,9 @@ in
     picom
     unclutter
     pasystray
+
+
+    slack
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -72,6 +75,9 @@ in
               font = "Lato 10";
               markup="yes";
               format = "%s %p\n%b";
+              transparency = 15;
+              follow = "mouse";
+              show_indicators = "yes";
           };
           urgency_low = {
               background = "#263238";
