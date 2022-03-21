@@ -42,6 +42,7 @@ in
     python310Packages.ipython
     python310Packages.pip
     darktable
+    kitty
     fish
     rofi
   ]
