@@ -48,7 +48,7 @@ in
     picom
     unclutter
     pasystray
-
+    pavucontrol
 
     slack
   ]
