@@ -1,1 +1,1 @@
-/nix/store/m7459118za5dpc8nwm4z7wj5y9dh5lkq-home-manager-files/.xsession
+/nix/store/z5g6mr38kjwjrl81nmp5rnllx0nwan9y-home-manager-files/.xsession

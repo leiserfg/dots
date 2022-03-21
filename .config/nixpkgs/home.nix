@@ -91,6 +91,7 @@ in
     pointerCursor = {
         package = pkgs.gnome.adwaita-icon-theme;
         name = "Adwaita";
+        size=16;
     };
   };
 
