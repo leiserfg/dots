@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 let
   hardware = pkgs.callPackage ./hardware.nix { };
-  hasNvidia = hardware.productName == "MS-7A38";
+  isThePc = "MS-7A38" == hardware.productName;
+  isTheThinkpad = (pkgs.lib.hasPrefix "20TH" hardware.productName) != null;
 in
 {
   targets.genericLinux.enable = true; # I don't use NixOS nor MacOS
@@ -25,7 +26,8 @@ in
   ];
 
 
-  home.sessionVariables = if hasNvidia then hardware.nvidiaVars else hardware.intelVars;
+  home.sessionVariables = if isThePc then hardware.nvidiaVars else if isTheThinkpad then
+  hardware.intelVars else [];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -49,13 +51,13 @@ in
     unclutter
     pasystray
     pavucontrol
-
-    slack
+    # bluetooth_battery
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
                  (attrNames (readDir ./packages)))
-  ++ pkgs.lib.optionals hasNvidia [
+  ++ pkgs.lib.optionals isTheThinkpad [slack]
+  ++ pkgs.lib.optionals isThePc [
         wineWowPackages.unstable
         blender_3_1
         lutris
