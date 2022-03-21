@@ -160,10 +160,10 @@ screens = [
                 widget.Battery(
                     format='{char} {percent:2.0%}'
                 ),
-                widget.PulseVolume(
-                    update_interval=0.2,
-                    volume_app="pavucontrol",
-                ),
+                # widget.PulseVolume(
+                #     update_interval=0.2,
+                #     volume_app="pavucontrol",
+                # ),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
             ],

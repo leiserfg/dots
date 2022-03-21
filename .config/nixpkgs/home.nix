@@ -46,6 +46,8 @@ in
     fish
     rofi
     picom
+    unclutter
+    pasystray
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -56,7 +58,41 @@ in
         lutris
         dxvk
     ];
+  services.mpris-proxy.enable = true;
+  services.dunst = {
+      enable = true;
+      iconTheme = {
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus-Dark";
+      };
+      settings = {
+          global = {
+              frame_width = 1;
+              frame_color = "#788388";
+              font = "Lato 10";
+              markup="yes";
+              format = "%s %p\n%b";
+          };
+          urgency_low = {
+              background = "#263238";
+              foreground = "#556064";
+              timeout = 10;
+          };
 
+          urgency_normal = {
+              background = "#263238";
+              foreground = "#F9FAF9";
+              timeout = 10;
+          };
+
+          urgency_critical = {
+              background = "#D62929";
+              foreground = "#F9FAF9";
+              timeout = 0;
+          };
+      };
+  };
+  services.blueman-applet.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
