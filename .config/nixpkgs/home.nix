@@ -40,6 +40,7 @@ in
     nix-update
     firefox
     python310Packages.ipython
+    python310Packages.pip
     darktable
     fish
     rofi
@@ -76,12 +77,20 @@ in
         package=pkgs.lato;
         name = "Lato";
     };
+    cursorTheme = {
+        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+    };
   };
   qt.enable = true;
 
   xsession = {
     enable = true;
-    windowManager.command = "${pkgs.qtile}/bin/qtile start";
+    windowManager.command = "env XCURSOR_PATH=$HOME/.nix-profile/share/icons ${pkgs.qtile}/bin/qtile start";
+    pointerCursor = {
+        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+    };
   };
 
 }
