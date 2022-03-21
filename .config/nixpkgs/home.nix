@@ -45,6 +45,7 @@ in
     kitty
     fish
     rofi
+    picom
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
