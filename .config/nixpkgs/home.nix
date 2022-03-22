@@ -54,6 +54,8 @@ in
     tdesktop
     zathura
     # bluetooth_battery
+    nsxiv
+    dragon-drop
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
