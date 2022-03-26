@@ -83,4 +83,5 @@ rec {
         OCL_ICD_VENDORS="${intel-compute-runtime}/etc/OpenCL/vendors/";
     };
     productName = builtins.replaceStrings ["\n"] [""] (lib.readFile "/sys/class/dmi/id/product_name");
+    hostName = builtins.replaceStrings ["\n"] [""] (lib.readFile "/proc/sys/kernel/hostname");
 }

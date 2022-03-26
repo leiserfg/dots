@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   hardware = pkgs.callPackage ./hardware.nix { };
-  isThePc = "MS-7A38" == hardware.productName;
-  isTheThinkpad = pkgs.lib.hasPrefix "20TH" hardware.productName ;
+  isThePc = "shiralad" == hardware.hostName;
+  isTheThinkpad = "dunkel" == hardware.hostName;
 in
 {
   targets.genericLinux.enable = true; # I don't use NixOS nor MacOS
@@ -56,6 +56,7 @@ in
     # bluetooth_battery
     nsxiv
     dragon-drop
+    tio
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -64,7 +65,7 @@ in
   ++ pkgs.lib.optionals isThePc [
         wineWowPackages.unstable
         blender_3_1
-        lutris
+        # lutris
         dxvk
     ];
   services.mpris-proxy.enable = true;
@@ -80,7 +81,7 @@ in
               frame_color = "#788388";
               font = "Lato 10";
               markup="yes";
-              format = "%s %p\n%b";
+              format = "%s %p\\n%b";
               transparency = 15;
               follow = "mouse";
               show_indicators = "yes";
