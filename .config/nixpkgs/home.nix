@@ -65,9 +65,15 @@ in
   ++ pkgs.lib.optionals isThePc [
         wineWowPackages.unstable
         blender_3_1
-        # lutris
+        lutris-unwrapped
         dxvk
     ];
+
+
+  services.udiskie = {
+      enable = true;
+      automount = true;
+  };
   services.mpris-proxy.enable = true;
   services.dunst = {
       enable = true;
