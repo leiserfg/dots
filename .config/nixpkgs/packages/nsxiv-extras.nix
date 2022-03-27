@@ -4,10 +4,8 @@
     stdenv,
     fetchFromGitHub
 }:
-let 
-
-imgFormats = ["bmp" "gif" "jpeg" "jpg" "png" "tiff" "x-bmp" "x-portable-anymap" "x-portable-bitmap"
-"x-portable-graymap" "x-tga" "x-xpixmap" "webp"];
+let
+    imgFormats = ["bmp" "gif" "jpeg" "jpg" "png" "tiff" "x-bmp" "x-portable-anymap" "x-portable-bitmap" "x-portable-graymap" "x-tga" "x-xpixmap" "webp"];
 in
 stdenv.mkDerivation rec {
   pname = "nsxiv-extra";
@@ -19,7 +17,7 @@ stdenv.mkDerivation rec {
       sha256 = "sha256-3qs8rjK0WsCv1tIobrVJfqri7ZiV5FYgwgIAVtvn1VU=";
   };
   builtInputs = [nsxiv];
-  desktopItems= [
+  desktopItems = [
     (makeDesktopItem {
      desktopName="Nsxiv Rifle";
      exec = "nsxiv-rifle";
