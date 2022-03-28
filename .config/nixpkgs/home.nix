@@ -3,6 +3,7 @@ let
   hardware = pkgs.callPackage ./hardware.nix { };
   isThePc = "shiralad" == hardware.hostName;
   isTheThinkpad = "dunkel" == hardware.hostName;
+  isAComputer = isThePc || isTheThinkpad;
 in
 {
   targets.genericLinux.enable = true; # I don't use NixOS nor MacOS
@@ -53,10 +54,18 @@ in
     pavucontrol
     tdesktop
     zathura
-    # bluetooth_battery
     nsxiv
     dragon-drop
-    tio
+
+    lf
+    fzf
+    bat
+    zoxide
+    ripgrep
+    # git stuff
+    delta
+    gh
+    git-standup
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -67,6 +76,9 @@ in
         blender_3_1
         lutris-unwrapped
         dxvk
+
+    # for debugging the keyboad
+    tio
     ];
 
 
