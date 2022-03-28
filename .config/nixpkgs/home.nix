@@ -91,6 +91,7 @@ in
               transparency = 15;
               follow = "mouse";
               show_indicators = "yes";
+              mouse_right = "do_action";
           };
           urgency_low = {
               background = "#263238";
