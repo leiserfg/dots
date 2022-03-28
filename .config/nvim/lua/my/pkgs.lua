@@ -166,16 +166,4 @@ packages {
   },
   "lewis6991/impatient.nvim",
   -- {"rktjmp/hotpot.nvim", branch="picante"},
-  {
-    "nathom/filetype.nvim",
-    config = [[
-    require"filetype".setup { overrides={ 
-        literal = {[".envrc"] = "direnv",
-Jenkinsfile="groovy"
-    },
-        extensions = {tf="terraform"}
-    }} 
-
-    ]],
-  },
 }
