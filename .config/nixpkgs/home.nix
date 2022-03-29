@@ -27,8 +27,11 @@ in
   ];
 
 
-  home.sessionVariables = if isThePc then hardware.nvidiaVars else if isTheThinkpad then
-  hardware.intelVars else [];
+  home.sessionVariables = (if isThePc then hardware.nvidiaVars else if isTheThinkpad then
+  hardware.intelVars else [])
+  //
+  { XCURSOR_PATH="$HOME/.nix-profile/share/icons"; }
+  ;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -56,7 +59,9 @@ in
     zathura
     nsxiv
     dragon-drop
+    arandr
 
+    typos
     lf
     fzf
     bat
@@ -70,7 +75,10 @@ in
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
                  (attrNames (readDir ./packages)))
-  ++ pkgs.lib.optionals isTheThinkpad [slack]
+  ++ pkgs.lib.optionals isTheThinkpad [
+    slack
+    insomnia
+  ]
   ++ pkgs.lib.optionals isThePc [
         wineWowPackages.unstable
         blender_3_1
@@ -156,7 +164,7 @@ in
 
   xsession = {
     enable = true;
-    windowManager.command = "env XCURSOR_PATH=$HOME/.nix-profile/share/icons ${pkgs.qtile}/bin/qtile start";
+    windowManager.command = "${pkgs.qtile}/bin/qtile start";
     pointerCursor = {
         package = pkgs.gnome.adwaita-icon-theme;
         name = "Adwaita";
