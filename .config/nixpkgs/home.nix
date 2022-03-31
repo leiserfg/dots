@@ -72,6 +72,7 @@ in
     delta
     sshuttle
     gh
+    git
     git-standup
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
