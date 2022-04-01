@@ -87,11 +87,11 @@ keys = [
         ),
         desc="App launcher",
     )
-    # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Key([mod], "r", lazy.spawncmd(),
-    #     desc="Spawn a command using a prompt widget"),
 ]
 groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
+groups_letters = "yuiop"
+gl_len = len(groups_letters)
+
 groups_rules = {
     1: [Match(wm_class="Navigator")],
     4: [Match(wm_class="TelegramDesktop")],
@@ -119,6 +119,27 @@ for i, g in enumerate(groups):
             ),
         ]
     )
+    if i < gl_len:
+        keys.extend(
+            [
+                # mod1 + letter of group = switch to group
+                Key(
+                    [mod],
+                    groups_letters[i],
+                    lazy.group[g.name].toscreen(toggle=True),
+                    desc="Switch to group {}".format(g.name),
+                ),
+                # mod1 + shift + letter of group = switch to & move focused window to group
+                Key(
+                    [mod, "shift"],
+                    groups_letters[i],
+                    lazy.window.togroup(g.name),
+                    desc=f"Move focused window to group {g.name}",
+                ),
+            ]
+        )
+
+
 
 
 layout_config = dict(
