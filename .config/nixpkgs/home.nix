@@ -60,6 +60,7 @@ in
     nsxiv
     dragon-drop
     arandr
+    xcwd
 
     typos
     lf
@@ -69,6 +70,7 @@ in
     ripgrep
     # git stuff
     delta
+    sshuttle
     gh
     git-standup
   ]
