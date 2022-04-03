@@ -123,10 +123,13 @@ packages {
     requires = "kyazdani42/nvim-web-devicons",
   },
   { "Olical/conjure", ft = { "fennel", "clojure" } },
-  {
-    "gpanders/nvim-parinfer",
-    ft = { "fennel", "janet", "clojure" },
-  },
+  -- {
+  --   "gpanders/nvim-parinfer",
+  --   ft = { "fennel", "janet", "clojure" },
+  -- },
+  'tpope/vim-sexp-mappings-for-regular-people',
+  {'guns/vim-sexp', config='vim.g.sexp_filetypes="fennel,lisp,scheme,clojure" }'},
+
   {
     "ibhagwan/fzf-lua",
     requires = {

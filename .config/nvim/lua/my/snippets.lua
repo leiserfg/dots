@@ -1,5 +1,6 @@
 local ls = require "luasnip"
 local l = require("luasnip.extras").l
+local rep = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 
 -- local _1 = require "luasnip.util.lambda"._1
@@ -51,8 +52,35 @@ local function lorem(args)
     return { LOREM_IPSUM:sub(1, (amount + 1)) }
   end
 end
+
+local function sha256(secret)
+    return "chachacha" .. secret
+end
+
+
+local function token_and_hash(n)
+  local hexstr = "0123456789abcdfe"
+  local token = ""
+  for _ = 1, n * 2 do
+    local r = math.random(1, 16)
+    token = token .. hexstr:sub(r, r)
+  end
+  return { token, sha256(token)..":", '' }
+end
+
 ls.add_snippets(nil, {
   all = {
+s(
+  "user",
+  fmt("{name}: {token_and_hash}name: {name_again}\n  <<: *{group}", {
+    name = i(1, "username"),
+    name_again = rep(1),
+    group = i(0, "group"),
+    token_and_hash = f(function()
+      return token_and_hash(16)
+    end),
+  })
+),
     sf("date", date),
     sf("uuid", uuid_),
     sf("lorem(%d*)", lorem, true),
