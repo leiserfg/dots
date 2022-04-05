@@ -1,5 +1,6 @@
 {
     makeDesktopItem,
+    copyDesktopItems,
     nsxiv,
     stdenv,
     fetchFromGitHub
@@ -17,6 +18,7 @@ stdenv.mkDerivation rec {
       sha256 = "sha256-3qs8rjK0WsCv1tIobrVJfqri7ZiV5FYgwgIAVtvn1VU=";
   };
   builtInputs = [nsxiv];
+  nativeBuildInputs = [copyDesktopItems];
   desktopItems = [
     (makeDesktopItem {
      desktopName="Nsxiv Rifle";
@@ -32,5 +34,6 @@ stdenv.mkDerivation rec {
   mkdir -p $out/bin
   cd scripts
   find -type f ! -name "*.md" -exec cp {} $out/bin \;
+  copyDesktopItems
   '';
 }
