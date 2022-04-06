@@ -74,6 +74,7 @@ in
     gh
     git
     git-standup
+    act
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
