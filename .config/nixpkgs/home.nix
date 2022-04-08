@@ -44,7 +44,7 @@ in
     (getAttr system (getFlake github:bennofs/nix-index).defaultPackage)
     pandoc
     nix-update
-    firefox
+    firefox-unwrapped
     python310Packages.ipython
     python310Packages.pip
     darktable
@@ -56,7 +56,7 @@ in
     pasystray
     pavucontrol
     tdesktop
-    zathura
+    # zathura
     nsxiv
     dragon-drop
     arandr
