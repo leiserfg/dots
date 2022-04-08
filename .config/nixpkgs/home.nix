@@ -56,6 +56,7 @@ in
     pasystray
     pavucontrol
     tdesktop
+    firefox
     # zathura
     nsxiv
     dragon-drop
