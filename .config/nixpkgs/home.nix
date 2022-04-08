@@ -44,10 +44,10 @@ in
     (getAttr system (getFlake github:bennofs/nix-index).defaultPackage)
     pandoc
     nix-update
-    firefox-unwrapped
     python310Packages.ipython
     python310Packages.pip
     darktable
+    gimp
     kitty
     fish
     rofi

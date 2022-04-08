@@ -128,7 +128,7 @@ packages {
   --   ft = { "fennel", "janet", "clojure" },
   -- },
   'tpope/vim-sexp-mappings-for-regular-people',
-  {'guns/vim-sexp', config='vim.g.sexp_filetypes="fennel,lisp,scheme,clojure" }'},
+  {'guns/vim-sexp', config='vim.g.sexp_filetypes="fennel,lisp,scheme,clojure"'},
 
   {
     "ibhagwan/fzf-lua",
