@@ -30,8 +30,9 @@ in
   home.sessionVariables = (if isThePc then hardware.nvidiaVars else if isTheThinkpad then
   hardware.intelVars else [])
   //
-  { XCURSOR_PATH="$HOME/.nix-profile/share/icons"; }
-  ;
+  { 
+      XCURSOR_PATH="$HOME/.nix-profile/share/icons";
+  };
 
   nixpkgs.config.allowUnfree = true;
 
