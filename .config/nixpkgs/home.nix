@@ -28,7 +28,7 @@ in
 
 
   home.sessionVariables = (if isThePc then hardware.nvidiaVars else if isTheThinkpad then
-  hardware.intelVars else [])
+  hardware.intelVars else {})
   //
   { 
       XCURSOR_PATH="$HOME/.nix-profile/share/icons";
@@ -91,14 +91,14 @@ in
     insomnia
   ]
   ++ pkgs.lib.optionals isThePc [
-        blender_3_1
-        wineWowPackages.unstable
-        lutris-unwrapped
-        dxvk
-
-    # for debugging the keyboad
-    tio
-    ];
+      blender_3_1
+      dxvk
+      luajitPackages.ldoc
+      lutris-unwrapped
+      wineWowPackages.unstable
+# for debugging the keyboad
+# tio
+  ];
 
 
   services.udiskie = {

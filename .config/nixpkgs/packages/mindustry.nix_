@@ -1,0 +1,17 @@
+{
+    writeShellScriptBin, mindustry, symlinkJoin, alsa-plugins
+}:
+let
+    wrapped = writeShellScriptBin "mindustry" ''
+        #!/bin/sh
+        export ALSA_PLUGIN_DIR=${alsa-plugins}/lib/alsa-lib/
+        ${mindustry}/bin/mindustry "$@"
+      '';
+in
+symlinkJoin {
+  name = "mindustry";
+  paths = [
+    wrapped
+    mindustry
+  ];
+}
