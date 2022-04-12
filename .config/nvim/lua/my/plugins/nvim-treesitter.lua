@@ -11,7 +11,7 @@ local ts = require "nvim-treesitter.configs"
 -- }
 --
 ts.setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = { "org" }, -- Enable conceal

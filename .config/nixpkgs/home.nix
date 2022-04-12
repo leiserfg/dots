@@ -38,7 +38,10 @@ in
 
   home.packages = with pkgs; with builtins; with lib; [
     neovim-nightly
-    gcc # This has to be available for treesitter to build the parsers
+    # This has to be available for treesitter to build the parsers
+    gcc
+    nodePackages.npm
+
     pcmanfm
     krita
     poetry
@@ -58,11 +61,12 @@ in
     pavucontrol
     tdesktop
     firefox
-    # zathura
+    zathura
     nsxiv
     dragon-drop
     arandr
     xcwd
+    moreutils
 
     typos
     lf
