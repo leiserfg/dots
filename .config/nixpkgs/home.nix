@@ -67,7 +67,6 @@ in
     arandr
     xcwd
     moreutils
-
     typos
     lf
     fzf
@@ -81,6 +80,7 @@ in
     git
     git-standup
     act
+    lightlocker
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
