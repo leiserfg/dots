@@ -46,6 +46,7 @@ in
     krita
     poetry
     (getAttr system (getFlake github:bennofs/nix-index).defaultPackage)
+    (iosevka-bin.override{variant="sgr-iosevka-term-ss07";})
     pandoc
     nix-update
     python310Packages.ipython
@@ -155,7 +156,7 @@ in
   };
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-
+  fonts.fontconfig.enable = true;
   gtk = {
     enable = true;
     iconTheme = {
