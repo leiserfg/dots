@@ -54,6 +54,7 @@ in
     gimp
     kitty
     fish
+    lightlocker
     rofi
     picom
     unclutter
@@ -63,7 +64,7 @@ in
     firefox
     zathura
     nsxiv
-    dragon-drop
+    xdragon
     arandr
     xcwd
     moreutils
@@ -80,7 +81,7 @@ in
     git
     git-standup
     act
-    lightlocker
+    nix-du
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -90,8 +91,8 @@ in
     insomnia
   ]
   ++ pkgs.lib.optionals isThePc [
-        wineWowPackages.unstable
         blender_3_1
+        wineWowPackages.unstable
         lutris-unwrapped
         dxvk
 
