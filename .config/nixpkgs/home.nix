@@ -83,6 +83,7 @@ in
     git-standup
     act
     nix-du
+    patool
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
