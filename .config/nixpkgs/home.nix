@@ -96,7 +96,7 @@ in
       blender_3_1
       dxvk
       luajitPackages.ldoc
-      lutris-unwrapped
+      # lutris-free
       wineWowPackages.unstable
       cabextract
 # for debugging the keyboad
