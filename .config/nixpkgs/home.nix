@@ -98,6 +98,7 @@ in
       luajitPackages.ldoc
       lutris-unwrapped
       wineWowPackages.unstable
+      cabextract
 # for debugging the keyboad
 # tio
   ];
