@@ -64,6 +64,7 @@ in
     tdesktop
     firefox
     zathura
+    calibre
     nsxiv
     xdragon
     arandr
