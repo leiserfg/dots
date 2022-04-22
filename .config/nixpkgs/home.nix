@@ -84,6 +84,7 @@ in
     act
     nix-du
     patool
+    stylua
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -91,6 +92,7 @@ in
   ++ pkgs.lib.optionals isTheThinkpad [
     slack
     insomnia
+    terraform-ls
   ]
   ++ pkgs.lib.optionals isThePc [
       blender_3_1
