@@ -77,8 +77,7 @@ keys = [
          |xargs -n 1 -d "\n" dirname \
          |xargs -d "\n" -n 1 basename \
          |rofi -dmenu -i  \
-         |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh \
-
+         |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh
         """
         # sh -c "lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i|
         # cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__"
