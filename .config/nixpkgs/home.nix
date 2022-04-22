@@ -48,7 +48,7 @@ in
     (getAttr system (getFlake github:bennofs/nix-index).defaultPackage)
     (iosevka-bin.override{variant="sgr-iosevka-term-ss07";})
     pandoc
-    nix-update
+    # nix-update
     python310Packages.ipython
     python310Packages.pip
     darktable
@@ -82,7 +82,7 @@ in
     git
     git-standup
     act
-    nix-du
+    # nix-du
     patool
     stylua
   ]

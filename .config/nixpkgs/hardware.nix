@@ -80,7 +80,8 @@ rec {
         "lib/vdpau" libvdpau}:${lib.makeLibraryPath [glxindirect libglvnd  vulkan-loader libICE]}'';
         VK_LAYER_PATH=''${vulkan-validation-layers}/share/vulkan/explicit_layer.d'';
         VK_ICD_FILENAMES="$(cat ${icd})";
-        OCL_ICD_VENDORS="${intel-compute-runtime}/etc/OpenCL/vendors/";
+        # broken
+        # OCL_ICD_VENDORS="${intel-compute-runtime}/etc/OpenCL/vendors/";
     };
     productName = builtins.replaceStrings ["\n"] [""] (lib.readFile "/sys/class/dmi/id/product_name");
     hostName = builtins.replaceStrings ["\n"] [""] (lib.readFile "/proc/sys/kernel/hostname");
