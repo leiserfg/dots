@@ -72,15 +72,15 @@ keys = [
         [mod],
         "g",
         lazy.spawn(
-        r"""
-          ls ~/Games/*/start.sh  --quoting-style=escape \
-         |xargs -n 1 -d "\n" dirname \
-         |xargs -d "\n" -n 1 basename \
-         |rofi -dmenu -i  \
-         |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh
-        """
-        # sh -c "lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i|
-        # cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__"
+            r"""
+            sh -c " ls ~/Games/*/start.sh  --quoting-style=escape \
+            |xargs -n 1 -d '\n' dirname \
+            |xargs -d '\n' -n 1 basename \
+            |rofi -dmenu -i  \
+            |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh "
+            """
+            # sh -c "lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i|
+            # cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__"
         ),
         desc="Games List",
     ),
@@ -91,7 +91,7 @@ keys = [
             "rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons"
         ),
         desc="App launcher",
-    )
+    ),
 ]
 groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
 groups_letters = "yuiop"
@@ -145,8 +145,6 @@ for i, g in enumerate(groups):
         )
 
 
-
-
 layout_config = dict(
     single_border_width=0, single_margin=0, border_focus="#AAAACC", margin=2
 )
@@ -183,9 +181,7 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 # widget.Net(prefix='M'),
-                widget.Battery(
-                    format='{char} {percent:2.0%}'
-                ),
+                widget.Battery(format="{char} {percent:2.0%}"),
                 # widget.PulseVolume(
                 #     update_interval=0.2,
                 #     volume_app="pavucontrol",
