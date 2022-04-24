@@ -1,22 +1,13 @@
-(local cmd vim.cmd)
+(vim.cmd "
+  cabbr <expr> %% expand('%:p:h')
+  nmap <leader>w :w!<cr>
+  map <leader>cd :cd %:p:h<cr>:pwd<cr>
+  inoremap <c-c> <ESC>
+  nmap <M-j> mz:m+<cr>`z
+  nmap <M-k> mz:m-2<cr>`z
+  vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+  vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+")
 
-(cmd "cabbr <expr> %% expand('%:p:h')")
 
-(cmd "nmap <leader>w :w!<cr>")
-
-(cmd "map <leader>cd :cd %:p:h<cr>:pwd<cr>")
-
-(cmd "inoremap <c-c> <ESC>")
-
-(cmd "nmap <M-j> mz:m+<cr>`z")
-
-(cmd "nmap <M-k> mz:m-2<cr>`z")
-
-(cmd "vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z")
-
-(cmd "vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z")
-
-(cmd "nnoremap Y y$")
-
-(cmd "nnoremap Q @q")
 
