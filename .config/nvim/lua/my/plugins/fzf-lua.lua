@@ -1,4 +1,4 @@
-local fzf = require("fzf-lua")
+local fzf = require "fzf-lua"
 fzf.setup {
   default_previewer = "bat",
 }
@@ -12,4 +12,3 @@ vim.cmd [[
   nnoremap <leader>fh <cmd>lua require('fzf-lua').help_tags()<CR>
   nnoremap <leader>fz <cmd>lua require('fzf-lua').builtin()<CR>
 ]]
-

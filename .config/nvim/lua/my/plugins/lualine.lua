@@ -5,6 +5,6 @@ require("lualine").setup {
     icons_enabled = false,
     section_separators = "",
     theme = "gruvbox-flat",
-    globalstatus = true
+    globalstatus = true,
   },
 }

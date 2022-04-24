@@ -2,9 +2,9 @@ local cmp = require "cmp"
 local lspkind = require "lspkind"
 
 cmp.setup {
-    formatting = {
-        format = lspkind.cmp_format()
-    },
+  formatting = {
+    format = lspkind.cmp_format(),
+  },
   -- view = {
   --   entries = 'native'
   -- },
