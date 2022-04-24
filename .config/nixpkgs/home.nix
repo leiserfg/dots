@@ -37,7 +37,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; with builtins; with lib; [
-    neovim-nightly
+    neovim-unwrapped
     # This has to be available for treesitter to build the parsers
     gcc
     nodePackages.npm
