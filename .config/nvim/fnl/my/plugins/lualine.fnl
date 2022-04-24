@@ -4,4 +4,3 @@
                                           :section_separators ""
                                           :globalstatus true
                                           :theme :gruvbox-flat}})
-

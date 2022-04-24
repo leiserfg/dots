@@ -1,10 +1,9 @@
 (local fzf (require :fzf-lua))
-
 (fzf.setup {:default_previewer :bat})
-
 (fzf.register_ui_select)
 
-(vim.cmd "  nnoremap <leader>/ <cmd>lua require('fzf-lua').grep({no_esc=true})<CR>
+(vim.cmd "
+  nnoremap <leader>/ <cmd>lua require('fzf-lua').grep({no_esc=true})<CR>
   nnoremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
   nnoremap <leader>fr <cmd>lua require('fzf-lua').registers()<CR>
   nnoremap <leader>fb <cmd>lua require('fzf-lua').buffers()<CR>

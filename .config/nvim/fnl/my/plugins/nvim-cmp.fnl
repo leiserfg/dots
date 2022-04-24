@@ -11,13 +11,13 @@
             :experimental {:ghost_text true}
             :snippet {:expand (fn [args]
                                 ((. (require :luasnip) :lsp_expand) args.body))}
-            :sources {1 {:name :nvim_lsp}
-                      2 {:name :buffer}
-                      3 {:name :path}
-                      4 {:name :calc}
-                      5 {:name :emoji}
-                      6 {:name :nvim_lua}
-                      7 {:name :luasnip}
-                      8 {:name :orgmode}}
+            :sources [{:name :nvim_lsp}
+                      {:name :buffer}
+                      {:name :path}
+                      {:name :calc}
+                      {:name :emoji}
+                      {:name :nvim_lua}
+                      {:name :luasnip}
+                      {:name :orgmode}]
             :formatting {:format (lspkind.cmp_format)}})
 

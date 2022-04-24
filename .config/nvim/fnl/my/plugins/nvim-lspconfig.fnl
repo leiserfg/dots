@@ -13,23 +13,18 @@
     nnoremap <buffer> <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
     nnoremap <buffer> <silent> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
     "))
-
 (local capabilities
        ((. (require :cmp_nvim_lsp) :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
-
 (local lspconfig (require :lspconfig))
-
 (each [_ lsp (ipairs {1 :gdscript
                       2 :vimls
                       3 :tsserver
                       4 :clangd
                       5 :terraformls})]
-  ((. (. lspconfig lsp) :setup) {: capabilities :on_attach on-attach}))
-
+  ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
 (lspconfig.elixirls.setup {:cmd {1 :elixir-ls}
                            :on_attach on-attach
                            : capabilities})
-
 (lspconfig.pylsp.setup {:on_attach on-attach
                         :on_init (fn [client]
                                    (local venv (or vim.env.VIRTUAL_ENV ""))
@@ -40,29 +35,22 @@
                                    (client.notify :workspace/didChangeConfiguration)
                                    true)
                         : capabilities})
-
 (local runtime-path (vim.split package.path ";"))
-
 (table.insert runtime-path :lua/?.lua)
-
 (table.insert runtime-path :lua/?/init.lua)
-
-(lspconfig.sumneko_lua.setup {:cmd {1 :/usr/bin/lua-language-server}
+(lspconfig.sumneko_lua.setup {:cmd [ :/usr/bin/lua-language-server]
                               :on_attach on-attach
-                              :settings {:Lua {:workspace {:library (vim.api.nvim_get_runtime_file ""
-                                                                                                   true)}
+                              :settings {:Lua {:workspace {:library (vim.api.nvim_get_runtime_file "" true)}
                                                :telemetry {:enable false}
-                                               :runtime {:version :LuaJIT
-                                                         :path runtime-path}
-                                               :diagnostics {:globals {1 :vim
-                                                                       2 :client
-                                                                       3 :awesome
-                                                                       4 :root}}}}
+                                               :runtime {:version :LuaJIT :path runtime-path}
+                                               :diagnostics {:globals [:vim
+                                                                       :client
+                                                                       :awesome
+                                                                       :root]}}}
                               : capabilities})
-
-(vim.cmd "  sign define DiagnosticSignError text=🩸 linehl= numhl=
+(vim.cmd "
+  sign define DiagnosticSignError text=🩸 linehl= numhl=
   sign define DiagnosticSignWarn text=🔸 linehl= numhl=
   sign define DiagnosticSignInfo text=🔹 linehl= numhl=
   sign define DiagnosticSignHint text=👉 linehl= numhl=
 ")
-
