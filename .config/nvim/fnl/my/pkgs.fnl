@@ -32,7 +32,7 @@
              "require('Comment').setup()")
           (cu :junegunn/vim-easy-align :keys :ga)
           (u :vim-scripts/ReplaceWithRegister :keys :gr) :tpope/vim-repeat
-          (u :AndrewRadev/switch.vim :config true :requires
+          (cu :AndrewRadev/switch.vim :requires
              (u :tpope/vim-speeddating :keys
                 [:<Plug>SpeedDatingFallbackUp :<Plug>SpeedDatingFallbackDown]))
           (u :Olical/vim-enmasse :cmd :EnMasse)
