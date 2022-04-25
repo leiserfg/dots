@@ -23,18 +23,22 @@
        ,...))
 
 
-(packages (pkg :Olical/aniseed :ft :fennel) :wbthomason/packer.nvim
-          (pkg :tpope/vim-unimpaired :event :BufRead) :gpanders/nvim-parinfer
+(packages (pkg :Olical/aniseed :ft :fennel)
+          :wbthomason/packer.nvim
+          (pkg :tpope/vim-unimpaired :event :BufRead)
+          :gpanders/nvim-parinfer
           (pkg :numToStr/Comment.nvim :keys :gc :config
              "require('Comment').setup()")
           (cpkg :junegunn/vim-easy-align :keys :ga)
-          (pkg :vim-scripts/ReplaceWithRegister :keys :gr) :tpope/vim-repeat
+          (pkg :vim-scripts/ReplaceWithRegister :keys :gr)
+          :tpope/vim-repeat
           (cpkg :AndrewRadev/switch.vim :requires
              (pkg :tpope/vim-speeddating :keys
                 [:<Plug>SpeedDatingFallbackUp :<Plug>SpeedDatingFallbackDown]))
           (pkg :Olical/vim-enmasse :cmd :EnMasse)
           (pkg :tpope/vim-fugitive :cmd [:G] :event :BufRead)
-          (pkg :tpope/vim-rhubarb :after :vim-fugitive) :tpope/vim-eunuch
+          (pkg :tpope/vim-rhubarb :after :vim-fugitive)
+          :tpope/vim-eunuch
           (pkg :Vimjas/vim-python-pep8-indent :ft :python)
           (pkg :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
           :direnv/direnv.vim (cpkg :machakann/vim-sandwich)
@@ -74,6 +78,5 @@
           (pkg :nanotee/zoxide.vim :cmd :Z)
           (pkg :tweekmonster/startuptime.vim :cmd :StartupTime)
           (cpkg :kristijanhusak/orgmode.nvim)
-          (pkg :akinsho/org-bullets.nvim
-             :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
+          (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
           :rktjmp/hotpot.nvim)
