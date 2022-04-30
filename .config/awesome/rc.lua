@@ -64,7 +64,7 @@ awful.spawn.with_shell(
 
 -- {{{ Variable definitions
 
-local chosen_theme = "steamburn"
+local chosen_theme = "simple"
 
 local modkey = "Mod4"
 local altkey = "Mod1"
@@ -78,30 +78,7 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉" }
 --{ "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
-	-- awful.layout.suit.spiral,
 	awful.layout.suit.tile,
-	--[[
-    awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    ]]
-	-- awful.layout.suit.fair,
-	--awful.layout.suit.fair.horizontal,
-	-- awful.layout.suit.spiral.dwindle,
-	--awful.layout.suit.max,
-	--awful.layout.suit.max.fullscreen,
-	--awful.layout.suit.magnifier,
-	--awful.layout.suit.corner.nw,
-	--awful.layout.suit.corner.ne,
-	--awful.layout.suit.corner.sw,
-	--awful.layout.suit.corner.se,
-	--lain.layout.cascade,
-	--lain.layout.cascade.tile,
-	--lain.layout.centerwork,
-	--lain.layout.centerwork.horizontal,
-	--lain.layout.termfair,
-	--lain.layout.termfair.center
 }
 
 awful.util.taglist_buttons = mytable.join(
@@ -518,21 +495,6 @@ local clientkeys = mytable.join(
 		c.ontop = not c.ontop
 	end, {
 		description = "toggle keep on top",
-		group = "client",
-	}),
-	awful.key({ modkey }, "n", function(c)
-		-- The client currently has the input focus, so it cannot be
-		-- minimized, since minimized clients can't have the focus.
-		c.minimized = true
-	end, {
-		description = "minimize",
-		group = "client",
-	}),
-	awful.key({ modkey, "Shift" }, "m", function(c)
-		c.maximized_horizontal = not c.maximized_horizontal
-		c:raise()
-	end, {
-		description = "(un)maximize horizontally",
 		group = "client",
 	})
 )
