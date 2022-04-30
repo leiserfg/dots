@@ -28,11 +28,19 @@ in
 
 
   home.sessionVariables = (if isThePc then hardware.nvidiaVars else if isTheThinkpad then
-  hardware.intelVars else {})
-  //
-  { 
-      XCURSOR_PATH="$HOME/.nix-profile/share/icons";
-  };
+  hardware.intelVars else {}) ;
+  # // let distroTerminfoDirs = concatStringsSep ":" [
+  #       "/etc/terminfo" # debian, fedora, gentoo
+  #       "/lib/terminfo" # debian
+  #       "/usr/share/terminfo" # package default, all distros
+  #     ];
+  #   in {
+  #     NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+  #     TERMINFO_DIRS =
+  #       "$HOME/.nix-profile/share/terminfo:$TERMINFO_DIRS\${TERMINFO_DIRS:+:}${distroTerminfoDirs}";
+  #   };
+  # };
+  # { TERMINFO_DIRS = "/home/leiserfg/.nix-profile/share/terminfo";};
 
   nixpkgs.config.allowUnfree = true;
 
@@ -59,6 +67,7 @@ in
     rofi
     picom
     unclutter
+    awesome
     pasystray
     pavucontrol
     tdesktop
@@ -76,6 +85,7 @@ in
     bat
     zoxide
     ripgrep
+    rust-analyzer-unwrapped
     # git stuff
     delta
     sshuttle
@@ -113,7 +123,7 @@ in
   };
   services.mpris-proxy.enable = true;
   services.dunst = {
-      enable = true;
+      enable = false;
       iconTheme = {
           package = pkgs.papirus-icon-theme;
           name = "Papirus-Dark";
@@ -181,7 +191,8 @@ in
 
   xsession = {
     enable = true;
-    windowManager.command = "${pkgs.qtile}/bin/qtile start";
+    # windowManager.command = "${pkgs.}/bin/qtile start";
+    windowManager.command = "awesome";
     pointerCursor = {
         package = pkgs.gnome.adwaita-icon-theme;
         name = "Adwaita";

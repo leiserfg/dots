@@ -13,14 +13,15 @@
     nnoremap <buffer> <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
     nnoremap <buffer> <silent> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
     "))
+
 (local capabilities
        ((. (require :cmp_nvim_lsp) :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
 (local lspconfig (require :lspconfig))
-(each [_ lsp (ipairs {1 :gdscript
-                      2 :vimls
-                      3 :tsserver
-                      4 :clangd
-                      5 :terraformls})]
+(each [_ lsp (ipairs [:gdscript
+                      :vimls
+                      :tsserver
+                      :clangd
+                      :terraformls])]
   ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
 (lspconfig.elixirls.setup {:cmd {1 :elixir-ls}
                            :on_attach on-attach
@@ -43,14 +44,29 @@
                               :settings {:Lua {:workspace {:library (vim.api.nvim_get_runtime_file "" true)}
                                                :telemetry {:enable false}
                                                :runtime {:version :LuaJIT :path runtime-path}
-                                               :diagnostics {:globals [:vim
-                                                                       :client
-                                                                       :awesome
-                                                                       :root]}}}
+                                               :diagnostics {:globals [:vim]}}}
                               : capabilities})
+
+
+(local opts {:tools {:hover_with_actions true
+                     :autoSetHints true
+                     :inlay_hints {:max_len_align false
+                                   :right_align false
+                                   :max_len_align_padding 1
+                                   :parameter_hints_prefix "<-"
+                                   :show_parameter_hints true
+                                   :right_align_padding 7
+                                   :other_hints_prefix "=>"}}
+             :server {: on_attach : capabilities}})
+
+((. (require :rust-tools) :setup) opts)
+
+
+
 (vim.cmd "
   sign define DiagnosticSignError text=🩸 linehl= numhl=
   sign define DiagnosticSignWarn text=🔸 linehl= numhl=
   sign define DiagnosticSignInfo text=🔹 linehl= numhl=
   sign define DiagnosticSignHint text=👉 linehl= numhl=
 ")
+

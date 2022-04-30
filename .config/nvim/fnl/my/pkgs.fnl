@@ -47,9 +47,7 @@
               [:nvim-lua/plenary.nvim])
           (pkg :ray-x/lsp_signature.nvim :config
              "require\"lsp_signature\".setup({floating_window=false})")
-          (cpkg :neovim/nvim-lspconfig :after [:lsp_signature.nvim])
-          (pkg :simrat39/rust-tools.nvim :ft [:rust] :config
-             "require('rust-tools').setup()")
+          (cpkg :neovim/nvim-lspconfig :after [:lsp_signature.nvim ] :requires [:simrat39/rust-tools.nvim])
           (cpkg :nvim-treesitter/nvim-treesitter :run ":TSUpdate" :requires
               [:nvim-treesitter/playground
                :nvim-treesitter/nvim-treesitter-textobjects])

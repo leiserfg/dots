@@ -12,8 +12,6 @@ run_disowned () {
 xset -b
 pkill -9 picom; picom -b
 
-nitrogen --restore
-
 xset s 300 600
 run_once xsettingsd
 run_once light-locker --lock-on-lid

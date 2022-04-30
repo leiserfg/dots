@@ -8,22 +8,24 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
+
+local main_color = "#afcfee" --"#d88166"
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/steamburn"
-theme.wallpaper = theme.dir .. "/wall.png"
-theme.font = "Iosevka SS07"
+theme.wallpaper = os.getenv("HOME") .. "/wall.png"
+theme.font = "Lato"
 theme.fg_normal = "#e2ccb0"
-theme.fg_focus = "#d88166"
+theme.fg_focus =  main_color --
 theme.fg_urgent = "#CC9393"
 theme.bg_normal = "#140c0b"
 theme.bg_focus = "#140c0b"
 theme.bg_urgent = "#2a1f1e"
 theme.border_width = dpi(1)
 theme.border_normal = "#302627"
-theme.border_focus = "#c2745b"
+theme.border_focus =  main_color
 theme.border_marked = "#CC9393"
-theme.taglist_fg_focus = "#d88166"
+theme.taglist_fg_focus =  main_color --"#d88166"
 theme.tasklist_bg_focus = "#140c0b"
-theme.tasklist_fg_focus = "#d88166"
+theme.tasklist_fg_focus = main_color
 theme.taglist_squares_sel = theme.dir .. "/icons/square_sel.png"
 theme.taglist_squares_unsel = theme.dir .. "/icons/square_unsel.png"
 theme.menu_height = dpi(16)
@@ -73,7 +75,7 @@ function theme.at_screen_connect(s)
 	if type(wallpaper) == "function" then
 		wallpaper = wallpaper(s)
 	end
-	gears.wallpaper.maximized(wallpaper, s, true)
+	gears.wallpaper.centered(wallpaper, s)
 
 	-- Tags
 	awful.tag(awful.util.tagnames, s, awful.layout.layouts)
@@ -136,8 +138,8 @@ function theme.at_screen_connect(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
-			mytextclock,
 			wibox.widget.systray(),
+			mytextclock,
 		},
 	})
 end

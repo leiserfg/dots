@@ -1,14 +1,3 @@
---[[
-
-     Awesome WM configuration template
-     github.com/lcpz
-
---]]
-
--- {{{ Required libraries
-
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
 local gears = require("gears")
@@ -18,17 +7,12 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 --local menubar       = require("menubar")
-local freedesktop = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 awful.util.shell = "sh" -- Make it faster by not using fish
--- }}}
--- {{{ Error handling
 
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
 	naughty.notify({
 		preset = naughty.config.presets.critical,
@@ -63,15 +47,8 @@ end
 -- {{{ Autostart windowless processes
 
 -- This function will run once every time Awesome is started
-local function run_once(cmd_arr)
-	for _, cmd in ipairs(cmd_arr) do
-		awful.spawn.with_shell(
-			string.format("pgrep -u $USER -fx '%s' > /dev/null || nohup '%s' > /dev/null 2>&1 &", cmd, cmd)
-		)
-	end
-end
 
-run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
+awful.spawn.with_shell([[sh $HOME/bin/autostart.sh]])
 
 -- This function implements the XDG autostart specification
 --[[
@@ -92,10 +69,10 @@ local chosen_theme = "steamburn"
 local modkey = "Mod4"
 local altkey = "Mod1"
 local terminal = os.getenv("TERMINAL") or "kitty"
-local vi_focus = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
+-- local vi_focus = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev = true -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor = os.getenv("EDITOR") or "nvim"
-local browser = "librewolf"
+local browser = "firefox"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉" }
@@ -126,7 +103,6 @@ awful.layout.layouts = {
 	--lain.layout.termfair,
 	--lain.layout.termfair.center
 }
-
 
 awful.util.taglist_buttons = mytable.join(
 	awful.button({}, 1, function(t)
@@ -195,43 +171,6 @@ local myawesomemenu = {
 	},
 }
 
-awful.util.mymainmenu = freedesktop.menu.build({
-	before = {
-		{ "Awesome", myawesomemenu, beautiful.awesome_icon },
-		-- other triads can be put here
-	},
-	after = {
-		{ "Open terminal", terminal },
-		-- other triads can be put here
-	},
-})
-
--- Hide the menu when the mouse leaves it
---[[
-awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function()
-    if not awful.util.mymainmenu.active_child or
-       (awful.util.mymainmenu.wibox ~= mouse.current_wibox and
-       awful.util.mymainmenu.active_child.wibox ~= mouse.current_wibox) then
-        awful.util.mymainmenu:hide()
-    else
-        awful.util.mymainmenu.active_child.wibox:connect_signal("mouse::leave",
-        function()
-            if awful.util.mymainmenu.wibox ~= mouse.current_wibox then
-                awful.util.mymainmenu:hide()
-            end
-        end)
-    end
-end)
---]]
-
--- Set the Menubar terminal for applications that require it
---menubar.utils.terminal = terminal
-
--- }}}
-
--- {{{ Screen
-
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
 	-- Wallpaper
 	if beautiful.wallpaper then
@@ -305,26 +244,6 @@ local globalkeys = mytable.join(
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
-	--[[ -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}), ]]
-
-	-- Default client focus
-	--[[ awful.key({ altkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ altkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ), ]]
 
 	-- By-direction client focus
 	awful.key({ modkey }, "j", function()
@@ -427,17 +346,6 @@ local globalkeys = mytable.join(
 
 	-- On-the-fly useless gaps change
 
-	-- Dynamic tagging
-	--[[ awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end,
-              {description = "add new tag", group = "tag"}),
-    awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end,
-              {description = "rename tag", group = "tag"}),
-    awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end,
-              {description = "move tag to the left", group = "tag"}),
-    awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(1) end,
-              {description = "move tag to the right", group = "tag"}),
-    awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end,
-              {description = "delete tag", group = "tag"}), ]]
 
 	-- Standard program
 	awful.key({ modkey }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
@@ -541,7 +449,6 @@ local globalkeys = mytable.join(
 		group = "hotkeys",
 	}),
 
-
 	-- User programs
 	awful.key({ modkey }, "/", function()
 		awful.spawn(browser)
@@ -551,6 +458,19 @@ local globalkeys = mytable.join(
 		os.execute("rofi -combi-modi window,drun,ssh -show combi -modi combi -show-icons")
 	end, {
 		description = "show rofi",
+		group = "launcher",
+	}),
+
+	awful.key({ modkey }, "g", function()
+		os.execute([[
+             sh -c " ls ~/Games/*/start.sh  --quoting-style=escape \
+                |xargs -n 1 -d '\n' dirname \
+                |xargs -d '\n' -n 1 basename \
+                |rofi -dmenu -i  \
+                |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh "
+            ]])
+	end, {
+		description = "list games",
 		group = "launcher",
 	}),
 
@@ -627,12 +547,14 @@ for i = 1, 9 do
 		awful.key({ modkey }, "#" .. i + 9, function()
 			local screen = awful.screen.focused()
 			local tag = screen.tags[i]
-      if not tag then return end
+			if not tag then
+				return
+			end
 
-      local current_tag = screen.selected_tag
+			local current_tag = screen.selected_tag
 			if tag == current_tag then
-        awful.tag.history.restore(1)
-      else
+				awful.tag.history.restore(1)
+			else
 				tag:view_only()
 			end
 		end, {
@@ -774,6 +696,7 @@ awful.rules.rules = {
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	{ rule = { class = "Firefox" }, properties = { screen = 1, tag = awful.util.tagnames[1] } },
+	{ rule = { class = "TelegramDesktop" }, properties = { screen = 1, tag = awful.util.tagnames[4] } },
 }
 
 -- }}}
