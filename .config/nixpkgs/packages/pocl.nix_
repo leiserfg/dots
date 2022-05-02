@@ -1,0 +1,56 @@
+{ lib
+, stdenv
+, config
+, fetchFromGitHub
+, cmake
+, ninja
+, llvm
+
+
+  , clang
+  , hwloc
+  , lttng-ust
+  , ocl-icd
+  , pkgconfig
+ ,libclang 
+} :
+
+stdenv.mkDerivation rec {
+    pname = "pocl";
+    version = "1.8";
+    src = fetchFromGitHub {
+        rev = "v${version}";
+      owner = "pocl";
+      repo = pname;
+      sha256 = "sha256-beO5pIpu0Lqeg+bZEzlu62Df7rAIUpthpjlzlUAAsQw=";
+    };
+
+  buildInputs = [
+    clang
+    cmake
+    hwloc
+    llvm
+    lttng-ust
+    ocl-icd
+    pkgconfig
+    libclang
+    ];
+  nativeBuildInputs = [cmake ninja clang];
+
+cmakeFlags = [
+    "-DCMAKE_BUILD_TYPE=Release"
+    "-DKERNELLIB_HOST_CPU_VARIANTS=distro"
+    "-GNinja"
+    "--no-warn-unused-cli"
+];
+postInstall = ''
+ls .
+'';
+
+  meta = with lib; {
+      description = "pocl";
+      homepage = "portablecl.org";
+      # license = licenses.bsd3;
+      platforms = platforms.linux;
+  };
+}
