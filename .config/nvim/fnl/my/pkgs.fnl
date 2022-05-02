@@ -77,4 +77,6 @@
           (pkg :tweekmonster/startuptime.vim :cmd :StartupTime)
           (cpkg :kristijanhusak/orgmode.nvim)
           (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
-          :rktjmp/hotpot.nvim)
+          :rktjmp/hotpot.nvim
+          (pkg  :folke/which-key.nvim :config "require('which-key').setup {}"))
+    
