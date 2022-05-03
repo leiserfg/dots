@@ -10,7 +10,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 
 local main_color = "#afcfee"
-theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/steamburn"
+theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/simple"
 theme.wallpaper = os.getenv("HOME") .. "/wall.png"
 theme.font = "Lato"
 theme.fg_normal = "#e2ccb0"
