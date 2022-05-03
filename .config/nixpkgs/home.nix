@@ -116,7 +116,7 @@ in
 # tio
   ];
 
-
+  services.caffeine.enable = true;
   services.udiskie = {
       enable = true;
       automount = true;
