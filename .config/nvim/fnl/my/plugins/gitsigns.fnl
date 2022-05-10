@@ -1,6 +1,20 @@
 (local gs (require :gitsigns))
 
 
+(fn forward []
+     (if vim.wo.diff
+        "]c"
+       (do
+         (vim.schedule gs.next_hunk)
+         "<Ignore>")))
+
+(fn backward []
+     (if vim.wo.diff
+        "[c"
+       (do
+         (vim.schedule gs.prev_hunk)
+         "<Ignore>")))
+
 (gs.setup {:yadm {:enable true}
            :on_attach (fn [bufnr]
                         (fn map [mode l r opts?]
@@ -9,10 +23,10 @@
                           (vim.keymap.set mode l r opts))
 
                         (map :n "]c"
-                             "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"
+                             forward
                              {:expr true})
                         (map :n "[c"
-                           "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"
+                           backward
                            {:expr true})
                         (map [:n  :v] :<leader>hs ":Gitsigns stage_hunk<CR>")
                         (map [:n  :v] :<leader>hr ":Gitsigns reset_hunk<CR>")
