@@ -14,7 +14,7 @@ in
   home.stateVersion = "22.05";
 
   nixpkgs.overlays = [
-    (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlay
+    (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlays.default
     (builtins.getFlake github:nix-community/neovim-nightly-overlay).overlay
     # (self: super: {
     #     qtile = python3.withPackages(_: [super.qtile.unwrapped]).overrideAttrs (_: {

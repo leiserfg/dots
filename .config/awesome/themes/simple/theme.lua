@@ -118,11 +118,11 @@ function theme.at_screen_connect(s)
     s.mytaglist = awful.widget.taglist(s, tags_filter, awful.util.taglist_buttons)
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
+    s.mytasklist = wibox.container.constraint(awful.widget.tasklist {
         screen = s,
         filter = awful.widget.tasklist.filter.focused,
         buttons = awful.util.tasklist_buttons,
-    }
+    }, "max", s.geometry.width/3)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18) })
@@ -141,6 +141,7 @@ function theme.at_screen_connect(s)
             s.mypromptbox,
             spr,
         },
+
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
