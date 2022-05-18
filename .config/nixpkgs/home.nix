@@ -172,6 +172,7 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   fonts.fontconfig.enable = true;
+
   gtk = {
     enable = true;
     iconTheme = {
@@ -193,11 +194,11 @@ in
     enable = true;
     # windowManager.command = "${pkgs.}/bin/qtile start";
     windowManager.command = "awesome";
-    pointerCursor = {
+  };
+  home.pointerCursor = {
         package = pkgs.gnome.adwaita-icon-theme;
         name = "Adwaita";
         size=16;
+        x11.enable=true;
     };
-  };
-
 }
