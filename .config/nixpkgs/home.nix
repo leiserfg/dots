@@ -96,6 +96,10 @@ in
     # nix-du
     patool
     stylua
+    autorandr
+
+      # blender_3_1
+      blender
   ]
   ++ map (x: pkgs.callPackage ("${./packages}/${x}") { })
          (filter (hasSuffix ".nix")
@@ -106,7 +110,6 @@ in
     terraform-ls
   ]
   ++ pkgs.lib.optionals isThePc [
-      blender_3_1
       dxvk
       luajitPackages.ldoc
       # lutris-free

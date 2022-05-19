@@ -11,6 +11,7 @@ run_disowned () {
 
 xset -b
 pkill -9 picom; picom -b
+autorandr --change
 
 xset s 300 600
 run_once xsettingsd

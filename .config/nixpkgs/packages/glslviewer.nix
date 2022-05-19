@@ -1,18 +1,18 @@
 {
     withFFMPG ? true,
-    stdenv, cmake, ninja, lib, fetchFromGitHub,
-    libX11, libXrandr, libXinerama, libXcursor, libXi, libXext, libGLU, ffmpeg
+    stdenv, cmake, ninja, lib, fetchFromGitHub, pkg-config,
+    libX11, libXrandr, libXinerama, libXcursor, libXi, libXext, libGLU, ffmpeg, ncurses
 }:
 
 stdenv.mkDerivation rec {
   pname = "glslViewer";
-  version = "2.0.4";
+  version = "2.0.4-test";
   src = fetchFromGitHub {
       owner = "patriciogonzalezvivo";
       repo = pname;
       fetchSubmodules = true;
-      rev = version;
-      sha256 = "sha256-Jrj8WlKrkPpmME50oVcZLQZs0bqbODAYibLJGPF7ock=";
+      rev = "9dc7a065124724652b391886bdc0054c9fc97cf6";
+      sha256 = "sha256-THw0K3e8WVPfI09ZfB5CCfEwroazLBpC+fqd4QphXNg=";
   };
   nativeBuildInputs = [cmake ninja];
   buildInputs = [
@@ -23,12 +23,9 @@ stdenv.mkDerivation rec {
       libXi
       libXext
       libGLU
+      ncurses
+      pkg-config
   ] ++ lib.optional withFFMPG ffmpeg;
-
-  cmakeFlags = [
-      "-DCMAKE_BUILD_TYPE='Release'"
-      "-GNinja"
-  ];
 
   meta = with lib; {
       description = "Live GLSL coding renderer";
