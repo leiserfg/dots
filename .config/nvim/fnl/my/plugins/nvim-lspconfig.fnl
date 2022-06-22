@@ -23,7 +23,7 @@
                       :clangd
                       :terraformls])]
   ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
-(lspconfig.elixirls.setup {:cmd {1 :elixir-ls}
+(lspconfig.elixirls.setup {:cmd [:elixir-ls]
                            :on_attach on-attach
                            : capabilities})
 (lspconfig.pylsp.setup {:on_attach on-attach
@@ -39,7 +39,7 @@
 (local runtime-path (vim.split package.path ";"))
 (table.insert runtime-path :lua/?.lua)
 (table.insert runtime-path :lua/?/init.lua)
-(lspconfig.sumneko_lua.setup {:cmd [ :/usr/bin/lua-language-server]
+(lspconfig.sumneko_lua.setup {:cmd [ :lua-language-server]
                               :on_attach on-attach
                               :settings {:Lua {:workspace {:library (vim.api.nvim_get_runtime_file "" true)}
                                                :telemetry {:enable false}
@@ -61,6 +61,9 @@
 
 ((. (require :rust-tools) :setup) opts)
 
+(lspconfig.tailwindcss.setup
+  { :on_attach on-attach
+    :filetypes [ "html" "elixir" "eelixir"]})
 
 
 (vim.cmd "

@@ -29,7 +29,7 @@
           :gpanders/nvim-parinfer
           (pkg :numToStr/Comment.nvim :keys :gc :config
              "require('Comment').setup()")
-          (cpkg :junegunn/vim-easy-align :keys :ga)
+          (cpkg :junegunn/vim-easy-align)
           (pkg :vim-scripts/ReplaceWithRegister :keys :gr)
           :tpope/vim-repeat
           (cpkg :AndrewRadev/switch.vim :requires

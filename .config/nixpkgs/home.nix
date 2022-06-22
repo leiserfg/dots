@@ -66,6 +66,7 @@ in
     lightlocker
     rofi
     picom
+    dogdns
     unclutter
     awesome
     pasystray
@@ -73,6 +74,8 @@ in
     tdesktop
     firefox
     zathura
+    mupdf
+    brave
     calibre
     nsxiv
     xdragon
