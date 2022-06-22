@@ -61,10 +61,6 @@
 
 ((. (require :rust-tools) :setup) opts)
 
-(lspconfig.tailwindcss.setup
-  { :on_attach on-attach
-    :filetypes [ "html" "elixir" "eelixir"]})
-
 
 (vim.cmd "
   sign define DiagnosticSignError text=🩸 linehl= numhl=
