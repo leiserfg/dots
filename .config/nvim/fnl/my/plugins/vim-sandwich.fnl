@@ -15,6 +15,6 @@
 
 
 (set vim.g.sandwich#recipes (vim.list_extend
-                              [{:buns ["{trans}" "{endtrans}"]
+                              [{:buns ["{% trans %}" "{% endtrans %}"]
                                 :input [:j]}]
                               vim.g.sandwich#default_recipes))
