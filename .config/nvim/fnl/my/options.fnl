@@ -82,7 +82,7 @@
   augroup END
 ")
 
-(set g.do_filetype_lua 1)
-(set g.did_load_filetypes 0)
-(vim.filetype.add {:extension {:keymap :dts
-                               :frag :glsl}})
+;; (set g.do_filetype_lua 1)
+;; (set g.did_load_filetypes 0)
+;; (vim.filetype.add {:extension {:keymap :dts
+;;                                :frag :glsl}})
