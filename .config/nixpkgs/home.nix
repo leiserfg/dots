@@ -15,15 +15,8 @@ in
 
   nixpkgs.overlays = [
     (builtins.getFlake github:edolstra/nix-warez?dir=blender).overlays.default
+    (builtins.getFlake github:leiserfg/leiserfg-overlay).overlays.default
     (builtins.getFlake github:nix-community/neovim-nightly-overlay).overlay
-    # (self: super: {
-    #     qtile = python3.withPackages(_: [super.qtile.unwrapped]).overrideAttrs (_: {
-    #       otherwise will be exported as "env", this restores `nix search` behavior
-    #       name = "${unwrapped.pname}-${unwrapped.version}";
-    #       # export underlying qtile package
-    #       passthru = { inherit unwrapped; };
-    #     }
-    # })
   ];
 
 
@@ -42,14 +35,24 @@ in
   # };
   # { TERMINFO_DIRS = "/home/leiserfg/.nix-profile/share/terminfo";};
 
-  nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+      allowUnfree = true;
+      packageOverrides = pkgs: {
+        nixos = import <nixos> {
+          config = config.nixpkgs.config;
+        };
+      };
+    };
 
   home.packages = with pkgs; with builtins; with lib; [
     neovim-unwrapped
+    anki
+    # (nixos.discord)
     # This has to be available for treesitter to build the parsers
+    javx
     gcc
     nodePackages.npm
-
+    controllermap
     pcmanfm
     krita
     poetry

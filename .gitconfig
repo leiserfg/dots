@@ -31,7 +31,7 @@
 	meh             = commit --amend
 	wdiff           = diff --word-diff=color
 	wshow           = show --word-diff=color
-	lasttag         = describe --tags --abbrev=0
+	lasttag         = "!git tag --sort=-creatordate|head -n 1"
 	branches        = branch -vv
 	comerge         = "!x() { target=`git symbolic-ref HEAD`; git co $1; git merge $target; }; x"
 	ours            = "!f() { git checkout --ours -- $@ && git add -- $@; }; f"

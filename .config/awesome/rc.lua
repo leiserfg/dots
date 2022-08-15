@@ -105,13 +105,6 @@ awful.util.taglist_buttons = mytable.join(
 )
 
 awful.util.tasklist_buttons = mytable.join(
-	awful.button({}, 1, function(c)
-		if c == client.focus then
-			c.minimized = true
-		else
-			c:emit_signal("request::activate", "tasklist", { raise = true })
-		end
-	end),
 	awful.button({}, 3, function()
 		awful.menu.client_list({ theme = { width = 250 } })
 	end),
@@ -126,27 +119,6 @@ awful.util.tasklist_buttons = mytable.join(
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 -- }}}
-
--- {{{ Menu
-
--- Create a launcher widget and a main menu
-local myawesomemenu = {
-	{
-		"Hotkeys",
-		function()
-			hotkeys_popup.show_help(nil, awful.screen.focused())
-		end,
-	},
-	{ "Manual", string.format("%s -e man awesome", terminal) },
-	{ "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-	{ "Restart", awesome.restart },
-	{
-		"Quit",
-		function()
-			awesome.quit()
-		end,
-	},
-}
 
 screen.connect_signal("property::geometry", function(s)
 	-- Wallpaper
@@ -182,9 +154,6 @@ end)
 -- {{{ Mouse bindings
 
 root.buttons(mytable.join(
-	awful.button({}, 3, function()
-		awful.util.mymainmenu:toggle()
-	end),
 	awful.button({}, 4, awful.tag.viewnext),
 	awful.button({}, 5, awful.tag.viewprev)
 ))
@@ -439,13 +408,13 @@ local globalkeys = mytable.join(
 	}),
 
 	awful.key({ modkey }, "g", function()
-		os.execute([[
-             sh -c " ls ~/Games/*/start.sh  --quoting-style=escape \
+		awful.spawn.with_shell[[
+             sh -c " ls ~/Games/*/?start.sh  --quoting-style=escape \
                 |xargs -n 1 -d '\n' dirname \
                 |xargs -d '\n' -n 1 basename \
                 |rofi -dmenu -i  \
-                |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh "
-            ]])
+                |xargs  -d '\n'  -I__ gamemoderun $HOME'/Games/__/wstart.sh' "
+            ]]
 	end, {
 		description = "list games",
 		group = "launcher",
@@ -476,6 +445,10 @@ local clientkeys = mytable.join(
 	awful.key({ modkey }, "q", function(c)
 		c:kill()
 	end, { description = "close", group = "client" }),
+
+	awful.key({ modkey, "Shift" }, "q", function(c)
+		awesome.kill(c.pid, awesome.unix_signal.SIGTERM)
+	end, { description = "kill program", group = "client" }),
 	awful.key(
 		{ modkey, "Control" },
 		"space",
@@ -597,6 +570,10 @@ awful.rules.rules = {
 			screen = awful.screen.preferred,
 			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 			size_hints_honor = false,
+                        maximized = false,
+                        maximized_vertical = false,
+                        maximized_horizontal = false,
+                        minimized = false
 		},
 	},
 
@@ -624,12 +601,10 @@ awful.rules.rules = {
 				"Sxiv",
 				"xtightvncviewer",
 
-				"Zathura",
 				"PureRef",
 				"MEGAsync",
 				"gmic_qt",
 				"Pavucontrol",
-				"Dragon-drag-and-drop",
 
 				"file_progress",
 				"confirm",
@@ -659,6 +634,13 @@ awful.rules.rules = {
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	{ rule = { class = "Firefox" }, properties = { screen = 1, tag = awful.util.tagnames[1] } },
 	{ rule = { class = "TelegramDesktop" }, properties = { screen = 1, tag = awful.util.tagnames[4] } },
+
+	{ rule_any = { class = {"Dragon"} },
+          properties = {
+            sticky = true,
+            ontop = true,
+            placement = awful.placement.centered }
+        },
 }
 
 -- }}}
@@ -677,6 +659,7 @@ client.connect_signal("manage", function(c)
 		-- Prevent clients from being unreachable after screen count changes.
 		awful.placement.no_offscreen(c)
 	end
+
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
@@ -738,4 +721,16 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
+-- Disable maximizing windows
+-- client.connect_signal("property::maximized", function(c)
+--         c.maximized = false
+-- end)
+--
+-- client.connect_signal("property::maximized_vertical", function(c)
+--         c.maximized_vertical = false
+-- end)
+--
+-- client.connect_signal("property::maximized_horizontal", function(c)
+--         c.maximized_horizontal = false
+-- end)
 -- }}}
