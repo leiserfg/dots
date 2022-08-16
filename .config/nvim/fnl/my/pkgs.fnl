@@ -41,7 +41,11 @@
           :tpope/vim-eunuch
           (pkg :Vimjas/vim-python-pep8-indent :ft :python)
           (pkg :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
-          :direnv/direnv.vim (cpkg :machakann/vim-sandwich)
+          :direnv/direnv.vim
+          ;; (cpkg :machakann/vim-sandwich)
+          (pkg :kylechui/nvim-surround :config "require('nvim-surround').setup{}")
+          (pkg  :leiserfg/bqn-vim)
+          (pkg  "https://git.sr.ht/~detegr/nvim-bqn")
           (cpkg :AndrewRadev/splitjoin.vim :keys [:gS :gJ])
           (cpkg :lewis6991/gitsigns.nvim :event :VimEnter :requires
               [:nvim-lua/plenary.nvim])
@@ -51,7 +55,9 @@
           (cpkg :nvim-treesitter/nvim-treesitter :run ":TSUpdate" :requires
               [:nvim-treesitter/playground
                :nvim-treesitter/nvim-treesitter-textobjects])
-          (cpkg :L3MON4D3/LuaSnip :requires [:rafamadriz/friendly-snippets])
+          (cpkg :L3MON4D3/LuaSnip 
+                :requires [:rafamadriz/friendly-snippets]
+                :branch :parse_from_ast)
           (cpkg :hrsh7th/nvim-cmp :requires
               [:hrsh7th/cmp-buffer
                :hrsh7th/cmp-path
@@ -75,8 +81,8 @@
              "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')")
           (pkg :nanotee/zoxide.vim :cmd :Z)
           (pkg :tweekmonster/startuptime.vim :cmd :StartupTime)
-          (cpkg :kristijanhusak/orgmode.nvim)
-          (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
+          :renerocksai/calendar-vim
+          ;; (cpkg :kristijanhusak/orgmode.nvim)
+          ;; (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
           :rktjmp/hotpot.nvim)
           ;; (pkg  :folke/which-key.nvim :config "require('which-key').setup {}"))
-    

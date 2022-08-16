@@ -23,9 +23,9 @@
                       :clangd
                       :terraformls])]
   ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
-;; (lspconfig.elixirls.setup {:cmd [:elixir-ls]
-;;                            :on_attach on-attach
-;;                            : capabilities})
+(lspconfig.elixirls.setup {:cmd [:elixir-ls]
+                           :on_attach on-attach
+                           : capabilities})
 (lspconfig.pylsp.setup {:on_attach on-attach
                         :on_init (fn [client]
                                    (local venv (or vim.env.VIRTUAL_ENV ""))
@@ -48,8 +48,7 @@
                               : capabilities})
 
 
-(local opts {:tools {:hover_with_actions true
-                     :autoSetHints true
+(local opts {:tools {:autoSetHints true
                      :inlay_hints {:max_len_align false
                                    :right_align false
                                    :max_len_align_padding 1
@@ -60,6 +59,10 @@
              :server {: on_attach : capabilities}})
 
 ((. (require :rust-tools) :setup) opts)
+
+(lspconfig.tailwindcss.setup
+  { :on_attach on-attach
+    :filetypes [ "html" "elixir" "eelixir"]})
 
 
 (vim.cmd "

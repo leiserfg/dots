@@ -409,11 +409,11 @@ local globalkeys = mytable.join(
 
 	awful.key({ modkey }, "g", function()
 		awful.spawn.with_shell[[
-             sh -c " ls ~/Games/*/?start.sh  --quoting-style=escape \
+             gamemoderun sh -c " ls ~/Games/*/*start.sh  --quoting-style=escape \
                 |xargs -n 1 -d '\n' dirname \
                 |xargs -d '\n' -n 1 basename \
                 |rofi -dmenu -i  \
-                |xargs  -d '\n'  -I__ gamemoderun $HOME'/Games/__/wstart.sh' "
+                |xargs  -d '\n'  -I__  bash -c  'exec bash  $HOME/Games/__/*start.sh'"
             ]]
 	end, {
 		description = "list games",
