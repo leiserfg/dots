@@ -57,6 +57,7 @@
                :nvim-treesitter/nvim-treesitter-textobjects])
           (cpkg :L3MON4D3/LuaSnip 
                 :requires [:rafamadriz/friendly-snippets]
+                :rocks [:jsregexp]
                 :branch :parse_from_ast)
           (cpkg :hrsh7th/nvim-cmp :requires
               [:hrsh7th/cmp-buffer

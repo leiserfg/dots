@@ -303,7 +303,7 @@ local globalkeys = mytable.join(
 	}),
 
 	awful.key({ modkey }, "Return", function()
-		awful.spawn(terminal)
+		awful.spawn.with_shell("cd $(xcwd); " .. terminal)
 	end, {
 		description = "open a terminal",
 		group = "launcher",
