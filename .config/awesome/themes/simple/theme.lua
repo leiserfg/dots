@@ -39,7 +39,8 @@ theme.layout_txt_tilebottom = "[b]"
 theme.layout_txt_tiletop = "[tt]"
 theme.layout_txt_fairv = "[fv]"
 theme.layout_txt_fairh = "[fh]"
-theme.layout_txt_spiral = "[s]" theme.layout_txt_dwindle = "[d]"
+theme.layout_txt_spiral = "[s]"
+theme.layout_txt_dwindle = "[d]"
 theme.layout_txt_max = "[m]"
 theme.layout_txt_fullscreen = "[F]"
 theme.layout_txt_magnifier = "[M]"
@@ -104,7 +105,8 @@ function theme.at_screen_connect(s)
             awful.layout.inc(-1)
         end),
         awful.button({}, 4, function()
-            awful.layout.inc(1) end),
+            awful.layout.inc(1)
+        end),
         awful.button({}, 5, function()
             awful.layout.inc(-1)
         end)
@@ -123,7 +125,7 @@ function theme.at_screen_connect(s)
         screen = s,
         filter = awful.widget.tasklist.filter.focused,
         buttons = awful.util.tasklist_buttons,
-    }, "max", s.geometry.width/3)
+    }, "max", s.geometry.width / 3)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18) })
@@ -146,7 +148,12 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            bw{},
+            bw { timeout = 60,
+                percent_colors = {
+                    { 35, "red" },
+                    { 50, "orange" },
+                    { 999, "white" },
+                } },
             wibox.widget.systray(),
             mytextclock,
         },
