@@ -21,7 +21,7 @@ in
 
 
   home.sessionVariables = (if isThePc then hardware.nvidiaVars else if isTheThinkpad then
-  hardware.intelVars else {}) ;
+  hardware.intelVars else {});
   # // let distroTerminfoDirs = concatStringsSep ":" [
   #       "/etc/terminfo" # debian, fedora, gentoo
   #       "/lib/terminfo" # debian
@@ -45,6 +45,8 @@ in
     };
 
   home.packages = with pkgs; with builtins; with lib; [
+    termusic
+    pipewire
     neovim-unwrapped
     anki
     # (nixos.discord)
@@ -68,6 +70,9 @@ in
     fish
     lightlocker
     rofi
+    dwarfs
+    yt-dlp
+    mediainfo
     picom
     dogdns
     unclutter
@@ -103,7 +108,7 @@ in
     patool
     stylua
     autorandr
-
+    godot
       # blender_3_1
       blender
   ]
@@ -114,12 +119,14 @@ in
     slack
     insomnia
     terraform-ls
+    winetricks
+    # wineWowPackages.staging
   ]
   ++ pkgs.lib.optionals isThePc [
       dxvk
       luajitPackages.ldoc
       # lutris-free
-      wineWowPackages.unstable
+      # wineWowPackages.unstable
       cabextract
 # for debugging the keyboad
 # tio

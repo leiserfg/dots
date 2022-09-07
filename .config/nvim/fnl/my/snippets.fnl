@@ -54,6 +54,7 @@
                       :all [
                             (sf :date date)
                             (sf :uuid uuid-)
+                            (ls.parser.parse_snippet {:trig "(ma)(gic)" :regTrig true} "$LS_TRIGGER $LS_CAPTURE1 $LS_CAPTURE2")
                             (sf "lorem(%d*)" lorem true)
                             (s {:trig :bbox}
                                [(t ["╔"])
