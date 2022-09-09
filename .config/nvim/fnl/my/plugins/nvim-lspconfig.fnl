@@ -23,9 +23,9 @@
                       :clangd
                       :terraformls])]
   ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
-(lspconfig.elixirls.setup {:cmd [:elixir-ls]
-                           :on_attach on-attach
-                           : capabilities})
+;; (lspconfig.elixirls.setup {:cmd [:elixir-ls]
+;;                            :on_attach on-attach
+;;                            : capabilities})
 (lspconfig.pylsp.setup {:on_attach on-attach
                         :on_init (fn [client]
                                    (local venv (or vim.env.VIRTUAL_ENV ""))
