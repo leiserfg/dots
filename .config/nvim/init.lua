@@ -1,10 +1,3 @@
--- Profiling
---require("jit.p").start("10,i1,s,m0,G", "/tmp/output.log")
---vim.cmd [[
---	au VimLeave * lua require'jit.p'.stop()
---]]
-
-
 local function ensure(pkg)
     local pkg_name = pkg:match'[^/]*$'
     local pkg_path = vim.fn.stdpath('data')..'/site/pack/packer/start/' .. pkg_name

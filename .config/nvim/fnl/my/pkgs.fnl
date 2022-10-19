@@ -43,7 +43,7 @@
           (pkg :norcalli/nvim-colorizer.lua :config "require'colorizer'.setup()")
           :direnv/direnv.vim
           ;; (cpkg :machakann/vim-sandwich)
-          (pkg :kylechui/nvim-surround :config "require('nvim-surround').setup{}")
+          (cpkg :kylechui/nvim-surround)
           (pkg  :leiserfg/bqn-vim)
           (pkg  "https://git.sr.ht/~detegr/nvim-bqn")
           (cpkg :AndrewRadev/splitjoin.vim :keys [:gS :gJ])
@@ -56,9 +56,7 @@
               [:nvim-treesitter/playground
                :nvim-treesitter/nvim-treesitter-textobjects])
           (cpkg :L3MON4D3/LuaSnip 
-                :requires [:rafamadriz/friendly-snippets]
-                :rocks [:jsregexp])
-
+                :requires [:rafamadriz/friendly-snippets])
           (cpkg :hrsh7th/nvim-cmp :requires
               [:hrsh7th/cmp-buffer
                :hrsh7th/cmp-path
@@ -72,18 +70,25 @@
           (pkg :lambdalisue/suda.vim :config :vim.g.suda_smart_edit=1)
           (cpkg :metakirby5/codi.vim :cmd :Codi)
           (pkg :dhruvasagar/vim-table-mode :ft [:markdown :org :orgagenda])
-          (cpkg :nvim-lualine/lualine.nvim :requires :gruvbox-flat.nvim)
+          (cpkg :nvim-lualine/lualine.nvim) 
+                ;; :requires :gruvbox-flat.nvim)
           (cpkg :kyazdani42/nvim-tree.lua :keys :<leader>t :requires
               :kyazdani42/nvim-web-devicons)
           (pkg :Olical/conjure :ft [:fennel :clojure])
           (cpkg :ibhagwan/fzf-lua :requires
               [:vijaymarupudi/nvim-fzf :kyazdani42/nvim-web-devicons])
-          (pkg :eddyekofo94/gruvbox-flat.nvim :config
-             "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')")
+          ;; (pkg :eddyekofo94/gruvbox-flat.nvim :config
+          ;;    "vim.g.gruvbox_flat_style = 'dark'; vim.cmd('colorscheme gruvbox-flat')")
+          (pkg :rebelot/kanagawa.nvim :config "require('kanagawa').setup(); vim.cmd('colorscheme kanagawa')")
           (pkg :nanotee/zoxide.vim :cmd :Z)
           (pkg :tweekmonster/startuptime.vim :cmd :StartupTime)
-          :renerocksai/calendar-vim
           ;; (cpkg :kristijanhusak/orgmode.nvim)
           ;; (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
           :rktjmp/hotpot.nvim)
           ;; (pkg  :folke/which-key.nvim :config "require('which-key').setup {}"))
+
+          ;; (pkg :tamton-aquib/duck.nvim  :config "
+          ;;      vim.keymap.set('n', '<leader>dd', function() require('duck').hatch() end, {})
+          ;;      vim.keymap.set('n', '<leader>dk', function() require('duck').cook() end, {})
+          ;;      "))
+

@@ -81,8 +81,5 @@
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=150}
   augroup END
 ")
-
-;; (set g.do_filetype_lua 1)
-;; (set g.did_load_filetypes 0)
 (vim.filetype.add {:extension {:keymap :dts
                                :frag :glsl}})

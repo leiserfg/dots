@@ -3,7 +3,8 @@
 (local ls (require :luasnip))
 (local types (require :luasnip.util.types))
 (ls.config.set_config {:ext_opts {types.choiceNode {:active {:virt_text [[:choiceNode :IncSearch]]}}
-                                  types.insertNode {:passive {:hl_group :Substitute}}}
+                                  types.insertNode {:passive {:hl_group :Substitute}}
+                                  types.exitNode {:passive {:hl_group :Substitute}}}
                        :updateevents "TextChanged,TextChangedI"
                        :store_selection_keys :<c-j>})
 

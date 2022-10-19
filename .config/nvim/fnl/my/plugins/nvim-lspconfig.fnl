@@ -6,7 +6,7 @@
     nnoremap <buffer> <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
     nnoremap <buffer> <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
     nnoremap <buffer> <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.formatting()<CR>
+    nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.format{async=true}<CR>
     xnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.range_formatting()<CR>
     nnoremap <buffer> <silent> <Leader>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
     nnoremap <buffer> <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
@@ -15,7 +15,7 @@
     "))
 
 (local capabilities
-       ((. (require :cmp_nvim_lsp) :update_capabilities) (vim.lsp.protocol.make_client_capabilities)))
+       ((. (require :cmp_nvim_lsp) :default_capabilities)))
 (local lspconfig (require :lspconfig))
 (each [_ lsp (ipairs [:gdscript
                       :vimls
@@ -23,9 +23,9 @@
                       :clangd
                       :terraformls])]
   ((. lspconfig lsp :setup) {: capabilities :on_attach on-attach}))
-;; (lspconfig.elixirls.setup {:cmd [:elixir-ls]
-;;                            :on_attach on-attach
-;;                            : capabilities})
+(lspconfig.elixirls.setup {:cmd [:elixir-ls]
+                           :on_attach on-attach
+                           : capabilities})
 (lspconfig.pylsp.setup {:on_attach on-attach
                         :on_init (fn [client]
                                    (local venv (or vim.env.VIRTUAL_ENV ""))

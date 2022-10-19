@@ -110,6 +110,9 @@ in
     stylua
     autorandr
     godot
+    hyperfine
+    nodePackages.serverless
+    wkhtmltopdf-bin
       # blender_3_1
       blender
   ]

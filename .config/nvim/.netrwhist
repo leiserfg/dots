@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/tmp'
+let g:netrw_dirhist_0='/home/leiserfg/.local/share'
+let g:netrw_dirhist_9='/home/leiserfg/.local/share/TelegramDesktop'
+let g:netrw_dirhist_8='scp://staging/'
+let g:netrw_dirhist_7='/home/leiserfg/inventorum/core-api/src/inventorum.api/inventorum/api/apps/customers'
+let g:netrw_dirhist_6='/home/leiserfg/inventorum/core-api/src/inventorum.api/inventorum/api/apps/devices'
+let g:netrw_dirhist_5='/home/leiserfg/inventorum/shop/docker'
+let g:netrw_dirhist_4='scp://production/'
+let g:netrw_dirhist_3='/home/leiserfg/inventorum/core-api/src/inventorum.api/inventorum/api/tests/files/product_import'
+let g:netrw_dirhist_2='/home/leiserfg/.emacs.d/elpa/use-package-20201110.2133'

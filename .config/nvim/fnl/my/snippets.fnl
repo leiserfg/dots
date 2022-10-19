@@ -47,33 +47,40 @@
       [(LOREM_IPSUM:sub 1 (+ amount 1))])))
 
 (ls.add_snippets nil {:direnv [
-                               (s {:wordTrig true :trig :lay}
-                                  [(t ["layout "])
-                                   (i 1 [:python])
-                                   (i 0)])]
-                      :all [
-                            (sf :date date)
-                            (sf :uuid uuid-)
-                            (ls.parser.parse_snippet {:trig "(ma)(gic)" :regTrig true} "$LS_TRIGGER $LS_CAPTURE1 $LS_CAPTURE2")
-                            (sf "lorem(%d*)" lorem true)
-                            (s {:trig :bbox}
-                               [(t ["╔"])
-                                (f (replace-each "═") {1 1})
-                                (t ["╗" "║"])
-                                (i 1 [""])
-                                (t ["║" "╚"])
-                                (f (replace-each "═") {1 1})
-                                (t {1 "╝"})
-                                (i 0)])
-                            (s {:wordTrig true :trig :sbox}
-                               [(t ["*"])
-                                (f (replace-each "-") {1 1})
-                                (t ["*" "|"])
-                                (i 1 [:content])
-                                (t ["|" "*"])
-                                (f (replace-each "-") {1 1})
-                                (t ["*"])
-                                (i 0)])]})
+                                                           (s {:wordTrig true :trig :lay}
+                                                              [(t ["layout "])
+                                                               (i 1 [:python])
+                                                               (i 0 [])])]
+                            :all [
+                                  (sf :date date)
+                                  (sf :uuid uuid-)
+                                  (sf "lorem(%d*)" lorem true)
+                                  (ls.parser.parse_snippet :env "Testing env $MY_NAME  $MY_AGE  $YOUR_THING  $S_PWD  $NON_EXISTING  $CURRENT_YEAR $TM_SELECTED_TEXT")
+                                  (s {:trig :bbox}
+                                     [(t ["╔"])
+                                      (f (replace-each "═") {1 1})
+                                      (t ["╗" "║"])
+                                      (i 1 {1 :content})
+                                      (t ["║" "╚"])
+                                      (f (replace-each "═") {1 1})
+                                      (t {1 "╝"})
+                                      (i 0 "asd")])
+                                  (s {:wordTrig true :trig :sbox}
+                                     [(t ["*"])
+                                      (f (replace-each "-") {1 1})
+                                      (t ["*" "|"])
+                                      (i 1 [:content])
+                                      (t ["|" "*"])
+                                      (f (replace-each "-") {1 1})
+                                      (t ["*"])
+                                      (f (fn [_ parent] parent.env.MY_NAME))
+                                      (i 0)])]})
 
 
 ((. (require :luasnip/loaders/from_vscode) :lazy_load))
+
+
+(ls.env_namespace :MY {:vars {:NAME :leiserfg}})
+(ls.env_namespace :YOUR {:vars (fn [x] (x:lower))})
+(ls.env_namespace :S {:vars os.getenv})
+ 
