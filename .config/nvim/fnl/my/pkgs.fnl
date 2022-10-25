@@ -84,11 +84,24 @@
           (pkg :tweekmonster/startuptime.vim :cmd :StartupTime)
           ;; (cpkg :kristijanhusak/orgmode.nvim)
           ;; (pkg :akinsho/org-bullets.nvim :config "require(\"org-bullets\").setup { symbols = { \"◉\", \"○\", \"✸\", \"✿\" } }")
-          :rktjmp/hotpot.nvim)
+          :rktjmp/hotpot.nvim
           ;; (pkg  :folke/which-key.nvim :config "require('which-key').setup {}"))
 
           ;; (pkg :tamton-aquib/duck.nvim  :config "
           ;;      vim.keymap.set('n', '<leader>dd', function() require('duck').hatch() end, {})
           ;;      vim.keymap.set('n', '<leader>dk', function() require('duck').cook() end, {})
           ;;      "))
+
+          (pkg :folke/noice.nvim
+               :event :VimEnter
+               :requires [:MunifTanjim/nui.nvim]
+               :config "require'noice'.setup({
+                      routes = {{
+                                  view = 'split',
+                                  filter = { min_width = 500 },
+                                        },
+                                  },
+                                }
+                      )"))
+
 
