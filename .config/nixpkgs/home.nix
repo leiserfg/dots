@@ -45,6 +45,7 @@ in
     };
 
   home.packages = with pkgs; with builtins; with lib; [
+  hugo
    elixir_ls
     termusic
     pipewire
