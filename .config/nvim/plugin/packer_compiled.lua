@@ -214,6 +214,19 @@ _G.packer_plugins = {
     path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["noice.nvim"] = {
+    config = { "require'noice'.setup({\n                      routes = {{\n                                  view = 'split',\n                                  filter = { min_width = 500 },\n                                        },\n                                  },\n                                }\n                      )" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/leiserfg/.local/share/nvim/site/pack/packer/opt/noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
+  },
   ["nvim-bqn"] = {
     loaded = true,
     path = "/home/leiserfg/.local/share/nvim/site/pack/packer/start/nvim-bqn",
@@ -411,46 +424,30 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-require[[my.plugins/LuaSnip]]
-time([[Config for LuaSnip]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require[[my.plugins/nvim-cmp]]
-time([[Config for nvim-cmp]], false)
--- Config for: kanagawa.nvim
-time([[Config for kanagawa.nvim]], true)
-require('kanagawa').setup(); vim.cmd('colorscheme kanagawa')
-time([[Config for kanagawa.nvim]], false)
--- Config for: lsp_signature.nvim
-time([[Config for lsp_signature.nvim]], true)
-require"lsp_signature".setup({floating_window=false})
-time([[Config for lsp_signature.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'colorizer'.setup()
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: fzf-lua
-time([[Config for fzf-lua]], true)
-require[[my.plugins/fzf-lua]]
-time([[Config for fzf-lua]], false)
 -- Config for: suda.vim
 time([[Config for suda.vim]], true)
 vim.g.suda_smart_edit=1
 time([[Config for suda.vim]], false)
--- Config for: switch.vim
-time([[Config for switch.vim]], true)
-require[[my.plugins/switch]]
-time([[Config for switch.vim]], false)
 -- Config for: nvim-surround
 time([[Config for nvim-surround]], true)
 require[[my.plugins/nvim-surround]]
 time([[Config for nvim-surround]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+require[[my.plugins/LuaSnip]]
+time([[Config for LuaSnip]], false)
+-- Config for: switch.vim
+time([[Config for switch.vim]], true)
+require[[my.plugins/switch]]
+time([[Config for switch.vim]], false)
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
 require[[my.plugins/lualine]]
 time([[Config for lualine.nvim]], false)
+-- Config for: lsp_signature.nvim
+time([[Config for lsp_signature.nvim]], true)
+require"lsp_signature".setup({floating_window=false})
+time([[Config for lsp_signature.nvim]], false)
 -- Config for: vim-easy-align
 time([[Config for vim-easy-align]], true)
 require[[my.plugins/vim-easy-align]]
@@ -459,6 +456,22 @@ time([[Config for vim-easy-align]], false)
 time([[Config for nvim-treesitter]], true)
 require[[my.plugins/nvim-treesitter]]
 time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'colorizer'.setup()
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: fzf-lua
+time([[Config for fzf-lua]], true)
+require[[my.plugins/fzf-lua]]
+time([[Config for fzf-lua]], false)
+-- Config for: kanagawa.nvim
+time([[Config for kanagawa.nvim]], true)
+require('kanagawa').setup(); vim.cmd('colorscheme kanagawa')
+time([[Config for kanagawa.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require[[my.plugins/nvim-cmp]]
+time([[Config for nvim-cmp]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-lspconfig ]]
@@ -471,38 +484,38 @@ time([[Sequenced loading]], false)
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Z lua require("packer.load")({'zoxide.vim'}, { cmd = "Z", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file EnMasse lua require("packer.load")({'vim-enmasse'}, { cmd = "EnMasse", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'startuptime.vim'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Codi lua require("packer.load")({'codi.vim'}, { cmd = "Codi", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'startuptime.vim'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file EnMasse lua require("packer.load")({'vim-enmasse'}, { cmd = "EnMasse", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file G lua require("packer.load")({'vim-fugitive'}, { cmd = "G", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
 vim.cmd [[noremap <silent> gc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gr <cmd>lua require("packer.load")({'ReplaceWithRegister'}, { keys = "gr", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <Plug>SpeedDatingFallbackDown <cmd>lua require("packer.load")({'vim-speeddating'}, { keys = "<lt>Plug>SpeedDatingFallbackDown", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gS <cmd>lua require("packer.load")({'splitjoin.vim'}, { keys = "gS", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gJ <cmd>lua require("packer.load")({'splitjoin.vim'}, { keys = "gJ", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <Plug>SpeedDatingFallbackUp <cmd>lua require("packer.load")({'vim-speeddating'}, { keys = "<lt>Plug>SpeedDatingFallbackUp", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>t <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "<lt>leader>t", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> gJ <cmd>lua require("packer.load")({'splitjoin.vim'}, { keys = "gJ", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <Plug>SpeedDatingFallbackDown <cmd>lua require("packer.load")({'vim-speeddating'}, { keys = "<lt>Plug>SpeedDatingFallbackDown", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> gS <cmd>lua require("packer.load")({'splitjoin.vim'}, { keys = "gS", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> gr <cmd>lua require("packer.load")({'ReplaceWithRegister'}, { keys = "gr", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-table-mode'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType fennel ++once lua require("packer.load")({'conjure', 'aniseed'}, { ft = "fennel" }, _G.packer_plugins)]]
 vim.cmd [[au FileType org ++once lua require("packer.load")({'vim-table-mode'}, { ft = "org" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-python-pep8-indent'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType orgagenda ++once lua require("packer.load")({'vim-table-mode'}, { ft = "orgagenda" }, _G.packer_plugins)]]
-vim.cmd [[au FileType fennel ++once lua require("packer.load")({'aniseed', 'conjure'}, { ft = "fennel" }, _G.packer_plugins)]]
 vim.cmd [[au FileType clojure ++once lua require("packer.load")({'conjure'}, { ft = "clojure" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'vim-unimpaired', 'vim-fugitive'}, { event = "BufRead *" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'gitsigns.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'vim-fugitive', 'vim-unimpaired'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'gitsigns.nvim', 'noice.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

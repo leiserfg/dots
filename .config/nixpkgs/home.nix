@@ -99,6 +99,7 @@ in
     zoxide
     ripgrep
     rust-analyzer-unwrapped
+    rustup
     # git stuff
     delta
     sshuttle
