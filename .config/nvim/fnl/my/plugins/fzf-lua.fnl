@@ -2,12 +2,15 @@
 (fzf.setup {:default_previewer :bat})
 (fzf.register_ui_select)
 
-(vim.cmd "
-  nnoremap <leader>/ <cmd>lua require('fzf-lua').grep({no_esc=true})<CR>
-  nnoremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
-  nnoremap <leader>fr <cmd>lua require('fzf-lua').registers()<CR>
-  nnoremap <leader>fb <cmd>lua require('fzf-lua').buffers()<CR>
-  nnoremap <leader>fh <cmd>lua require('fzf-lua').help_tags()<CR>
-  nnoremap <leader>fz <cmd>lua require('fzf-lua').builtin()<CR>
-")
+(local map vim.keymap.set)
+(local mappings 
+  { "<leader>ff" fzf.files
+    "<leader>fr" fzf.registers
+    "<leader>fb" fzf.buffers
+    "<leader>fh" fzf.help_tags
+    "<leader>fz" fzf.builtin
+    "<leader>/"  #(fzf.grep {:no_esc true})})
+
+(each [shortcut callback (pairs mappings)]
+   (map :n shortcut callback {:noremap true}))
 

@@ -1,18 +1,25 @@
 (fn on-attach []
-  (vim.cmd "    nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <buffer> <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <buffer> <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <buffer> <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <buffer> <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <buffer> <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <buffer> <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.format{async=true}<CR>
-    xnoremap <buffer> <silent> <Leader>= <cmd>lua vim.lsp.buf.range_formatting()<CR>
-    nnoremap <buffer> <silent> <Leader>q <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-    nnoremap <buffer> <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-    nnoremap <buffer> <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-    nnoremap <buffer> <silent> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-    "))
+
+  (local map vim.keymap.set)
+  (let [lb vim.lsp.buf
+        ld vim.diagnostic
+        mappings
+        {"gd"        lb.definition
+         "K"         lb.hover
+         "gD"        lb.implementation
+         "<c-k>"     lb.signature_help
+         "1gD"       lb.type_definition
+         "g0"        lb.document_symbol
+         "gW"        lb.workspace_symbol
+         "<Leader>=" #(lb.format {:async true})
+         "<Leader>=" lb.range_formatting
+         "<Leader>a" lb.code_action
+         "<Leader>q" ld.setloclist
+         "[d" ld.goto_prev
+         "]d" ld.goto_next}]
+      (each [shortcut callback (pairs mappings)]
+         (map :n shortcut callback {:noremap true :buffer true :silent true}))))
+
 
 (local capabilities
        ((. (require :cmp_nvim_lsp) :default_capabilities)))

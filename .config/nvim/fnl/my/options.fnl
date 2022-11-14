@@ -7,7 +7,7 @@
 (set o.ruler true)
 (set o.modelines 2)
 (set o.backspace "eol,start,indent")
-(o.whichwrap:append "<,>,h,l")
+;; (o.whichwrap:append "<,>,h,l")
 (set o.synmaxcol 500)
 (set o.ignorecase true)
 (set o.smartcase true)
@@ -71,15 +71,13 @@
 (set o.termguicolors true)
 (set g.loaded_zipPlugin 1)
 (set g.loaded_zip 1)
-(vim.cmd "
-  augroup vimrc
-  autocmd!
-  au InsertEnter * set nohlsearch
-  au BufRead,BufNewFile *.md,*.rst setlocal spell spelllang=en_us
-  au FileType gitcommit setlocal spell spelllang=en_us
-  au BufReadPost * silent! normal! g`\"zv
-  au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=150}
-  augroup END
-")
+
+(let [vimrc (vim.api.nvim_create_augroup :vimrc {:clear false})
+      acmd vim.api.nvim_create_autocmd]
+   (acmd :InsertEnter {:group vimrc :command "set nohlsearch"})
+   (acmd [:BufRead :BufNewFile] {:pattern [:*.md :*.rst ] :group vimrc :command "setlocal spell spelllang=en_us"})
+   (acmd :BufReadPost {:group vimrc :command "silent! normal! g`\"zv"})
+   (acmd :TextYankPost {:group vimrc :callback #(vim.highlight.on_yank {:higroup :IncSearch :timeout 150})}))
+
 (vim.filetype.add {:extension {:keymap :dts
                                :frag :glsl}})

@@ -45,6 +45,7 @@ in
     };
 
   home.packages = with pkgs; with builtins; with lib; [
+  valgrind
   hugo
    elixir_ls
     termusic
@@ -53,10 +54,8 @@ in
     anki
     # (nixos.discord)
     # This has to be available for treesitter to build the parsers
-    javx
     gcc
     nodePackages.npm
-    controllermap
     pcmanfm
     krita
     poetry

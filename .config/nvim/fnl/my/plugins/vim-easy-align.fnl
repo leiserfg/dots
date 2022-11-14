@@ -1,7 +1,8 @@
-(vim.cmd " 
- xmap ga <Plug>(EasyAlign)
- nmap ga <Plug>(EasyAlign)
- nmap gaa ga_
- xmap <Leader>ga   <Plug>(LiveEasyAlign)
-")
+(local map vim.keymap.set)
+(map :x "ga" "<Plug>(EasyAlign)")
+(map :n "ga" "<Plug>(EasyAlign)")
+(map :n "gaa" "<Plug>(EasyAlign)")
+(map :x "<leader>ga" "<Plug>(EasyAlign)")
+
+
 
