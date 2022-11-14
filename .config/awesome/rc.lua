@@ -172,19 +172,19 @@ local globalkeys = mytable.join(
 	}),
 	-- Take a screenshot
 	-- https://github.com/lcpz/dots/blob/master/bin/screenshot
-	awful.key({ modkey }, "s", function()
-		os.execute("flameshot")
-	end, {
-		description = "take a screenshot",
-		group = "hotkeys",
-	}),
+	-- awful.key({ modkey }, "s", function()
+	-- 	os.execute("flameshot")
+	-- end, {
+	-- 	description = "take a screenshot",
+	-- 	group = "hotkeys",
+	-- }),
 
 	-- X screen locker
 	--[[ awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
               {description = "lock screen", group = "hotkeys"}), ]]
 
 	-- Show help
-	awful.key({ modkey }, "S", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
 	-- Tag browsing
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -229,13 +229,6 @@ local globalkeys = mytable.join(
 		group = "client",
 	}),
 
-	-- Menu
-	awful.key({ modkey }, "w", function()
-		awful.util.mymainmenu:show()
-	end, {
-		description = "show main menu",
-		group = "awesome",
-	}),
 
 	-- Layout manipulation
 	awful.key({ modkey, "Shift" }, "j", function()
