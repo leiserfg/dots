@@ -1,5 +1,3 @@
-test  -n $__HM_SESS_VARS_SOURCED  ||  source  $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 
@@ -8,6 +6,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT="no prompt"
 # set PATH "/usr/local/opt/python/libexec/bin" $HOME/.local/bin $PATH
 set PATH $HOME/.local/bin $PATH
 set PATH $HOME/.nimble/bin $PATH
+
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
@@ -17,17 +16,6 @@ end
 # set PATH ~/bin/ (yarn global bin 2>/dev/null) $PATH
 set PATH $HOME/bin/ $HOME/.yarn/bin $PATH
 
-# if status --is-interactive
-    # cat ~/.cache/wal/sequences  ^ /dev/null
-# end
-
-
-#golang
-set PATH "$HOME/go/bin/" $PATH
-#
-#Npm
-set -x NPM_PACKAGES $HOME/.npm-packages
-set PATH "$NPM_PACKAGES/bin/" $PATH
 
 #Rust
 set PATH "$HOME/.cargo/bin/" $PATH
@@ -35,8 +23,6 @@ set PATH "$HOME/.cargo/bin/" $PATH
 export NODE_VERSIONS=$HOME/.config/nvm/
 export NODE_VERSION_PREFIX=''
 
-#pipx
-register-python-argcomplete --shell fish pipx | .
 direnv hook fish|source
 
 set -g __fish_git_prompt_show_informative_status 1

@@ -1,22 +1,29 @@
-#!/usr/bin/env sh
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
 
-dpi=$(xrandr |grep -w "connected.*x"| head -n1| sed -E 's|.*x([0-9]+)\+.* ([0-9]+)mm$|scale=0;(\1*25.4/\2)|'|bc)
-nice_dpi=$(echo "scale=0;$dpi/16*16"|bc)
-printf "Xft.dpi: $nice_dpi;\n*dpi: $nice_dpi"|xrdb -merge
-# xrandr --dpi $nice_dpi
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
 
-# xsettings_dpi=$(printf "%i *1024" $nice_dpi|bc)
-# printf 'Xft/Antialias 1 \n Xft/HintStyle "hintfull"\n Xft/Hinting 1 Xft/RGBA "none"\n Xft/DPI  %i' $xsettings_dpi > ~/.xsettingsd
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
 
-#Set the QT scale by hand
-# export QT_AUTO_SCREEN_SCALE_FACTOR=0
-# export QT_SCALE_FACTOR=1
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 
-export PATH=$HOME/.local/bin/:$PATH
-
-#Apps
-export BROWSER=firefox
-export TERMCMD="kitty"
-export TERMINAL=$TERMCMD
-
+if [ -e /home/leiserfg/.nix-profile/etc/profile.d/nix.sh ]; then . /home/leiserfg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
