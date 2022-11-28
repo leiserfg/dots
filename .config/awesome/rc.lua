@@ -715,15 +715,15 @@ client.connect_signal("unfocus", function(c)
 end)
 
 -- Disable maximizing windows
--- client.connect_signal("property::maximized", function(c)
---         c.maximized = false
--- end)
---
--- client.connect_signal("property::maximized_vertical", function(c)
---         c.maximized_vertical = false
--- end)
---
--- client.connect_signal("property::maximized_horizontal", function(c)
---         c.maximized_horizontal = false
--- end)
+client.connect_signal("property::maximized", function(c)
+        c.maximized = false
+end)
+
+client.connect_signal("property::maximized_vertical", function(c)
+        c.maximized_vertical = false
+end)
+
+client.connect_signal("property::maximized_horizontal", function(c)
+        c.maximized_horizontal = false
+end)
 -- }}}
