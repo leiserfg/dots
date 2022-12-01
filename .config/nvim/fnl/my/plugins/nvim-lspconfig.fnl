@@ -12,7 +12,6 @@
          "g0"        lb.document_symbol
          "gW"        lb.workspace_symbol
          "<Leader>=" #(lb.format {:async true})
-         "<Leader>=" lb.range_formatting
          "<Leader>a" lb.code_action
          "<Leader>q" ld.setloclist
          "[d" ld.goto_prev
