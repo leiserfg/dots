@@ -1,0 +1,3 @@
+vim.cmd(" runtime macros/sandwich/keymap/surround.vim\n xmap is <Plug>(textobj-sandwich-query-i)\n xmap as <Plug>(textobj-sandwich-query-a)\n omap is <Plug>(textobj-sandwich-query-i)\n omap as <Plug>(textobj-sandwich-query-a)\n xmap im <Plug>(textobj-sandwich-literal-query-i)\n xmap am <Plug>(textobj-sandwich-literal-query-a)\n omap im <Plug>(textobj-sandwich-literal-query-i)\n omap am <Plug>(textobj-sandwich-literal-query-a)\n xmap iss <Plug>(textobj-sandwich-auto-i)\n xmap ass <Plug>(textobj-sandwich-auto-a)\n omap iss <Plug>(textobj-sandwich-auto-i)\n omap ass <Plug>(textobj-sandwich-auto-a)\n")
+vim.g["sandwich#recipes"] = vim.list_extend({{buns = {"{% trans %}", "{% endtrans %}"}, input = {"j"}}}, vim.g["sandwich#default_recipes"])
+return nil

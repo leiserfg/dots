@@ -1,0 +1,9 @@
+local dm = require("dial.map")
+local setkm = vim.keymap.set
+local augend = require("dial.augend")
+setkm("n", "<c-a>", dm.inc_normal, {noremap = true})
+setkm("n", "<c-x>", dm.dec_normal, {noremap = true})
+setkm("n", "<c-a>", dm.inc_visual, {noremap = true})
+setkm("n", "<c-x>", dm.dec_visual, {noremap = true})
+setkm("n", "<c-a>", dm.inc_gvisual, {noremap = true})
+return setkm("n", "<c-x>", dm.dec_gvisual, {noremap = true})
