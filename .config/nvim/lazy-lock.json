@@ -12,6 +12,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "codi.vim": { "branch": "master", "commit": "6537ba677a0c7c6c796b195f29077b57fad33716" },
   "conjure": { "branch": "master", "commit": "0be93ef60f075a247bb5de9e29d447dc8a888ff0" },
+  "dial.nvim": { "branch": "master", "commit": "61afb28f61ba090a67a88186f7bc8a94212e509a" },
   "direnv.vim": { "branch": "master", "commit": "4c858b8cd8cbfac998534096e6ffb710d7a07358" },
   "friendly-snippets": { "branch": "main", "commit": "484fb38b8f493ceeebf4e6fc499ebe41e10aae25" },
   "fzf-lua": { "branch": "main", "commit": "7bb05a75eb04d3b7b74df0698a146c62877fc456" },
@@ -38,7 +39,6 @@
   "splitjoin.vim": { "branch": "main", "commit": "956d67c88512b91c2938da3a9e0aeeea2b82cd0b" },
   "startuptime.vim": { "branch": "master", "commit": "dfa57f522d6f61793fe5fea65bca7484751b8ca2" },
   "suda.vim": { "branch": "master", "commit": "2fc45dc4bcafb245b613ebd6847a244924735cc6" },
-  "switch.vim": { "branch": "main", "commit": "900c5d3ee79b1771c5e07bf7290068ea35881756" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
   "vim-enmasse": { "branch": "master", "commit": "c2286f1d7bd735287a661cd223cd94e2a1f74deb" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
@@ -46,7 +46,6 @@
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-rhubarb": { "branch": "master", "commit": "cad60fe382f3f501bbb28e113dfe8c0de6e77c75" },
-  "vim-speeddating": { "branch": "master", "commit": "5a36fd29df63ea3f65562bd2bb837be48a5ec90b" },
   "vim-table-mode": { "branch": "master", "commit": "9555a3e6e5bcf285ec181b7fc983eea90500feb4" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "zoxide.vim": { "branch": "master", "commit": "7add42b0474b07c206c94d1693997e52d25c5fec" }
