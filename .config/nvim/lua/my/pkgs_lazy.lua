@@ -28,7 +28,7 @@ require("lazy").setup(
         {  "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
         { config = ev "require[[my.plugins/nvim-treesitter]]",
             dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-            -- build = ":TSUpdate",
+            build = ":TSUpdate",
             "nvim-treesitter/nvim-treesitter" },
         { config = ev "require[[my.plugins/LuaSnip]]", dependencies = { "rafamadriz/friendly-snippets" },
             "L3MON4D3/LuaSnip" },
