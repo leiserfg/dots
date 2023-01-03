@@ -49,7 +49,7 @@ require("lazy").setup(
             config = function() require('kanagawa').setup(); vim.cmd('colorscheme kanagawa') end, "rebelot/kanagawa.nvim" },
         { cmd = "Z", "nanotee/zoxide.vim" },
         { cmd = "StartupTime", "tweekmonster/startuptime.vim" },
-        "rktjmp/hotpot.nvim",
+        -- "rktjmp/hotpot.nvim",
         { config = { routes = { { view = 'split', filter = { min_width = 500 }, }, }, }, event = "VimEnter",
             dependencies = { "MunifTanjim/nui.nvim" }, "folke/noice.nvim" },
 
