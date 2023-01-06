@@ -1,5 +1,6 @@
 local o = vim.opt
 local g = vim.g
+
 o.number = true
 o.relativenumber = true
 o.numberwidth = 2
@@ -46,12 +47,10 @@ o.inccommand = "split"
 o.backup = false
 o.swapfile = false
 o.termguicolors = true
-do end
-(o.shortmess):append("Ic")
+o.shortmess:append("Ic")
 o.completeopt = "noinsert,menuone,noselect"
 o.pumheight = 20
-do end
-(o.diffopt):append("internal,algorithm:histogram,indent-heuristic,vertical")
+o.diffopt:append("internal,algorithm:histogram,indent-heuristic,vertical")
 o.clipboard = "unnamedplus"
 g.netrw_banner = 0
 g.netrw_winsize = 15
@@ -76,10 +75,10 @@ acmd("InsertEnter", { group = vimrc, command = "set nohlsearch" })
 acmd({ "BufRead", "BufNewFile" },
     { pattern = { "*.md", "*.rst" }, group = vimrc, command = "setlocal spell spelllang=en_us" })
 acmd("BufReadPost", { group = vimrc, command = "silent! normal! g`\"zv" })
+
 local function yank_colors()
     return vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
 end
-
 acmd("TextYankPost", { group = vimrc, callback = yank_colors })
 
 vim.filetype.add({ extension = { keymap = "dts", frag = "glsl" } })
