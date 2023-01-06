@@ -15,7 +15,7 @@ require("lazy").setup(
         { "monaqa/dial.nvim", config = ev "require[[my.plugins/dial]]" },
         { cmd = "EnMasse", "Olical/vim-enmasse" },
         { cmd = { "G" }, event = "BufRead", "tpope/vim-fugitive" },
-        { after = "vim-fugitive", "tpope/vim-rhubarb" },
+        { "tpope/vim-rhubarb", dependencies="tpope/vim-fugitive" },
         "tpope/vim-eunuch",
         { ft = "python", "Vimjas/vim-python-pep8-indent" },
         { config = ev "require'colorizer'.setup()", "norcalli/nvim-colorizer.lua" },
@@ -50,7 +50,14 @@ require("lazy").setup(
         { "stevearc/oil.nvim", config = true },
         { cmd = "StartupTime", "tweekmonster/startuptime.vim" },
         -- "rktjmp/hotpot.nvim",
-        { config = { routes = { { view = 'split', filter = { min_width = 500 }, }, }, }, event = "VimEnter",
+        { config = { lsp = {
+            -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+            override = {
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true,
+            },
+        }, routes = { { view = 'split', filter = { min_width = 500 }, }, }, }, event = "VimEnter",
             dependencies = { "MunifTanjim/nui.nvim" }, "folke/noice.nvim" },
 
     })
