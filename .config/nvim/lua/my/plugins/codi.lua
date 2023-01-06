@@ -1,1 +1,1 @@
-vim.g["codi#interpreters"] = {rink = {bin = "rink", prompt = "> "}}
+vim.g["codi#interpreters"] = { rink = { bin = "rink", prompt = "> " } }
