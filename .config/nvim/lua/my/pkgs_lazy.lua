@@ -20,7 +20,7 @@ require("lazy").setup(
         { ft = "python", "Vimjas/vim-python-pep8-indent" },
         { config = ev "require'colorizer'.setup()", "norcalli/nvim-colorizer.lua" },
         "direnv/direnv.vim",
-        { config = ev "require[[my.plugins/nvim-surround]]", "kylechui/nvim-surround" },
+        { config = true, "kylechui/nvim-surround" },
         { config = ev "require[[my.plugins/splitjoin]]", keys = { "gS", "gJ" }, "AndrewRadev/splitjoin.vim" },
         { config = ev "require[[my.plugins/gitsigns]]", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" },
             "lewis6991/gitsigns.nvim" },
