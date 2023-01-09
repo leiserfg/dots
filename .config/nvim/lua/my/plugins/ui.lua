@@ -12,8 +12,7 @@ return {
         },
       }
     end,
-  }
-,
+  },
   {
     config = {
       lsp = {
