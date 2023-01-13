@@ -14,7 +14,8 @@ return {
     end,
   },
   {
-    config = {
+    "folke/noice.nvim",
+    opts = {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
@@ -27,6 +28,5 @@ return {
     },
     event = "VimEnter",
     dependencies = { "MunifTanjim/nui.nvim" },
-    "folke/noice.nvim",
   },
 }
