@@ -13,6 +13,7 @@
   "codi.vim": { "branch": "master", "commit": "6537ba677a0c7c6c796b195f29077b57fad33716" },
   "conjure": { "branch": "master", "commit": "d2e69a13b32e8574decfe81ea275292234eba6ea" },
   "dial.nvim": { "branch": "master", "commit": "dbcfd4510d31884d444ec33a4453d0f06ad4a5eb" },
+  "diffview.nvim": { "branch": "main", "commit": "5bbcf162d03287296fe393f88da6065db3cf9fd0" },
   "direnv.vim": { "branch": "master", "commit": "4c858b8cd8cbfac998534096e6ffb710d7a07358" },
   "friendly-snippets": { "branch": "main", "commit": "320865dfe76c03a5c60513d4f34ca22effae56f2" },
   "fzf-lua": { "branch": "main", "commit": "292de730ebbd3834e87f864c8c4115dc1035db37" },

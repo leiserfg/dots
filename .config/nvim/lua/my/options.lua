@@ -39,7 +39,8 @@ o.listchars = {
   trail = "\226\128\162",
   precedes = "\226\159\168",
 }
-o.fcs = "eob: "
+
+o.fillchars = {eob=" ", diff="╱"}
 o.virtualedit = "block"
 o.shiftwidth = 4
 o.softtabstop = 4

@@ -7,18 +7,16 @@ return {
 
       local setkm = vim.keymap.set
 
-function _G._group_from_ft()
-  local ft = vim.o.filetype
-  if require("dial.config").augends.group[ft] then
-    return ft
-  else
-    return "default"
-  end
-end
+      function _G._group_from_ft()
+        local ft = vim.o.filetype
+        if require("dial.config").augends.group[ft] then
+          return ft
+        else
+          return "default"
+        end
+      end
 
-
-local  group_from_ft = [[".._group_from_ft().."]]
-
+      local group_from_ft = [[".._group_from_ft().."]]
 
       setkm("n", "<C-A>", dm.inc_normal(group_from_ft), { noremap = true })
       setkm("n", "<C-X>", dm.dec_normal(group_from_ft), { noremap = true })
@@ -46,7 +44,7 @@ local  group_from_ft = [[".._group_from_ft().."]]
         },
         python = {
           words { "False", "True" },
-        }
+        },
       }
     end,
   },
