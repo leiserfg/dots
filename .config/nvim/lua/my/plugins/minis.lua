@@ -12,7 +12,7 @@ return {
       },
     },
     config = function()
-      for _, mini in ipairs { "jump", "align", "pairs", "move" } do
+      for _, mini in ipairs { "jump", "align", "move" } do
         require(("mini.%s"):format(mini)).setup {}
       end
 

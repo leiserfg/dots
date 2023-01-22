@@ -65,6 +65,7 @@ g.maplocalleader = " "
 
 local vimrc = vim.api.nvim_create_augroup("vimrc", { clear = false })
 local acmd = vim.api.nvim_create_autocmd
+
 acmd("InsertEnter", { group = vimrc, command = "set nohlsearch" })
 acmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.md", "*.rst" },

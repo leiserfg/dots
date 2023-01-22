@@ -164,12 +164,12 @@ root.buttons(mytable.join(
 
 local globalkeys = mytable.join(
 	-- Destroy all notifications
-	awful.key({ "Control" }, "space", function()
-		naughty.destroy_all_notifications()
-	end, {
-		description = "destroy all notifications",
-		group = "hotkeys",
-	}),
+	-- awful.key({ "Control" }, "space", function()
+	-- 	naughty.destroy_all_notifications()
+	-- end, {
+	-- 	description = "destroy all notifications",
+	-- 	group = "hotkeys",
+	-- }),
 	-- Take a screenshot
 	-- https://github.com/lcpz/dots/blob/master/bin/screenshot
 	-- awful.key({ modkey }, "s", function()
