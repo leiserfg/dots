@@ -1,6 +1,5 @@
 return {
   { "tpope/vim-unimpaired", event = "BufRead" },
-  { "numToStr/Comment.nvim", config = true, keys = { { "gc", mode = { "n", "v" } } } },
   { "vim-scripts/ReplaceWithRegister", keys = { { "gr", mode = { "n", "v" } } } },
   "tpope/vim-repeat",
   { "Olical/vim-enmasse", cmd = "EnMasse" },
@@ -11,11 +10,6 @@ return {
     config = true,
   },
   "direnv/direnv.vim",
-  {
-    "kylechui/nvim-surround",
-    config = true,
-  },
-  -- { "AndrewRadev/splitjoin.vim",    keys = { "gS", "gJ" } },
 
   {
     "lambdalisue/suda.vim",
@@ -39,5 +33,11 @@ return {
   },
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "stevearc/oil.nvim", config = true },
-  { "tweekmonster/startuptime.vim", cmd = "StartupTime" },
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
 }
