@@ -4,4 +4,4 @@ function fish_user_key_bindings
 end
 
 fzf_key_bindings
-bind --erase \cr # use native <c-r> 😍
+# bind --erase \cr # use native <c-r> 😍

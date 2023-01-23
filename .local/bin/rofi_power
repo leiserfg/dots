@@ -6,7 +6,7 @@ question=$(printf "||||"| enumerate|rofi -dmenu -markup-rows)
 
 case $question in
     **)
-        light-locker-command -l
+        loginctl lock-session $XDG_SESSION_ID
         ;;
     **)
         systemctl suspend
