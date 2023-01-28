@@ -617,6 +617,7 @@ awful.rules.rules = {
 			-- and the name shown there might not match defined rules here.
 			name = {
 				"Event Tester", -- xev.
+                                "Blender Preferences"
 			},
 			role = {
 				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
