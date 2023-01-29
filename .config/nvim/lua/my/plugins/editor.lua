@@ -1,13 +1,14 @@
 return {
   {
     "monaqa/dial.nvim",
+    dev=true,
     config = function()
       local dm = require "dial.map"
       local augend = require "dial.augend"
 
       local setkm = vim.keymap.set
 
-      function _G._group_from_ft()
+      local function group_from_ft()
         local ft = vim.o.filetype
         if require("dial.config").augends.group[ft] then
           return ft
@@ -16,7 +17,7 @@ return {
         end
       end
 
-      local group_from_ft = [[".._group_from_ft().."]]
+      -- local group_from_ft = [[".._group_from_ft().."]]
 
       setkm("n", "<C-A>", dm.inc_normal(group_from_ft), { noremap = true })
       setkm("n", "<C-X>", dm.dec_normal(group_from_ft), { noremap = true })

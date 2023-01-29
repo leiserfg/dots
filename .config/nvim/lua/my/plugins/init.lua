@@ -6,7 +6,7 @@ return {
   "tpope/vim-eunuch",
   { "Vimjas/vim-python-pep8-indent", ft = "python" },
   {
-    "norcalli/nvim-colorizer.lua",
+    "NvChad/nvim-colorizer.lua",
     config = true,
   },
   "direnv/direnv.vim",
