@@ -59,7 +59,7 @@ return {
     end,
   },
 
-  { "tpope/vim-fugitive", cmd = { "G" }, event = "BufRead" },
+  { "tpope/vim-fugitive", event = "BufRead" },
   { "tpope/vim-rhubarb", dependencies = "tpope/vim-fugitive" },
   { "sindrets/diffview.nvim" },
 }

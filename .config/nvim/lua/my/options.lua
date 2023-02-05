@@ -43,7 +43,7 @@ o.softtabstop = 4
 o.linebreak = true
 o.smartindent = true
 o.signcolumn = "yes"
-o.inccommand = "split"
+-- o.inccommand = "split"
 o.termguicolors = true
 o.shortmess:append "Ic"
 o.completeopt = "noinsert,menuone,noselect"
