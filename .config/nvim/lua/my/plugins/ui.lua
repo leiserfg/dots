@@ -28,12 +28,25 @@ return {
                 end,
             })
 
-            local function show_macro_recording()
+            local Rec = require('lualine.component'):extend()
+            function Rec:init(options)
+                Rec.super.init(self, options)
+                -- Todo, get color from theme
+                self.icon_hg = self:create_hl({ fg = "#991122" }, "macro_icon")
+            end
+
+            function Rec:update_status()
                 local recording_register = vim.fn.reg_recording()
                 if recording_register == "" then
                     return ""
                 else
-                    return "󰑋 @" .. recording_register
+                    return table.concat {
+                        self:format_hl(self.icon_hg),
+                        "󰑋 ",
+                        self:get_default_hl(),
+                        "@",
+                        recording_register
+                    }
                 end
             end
 
@@ -48,8 +61,7 @@ return {
                 sections = {
                     lualine_b = {
                         {
-                            "macro-recording",
-                            fmt = show_macro_recording,
+                            Rec
                         },
                     },
                 }
