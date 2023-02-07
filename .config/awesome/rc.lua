@@ -296,11 +296,11 @@ local globalkeys = mytable.join(
 	}),
 
 	awful.key({ modkey }, "Return", function()
-                   awful.spawn.easy_async("xcwd", function(cwd)
-                       if cwd == "" then  cwd  = '.' end -- handle xcwd missingness or missbehavior
-                       awful.spawn(terminal  .. " -d " .. cwd)
-                    end
-                    )
+                   -- awful.spawn.easy_async("xcwd", function(cwd)
+                   --     if cwd == "" then  cwd  = '.' end -- handle xcwd missingness or missbehavior
+                       awful.spawn(terminal)
+                    -- end
+                    -- )
 	end, {
 		description = "open a terminal",
 		group = "launcher",
