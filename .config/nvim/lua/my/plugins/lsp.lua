@@ -1,6 +1,22 @@
 return {
   "folke/neodev.nvim",
   "simrat39/rust-tools.nvim",
+   {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "BufReadPre",
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        sources = {
+          -- nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.stylua,
+          nls.builtins.diagnostics.ruff,
+          nls.builtins.formatting.ruff,
+          nls.builtins.formatting.black,
+        },
+      }
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -35,7 +51,7 @@ return {
 
       local capabilities = (require "cmp_nvim_lsp").default_capabilities()
       local lspconfig = require "lspconfig"
-      for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls" } do
+      for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls", "pyright" } do
         lspconfig[lsp].setup { capabilities = capabilities, on_attach = on_attach }
       end
       lspconfig.elixirls.setup {
@@ -43,22 +59,23 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
       }
-      local function init(client)
-        local venv = (vim.env.VIRTUAL_ENV or "")
-        if venv:find("python-2", 1, true) then
-          client.config.settings.pylsp.plugins.jedi.extra_paths =
-            { ("%s/lib/python2.7/site-packages/"):format(venv) }
-        else
-        end
-        client.notify "workspace/didChangeConfiguration"
-        return true
-      end
 
-      lspconfig.pylsp.setup {
-        on_attach = on_attach,
-        on_init = init,
-        capabilities = capabilities,
-      }
+      -- local function init(client)
+      --   local venv = (vim.env.VIRTUAL_ENV or "")
+      --   if venv:find("python-2", 1, true) then
+      --     client.config.settings.pylsp.plugins.jedi.extra_paths =
+      --       { ("%s/lib/python2.7/site-packages/"):format(venv) }
+      --   else
+      --   end
+      --   client.notify "workspace/didChangeConfiguration"
+      --   return true
+      -- end
+      --
+      -- lspconfig.pylsp.setup {
+      --   on_attach = on_attach,
+      --   on_init = init,
+      --   capabilities = capabilities,
+      -- }
 
       local runtime_path = vim.split(package.path, ";")
       table.insert(runtime_path, "lua/?.lua")
