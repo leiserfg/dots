@@ -32,7 +32,7 @@ return {
             function Rec:init(options)
                 Rec.super.init(self, options)
                 -- Todo, get color from theme
-                self.icon_hg = self:create_hl({ fg = "#991122" }, "macro_icon")
+                self.icon_hg = self:create_hl({ fg = "#993333" }, "macro_icon")
             end
 
             function Rec:update_status()
