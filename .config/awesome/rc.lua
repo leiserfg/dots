@@ -75,7 +75,7 @@ local editor = os.getenv("EDITOR") or "nvim"
 local browser = "firefox"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉" }
+awful.util.tagnames = { " ₁", " ₂", " ₃", " ₄", " ₅", " ₆", " ₇", " ₈", " ₉" }
 --{ "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
 	awful.layout.suit.tile,
