@@ -93,26 +93,26 @@ return {
         capabilities = capabilities,
       }
 
-      lspconfig.tailwindcss.setup {
-        on_attach = on_attach,
-        filetypes = { "html", "elixir", "eelixir" },
-      }
-
-      local opts = {
-        tools = {
-          autoSetHints = true,
-          inlay_hints = {
-            max_len_align_padding = 1,
-            parameter_hints_prefix = "<-",
-            show_parameter_hints = true,
-            right_align_padding = 7,
-            other_hints_prefix = "=>",
-            max_len_align = false,
-            right_align = false,
-          },
-        },
-        server = { on_attach = on_attach, capabilities = capabilities },
-      }
+      -- lspconfig.tailwindcss.setup {
+      --   on_attach = on_attach,
+      --   filetypes = { "html", "elixir", "eelixir" },
+      -- }
+      --
+      -- local opts = {
+      --   tools = {
+      --     autoSetHints = true,
+      --     inlay_hints = {
+      --       max_len_align_padding = 1,
+      --       parameter_hints_prefix = "<-",
+      --       show_parameter_hints = true,
+      --       right_align_padding = 7,
+      --       other_hints_prefix = "=>",
+      --       max_len_align = false,
+      --       right_align = false,
+      --     },
+      --   },
+      --   server = { on_attach = on_attach, capabilities = capabilities },
+      -- }
 
       require("rust-tools").setup(opts)
       vim.cmd [[
