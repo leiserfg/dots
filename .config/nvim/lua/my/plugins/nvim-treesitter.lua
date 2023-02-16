@@ -16,7 +16,7 @@ return {
         auto_install = false,
         sync_install = false,
         playground = { enable = true, persist_queries = false },
-        highlight = { enable = true, additional_vim_regex_highlighting = { "org" } },
+        highlight = { enable = true},
         context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {
           enable = true,
