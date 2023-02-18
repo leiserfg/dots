@@ -2,18 +2,16 @@ return {
   {
     "ibhagwan/fzf-lua",
     event="VeryLazy",
-    dependencies = { "vijaymarupudi/nvim-fzf", "kyazdani42/nvim-web-devicons" },
+    dependencies = { "vijaymarupudi/nvim-fzf", "nvim-tree/nvim-web-devicons" },
     config = function()
       local fzf = require "fzf-lua"
       fzf.setup { default_previewer = "bat" }
       fzf.register_ui_select()
-      local map = vim.keymap.set
-      local mappings
       local function grep()
         return fzf.grep { no_esc = true }
       end
 
-      mappings = {
+      local mappings = {
         ["<leader>ff"] = fzf.files,
         ["<leader>fr"] = fzf.registers,
         ["<leader>fb"] = fzf.buffers,
@@ -21,6 +19,9 @@ return {
         ["<leader>fz"] = fzf.builtin,
         ["<leader>/"] = grep,
       }
+
+      local map = vim.keymap.set
+
       for shortcut, callback in pairs(mappings) do
         map("n", shortcut, callback, { noremap = true })
       end
