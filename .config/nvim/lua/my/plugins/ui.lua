@@ -32,7 +32,12 @@ return {
       function Rec:init(options)
         Rec.super.init(self, options)
         -- Todo, get color from theme
-        self.icon_hg = self:create_hl({ fg = "#993333" }, "macro_icon")
+        local icon_color = require("lualine.utils.utils").extract_color_from_hllist(
+          { "fg", "sp" },
+          { "DiagnosticError", "LspDiagnosticsDefaultError", "DiffDelete" },
+          "#e32636"
+        )
+        self.icon_hg = self:create_hl({ fg = icon_color }, "macro_icon")
       end
 
       function Rec:update_status()
