@@ -68,27 +68,6 @@ return {
         capabilities = capabilities,
       }
 
-      -- local function init(client)
-      --   local venv = (vim.env.VIRTUAL_ENV or "")
-      --   if venv:find("python-2", 1, true) then
-      --     client.config.settings.pylsp.plugins.jedi.extra_paths =
-      --       { ("%s/lib/python2.7/site-packages/"):format(venv) }
-      --   else
-      --   end
-      --   client.notify "workspace/didChangeConfiguration"
-      --   return true
-      -- end
-      --
-      -- lspconfig.pylsp.setup {
-      --   on_attach = on_attach,
-      --   on_init = init,
-      --   capabilities = capabilities,
-      -- }
-
-      local runtime_path = vim.split(package.path, ";")
-      table.insert(runtime_path, "lua/?.lua")
-      table.insert(runtime_path, "lua/?/init.lua")
-
       lspconfig.lua_ls.setup {
         on_attach = on_attach,
         settings = {
@@ -106,29 +85,22 @@ return {
       --   filetypes = { "html", "elixir", "eelixir" },
       -- }
       --
-      -- local opts = {
-      --   tools = {
-      --     autoSetHints = true,
-      --     inlay_hints = {
-      --       max_len_align_padding = 1,
-      --       parameter_hints_prefix = "<-",
-      --       show_parameter_hints = true,
-      --       right_align_padding = 7,
-      --       other_hints_prefix = "=>",
-      --       max_len_align = false,
-      --       right_align = false,
-      --     },
-      --   },
-      --   server = { on_attach = on_attach, capabilities = capabilities },
-      -- }
 
-      require("rust-tools").setup(opts)
-      --       vim.cmd [[
-      --   sign define DiagnosticSignError text=🩸 linehl= numhl=
-      --   sign define DiagnosticSignWarn text=🔶 linehl= numhl=
-      --   sign define DiagnosticSignInfo text=🔷 linehl= numhl=
-      --   sign define DiagnosticSignHint text=👉 linehl= numhl=
-      -- ]]
+      require("rust-tools").setup {
+        tools = {
+          autoSetHints = true,
+          inlay_hints = {
+            max_len_align_padding = 1,
+            parameter_hints_prefix = "<-",
+            show_parameter_hints = true,
+            right_align_padding = 7,
+            other_hints_prefix = "=>",
+            max_len_align = false,
+            right_align = false,
+          },
+        },
+        server = { on_attach = on_attach, capabilities = capabilities },
+      }
 
       for name, text in pairs {
         Error = "🩸",
@@ -141,6 +113,7 @@ return {
           { text = text, linehl = "", numhl = "" }
         )
       end
+]]
     end,
   },
 }
