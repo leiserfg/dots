@@ -3,6 +3,7 @@ return {
   "simrat39/rust-tools.nvim",
    {
     "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     event = "BufReadPre",
     opts = function()
       local nls = require("null-ls")

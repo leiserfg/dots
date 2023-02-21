@@ -2,7 +2,7 @@ return {
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
   {
     "echasnovski/mini.nvim",
-    event="VeryLazy",
+    event = "VeryLazy",
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -67,6 +67,10 @@ return {
           end,
         },
       }
+
+      -- require("mini.bracketed").setup { 
+      --     comment = { suffix = "" } -- This is used for gitsign hunks
+      -- }
     end,
   },
 }
