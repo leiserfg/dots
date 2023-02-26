@@ -12,7 +12,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
     },
-    event="VeryLazy",
+    event = "VeryLazy",
     config = function()
       local cmp = require "cmp"
       local lspkind = require "lspkind"

@@ -68,7 +68,7 @@ return {
         },
       }
 
-      -- require("mini.bracketed").setup { 
+      -- require("mini.bracketed").setup {
       --     comment = { suffix = "" } -- This is used for gitsign hunks
       -- }
     end,

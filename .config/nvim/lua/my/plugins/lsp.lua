@@ -1,12 +1,12 @@
 return {
   "folke/neodev.nvim",
   "simrat39/rust-tools.nvim",
-   {
+  {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "BufReadPre",
     opts = function()
-      local nls = require("null-ls")
+      local nls = require "null-ls"
       return {
         sources = {
           -- nls.builtins.formatting.prettierd,
@@ -52,7 +52,14 @@ return {
 
       local capabilities = (require "cmp_nvim_lsp").default_capabilities()
       local lspconfig = require "lspconfig"
-      for _, lsp in ipairs { "gdscript", "vimls", "tsserver", "clangd", "terraformls", "pyright" } do
+      for _, lsp in ipairs {
+        "gdscript",
+        "vimls",
+        "tsserver",
+        "clangd",
+        "terraformls",
+        "pyright",
+      } do
         lspconfig[lsp].setup { capabilities = capabilities, on_attach = on_attach }
       end
       lspconfig.elixirls.setup {
@@ -116,12 +123,24 @@ return {
       -- }
 
       require("rust-tools").setup(opts)
-      vim.cmd [[
-  sign define DiagnosticSignError text=🩸 linehl= numhl=
-  sign define DiagnosticSignWarn text=🔶 linehl= numhl=
-  sign define DiagnosticSignInfo text=🔷 linehl= numhl=
-  sign define DiagnosticSignHint text=👉 linehl= numhl=
-]]
+      --       vim.cmd [[
+      --   sign define DiagnosticSignError text=🩸 linehl= numhl=
+      --   sign define DiagnosticSignWarn text=🔶 linehl= numhl=
+      --   sign define DiagnosticSignInfo text=🔷 linehl= numhl=
+      --   sign define DiagnosticSignHint text=👉 linehl= numhl=
+      -- ]]
+
+      for name, text in pairs {
+        Error = "🩸",
+        Warn = "🔶",
+        Info = "🔷",
+        Hint = "👉",
+      } do
+        vim.fn.sign_define(
+          "DiagnosticSign" .. name,
+          { text = text, linehl = "", numhl = "" }
+        )
+      end
     end,
   },
 }

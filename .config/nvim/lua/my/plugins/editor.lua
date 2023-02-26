@@ -1,8 +1,8 @@
 return {
   {
     "monaqa/dial.nvim",
-    event="VeryLazy",
-    dev=true,
+    event = "VeryLazy",
+    dev = true,
     config = function()
       local dm = require "dial.map"
       local augend = require "dial.augend"
