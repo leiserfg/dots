@@ -113,7 +113,6 @@ return {
           { text = text, linehl = "", numhl = "" }
         )
       end
-]]
     end,
   },
 }
