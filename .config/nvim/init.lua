@@ -1,6 +1,15 @@
 local basepath = vim.fn.stdpath "data" .. "/lazy/"
- -- collectgarbage("stop")
- -- jit.off()
+
+-- Blazingly fast
+collectgarbage "stop"
+jit.off()
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    jit.on()
+    collectgarbage "restart"
+  end,
+  once = true,
+})
 
 local function ensure(pkg)
   local pkg_name = pkg:match "[^/]*$"
