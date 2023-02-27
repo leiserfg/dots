@@ -1,5 +1,6 @@
 local basepath = vim.fn.stdpath "data" .. "/lazy/"
--- local basepath = vim.fn.stdpath('data')..'/site/pack/packer/start/'
+ -- collectgarbage("stop")
+ -- jit.off()
 
 local function ensure(pkg)
   local pkg_name = pkg:match "[^/]*$"
