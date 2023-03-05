@@ -623,6 +623,7 @@ awful.rules.rules = {
   -- Floating clients.
   {
     rule_any = {
+      modal = {true},
       instance = {
         "DTA", -- Firefox addon DownThemAll.
         "copyq", -- Includes session name in class.
@@ -668,6 +669,7 @@ awful.rules.rules = {
       role = {
         "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
       },
+
     },
     properties = { floating = true },
   },
