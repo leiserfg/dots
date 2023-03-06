@@ -649,6 +649,7 @@ awful.rules.rules = {
         "MEGAsync",
         "gmic_qt",
         "Pavucontrol",
+        "vokoscreenNG",
 
         "file_progress",
         "confirm",
