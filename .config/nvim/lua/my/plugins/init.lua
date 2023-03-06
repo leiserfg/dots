@@ -22,13 +22,22 @@ return {
     "dhruvasagar/vim-table-mode",
     ft = { "markdown" },
   },
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("kanagawa").setup{}
+  --     vim.cmd "colorscheme kanagawa"
+  --   end,
+  -- },
   {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
+    "savq/melange-nvim",
+    lazy=false,
     priority = 1000,
     config = function()
-      require("kanagawa").setup()
-      vim.cmd "colorscheme kanagawa"
+      -- require("monokai-pro").setup{filter="spectrum"}
+      vim.cmd.colorscheme "melange"
     end,
   },
   { "nanotee/zoxide.vim", cmd = "Z" },

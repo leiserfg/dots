@@ -86,6 +86,13 @@ return {
       },
       routes = {
         { view = "split", filter = { min_width = 500 } },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
       },
     },
     event = "VimEnter",
