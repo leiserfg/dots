@@ -3,7 +3,7 @@ function fish_prompt
 	if test -w "$PWD"
         set_color blue
     else
-        set_color -b red
+        set_color  brred
     end
 
     printf (prompt_pwd)' '
