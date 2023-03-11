@@ -2,12 +2,11 @@ local basepath = vim.fn.stdpath "data" .. "/lazy/"
 
 -- Blazingly fast
 collectgarbage "stop"
-jit.off()
+-- jit.off()
 
--- collectgarbage("isrunning")
 vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
-    jit.on()
+    -- jit.on()
     collectgarbage "restart"
   end,
   once = true,
