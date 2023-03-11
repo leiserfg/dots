@@ -75,6 +75,7 @@ return {
             completion = {
               callSnippet = "Replace",
             },
+            format = { enable = false },
           },
         },
         capabilities = capabilities,
