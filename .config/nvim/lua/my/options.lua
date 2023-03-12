@@ -1,6 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
+o.cpo:append ">"
 o.number = true
 o.relativenumber = true
 o.numberwidth = 2
