@@ -10,7 +10,6 @@ return {
       "hrsh7th/cmp-emoji",
       "onsails/lspkind-nvim",
       "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
     },
     event = "VeryLazy",
     config = function()
