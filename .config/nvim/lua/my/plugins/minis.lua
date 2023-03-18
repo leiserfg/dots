@@ -13,7 +13,7 @@ return {
       },
     },
     config = function()
-      for _, mini in ipairs { "jump", "align", "move" } do
+      for _, mini in ipairs { "jump", "align", "move", "splitjoin" } do
         require(("mini.%s"):format(mini)).setup {}
       end
 
@@ -68,9 +68,9 @@ return {
         },
       }
 
-      -- require("mini.bracketed").setup {
-      --     comment = { suffix = "" } -- This is used for gitsign hunks
-      -- }
+      require("mini.bracketed").setup {
+        comment = { suffix = "k" }, -- I use c for changes as diffmode does by default
+      }
     end,
   },
 }

@@ -1,5 +1,4 @@
 return {
-  { "tpope/vim-unimpaired", event = "BufRead" },
   { "vim-scripts/ReplaceWithRegister", keys = { { "gr", mode = { "n", "v" } } } },
   "tpope/vim-repeat",
   { "Olical/vim-enmasse", cmd = "EnMasse" },
@@ -42,7 +41,7 @@ return {
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
-    init = function()
+    config = function()
       vim.g.startuptime_tries = 10
     end,
   },

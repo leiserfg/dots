@@ -14,6 +14,7 @@ return {
           nls.builtins.diagnostics.ruff,
           nls.builtins.formatting.ruff,
           nls.builtins.formatting.black,
+          nls.builtins.formatting.alejandra,
         },
       }
     end,

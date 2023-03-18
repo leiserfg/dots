@@ -63,6 +63,11 @@ ls.add_snippets(nil, {
     ),
   },
   all = {
+    -- s({ trig = "bk" }, {
+    --   f(function(_, snip)
+    --     return snip.env.TM_SELECTED_TEXT
+    --   end),
+    -- }),
     sf("date", date),
     sf("uuid", uuid_),
     sf("lorem(%d*)", lorem, true),
