@@ -56,7 +56,7 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn(f"{terminal} -d $(xcwd || echo '.')"),
+        lazy.spawn(f"sh -c 'exec {terminal} -d $(xcwd)'"),
         desc="Launch terminal",
     ),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
@@ -160,7 +160,7 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 # widget.Net(prefix='M'),
-                widget.Battery(format="{char} {percent:2.0%}"),
+                # widget.Battery(format="{char} {percent:2.0%}"),
                 # widget.PulseVolume(
                 #     update_interval=0.2,
                 #     volume_app="pavucontrol",
