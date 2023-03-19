@@ -56,7 +56,7 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn(f"sh -c 'cd $(xcwd);exec {terminal}'"),
+        lazy.spawn(f"{terminal} -d $(xcwd || echo '.')"),
         desc="Launch terminal",
     ),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
@@ -72,15 +72,13 @@ keys = [
         [mod],
         "g",
         lazy.spawn(
-            r"""
-            sh -c " ls ~/Games/*/start.sh  --quoting-style=escape \
-            |xargs -n 1 -d '\n' dirname \
-            |xargs -d '\n' -n 1 basename \
-            |rofi -dmenu -i  \
-            |xargs  -d '\n'  -I__  sh -c ~/Games/__/start.sh "
             """
-            # sh -c "lutris -lo 2>/dev/null |cut -f 1,2 -d '|' | rofi -dmenu -i|
-            # cut -f 1 -d '|'  | xargs -I__ lutris lutris:rungameid/__"
+             gamemoderun sh -c " ls ~/Games/*/*start.sh  --quoting-style=escape \
+                |xargs -n 1 -d '\n' dirname \
+                |xargs -d '\n' -n 1 basename \
+                |rofi -dmenu -i  \
+                |xargs  -d '\n'  -I__  bash -c  'exec bash  $HOME/Games/__/*start.sh'"
+            """
         ),
         desc="Games List",
     ),
@@ -94,11 +92,10 @@ keys = [
     ),
 ]
 groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
-groups_letters = "yuiop"
-gl_len = len(groups_letters)
 
 groups_rules = {
     1: [Match(wm_class="Navigator")],
+    2: [Match(wm_class="Slack")],
     4: [Match(wm_class="TelegramDesktop")],
 }
 
@@ -124,25 +121,6 @@ for i, g in enumerate(groups):
             ),
         ]
     )
-    if i < gl_len:
-        keys.extend(
-            [
-                # mod1 + letter of group = switch to group
-                Key(
-                    [mod],
-                    groups_letters[i],
-                    lazy.group[g.name].toscreen(toggle=True),
-                    desc="Switch to group {}".format(g.name),
-                ),
-                # mod1 + shift + letter of group = switch to & move focused window to group
-                Key(
-                    [mod, "shift"],
-                    groups_letters[i],
-                    lazy.window.togroup(g.name),
-                    desc=f"Move focused window to group {g.name}",
-                ),
-            ]
-        )
 
 
 layout_config = dict(
@@ -162,6 +140,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper=os.path.expanduser("~/wall.png"),
         top=bar.Bar(
             [
                 widget.GroupBox(
@@ -214,18 +193,43 @@ bring_front_click = False
 cursor_warp = False
 # Drag floating layouts.
 floating_layout = layout.Floating(
-    float_rules=[
+    float_rules=(
+        layout.Floating.default_float_rules
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(title="Zathura"),
-        Match(title="PureRef"),
-        Match(title="MEGAsync"),
-        Match(title="gmic_qt"),
-        Match(wm_class="vokoscreenNG"),
-        # Match(wm_class='ssh-askpass'),  # ssh-askpass
-        # Match(title='branchdialog'),  # gitk
-        # Match(title='pinentry'),  # GPG key password entry
-    ]
+        + [
+            Match(title=title)
+            for title in [
+                "PureRef" "MEGAsync",
+                "gmic_qt",
+                "Preferences",
+            ]
+        ]
+        + [
+            Match(wm_class=cls)
+            for cls in [
+                "Pavucontrol",
+                "Arandr",
+                "Blueman-manager",
+                "Gpick",
+                "PureRef",
+                "Sxiv",
+                "xtightvncviewer",
+                "PureRef",
+                "MEGAsync",
+                "gmic_qt",
+                "Pavucontrol",
+                "vokoscreenNG",
+                "file_progress",
+                "confirm",
+                "dialog",
+                "download",
+                "error",
+                "notification",
+                "splash",
+                "toolbar",
+            ]
+        ]
+    )
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -239,7 +243,7 @@ wmname = "LG3D"
 
 # Hooks
 
-startup_script = os.path.expanduser("~/.config/qtile/autostart.sh")
+startup_script = os.path.expanduser("~/bin/autostart.sh")
 
 
 @hook.subscribe.startup
