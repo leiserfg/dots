@@ -166,7 +166,7 @@ screens = [
                 #     volume_app="pavucontrol",
                 # ),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Clock(format="%d-%m-%y %a %I:%M"),
             ],
             24,
         ),
