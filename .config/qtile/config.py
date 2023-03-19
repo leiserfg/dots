@@ -56,7 +56,7 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn(f"sh -c 'exec {terminal} -d $(xcwd)'"),
+        lazy.spawn(f"sh -c 'exec {terminal} -d $(xcwd || echo .)'"),
         desc="Launch terminal",
     ),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
@@ -166,6 +166,7 @@ screens = [
                 #     volume_app="pavucontrol",
                 # ),
                 widget.Systray(),
+                # widget.StatusNotifier(), # Some progrms don't work the "new" way OMG!
                 widget.Clock(format="%d-%m-%y %a %I:%M"),
             ],
             24,
