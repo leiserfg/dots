@@ -30,12 +30,21 @@ return {
   --     vim.cmd "colorscheme kanagawa"
   --   end,
   -- },
+
   {
-    "savq/melange-nvim",
-    lazy=false,
+    "EdenEast/nightfox.nvim",
+    lazy = false,
     priority = 1000,
-    config = function() vim.cmd.colorscheme "melange" end,
+    config = function()
+      vim.cmd.colorscheme "carbonfox"
+    end,
   },
+  -- {
+  --   "savq/melange-nvim",
+  --   lazy=false,
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme "melange" end,
+  -- },
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "stevearc/oil.nvim", config = true },
   {
