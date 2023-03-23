@@ -67,7 +67,12 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Togle fullscreen"),
     # Globals
     Key([mod], "r", lazy.restart(), desc="Reload the config"),
-    Key([mod], "0", lazy.spawn("rofi_power"), desc="Power management"),
+    Key(
+        [mod],
+        "0",
+        lazy.spawn(os.path.expanduser("~/.local/bin/rofi_power")),
+        desc="Power management",
+    ),
     Key(
         [mod],
         "g",
