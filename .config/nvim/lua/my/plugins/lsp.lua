@@ -89,6 +89,7 @@ return {
       --
 
       require("rust-tools").setup {
+
         tools = {
           autoSetHints = true,
           inlay_hints = {
@@ -101,7 +102,21 @@ return {
             right_align = false,
           },
         },
-        server = { on_attach = on_attach, capabilities = capabilities },
+        server = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+
+          settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+              -- enable clippy on save
+              checkOnSave = {
+                command = "clippy",
+              },
+            },
+          },
+        },
       }
 
       for name, text in pairs {
