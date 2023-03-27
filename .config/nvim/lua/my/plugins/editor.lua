@@ -1,7 +1,8 @@
 return {
   {
     "monaqa/dial.nvim",
-    branch="fix-map_as_function",
+    branch = "fix-map_as_function",
+    cond = false,
     event = "VeryLazy",
     config = function()
       local dm = require "dial.map"

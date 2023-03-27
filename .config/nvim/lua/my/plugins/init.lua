@@ -21,16 +21,6 @@ return {
     "dhruvasagar/vim-table-mode",
     ft = { "markdown" },
   },
-  -- {
-  --   "rebelot/kanagawa.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("kanagawa").setup{}
-  --     vim.cmd "colorscheme kanagawa"
-  --   end,
-  -- },
-
   {
     "EdenEast/nightfox.nvim",
     lazy = false,
@@ -39,12 +29,7 @@ return {
       vim.cmd.colorscheme "carbonfox"
     end,
   },
-  -- {
-  --   "savq/melange-nvim",
-  --   lazy=false,
-  --   priority = 1000,
-  --   config = function() vim.cmd.colorscheme "melange" end,
-  -- },
+
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "stevearc/oil.nvim", config = true },
   {
