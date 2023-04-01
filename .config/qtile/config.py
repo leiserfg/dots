@@ -208,6 +208,7 @@ floating_layout = layout.Floating(
                 "PureRef" "MEGAsync",
                 "gmic_qt",
                 "Preferences",
+                "Media viewer",
             ]
         ]
         + [

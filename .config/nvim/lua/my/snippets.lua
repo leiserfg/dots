@@ -8,6 +8,9 @@ local s = ls.s
 local t = ls.t
 local i = ls.i
 local f = ls.f
+local c = ls.c
+local sn = ls.sn
+
 math.randomseed(os.time())
 local function uuid()
   local random = math.random
@@ -67,6 +70,18 @@ ls.add_snippets(nil, {
     --   f(function(_, snip)
     --     return snip.env.TM_SELECTED_TEXT
     --   end),
+    -- }),
+    -- s({ trig = "$$", snippetType = "autosnippet" }, {
+    --   t "$",
+    --   c(1, {
+    --     i(1),
+    --     sn(1, {
+    --       t { "$", "" },
+    --       i(1),
+    --       t { "", "$" },
+    --     }),
+    --   }),
+    --   t "$",
     -- }),
     sf("date", date),
     sf("uuid", uuid_),
