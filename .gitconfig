@@ -78,8 +78,6 @@
 	indentheuristic = true
 [status]
 	short = true
-[pull]
-	rebase = true
 
 [user]
 	email           = leiserfg@gmail.com
@@ -103,5 +101,8 @@
 
 [url "https://github.com/rust-lang/crates.io-index"]
     insteadOf = https://github.com/rust-lang/crates.io-index
+
 [rebase]
 	autoStash = true
+[pull]
+	rebase = true

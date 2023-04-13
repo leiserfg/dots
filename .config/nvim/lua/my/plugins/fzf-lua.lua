@@ -18,6 +18,7 @@ return {
         ["<leader>fh"] = fzf.help_tags,
         ["<leader>fz"] = fzf.builtin,
         ["<leader>/"] = grep,
+        ["z="] = fzf.spell_suggest,
       }
 
       local map = vim.keymap.set
