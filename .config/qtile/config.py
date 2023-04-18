@@ -255,3 +255,27 @@ startup_script = os.path.expanduser("~/bin/autostart.sh")
 @hook.subscribe.startup
 def autostart():
     subprocess.run([startup_script])
+
+sticky_windows = set()
+
+sticky_rules = [
+    Match(wm_class="Dragon"),
+    Match(title="Picture-in-Picture"),
+]
+
+@hook.subscribe.setgroup
+def move_sticky_windows():
+    for window in sticky_windows:
+        window.togroup()
+
+
+@hook.subscribe.client_killed
+def remove_sticky_windows(window):
+    if window in sticky_windows:
+        sticky_windows.remove(window)
+
+@hook.subscribe.client_managed
+def auto_sticky_windows(window):
+    for r in sticky_rules:
+        if r.compare(window):
+            sticky_windows.add(window)
