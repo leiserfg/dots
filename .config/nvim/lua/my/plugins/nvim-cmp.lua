@@ -8,7 +8,7 @@ return {
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-emoji",
-      "onsails/lspkind-nvim",
+      "leiserfg/lspkind.nvim",
       "saadparwaiz1/cmp_luasnip",
     },
     event = "VeryLazy",
@@ -30,7 +30,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<Tab>"] = cmp.mapping.select_next_item(),
         },
-        experimental = { ghost_text = true },
+        experimental = { ghost_text = { hl_group = "Comment" } },
         snippet = { expand = expand_snippet },
         sources = {
           { name = "nvim_lsp" },

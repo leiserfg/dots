@@ -82,6 +82,8 @@
 [user]
 	email           = leiserfg@gmail.com
 	name = leiserfg
+	signingkey = /home/leiserfg/.ssh/id_rsa.pub
+
 [filter "lfs"]
 	clean           = git-lfs clean -- %f
 	smudge          = git-lfs smudge -- %f
@@ -106,3 +108,9 @@
 	autoStash = true
 [pull]
 	rebase = true
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
