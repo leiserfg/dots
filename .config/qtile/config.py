@@ -96,7 +96,7 @@ keys = [
         desc="App launcher",
     ),
 ]
-groups_names = "₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉".split()
+groups_names = "₁ ₂ ₃ 󰍥₄ ₅ ₆ ₇ ₈ ₉".split()
 
 groups_rules = {
     1: [Match(wm_class="Navigator")],

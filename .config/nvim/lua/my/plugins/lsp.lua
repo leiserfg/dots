@@ -59,7 +59,6 @@ return {
         "tsserver",
         "clangd",
         "terraformls",
-        "pyright",
       } do
         lspconfig[lsp].setup { capabilities = capabilities, on_attach = on_attach }
       end
@@ -67,6 +66,20 @@ return {
         cmd = { "elixir-ls" },
         on_attach = on_attach,
         capabilities = capabilities,
+      }
+
+      lspconfig.pyright.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+            python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    useLibraryCodeForTypes = true,
+                    diagnosticMode = 'openFilesOnly',
+                },
+            },
+        },
       }
 
       lspconfig.lua_ls.setup {
