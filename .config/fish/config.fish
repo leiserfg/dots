@@ -43,6 +43,7 @@ set -g __fish_git_prompt_color_cleanstate green
 export DOCKER_BUILDKIT=1
 zoxide init fish | source
 
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 function multicd
     echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
