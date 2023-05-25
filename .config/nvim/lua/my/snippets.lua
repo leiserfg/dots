@@ -10,6 +10,7 @@ local i = ls.i
 local f = ls.f
 local c = ls.c
 local sn = ls.sn
+local sp = require "luasnip.nodes.snippetProxy"
 
 math.randomseed(os.time())
 local function uuid()
@@ -59,6 +60,10 @@ local function lorem(args)
 end
 
 ls.add_snippets(nil, {
+  python = {
+    sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]])
+  },
+
   direnv = {
     s(
       { wordTrig = true, trig = "lay" },
