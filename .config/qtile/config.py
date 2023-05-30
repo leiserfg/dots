@@ -61,7 +61,7 @@ keys = [
     ),
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
-    # Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "q", kill_app, desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Togle fullscreen"),
@@ -134,6 +134,7 @@ layout_config = dict(
 
 layouts = [
     layout.MonadTall(**layout_config),
+    layout.MonadWide(**layout_config),
 ]
 
 widget_defaults = dict(
