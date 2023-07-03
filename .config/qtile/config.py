@@ -17,6 +17,12 @@ def kill_app(qtile):
     os.kill(pid, signal.SIGTERM)
 
 
+@lazy.function
+def restart(qtile):
+    subprocess.run(["autorandr", "--change"])
+    qtile.cmd_restart()
+
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -62,14 +68,21 @@ keys = [
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "q", kill_app, desc="Kill focused window"),
+
+    Key([mod], "a", lazy.window.kill(), desc="Abort focused window"),
+    Key([mod, "shift"], "a", kill_app, desc="Abort focused application"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Togle fullscreen"),
     # Globals
-    Key([mod], "r", lazy.restart(), desc="Reload the config"),
+    Key([mod], "s", restart, desc="reStart qtile"),
     Key(
         [mod],
         "0",
+        lazy.spawn(os.path.expanduser("~/.local/bin/rofi_power")),
+        desc="Power management",
+    ),
+    Key(
+        [mod],
+        "p",
         lazy.spawn(os.path.expanduser("~/.local/bin/rofi_power")),
         desc="Power management",
     ),
@@ -96,8 +109,9 @@ keys = [
         desc="App launcher",
     ),
 ]
-groups_names = "₁ ₂ ₃ 󰍥₄ ₅ ₆ ₇ ₈ ₉".split()
 
+
+groups_names = "₁ ₂ ₃ 󰍥₄ ₅ ₆ ₇ ₈ ₉".split()
 groups_rules = {
     1: [Match(wm_class="Navigator")],
     2: [Match(wm_class="Slack")],
@@ -105,22 +119,40 @@ groups_rules = {
 }
 
 groups = [Group(n, matches=groups_rules.get(i + 1)) for i, n in enumerate(groups_names)]
+querty = "qwertyuio"
 
 for i, g in enumerate(groups):
     key = str(i + 1)
+    letter_key = querty[i]
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
+            # mod1 + number of group = switch to group
             Key(
                 [mod],
                 key,
                 lazy.group[g.name].toscreen(toggle=True),
                 desc="Switch to group {}".format(g.name),
             ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
+            # mod1 + shift + number of group = switch to & move focused window to group
             Key(
                 [mod, "shift"],
                 key,
+                lazy.window.togroup(g.name),
+                desc=f"Move focused window to group {g.name}",
+            ),
+
+
+            # mod1 + letter of group = switch to group
+            Key(
+                [mod],
+                letter_key,
+                lazy.group[g.name].toscreen(toggle=True),
+                desc="Switch to group {}".format(g.name),
+            ),
+            # mod1 + shift + letter of group = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                letter_key,
                 lazy.window.togroup(g.name),
                 desc=f"Move focused window to group {g.name}",
             ),
@@ -257,12 +289,14 @@ startup_script = os.path.expanduser("~/bin/autostart.sh")
 def autostart():
     subprocess.run([startup_script])
 
+
 sticky_windows = set()
 
 sticky_rules = [
     Match(wm_class="Dragon"),
     Match(title="Picture-in-Picture"),
 ]
+
 
 @hook.subscribe.setgroup
 def move_sticky_windows():
@@ -275,11 +309,13 @@ def remove_sticky_windows(window):
     if window in sticky_windows:
         sticky_windows.remove(window)
 
+
 @hook.subscribe.client_managed
 def auto_sticky_windows(window):
     for r in sticky_rules:
         if r.compare(window):
             sticky_windows.add(window)
+
 
 # @hook.subscribe.screen_change
 # def set_screens(qtile, event):

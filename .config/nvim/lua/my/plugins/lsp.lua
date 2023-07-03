@@ -59,6 +59,7 @@ return {
         "tsserver",
         "clangd",
         "terraformls",
+        "nil_ls",
       } do
         lspconfig[lsp].setup { capabilities = capabilities, on_attach = on_attach }
       end
@@ -72,13 +73,13 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
-            python = {
-                analysis = {
-                    autoSearchPaths = true,
-                    useLibraryCodeForTypes = true,
-                    diagnosticMode = 'openFilesOnly',
-                },
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
             },
+          },
         },
       }
 
