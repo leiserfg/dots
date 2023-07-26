@@ -316,9 +316,3 @@ def auto_sticky_windows(window):
         if r.compare(window):
             sticky_windows.add(window)
 
-
-# @hook.subscribe.screen_change
-# def set_screens(qtile, event):
-#     if not os.path.exists(os.path.expanduser('~/NO-AUTORANDR')):
-#         subprocess.run(["autorandr", "--change"])
-#         qtile.cmd_restart()
