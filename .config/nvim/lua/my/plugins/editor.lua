@@ -51,4 +51,9 @@ return {
       }
     end,
   },
+  {
+    "numToStr/Comment.nvim",
+    opts = {},
+    lazy = false,
+  },
 }

@@ -13,7 +13,7 @@ return {
       },
     },
     config = function()
-      for _, mini in ipairs { "jump", "align", "move", "splitjoin", "comment" } do
+      for _, mini in ipairs { "jump", "align", "move", "splitjoin" } do
         require(("mini.%s"):format(mini)).setup {}
       end
 
@@ -59,7 +59,6 @@ return {
       )
       -- Make special mapping for "add surrounding for line"
       vim.api.nvim_set_keymap("n", "yss", "ys_", { noremap = false })
-
 
       require("mini.bracketed").setup {
         comment = { suffix = "k" }, -- I use c for changes as diffmode does by default

@@ -56,7 +56,7 @@
 	upstream        = !git branch --set-upstream-to=origin/$(git current) $(git current)
 	repo            = !git remote -v | grep '@.*fetch' | sed 's/.*:\\(.*\\).git.*/\\1/g'
 	opr             = !open https://github.com/$(git repo)/compare/$(git current)?expand=1
-	undo            = !git reset --hard
+        # undo            = !git reset --hard
   # Welcome to fzf heaven. xargs hell
 	fbr             = !BRANCH=`git recent | fzf` && git checkout ${BRANCH}
 	fadd            = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && git add --all ${FILES}
