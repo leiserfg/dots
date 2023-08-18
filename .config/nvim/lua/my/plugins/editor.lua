@@ -25,10 +25,10 @@ return {
 
       local default = {
         augend.date.alias["%Y-%m-%d"],
+        augend.semver.alias.semver,
         augend.integer.alias.decimal,
         augend.integer.alias.hex,
         augend.constant.alias.bool,
-        augend.semver.alias.semver,
         words { "staging", "production" },
       }
 
