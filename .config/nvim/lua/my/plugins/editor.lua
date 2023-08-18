@@ -1,32 +1,19 @@
 return {
   {
     "monaqa/dial.nvim",
-    branch = "fix-map_as_function",
-    cond = false,
     event = "VeryLazy",
     config = function()
       local dm = require "dial.map"
       local augend = require "dial.augend"
 
-      local setkm = vim.keymap.set
+      local kms = vim.keymap.set
 
-      local function group_from_ft()
-        local ft = vim.o.filetype
-        if require("dial.config").augends.group[ft] then
-          return ft
-        else
-          return "default"
-        end
-      end
-
-      -- local group_from_ft = [[".._group_from_ft().."]]
-
-      setkm("n", "<C-A>", dm.inc_normal(group_from_ft), { noremap = true })
-      setkm("n", "<C-X>", dm.dec_normal(group_from_ft), { noremap = true })
-      setkm("v", "<C-A>", dm.inc_visual(group_from_ft), { noremap = true })
-      setkm("v", "<C-X>", dm.dec_visual(group_from_ft), { noremap = true })
-      setkm("v", "g<C-A>", dm.inc_gvisual(group_from_ft), { noremap = true })
-      setkm("v", "g<C-X>", dm.dec_gvisual(group_from_ft), { noremap = true })
+      kms("n", "<C-A>", dm.inc_normal(), { noremap = true })
+      kms("n", "<C-X>", dm.dec_normal(), { noremap = true })
+      kms("v", "<C-A>", dm.inc_visual(), { noremap = true })
+      kms("v", "<C-X>", dm.dec_visual(), { noremap = true })
+      kms("v", "g<C-A>", dm.inc_gvisual(), { noremap = true })
+      kms("v", "g<C-X>", dm.dec_gvisual(), { noremap = true })
 
       local function words(vals)
         return augend.constant.new {
@@ -36,17 +23,30 @@ return {
         }
       end
 
-      require("dial.config").augends:register_group {
-        default = {
-          augend.date.alias["%Y-%m-%d"],
-          augend.integer.alias.decimal,
-          augend.integer.alias.hex,
-          augend.constant.alias.bool,
-          augend.semver.alias.semver,
-          words { "staging", "production" },
+      local default = {
+        augend.date.alias["%Y-%m-%d"],
+        augend.integer.alias.decimal,
+        augend.integer.alias.hex,
+        augend.constant.alias.bool,
+        augend.semver.alias.semver,
+        words { "staging", "production" },
+      }
+
+      local function ftd(others)
+        -- Fallback To Default
+        return vim.list_extend(others, default)
+      end
+
+      require("dial.config").augends:register_group { default = default }
+      require("dial.config").augends:on_filetype {
+        typescript = ftd {
+          words { "let", "const" },
         },
-        python = {
-          words { "False", "True" },
+        markdown = ftd {
+          augend.misc.alias.markdown_header,
+        },
+        python = ftd {
+          words { "True", "False" },
         },
       }
     end,
