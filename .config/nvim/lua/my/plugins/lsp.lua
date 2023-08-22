@@ -15,6 +15,7 @@ return {
           nls.builtins.formatting.ruff,
           nls.builtins.formatting.black,
           nls.builtins.formatting.alejandra,
+          nls.builtins.formatting.jq,
         },
       }
     end,
@@ -24,7 +25,7 @@ return {
     config = function()
       require("neodev").setup {} -- Inject lua stuff
 
-      local function on_attach()
+      local function on_attach(buff)
         local map = vim.keymap.set
         local lb = vim.lsp.buf
         local ld = vim.diagnostic
@@ -47,9 +48,16 @@ return {
           ["]d"] = ld.goto_next,
         }
         for shortcut, callback in pairs(mappings) do
-          map("n", shortcut, callback, { noremap = true, buffer = true, silent = true })
+          map("n", shortcut, callback, { noremap = true, buffer = buff, silent = true })
         end
       end
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(ev)
+          on_attach(ev.buff)
+        end,
+      })
 
       local capabilities = (require "cmp_nvim_lsp").default_capabilities()
       local lspconfig = require "lspconfig"
@@ -61,16 +69,14 @@ return {
         "terraformls",
         "nil_ls",
       } do
-        lspconfig[lsp].setup { capabilities = capabilities, on_attach = on_attach }
+        lspconfig[lsp].setup { capabilities = capabilities }
       end
       lspconfig.elixirls.setup {
         cmd = { "elixir-ls" },
-        on_attach = on_attach,
         capabilities = capabilities,
       }
 
       lspconfig.pyright.setup {
-        on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           python = {
@@ -84,7 +90,6 @@ return {
       }
 
       lspconfig.lua_ls.setup {
-        on_attach = on_attach,
         settings = {
           Lua = {
             completion = {
@@ -117,7 +122,6 @@ return {
           },
         },
         server = {
-          on_attach = on_attach,
           capabilities = capabilities,
 
           settings = {
