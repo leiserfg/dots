@@ -10,7 +10,13 @@ return {
           lua = { "stylua" },
           python = { "ruff", "black" },
           json = { "jq" },
+          nix = { "alejandra" },
           -- ["*"] = { "trim_whitespace" },
+        },
+        formatters = {
+          alejandra = {
+            command = "alejandra",
+          },
         },
       }
 
