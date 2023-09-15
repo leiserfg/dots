@@ -13,11 +13,6 @@ return {
           nix = { "alejandra" },
           -- ["*"] = { "trim_whitespace" },
         },
-        formatters = {
-          alejandra = {
-            command = "alejandra",
-          },
-        },
       }
 
       vim.keymap.set({ "n", "v" }, "<leader>=", function(args)
