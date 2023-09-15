@@ -2,22 +2,37 @@ return {
   "folke/neodev.nvim",
   "simrat39/rust-tools.nvim",
   {
-    "mskelton/null-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    event = "BufReadPre",
-    opts = function()
-      local nls = require "null-ls"
-      return {
-        sources = {
-          -- nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.ruff,
-          nls.builtins.formatting.ruff,
-          nls.builtins.formatting.black,
-          nls.builtins.formatting.alejandra,
-          nls.builtins.formatting.jq,
+    "stevearc/conform.nvim",
+    config = function()
+      local conform = require "conform"
+      conform.setup {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "ruff", "black" },
+          json = { "jq" },
+          -- ["*"] = { "trim_whitespace" },
         },
       }
+
+      vim.keymap.set({ "n", "v" }, "<leader>=", function(args)
+        conform.format { lsp_fallback = "always", async = true }
+      end)
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      local lint = require "lint"
+      lint.linters_by_ft = {
+        nix = { "nix" },
+        python = { "ruff" },
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
     end,
   },
   {
@@ -41,7 +56,6 @@ return {
           ["1gD"] = lb.type_definition,
           g0 = lb.document_symbol,
           gW = lb.workspace_symbol,
-          ["<Leader>="] = format,
           ["<Leader>a"] = lb.code_action,
           ["<Leader>q"] = ld.setloclist,
           ["[d"] = ld.goto_prev,
