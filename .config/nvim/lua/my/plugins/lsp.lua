@@ -111,6 +111,7 @@ return {
               callSnippet = "Replace",
             },
             format = { enable = false },
+            hint = { enable = true },
           },
         },
         capabilities = capabilities,
