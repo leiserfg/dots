@@ -8,14 +8,14 @@ return {
       conform.setup {
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "ruff", "ruff_format" },
+          python = { "ruff_fix", "ruff_format" },
           json = { "jq" },
           nix = { "alejandra" },
           -- ["*"] = { "trim_whitespace" },
         },
       }
 
-      vim.keymap.set({ "n", "v" }, "<leader>=", function(args)
+      vim.keymap.set({ "n", "v" }, "<leader>=", function()
         conform.format { lsp_fallback = "always", async = true }
       end)
     end,
