@@ -114,3 +114,5 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+[feature]
+	manyFiles = true
