@@ -34,6 +34,7 @@ return {
         snippet = { expand = expand_snippet },
         sources = {
           { name = "nvim_lsp" },
+          { name = "codeium" },
           { name = "buffer" },
           { name = "path" },
           { name = "calc" },
@@ -42,7 +43,14 @@ return {
           { name = "luasnip" },
           { name = "orgmode" },
         },
-        formatting = { format = lspkind.cmp_format() },
+        formatting = {
+          format = lspkind.cmp_format {
+            mode = "symbol",
+            maxwidth = 50,
+            ellipsis_char = "...",
+            symbol_map = { Codeium = "" },
+          },
+        },
       }
     end,
   },

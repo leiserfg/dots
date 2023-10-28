@@ -30,6 +30,7 @@ return {
     end,
   },
 
+
   { "nanotee/zoxide.vim", cmd = "Z" },
   { "stevearc/oil.nvim", config = true },
 }

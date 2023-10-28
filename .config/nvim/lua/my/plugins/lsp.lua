@@ -83,6 +83,7 @@ return {
         "clangd",
         "terraformls",
         "nil_ls",
+        "uiua",
       } do
         lspconfig[lsp].setup { capabilities = capabilities }
       end

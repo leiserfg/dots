@@ -82,4 +82,4 @@ end
 
 acmd("TextYankPost", { group = vimrc, callback = yank_colors })
 
-vim.filetype.add { extension = { keymap = "dts", frag = "glsl" } }
+vim.filetype.add { extension = { keymap = "dts", frag = "glsl", ua="uiua" } }
