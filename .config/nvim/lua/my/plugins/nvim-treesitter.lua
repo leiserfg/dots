@@ -13,6 +13,7 @@ return {
 
       return ts.setup {
         ensure_installed = "all",
+        ignore_install = {"po"},
         auto_install = false,
         sync_install = false,
         playground = { enable = true, persist_queries = false },

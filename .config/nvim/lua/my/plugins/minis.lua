@@ -3,7 +3,12 @@ return {
     "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
-      for _, mini in ipairs { "jump", "align", "move", "splitjoin" } do
+      for _, mini in ipairs {
+        "jump",
+        "align",
+        "move",
+        "splitjoin",
+      } do
         require(("mini.%s"):format(mini)).setup {}
       end
 
