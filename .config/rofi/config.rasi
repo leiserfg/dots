@@ -2,5 +2,6 @@ configuration {
 	ssh-command: "kitty -T {host} kitty +kitten ssh {host}";
 	run-command: "fish -c '{cmd}'";
 	run-list-command: "'fish -c functions'";
+        dpi: 0;
 }
 @theme "~/.config/rofi/basic.rasi"

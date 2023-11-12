@@ -26,13 +26,16 @@ entry {
 }
 /* List of entries */
 element {
-    padding: 0.2em;
-    margin: 0.1em 0px;
-    border: 0px 0px 0px 0.1em;
+    padding: 0.1em;
+    /* margin: 0.1em 0px; */
+    /* border: 0px 0px 0px 0.05em; */
 }
 element.normal {
     background-color: @background-alt;
     border-color: @background-alt;
+}
+element-icon {
+    size: 1em;
 }
 element.selected {
     background-color: @background-light;
