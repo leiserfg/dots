@@ -58,8 +58,16 @@ local function lorem(args)
     return { LOREM_IPSUM:sub(1, (amount + 1)) }
   end
 end
+vim.filetype.add{
+    pattern = {
+        [".*.spec.ts"] = "jest.typescript",
+    },
+}
 
 ls.add_snippets(nil, {
+  jest = {
+    sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]])
+  },
   python = {
     sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]])
   },

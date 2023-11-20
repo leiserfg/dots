@@ -68,7 +68,6 @@ keys = [
     Key([mod], "slash", lazy.spawn("firefox"), desc="Firefox"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-
     Key([mod], "a", lazy.window.kill(), desc="Abort focused window"),
     Key([mod, "shift"], "a", kill_app, desc="Abort focused application"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Togle fullscreen"),
@@ -140,8 +139,6 @@ for i, g in enumerate(groups):
                 lazy.window.togroup(g.name),
                 desc=f"Move focused window to group {g.name}",
             ),
-
-
             # mod1 + letter of group = switch to group
             Key(
                 [mod],
@@ -238,7 +235,8 @@ floating_layout = layout.Floating(
         + [
             Match(title=title)
             for title in [
-                "PureRef" "MEGAsync",
+                "PureRef",
+                "MEGAsync",
                 "gmic_qt",
                 "Preferences",
             ]
@@ -315,4 +313,3 @@ def auto_sticky_windows(window):
     for r in sticky_rules:
         if r.compare(window):
             sticky_windows.add(window)
-
