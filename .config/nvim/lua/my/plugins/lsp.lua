@@ -1,6 +1,6 @@
 return {
   "folke/neodev.nvim",
-  "simrat39/rust-tools.nvim",
+  "mrcjkb/rustaceanvim",
   {
     "stevearc/conform.nvim",
     config = function()
@@ -124,35 +124,35 @@ return {
       -- }
       --
 
-      require("rust-tools").setup {
-
-        tools = {
-          autoSetHints = true,
-          inlay_hints = {
-            max_len_align_padding = 1,
-            parameter_hints_prefix = "<-",
-            show_parameter_hints = true,
-            right_align_padding = 7,
-            other_hints_prefix = "=>",
-            max_len_align = false,
-            right_align = false,
-          },
-        },
-        server = {
-          capabilities = capabilities,
-
-          settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-              -- enable clippy on save
-              checkOnSave = {
-                command = "clippy",
-              },
-            },
-          },
-        },
-      }
+      -- require("rust-tools").setup {
+      --
+      --   tools = {
+      --     autoSetHints = true,
+      --     inlay_hints = {
+      --       max_len_align_padding = 1,
+      --       parameter_hints_prefix = "<-",
+      --       show_parameter_hints = true,
+      --       right_align_padding = 7,
+      --       other_hints_prefix = "=>",
+      --       max_len_align = false,
+      --       right_align = false,
+      --     },
+      --   },
+      --   server = {
+      --     capabilities = capabilities,
+      --
+      --     settings = {
+      --       -- to enable rust-analyzer settings visit:
+      --       -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+      --       ["rust-analyzer"] = {
+      --         -- enable clippy on save
+      --         checkOnSave = {
+      --           command = "clippy",
+      --         },
+      --       },
+      --     },
+      --   },
+      -- }
 
       for name, text in pairs {
         Error = "🩸",
