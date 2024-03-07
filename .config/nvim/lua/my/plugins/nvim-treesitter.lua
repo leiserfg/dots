@@ -13,11 +13,12 @@ return {
 
       return ts.setup {
         ensure_installed = "all",
-        ignore_install = {"po"},
+        ignore_install = { "po" },
         auto_install = false,
         sync_install = false,
         playground = { enable = true, persist_queries = false },
         highlight = { enable = true },
+        indent = {enable = true},
         context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {
           enable = true,

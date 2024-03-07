@@ -3,7 +3,7 @@ return {
   "tpope/vim-repeat",
   { "Olical/vim-enmasse", cmd = "EnMasse" },
   "tpope/vim-eunuch",
-  { "Vimjas/vim-python-pep8-indent", ft = "python" },
+  -- { "Vimjas/vim-python-pep8-indent", ft = "python" },
   {
     "NvChad/nvim-colorizer.lua",
     config = true,
