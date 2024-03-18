@@ -1,9 +1,0 @@
-* {
-    main-color:       #afcfee;
-    background:       #1c1c1c;
-    background-alt:   #1f1f1f;
-    background-light: #282828;
-    foreground:       #e2e2e2;
-    background-color: @background;
-    text-color:       @foreground;
-}
