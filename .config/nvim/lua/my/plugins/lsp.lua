@@ -92,7 +92,7 @@ return {
         capabilities = capabilities,
       }
 
-      lspconfig.pyright.setup {
+      lspconfig.basedpyright.setup {
         capabilities = capabilities,
         settings = {
           python = {
