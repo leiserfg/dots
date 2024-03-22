@@ -46,10 +46,10 @@ return {
         local lb = vim.lsp.buf
         local ld = vim.diagnostic
 
-
-        local function format()
-          return lb.format { async = true }
+        local function toggle_inlay()
+          vim.lsp.inlay_hint.enable(buff, not vim.lsp.inlay_hint.is_enabled(buff))
         end
+
         local mappings = {
           gd = lb.definition,
           K = lb.hover,
@@ -62,13 +62,11 @@ return {
           ["<Leader>q"] = ld.setloclist,
           ["[d"] = ld.goto_prev,
           ["]d"] = ld.goto_next,
+          ["<Leader>i"] = toggle_inlay,
         }
         for shortcut, callback in pairs(mappings) do
           map("n", shortcut, callback, { noremap = true, buffer = buff, silent = true })
         end
-
-        vim.lsp.inlay_hint.enable(buff, true)
-
       end
 
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -99,11 +97,12 @@ return {
       lspconfig.basedpyright.setup {
         capabilities = capabilities,
         settings = {
-          python = {
+          basedpyright  = {
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
               diagnosticMode = "openFilesOnly",
+              typeCheckingMode = "basic",
             },
           },
         },
