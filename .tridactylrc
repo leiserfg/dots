@@ -1,2 +1,0 @@
-bind ,v composite js document.location.href.replace('https://', 'ytdl://') | shellescape | js -p 'PATH="$PATH:/usr/local/bin" mpv ' + JS_ARG | !s
-set editorcmd kitty nvim
