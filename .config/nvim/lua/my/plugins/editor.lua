@@ -51,11 +51,11 @@ return {
       }
     end,
   },
-  {
-    "numToStr/Comment.nvim",
-    opts = {},
-    lazy = false,
-  },
+  -- {
+  --   "numToStr/Comment.nvim",
+  --   opts = {},
+  --   lazy = false,
+  -- },
   {
     "chrishrb/gx.nvim",
     cmd = { "Browse" },

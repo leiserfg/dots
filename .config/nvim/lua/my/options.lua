@@ -1,7 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
-o.commentstring = "/*%s*/"
+-- o.commentstring = "/*%s*/"
 o.cpo:append ">"
 o.number = true
 o.relativenumber = true
