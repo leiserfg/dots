@@ -10,6 +10,7 @@ return {
       "hrsh7th/cmp-emoji",
       "leiserfg/lspkind.nvim",
       "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     event = "VeryLazy",
     config = function()
@@ -33,7 +34,7 @@ return {
         experimental = { ghost_text = { hl_group = "Comment" } },
         snippet = { expand = expand_snippet },
         sources = {
-          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
           { name = "codeium" },
           { name = "buffer" },
           { name = "path" },
@@ -41,7 +42,6 @@ return {
           { name = "emoji" },
           { name = "nvim_lua" },
           { name = "luasnip" },
-          { name = "orgmode" },
         },
         formatting = {
           format = lspkind.cmp_format {
