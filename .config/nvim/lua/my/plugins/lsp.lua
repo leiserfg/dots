@@ -8,7 +8,6 @@ return {
       conform.setup {
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "ruff_fix", "ruff_format" },
           json = { "jq" },
           nix = { "alejandra" },
           -- ["*"] = { "trim_whitespace" },
@@ -26,7 +25,6 @@ return {
       local lint = require "lint"
       lint.linters_by_ft = {
         nix = { "nix" },
-        python = { "ruff" },
       }
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -86,6 +84,7 @@ return {
         "terraformls",
         "nil_ls",
         "uiua",
+        "ruff",
       } do
         lspconfig[lsp].setup { capabilities = capabilities }
       end
@@ -97,7 +96,7 @@ return {
       lspconfig.basedpyright.setup {
         capabilities = capabilities,
         settings = {
-          basedpyright  = {
+          basedpyright = {
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,

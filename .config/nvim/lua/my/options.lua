@@ -7,7 +7,6 @@ o.number = true
 o.relativenumber = true
 o.numberwidth = 2
 o.modelines = 2
-o.backspace = "eol,start,indent"
 o.synmaxcol = 500
 o.ignorecase = true
 o.smartcase = true
