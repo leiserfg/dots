@@ -14,4 +14,5 @@ vim.g["codi#interpreters"] = {
 -- vim.g["codi#raw"] = 1
 -- vim.g["codi#log"] = "/tmp/codi.log"
 
-return { { cmd = "Codi", "metakirby5/codi.vim" } }
+-- return { { cmd = "Codi", "metakirby5/codi.vim" } }
+return {}
