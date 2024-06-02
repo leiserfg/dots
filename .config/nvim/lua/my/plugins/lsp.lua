@@ -1,6 +1,18 @@
 return {
-  "folke/neodev.nvim",
   "mrcjkb/rustaceanvim",
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        vim.env.LAZY .. "/luvit-meta/library", -- see below
+        -- You can also add plugins you always want to have loaded.
+        -- Useful if the plugin has globals or types you want to use
+        -- vim.env.LAZY .. "/LazyVim", -- see below
+      },
+    },
+  },
+  { "Bilal2453/luvit-meta", lazy = true },
   {
     "stevearc/conform.nvim",
     config = function()
@@ -10,7 +22,6 @@ return {
           lua = { "stylua" },
           json = { "jq" },
           nix = { "alejandra" },
-          -- ["*"] = { "trim_whitespace" },
         },
       }
 
@@ -37,8 +48,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("neodev").setup {} -- Inject lua stuff
-
       local function on_attach(buff)
         local map = vim.keymap.set
         local lb = vim.lsp.buf
@@ -120,53 +129,16 @@ return {
         capabilities = capabilities,
       }
 
-      -- lspconfig.tailwindcss.setup {
-      --   on_attach = on_attach,
-      --   filetypes = { "html", "elixir", "eelixir" },
-      -- }
-      --
-
-      -- require("rust-tools").setup {
-      --
-      --   tools = {
-      --     autoSetHints = true,
-      --     inlay_hints = {
-      --       max_len_align_padding = 1,
-      --       parameter_hints_prefix = "<-",
-      --       show_parameter_hints = true,
-      --       right_align_padding = 7,
-      --       other_hints_prefix = "=>",
-      --       max_len_align = false,
-      --       right_align = false,
-      --     },
-      --   },
-      --   server = {
-      --     capabilities = capabilities,
-      --
-      --     settings = {
-      --       -- to enable rust-analyzer settings visit:
-      --       -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      --       ["rust-analyzer"] = {
-      --         -- enable clippy on save
-      --         checkOnSave = {
-      --           command = "clippy",
-      --         },
-      --       },
-      --     },
-      --   },
-      -- }
-
-      for name, text in pairs {
-        Error = "🩸",
-        Warn = "🔶",
-        Info = "🔷",
-        Hint = "👉",
-      } do
-        vim.fn.sign_define(
-          "DiagnosticSign" .. name,
-          { text = text, linehl = "", numhl = "" }
-        )
-      end
+      vim.diagnostic.config {
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "🩸",
+            [vim.diagnostic.severity.WARN] = "🔶",
+            [vim.diagnostic.severity.INFO] = "🔷",
+            [vim.diagnostic.severity.HINT] = "👉",
+          },
+        },
+      }
     end,
   },
 }
