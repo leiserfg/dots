@@ -8,7 +8,7 @@ return {
       fzf.setup { default_previewer = "bat" }
       fzf.register_ui_select()
       local function grep()
-        return fzf.grep { no_esc = true }
+        return fzf.grep { no_esc = true, multiline = true }
       end
 
       local mappings = {
