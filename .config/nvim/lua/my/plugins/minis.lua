@@ -8,6 +8,7 @@ return {
         "align",
         "move",
         "splitjoin",
+        "icons",
       } do
         require(("mini.%s"):format(mini)).setup {}
       end
@@ -27,6 +28,9 @@ return {
           c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
         },
       }
+
+
+      require("mini.icons").mock_nvim_web_devicons()
 
       -- I'm an old dog, so I keep using tpope's surround keybindings
       require("mini.surround").setup {

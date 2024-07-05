@@ -93,19 +93,32 @@ return {
         capabilities = capabilities,
       }
 
-      lspconfig.basedpyright.setup {
+      lspconfig.pyright.setup {
         capabilities = capabilities,
         settings = {
-          basedpyright = {
+          python = {
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
               diagnosticMode = "openFilesOnly",
-              typeCheckingMode = "basic",
             },
           },
         },
       }
+
+      -- lspconfig.basedpyright.setup {
+      --   capabilities = capabilities,
+      --   settings = {
+      --     basedpyright = {
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         useLibraryCodeForTypes = true,
+      --         diagnosticMode = "openFilesOnly",
+      --         typeCheckingMode = "basic",
+      --       },
+      --     },
+      --   },
+      -- }
 
       lspconfig.lua_ls.setup {
         settings = {

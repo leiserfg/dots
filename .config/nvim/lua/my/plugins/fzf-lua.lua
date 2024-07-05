@@ -2,7 +2,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
-    dependencies = { "vijaymarupudi/nvim-fzf", "nvim-tree/nvim-web-devicons" },
+    dependencies = { "vijaymarupudi/nvim-fzf"},
     config = function()
       local fzf = require "fzf-lua"
       fzf.setup { default_previewer = "bat" }

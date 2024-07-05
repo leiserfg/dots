@@ -75,6 +75,7 @@ return {
   },
   {
     "folke/noice.nvim",
+    cond = false,
     opts = {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
