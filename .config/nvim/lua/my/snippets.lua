@@ -10,9 +10,12 @@ local i = ls.i
 local f = ls.f
 local c = ls.c
 local sn = ls.sn
+local fmt = require("luasnip.extras.fmt").fmt
+
 local sp = require "luasnip.nodes.snippetProxy"
 
 math.randomseed(os.time())
+
 local function uuid()
   local random = math.random
   local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
@@ -58,18 +61,30 @@ local function lorem(args)
     return { LOREM_IPSUM:sub(1, (amount + 1)) }
   end
 end
-vim.filetype.add{
-    pattern = {
-        [".*.spec.ts"] = "jest.typescript",
-    },
+vim.filetype.add {
+  pattern = {
+    [".*.spec.ts"] = "jest.typescript",
+  },
 }
 
 ls.add_snippets(nil, {
   jest = {
-    sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]])
+    sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]]),
   },
   python = {
-    sp('3"', [["""${1:$TM_SELECTED_TEXT}"""]])
+    s(
+      "for",
+      fmt(
+        [[
+  for {} in {}:
+      
+  ]],
+        {
+          i(1, "it"),
+          i(2, "iterator"),
+        }
+      )
+    ),
   },
 
   direnv = {
@@ -79,23 +94,6 @@ ls.add_snippets(nil, {
     ),
   },
   all = {
-    -- s({ trig = "bk" }, {
-    --   f(function(_, snip)
-    --     return snip.env.TM_SELECTED_TEXT
-    --   end),
-    -- }),
-    -- s({ trig = "$$", snippetType = "autosnippet" }, {
-    --   t "$",
-    --   c(1, {
-    --     i(1),
-    --     sn(1, {
-    --       t { "$", "" },
-    --       i(1),
-    --       t { "", "$" },
-    --     }),
-    --   }),
-    --   t "$",
-    -- }),
     sf("date", date),
     sf("uuid", uuid_),
     sf("lorem(%d*)", lorem, true),
@@ -111,5 +109,3 @@ ls.add_snippets(nil, {
     }),
   },
 })
-
-require("luasnip/loaders/from_vscode").lazy_load()

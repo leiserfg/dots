@@ -48,6 +48,13 @@ return {
           vim.lsp.inlay_hint.enable(buff, not vim.lsp.inlay_hint.is_enabled(buff))
         end
 
+        local function goto_prev()
+          ld.jump { count = -1, float = true }
+        end
+
+        local function goto_next()
+          ld.jump { count = 1, float = true }
+        end
         local mappings = {
           gd = lb.definition,
           K = lb.hover,
@@ -58,10 +65,11 @@ return {
           gW = lb.workspace_symbol,
           ["<Leader>a"] = lb.code_action,
           ["<Leader>q"] = ld.setloclist,
-          ["[d"] = ld.goto_prev,
-          ["]d"] = ld.goto_next,
+          ["[d"] = goto_prev,
+          ["]d"] = goto_next,
           ["<Leader>i"] = toggle_inlay,
         }
+
         for shortcut, callback in pairs(mappings) do
           map("n", shortcut, callback, { noremap = true, buffer = buff, silent = true })
         end
@@ -133,53 +141,16 @@ return {
         capabilities = capabilities,
       }
 
-      -- lspconfig.tailwindcss.setup {
-      --   on_attach = on_attach,
-      --   filetypes = { "html", "elixir", "eelixir" },
-      -- }
-      --
-
-      -- require("rust-tools").setup {
-      --
-      --   tools = {
-      --     autoSetHints = true,
-      --     inlay_hints = {
-      --       max_len_align_padding = 1,
-      --       parameter_hints_prefix = "<-",
-      --       show_parameter_hints = true,
-      --       right_align_padding = 7,
-      --       other_hints_prefix = "=>",
-      --       max_len_align = false,
-      --       right_align = false,
-      --     },
-      --   },
-      --   server = {
-      --     capabilities = capabilities,
-      --
-      --     settings = {
-      --       -- to enable rust-analyzer settings visit:
-      --       -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      --       ["rust-analyzer"] = {
-      --         -- enable clippy on save
-      --         checkOnSave = {
-      --           command = "clippy",
-      --         },
-      --       },
-      --     },
-      --   },
-      -- }
-
-      for name, text in pairs {
-        Error = "🩸",
-        Warn = "🔶",
-        Info = "🔷",
-        Hint = "👉",
-      } do
-        vim.fn.sign_define(
-          "DiagnosticSign" .. name,
-          { text = text, linehl = "", numhl = "" }
-        )
-      end
+      vim.diagnostic.config {
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "🩸",
+            [vim.diagnostic.severity.WARN] = "🔶",
+            [vim.diagnostic.severity.INFO] = "🔷",
+            [vim.diagnostic.severity.HINT] = "👉",
+          },
+        },
+      }
     end,
   },
 }
