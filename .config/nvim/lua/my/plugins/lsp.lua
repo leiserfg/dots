@@ -1,6 +1,9 @@
 return {
   "folke/neodev.nvim",
-  "mrcjkb/rustaceanvim",
+  {
+    "mrcjkb/rustaceanvim",
+    lazy = false,
+  },
   {
     "stevearc/conform.nvim",
     config = function()
