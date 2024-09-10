@@ -66,7 +66,7 @@ return {
           ["1gD"] = lb.type_definition,
           g0 = lb.document_symbol,
           gW = lb.workspace_symbol,
-          ["<Leader>a"] = lb.code_action,
+          -- ["<Leader>a"] = lb.code_action,
           ["<Leader>q"] = ld.setloclist,
           ["[d"] = goto_prev,
           ["]d"] = goto_next,
@@ -90,7 +90,6 @@ return {
       for _, lsp in ipairs {
         "gdscript",
         "vimls",
-        "tsserver",
         "clangd",
         "terraformls",
         "nil_ls",
