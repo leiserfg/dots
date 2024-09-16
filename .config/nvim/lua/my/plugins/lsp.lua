@@ -66,11 +66,11 @@ return {
           ["1gD"] = lb.type_definition,
           g0 = lb.document_symbol,
           gW = lb.workspace_symbol,
-          -- ["<Leader>a"] = lb.code_action,
-          ["<Leader>q"] = ld.setloclist,
+          ["<Leader>la"] = lb.code_action,
+          ["<Leader>lq"] = ld.setloclist,
           ["[d"] = goto_prev,
           ["]d"] = goto_next,
-          ["<Leader>i"] = toggle_inlay,
+          ["<Leader>li"] = toggle_inlay,
         }
 
         for shortcut, callback in pairs(mappings) do
