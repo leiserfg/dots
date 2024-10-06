@@ -91,6 +91,7 @@ return {
         "gdscript",
         "vimls",
         "clangd",
+        -- "ccls",
         "terraformls",
         "nil_ls",
         "uiua",

@@ -1,6 +1,7 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
+    "iguanacucumber/magazine.nvim",
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
