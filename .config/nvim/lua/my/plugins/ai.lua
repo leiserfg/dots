@@ -24,9 +24,9 @@ return {
     "MunifTanjim/nui.nvim",
     {
       -- Make sure to set this up properly if you have lazy=true
-      "MeanderingProgrammer/render-markdown.nvim",
+      "OXY2DEV/markview.nvim",
       opts = {
-        file_types = { "markdown", "Avante" },
+        filetypes = { "markdown", "Avante" },
       },
       ft = { "markdown", "Avante" },
     },

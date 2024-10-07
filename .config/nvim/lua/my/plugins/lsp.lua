@@ -13,6 +13,8 @@ return {
           lua = { "stylua" },
           json = { "jq" },
           nix = { "alejandra" },
+          sh = { "shellcheck", "shfmt" },
+
           -- ["*"] = { "trim_whitespace" },
         },
       }
@@ -28,6 +30,7 @@ return {
       local lint = require "lint"
       lint.linters_by_ft = {
         nix = { "nix" },
+        sh = { "shellcheck" },
       }
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -94,6 +97,7 @@ return {
         -- "ccls",
         "terraformls",
         "nil_ls",
+        "ts_ls",
         "uiua",
         "ruff",
       } do
@@ -104,32 +108,32 @@ return {
         capabilities = capabilities,
       }
 
-      lspconfig.pyright.setup {
-        capabilities = capabilities,
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = "openFilesOnly",
-            },
-          },
-        },
-      }
-
-      -- lspconfig.basedpyright.setup {
+      -- lspconfig.pyright.setup {
       --   capabilities = capabilities,
       --   settings = {
-      --     basedpyright = {
+      --     python = {
       --       analysis = {
       --         autoSearchPaths = true,
       --         useLibraryCodeForTypes = true,
       --         diagnosticMode = "openFilesOnly",
-      --         typeCheckingMode = "basic",
       --       },
       --     },
       --   },
       -- }
+
+      lspconfig.basedpyright.setup {
+        capabilities = capabilities,
+        settings = {
+          basedpyright = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
+              typeCheckingMode = "basic",
+            },
+          },
+        },
+      }
 
       lspconfig.lua_ls.setup {
         settings = {

@@ -1,4 +1,5 @@
 return {
+  "jrop/jq.nvim",
   {
     "monaqa/dial.nvim",
     event = "VeryLazy",
@@ -46,6 +47,9 @@ return {
           augend.misc.alias.markdown_header,
         },
         python = ftd {
+          words { "True", "False" },
+        },
+        csv = ftd {
           words { "True", "False" },
         },
       }
