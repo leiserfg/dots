@@ -128,6 +128,7 @@ return {
             reportUnreachable = true,
             analysis = {
               autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
               diagnosticMode = "openFilesOnly",
               typeCheckingMode = "basic",
             },
