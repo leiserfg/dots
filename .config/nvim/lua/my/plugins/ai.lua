@@ -22,13 +22,23 @@ return {
     "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    -- {
+    --   -- Make sure to set this up properly if you have lazy=true
+    --   "OXY2DEV/markview.nvim",
+    --   lazy = false,
+    --   opts = {
+    --     filetypes = { "markdown", "Avante" },
+    --     hybrid_modes = { "n" },
+    --   },
+    -- },
     {
-      -- Make sure to set this up properly if you have lazy=true
-      "OXY2DEV/markview.nvim",
-      opts = {
-        filetypes = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
+      "MeanderingProgrammer/render-markdown.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+      ---@module 'render-markdown'
+      ---@type render.md.UserConfig
+      opts = {},
     },
   },
 }

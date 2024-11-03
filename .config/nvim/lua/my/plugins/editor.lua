@@ -63,7 +63,6 @@ return {
   {
     "chrishrb/gx.nvim",
     cmd = { "Browse" },
-    dependencies = { "nvim-lua/plenary.nvim" },
     keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
     config = {
       handlers = {

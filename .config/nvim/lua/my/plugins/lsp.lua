@@ -125,9 +125,9 @@ return {
         capabilities = capabilities,
         settings = {
           basedpyright = {
+            reportUnreachable = true,
             analysis = {
               autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
               diagnosticMode = "openFilesOnly",
               typeCheckingMode = "basic",
             },
