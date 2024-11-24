@@ -1,60 +1,84 @@
 return {
   {
+<<<<<<< HEAD
     -- "hrsh7th/nvim-cmp",
     "iguanacucumber/magazine.nvim",
     name = "nvim-cmp",
+=======
+    "saghen/blink.cmp",
+    lazy = false, -- lazy loading handled internally
+    build = "cargo build --release",
+    -- dev = true,
+>>>>>>> 2111767 (Mon Nov 25 12:10:01 AM CET 2024)
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-emoji",
-      "leiserfg/lspkind.nvim",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "L3MON4D3/LuaSnip",
+      {
+        "leiserfg/blink_luasnip",
+        -- dev = true
+      },
     },
-    event = "VeryLazy",
-    config = function()
-      local cmp = require "cmp"
-      local lspkind = require "lspkind"
-      local function expand_snippet(args)
-        return require("luasnip").lsp_expand(args.body)
-      end
 
-      cmp.setup {
-        mapping = {
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-          ["<C-e>"] = cmp.mapping.close(),
-          ["<CR>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
+    accept = {
+      expand_snippet = require("luasnip").lsp_expand,
+    },
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      fuzzy = { prebuilt_binaries = { force_version = "v0.5.1" } },
+      keymap = {
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "hide", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      },
+
+      highlight = {
+        -- sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release, assuming themes add support
+        use_nvim_cmp_as_default = true,
+      },
+      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- adjusts spacing to ensure icons are aligned
+      nerd_font_variant = "mono",
+
+      sources = {
+        completion = {
+          enabled_providers = { "lsp", "path", "luasnip", "buffer" },
+        },
+
+        providers = {
+          luasnip = {
+            name = "luasnip",
+            module = "blink_luasnip",
+
+            score_offset = -3,
+
+            opts = {
+              use_show_condition = false,
+              show_autosnippets = true,
+            },
           },
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<Tab>"] = cmp.mapping.select_next_item(),
         },
-        experimental = { ghost_text = { hl_group = "Comment" } },
-        snippet = { expand = expand_snippet },
-        sources = {
-          { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lsp" },
-          { name = "codeium" },
-          { name = "buffer" },
-          { name = "path" },
-          { name = "calc" },
-          { name = "emoji" },
-          { name = "nvim_lua" },
-          { name = "luasnip" },
-        },
-        formatting = {
-          format = lspkind.cmp_format {
-            mode = "symbol",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            symbol_map = { Codeium = "" },
-          },
-        },
-      }
-    end,
+      },
+      -- experimental auto-brackets support
+      -- accept = { auto_brackets = { enabled = true } }
+
+      -- experimental signature help support
+      trigger = { signature_help = { enabled = true } },
+    },
+    -- allows extending the enabled_providers array elsewhere in your config
+    -- without having to redefine it
+    opts_extend = { "sources.completion.enabled_providers" },
   },
 }

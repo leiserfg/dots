@@ -53,14 +53,15 @@ local function uuid_()
   return { uuid() }
 end
 
-local function lorem(args)
-  local amount = tonumber(args[1].captures[1])
+local function lorem(_, snp)
+  local amount = tonumber(snp.captures[1])
   if amount == nil then
     return { LOREM_IPSUM }
   else
-    return { LOREM_IPSUM:sub(1, (amount + 1)) }
+    return { LOREM_IPSUM:sub(1, amount ) }
   end
 end
+
 vim.filetype.add {
   pattern = {
     [".*.spec.ts"] = "jest.typescript",

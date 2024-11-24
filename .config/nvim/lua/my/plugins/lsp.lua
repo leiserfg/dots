@@ -42,6 +42,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    depenencies = { "saghen/blink.cmp" },
     config = function()
       require("neodev").setup {} -- Inject lua stuff
 
@@ -87,8 +88,8 @@ return {
           on_attach(ev.buff)
         end,
       })
-
-      local capabilities = (require "cmp_nvim_lsp").default_capabilities()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
       local lspconfig = require "lspconfig"
       for _, lsp in ipairs {
         "gdscript",
