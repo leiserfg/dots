@@ -1,15 +1,9 @@
 return {
   {
-<<<<<<< HEAD
-    -- "hrsh7th/nvim-cmp",
-    "iguanacucumber/magazine.nvim",
-    name = "nvim-cmp",
-=======
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     build = "cargo build --release",
     -- dev = true,
->>>>>>> 2111767 (Mon Nov 25 12:10:01 AM CET 2024)
     dependencies = {
       "L3MON4D3/LuaSnip",
       {
