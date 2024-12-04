@@ -88,8 +88,9 @@ return {
           on_attach(ev.buff)
         end,
       })
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      local capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+      local capabilities = require("blink.cmp").get_lsp_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+      )
       local lspconfig = require "lspconfig"
       for _, lsp in ipairs {
         "gdscript",
@@ -97,7 +98,9 @@ return {
         "clangd",
         -- "ccls",
         "terraformls",
-        "nil_ls",
+        -- "nil_ls",
+        "glsl_analyzer",
+        "nixd",
         "ts_ls",
         "uiua",
         "ruff",
