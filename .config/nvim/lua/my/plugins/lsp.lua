@@ -1,5 +1,4 @@
 return {
-  "folke/neodev.nvim",
   {
     "mrcjkb/rustaceanvim",
     lazy = false,
@@ -44,8 +43,6 @@ return {
     "neovim/nvim-lspconfig",
     depenencies = { "saghen/blink.cmp" },
     config = function()
-      require("neodev").setup {} -- Inject lua stuff
-
       local function on_attach(buff)
         local map = vim.keymap.set
         local lb = vim.lsp.buf
@@ -164,5 +161,16 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "folke/lazydev.nvim",
+    -- depenencies = { "LuaCATS/love2d" },
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
 }
