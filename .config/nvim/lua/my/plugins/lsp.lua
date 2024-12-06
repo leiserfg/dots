@@ -13,6 +13,7 @@ return {
           json = { "jq" },
           nix = { "alejandra" },
           sh = { "shellcheck", "shfmt" },
+          toml = { "taplo" },
 
           -- ["*"] = { "trim_whitespace" },
         },

@@ -1,45 +1,44 @@
--- return {}
--- [[
-return {
-  "leiserfg/avante.nvim",
-  -- "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
-  version = false, -- set this if you want to always pull the latest change
-  -- dev = true,
-  opts = {
-    provider = "openai",
-    openai = {
-      endpoint = "http://shiralad:11434/v1",
-      model = "yi-coder",
-      temperature = 0,
-      max_tokens = 4096,
-      ["local"] = true,
-    },
-  },
-  build = "make",
-  dependencies = {
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    -- {
-    --   -- Make sure to set this up properly if you have lazy=true
-    --   "OXY2DEV/markview.nvim",
-    --   lazy = false,
-    --   opts = {
-    --     filetypes = { "markdown", "Avante" },
-    --     hybrid_modes = { "n" },
-    --   },
-    -- },
-    {
-      "MeanderingProgrammer/render-markdown.nvim",
-      dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-      ---@module 'render-markdown'
-      ---@type render.md.UserConfig
-      opts = {},
-    },
-  },
-}
--- ]]
+return {}
+-- return {
+--   -- "leiserfg/avante.nvim",
+--   "yetone/avante.nvim",
+--   event = "VeryLazy",
+--   lazy = false,
+--   version = false, -- set this if you want to always pull the latest change
+--   -- dev = true,
+--   opts = {
+--     provider = "openai",
+--     openai = {
+--       endpoint = "http://shiralad:11434/v1",
+--       model = "yi-coder",
+--       temperature = 0,
+--       max_tokens = 4096,
+--       ["local"] = true,
+--     },
+--   },
+--   build = "make",
+--   dependencies = {
+--     "stevearc/dressing.nvim",
+--     "nvim-lua/plenary.nvim",
+--     "MunifTanjim/nui.nvim",
+--     -- {
+--     --   -- Make sure to set this up properly if you have lazy=true
+--     --   "OXY2DEV/markview.nvim",
+--     --   lazy = false,
+--     --   opts = {
+--     --     filetypes = { "markdown", "Avante" },
+--     --     hybrid_modes = { "n" },
+--     --   },
+--     -- },
+--     {
+--       "MeanderingProgrammer/render-markdown.nvim",
+--       dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+--       -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+--       -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+--       ---@module 'render-markdown'
+--       ---@type render.md.UserConfig
+--       opts = {},
+--     },
+--   },
+-- }
+

@@ -1,5 +1,6 @@
 return {
   "jrop/jq.nvim",
+  "MeanderingProgrammer/render-markdown.nvim",
   {
     "monaqa/dial.nvim",
     event = "VeryLazy",

@@ -4,7 +4,7 @@ return {
     lazy = false, -- lazy loading handled internally
     -- build = "cargo build --release",
     -- dev = true,
-    version = "v0.*",
+    version = 'v0.6.*',
     dependencies = {
       "L3MON4D3/LuaSnip",
     },
