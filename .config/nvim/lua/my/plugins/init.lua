@@ -30,7 +30,22 @@ return {
     end,
   },
 
-
   { "nanotee/zoxide.vim", cmd = "Z" },
-  { "stevearc/oil.nvim", config = true },
+  -- { "stevearc/oil.nvim", config = true },
+  {
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
+    keys = {
+      {
+        "-",
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
+      },
+    },
+    ---@type YaziConfig
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = true,
+    },
+  },
 }
