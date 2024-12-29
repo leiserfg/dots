@@ -4,30 +4,27 @@ return {
     lazy = false, -- lazy loading handled internally
     -- build = "cargo build --release",
     -- dev = true,
-    version = 'v0.*',
+    version = "v0.*",
     dependencies = {
       "L3MON4D3/LuaSnip",
     },
 
-    snippets = {
-      expand = function(snippet)
-        require("luasnip").lsp_expand(snippet)
-      end,
-      active = function(filter)
-        if filter and filter.direction then
-          return require("luasnip").jumpable(filter.direction)
-        end
-        return require("luasnip").in_snippet()
-      end,
-      jump = function(direction)
-        require("luasnip").jump(direction)
-      end,
-    },
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
-      -- fuzzy = { prebuilt_binaries = { force_version = "v0.5.1" } },
+      snippets = {
+        expand = function(snippet)
+          require("luasnip").lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
+        end,
+      },
+
       keymap = {
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"] = { "hide", "fallback" },
@@ -44,35 +41,18 @@ return {
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
       },
 
-      highlight = {
-        -- sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- useful for when your theme doesn't support blink.cmp
-        -- will be removed in a future release, assuming themes add support
-        use_nvim_cmp_as_default = true,
+      signature = { enabled = true },
+      completion = {
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
-      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- adjusts spacing to ensure icons are aligned
-      nerd_font_variant = "mono",
 
       sources = {
-        completion = {
-          enabled_providers = { "lsp", "path", "luasnip", "buffer", "lazydev" },
-        },
+        default = { "lsp", "path", "luasnip", "buffer", "lazydev" },
         providers = {
           -- dont show LuaLS require statements when lazydev has items
-          lsp = { fallback_for = { "lazydev" } },
-          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" , fallbacks='lsp'},
         },
       },
-      -- experimental auto-brackets support
-      -- accept = { auto_brackets = { enabled = true } }
-
-      -- experimental signature help support
-      -- trigger = { signature_help = { enabled = true } },
     },
-    -- allows extending the enabled_providers array elsewhere in your config
-    -- without having to redefine it
   },
 }
-
-
