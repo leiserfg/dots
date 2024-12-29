@@ -2,10 +2,11 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
-    dependencies = { "vijaymarupudi/nvim-fzf"},
+    dependencies = { "vijaymarupudi/nvim-fzf" },
     config = function()
       local fzf = require "fzf-lua"
-      fzf.setup { default_previewer = "bat" }
+      -- fzf.setup { "default" }
+      fzf.setup { winopts = { preview = { default = "bat" } } }
       fzf.register_ui_select()
       local function grep()
         return fzf.grep { no_esc = true }

@@ -18,7 +18,7 @@ return {
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            gs.nav_hunk "next"
           end)
           return "<Ignore>"
         end, { expr = true })
@@ -28,7 +28,7 @@ return {
             return "[c"
           end
           vim.schedule(function()
-            gs.prev_hunk()
+            gs.nav_hunk "prev"
           end)
           return "<Ignore>"
         end, { expr = true })
@@ -54,7 +54,7 @@ return {
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end
 
-      gs.setup { yadm = { enable = true }, on_attach = config }
+      gs.setup { on_attach = config }
     end,
   },
 
