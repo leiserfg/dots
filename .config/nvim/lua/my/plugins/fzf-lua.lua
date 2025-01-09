@@ -2,6 +2,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
+    dev = true,
     dependencies = { "vijaymarupudi/nvim-fzf" },
     config = function()
       local fzf = require "fzf-lua"
