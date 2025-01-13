@@ -4,6 +4,19 @@ return {
     lazy = false,
   },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    opts = true,
+    keys = {
+      {
+        "<leader>lv",
+        function()
+          require("lsp_lines").toggle()
+        end,
+        mode = "n",
+      },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     config = function()
       local conform = require "conform"
