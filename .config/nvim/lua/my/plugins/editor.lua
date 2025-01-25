@@ -1,6 +1,22 @@
 return {
   "jrop/jq.nvim",
-  "MeanderingProgrammer/render-markdown.nvim",
+  -- "MeanderingProgrammer/render-markdown.nvim",
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    opts = {
+      yaml = {
+        enable = true,
+      },
+      typst = {
+        enable = true,
+      },
+      preview = {
+        enable_hybrid_mode = false,
+        hybrid_modes = {"n", "i", "v"};
+      },
+    },
+  },
   {
     "monaqa/dial.nvim",
     event = "VeryLazy",

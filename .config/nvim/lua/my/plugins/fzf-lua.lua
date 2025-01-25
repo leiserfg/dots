@@ -6,7 +6,9 @@ return {
     config = function()
       local fzf = require "fzf-lua"
       -- fzf.setup { "default" }
-      fzf.setup { winopts = { preview = { default = "bat" } } }
+      fzf.setup {
+        winopts = { preview = { default = "bat" } }
+      }
       fzf.register_ui_select()
       local function grep()
         return fzf.grep { no_esc = true }
