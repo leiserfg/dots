@@ -2,9 +2,8 @@ vim.cmd.cabbr("<expr>", "%%", "expand('%:p:h')")
 local map = vim.keymap.set
 map("i", "<c-c>", "<ESC>", { noremap = true })
 map("n", "<leader>w", ":w!<cr>")
--- Replaces by mini.move
--- map("n", "<M-j>", "mz:m+<cr>`z")
--- map("n", "<M-k>", "mz:m-2<cr>`z")
--- map("v", "<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z")
--- map("v", "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
--- map("v", "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
+
+map("n", "<leader>lv", function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config { virtual_lines = new_config }
+end, { desc = "Toggle virtual diagnostic" })
