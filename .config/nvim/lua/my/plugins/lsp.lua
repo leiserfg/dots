@@ -46,32 +46,14 @@ return {
     config = function()
       local function on_attach(buff)
         local map = vim.keymap.set
-        local lb = vim.lsp.buf
         local ld = vim.diagnostic
 
         local function toggle_inlay()
           vim.lsp.inlay_hint.enable(buff, not vim.lsp.inlay_hint.is_enabled(buff))
         end
 
-        local function goto_prev()
-          ld.jump { count = -1, float = true }
-        end
-
-        local function goto_next()
-          ld.jump { count = 1, float = true }
-        end
         local mappings = {
-          gd = lb.definition,
-          K = lb.hover,
-          gD = lb.implementation,
-          ["<c-k>"] = lb.signature_help,
-          ["1gD"] = lb.type_definition,
-          g0 = lb.document_symbol,
-          gW = lb.workspace_symbol,
-          ["<Leader>la"] = lb.code_action,
           ["<Leader>lq"] = ld.setloclist,
-          ["[d"] = goto_prev,
-          ["]d"] = goto_next,
           ["<Leader>li"] = toggle_inlay,
         }
 
@@ -152,6 +134,8 @@ return {
       }
 
       vim.diagnostic.config {
+        jump = { float = false },
+        virtual_lines = { current_line = true },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "🩸",
