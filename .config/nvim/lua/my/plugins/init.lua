@@ -1,5 +1,11 @@
 return {
-  { "vim-scripts/ReplaceWithRegister", keys = { { "gr", mode = { "n", "v" } } } },
+  {
+    "vim-scripts/regreplop.vim",
+    keys = {
+      { "gp", "<Plug>ReplaceMotion", mode = { "n" } },
+      { "gp", "<Plug>ReplaceVisual", mode = { "v" } },
+    },
+  },
   "tpope/vim-repeat",
   { "Olical/vim-enmasse", cmd = "EnMasse" },
   "tpope/vim-eunuch",
