@@ -4,18 +4,29 @@ return {
   {
     "OXY2DEV/markview.nvim",
     lazy = false,
-    opts = {
-      yaml = {
-        enable = true,
-      },
-      typst = {
-        enable = true,
-      },
-      preview = {
-        enable_hybrid_mode = false,
-        hybrid_modes = {"n", "i", "v"};
-      },
-    },
+    config = function()
+      local presets = require "markview.presets"
+      require("markview").setup {
+        markdown = {
+          headings = presets.headings.glow,
+          tables = presets.tables.single,
+          list_items = {
+            marker_minus = { text = "⚬" },
+            marker_plus = { text = "◻" },
+          },
+        },
+        yaml = {
+          enable = true,
+        },
+        typst = {
+          enable = true,
+        },
+        preview = {
+          enable_hybrid_mode = true,
+          hybrid_modes = { "n", "i", "v" },
+        },
+      }
+    end,
   },
   {
     "monaqa/dial.nvim",
@@ -72,11 +83,6 @@ return {
       }
     end,
   },
-  -- {
-  --   "numToStr/Comment.nvim",
-  --   opts = {},
-  --   lazy = false,
-  -- },
   {
     "chrishrb/gx.nvim",
     cmd = { "Browse" },
