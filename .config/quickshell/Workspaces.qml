@@ -104,7 +104,7 @@ Item {
 					color: ShellGlobals.interpolateColors(animExists, ShellGlobals.colors.widget, ShellGlobals.colors.widgetActive);
 				}
                                 Text {
-                                    text: wsIndex
+                                    text: `${wsIndex}${wsItem.active && "*" || ""}`
 				    anchors.centerIn: parent
                                 }
 			}

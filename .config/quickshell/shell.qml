@@ -9,6 +9,7 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 ShellRoot {
+  id: bar
   property var date: new Date()
   property string time: Qt.formatDateTime(date, "hh:mm")
 
@@ -50,7 +51,7 @@ ShellRoot {
             // Layout.preferredHeight: 4
 
             Workspaces {
-                    bar: root
+                    bar: bar
                     Layout.fillHeight: true
                     wsBaseIndex: root.screen.name == "eDP-1" ? 11 : 1;
                     hideWhenEmpty: root.isSoleBar
