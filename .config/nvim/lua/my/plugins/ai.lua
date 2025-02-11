@@ -6,9 +6,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   opts = {
-    opts = {
-      log_level = "TRACE", -- TRACE|DEBUG|ERROR|INFO
-    },
     strategies = {
       chat = {
         adapter = "gemini",
