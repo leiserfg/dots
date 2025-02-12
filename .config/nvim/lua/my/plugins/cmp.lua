@@ -52,8 +52,8 @@ return {
         default = {
           "lazydev",
           "lsp",
-          "path",
           "snippets",
+          "path",
           "buffer",
         },
         providers = {
