@@ -26,7 +26,9 @@ return {
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
         -- same as the global minus the unused stuff
-        cmdline = {
+      },
+      cmdline = {
+        keymap = {
           ["<C-e>"] = { "hide", "fallback" },
           ["<CR>"] = { "accept", "fallback" },
 
