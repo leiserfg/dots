@@ -4,7 +4,9 @@ return {
     lazy = false, -- lazy loading handled internally
     -- build = "cargo build --release",
     -- dev = true,
-    version = "v0.*",
+    --
+    build = "nix run .#build-plugin",
+    -- version = "*",
     dependencies = {
       "L3MON4D3/LuaSnip",
     },
@@ -27,27 +29,27 @@ return {
 
         -- same as the global minus the unused stuff
       },
-      cmdline = {
-        keymap = {
-          ["<C-e>"] = { "hide", "fallback" },
-          ["<CR>"] = { "accept", "fallback" },
-
-          ["<Tab>"] = { "select_next", "fallback" },
-          ["<S-Tab>"] = { "select_prev", "fallback" },
-        },
-      },
+      -- cmdline = {
+      --   keymap = {
+      --     ["<C-e>"] = { "hide", "fallback" },
+      --     ["<CR>"] = { "accept", "fallback" },
+      --
+      --     ["<Tab>"] = { "select_next", "fallback" },
+      --     ["<S-Tab>"] = { "select_prev", "fallback" },
+      --   },
+      -- },
 
       signature = { enabled = true },
       completion = {
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
         -- Don't autoselect in cmd
-        list = {
-          selection = {
-            preselect = function(ctx)
-              return ctx.mode ~= "cmdline"
-            end,
-          },
-        },
+        -- list = {
+        --   selection = {
+        --     preselect = function(ctx)
+        --       return ctx.mode ~= "cmdline"
+        --     end,
+        --   },
+        -- },
       },
 
       sources = {
