@@ -5,8 +5,8 @@ return {
     -- build = "cargo build --release",
     -- dev = true,
     --
-    build = "nix run .#build-plugin",
-    -- version = "*",
+    -- build = "nix run .#build-plugin",
+    version = "*",
     dependencies = {
       "L3MON4D3/LuaSnip",
     },
