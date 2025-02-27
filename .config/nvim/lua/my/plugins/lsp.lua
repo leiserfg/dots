@@ -135,7 +135,7 @@ return {
 
       vim.diagnostic.config {
         jump = { float = false },
-        virtual_lines = { current_line = true },
+        -- virtual_lines = { current_line = true },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "⚬",

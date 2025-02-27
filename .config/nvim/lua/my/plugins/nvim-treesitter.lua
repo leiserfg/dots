@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPost",
-    build = ":TSUpdate",
+    -- build = ":TSUpdate",
     keys = {
       { "<c-space>", desc = "Increment selection" },
       { "<bs>", desc = "Schrink selection", mode = "x" },
@@ -11,13 +11,25 @@ return {
       local ts = require "nvim-treesitter.configs"
 
       return ts.setup {
-        ensure_installed = "all",
+        -- ensure_installed = "all",
+        ensure_installed = {
+          "c",
+          "lua",
+          "vim",
+          "vimdoc",
+          "query",
+          "markdown",
+          "markdown_inline",
+          "rust",
+          "nix",
+          "python",
+        },
         ignore_install = { "po" },
-        auto_install = false,
+        auto_install = true,
         sync_install = false,
         playground = { enable = true, persist_queries = false },
         highlight = { enable = true },
-        indent = {enable = true},
+        indent = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {
           enable = true,
