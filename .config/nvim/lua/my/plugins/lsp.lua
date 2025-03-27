@@ -44,9 +44,10 @@ return {
     "neovim/nvim-lspconfig",
     depenencies = { "saghen/blink.cmp" },
     config = function()
-      local function on_attach(buff)
+      local function on_attach(args)
         local map = vim.keymap.set
         local ld = vim.diagnostic
+        local buff = args.buf
 
         local function toggle_inlay()
           vim.lsp.inlay_hint.enable(buff, not vim.lsp.inlay_hint.is_enabled(buff))
@@ -60,13 +61,19 @@ return {
         for shortcut, callback in pairs(mappings) do
           map("n", shortcut, callback, { noremap = true, buffer = buff, silent = true })
         end
+
+        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+        -- if client:supports_method "textDocument/foldingRange" then
+        --   local win = vim.api.nvim_get_current_win()
+        --   vim.wo[win][0].foldmethod = "expr"
+        --   vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+        -- end
+
       end
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          on_attach(ev.buff)
-        end,
+        callback = on_attach,
       })
       local capabilities = require("blink.cmp").get_lsp_capabilities(
         vim.lsp.protocol.make_client_capabilities()

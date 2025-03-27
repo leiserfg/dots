@@ -8,7 +8,14 @@ return {
       { "<bs>", desc = "Schrink selection", mode = "x" },
     },
     config = function()
+
       local ts = require "nvim-treesitter.configs"
+      --
+      -- local vim = vim
+      -- local opt = vim.opt
+      --
+      -- opt.foldmethod = "expr"
+      -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
       return ts.setup {
         -- ensure_installed = "all",
