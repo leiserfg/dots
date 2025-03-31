@@ -3,44 +3,9 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
     opts = {},
+    ft = { "markdown", "codecompanion" },
   },
-
-  -- {
-  --   "OXY2DEV/markview.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     local presets = require "markview.presets"
-  --     require("markview").setup {
-  --       markdown = {
-  --         headings = presets.headings.glow,
-  --         tables = presets.tables.single,
-  --         list_items = {
-  --           -- ◈
-  --           marker_minus = { text = "⟡" },
-  --           marker_plus = { text = "◇" },
-  --           marker_star = { text = "◆" },
-  --           marker_dot = { text = "❖" },
-  --
-  --         },
-  --       },
-  --       yaml = {
-  --         enable = true,
-  --       },
-  --       typst = {
-  --         enable = true,
-  --       },
-  --       preview = {
-  --         enable_hybrid_mode = true,
-  --         hybrid_modes = { "n", "i", "v" },
-  --       },
-  --     }
-  --   end,
-  -- },
 
   {
     "monaqa/dial.nvim",
