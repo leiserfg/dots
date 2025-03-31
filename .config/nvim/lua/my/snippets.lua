@@ -58,7 +58,7 @@ local function lorem(_, snp)
   if amount == nil then
     return { LOREM_IPSUM }
   else
-    return { LOREM_IPSUM:sub(1, amount ) }
+    return { LOREM_IPSUM:sub(1, amount) }
   end
 end
 
@@ -95,6 +95,14 @@ ls.add_snippets(nil, {
     ),
   },
   all = {
+    -- ls.snippet({ trig = "bade" }, { ls.insert_node(1, "é") }),
+    -- ls.snippet({ trig="bad..." }, { ls.insert_node(1, "…") }),
+    --
+    ls.parser.parse_snippet(
+      "abc",
+      [[``` ${1|a,b,c|} title=\"${2:title}\"${3: linenums=\"1\"}${4: hl_lines=\"\"}","${5:printf(\"%s\\n\", code);} ```\n\n$0"]]
+    ),
+
     sf("date", date),
     sf("uuid", uuid_),
     sf("lorem(%d*)", lorem, true),
@@ -110,3 +118,14 @@ ls.add_snippets(nil, {
     }),
   },
 })
+
+vim.keymap.set(
+  { "i", "s" },
+  "<c-u>",
+  require "luasnip.extras.select_choice",
+  { desc = "luasnip select choice" }
+)
+
+vim.cmd [[
+    inoremap <c-t> <cmd>lua require("luasnip.extras.select_choice")()<cr>
+]]
