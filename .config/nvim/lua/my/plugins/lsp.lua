@@ -44,41 +44,30 @@ return {
     "neovim/nvim-lspconfig",
     depenencies = { "saghen/blink.cmp" },
     config = function()
-      local function on_attach(args)
-        local map = vim.keymap.set
-        local ld = vim.diagnostic
-        local buff = args.buf
+      local ld = vim.diagnostic
 
-        local function toggle_inlay()
-          vim.lsp.inlay_hint.enable(buff, not vim.lsp.inlay_hint.is_enabled(buff))
-        end
-
-        local mappings = {
-          ["<Leader>lq"] = ld.setloclist,
-          ["<Leader>li"] = toggle_inlay,
-        }
-
-        for shortcut, callback in pairs(mappings) do
-          map("n", shortcut, callback, { noremap = true, buffer = buff, silent = true })
-        end
-
-        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-        -- if client:supports_method "textDocument/foldingRange" then
-        --   local win = vim.api.nvim_get_current_win()
-        --   vim.wo[win][0].foldmethod = "expr"
-        --   vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-        -- end
-
+      local function toggle_inlay()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end
 
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = on_attach,
-      })
-      local capabilities = require("blink.cmp").get_lsp_capabilities(
-        vim.lsp.protocol.make_client_capabilities()
-      )
-      local lspconfig = require "lspconfig"
+      local mappings = {
+        ["<Leader>lq"] = vim.diagnostic.setloclist,
+        ["<Leader>li"] = toggle_inlay,
+      }
+
+      for shortcut, callback in pairs(mappings) do
+        vim.keymap.set("n", shortcut, callback, { noremap = true, silent = true })
+      end
+
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      local function lsp_enable(name, conf)
+        if conf then
+          vim.lsp.config(name, conf)
+        end
+        vim.lsp.enable(name)
+      end
+
       for _, lsp in ipairs {
         "gdscript",
         "vimls",
@@ -92,27 +81,15 @@ return {
         "uiua",
         "ruff",
       } do
-        lspconfig[lsp].setup { capabilities = capabilities }
+        lsp_enable(lsp, { capabilities = capabilities })
       end
-      lspconfig.elixirls.setup {
+
+      lsp_enable("elixirls", {
         cmd = { "elixir-ls" },
         capabilities = capabilities,
-      }
+      })
 
-      -- lspconfig.pyright.setup {
-      --   capabilities = capabilities,
-      --   settings = {
-      --     python = {
-      --       analysis = {
-      --         autoSearchPaths = true,
-      --         useLibraryCodeForTypes = true,
-      --         diagnosticMode = "openFilesOnly",
-      --       },
-      --     },
-      --   },
-      -- }
-
-      lspconfig.basedpyright.setup {
+      lsp_enable("basedpyright", {
         capabilities = capabilities,
         settings = {
           basedpyright = {
@@ -125,9 +102,9 @@ return {
             },
           },
         },
-      }
+      })
 
-      lspconfig.lua_ls.setup {
+      lsp_enable("lua_ls", {
         settings = {
           Lua = {
             completion = {
@@ -138,11 +115,10 @@ return {
           },
         },
         capabilities = capabilities,
-      }
+      })
 
       vim.diagnostic.config {
         jump = { float = false },
-        -- virtual_lines = { current_line = true },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "⚬",
