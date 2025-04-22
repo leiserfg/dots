@@ -50,6 +50,7 @@ o.shortmess:append "Ic"
 o.completeopt = "noinsert,menuone,noselect"
 o.swapfile = false
 o.pumheight = 20
+-- o.diffopt:append "internal,algorithm:patience,vertical"
 o.diffopt:append "internal,algorithm:histogram,indent-heuristic,vertical"
 o.clipboard = "unnamedplus"
 o.undofile = true
@@ -76,7 +77,7 @@ acmd({ "BufRead", "BufNewFile" }, {
 acmd("BufReadPost", { group = vimrc, command = 'silent! normal! g`"zv' })
 
 local function yank_colors()
-  vim.highlight.on_yank { higroup = "IncSearch", timeout = 150 }
+  vim.hl.on_yank { higroup = "IncSearch", timeout = 150 }
 end
 
 acmd("TextYankPost", { group = vimrc, callback = yank_colors })

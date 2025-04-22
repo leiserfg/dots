@@ -74,6 +74,7 @@ return {
       require("mini.bracketed").setup {
         comment = { suffix = "k" }, -- I use c for changes as diffmode does by default
       }
+
       local miniclue = require "mini.clue"
       miniclue.setup {
         triggers = {
