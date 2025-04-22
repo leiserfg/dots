@@ -5,9 +5,8 @@ return {
     dependencies = { "vijaymarupudi/nvim-fzf" },
     config = function()
       local fzf = require "fzf-lua"
-      -- fzf.setup { "default" }
       fzf.setup {
-        winopts = { preview = { default = "bat" } }
+        winopts = { treesitter = false }, -- hl does not look well with the black bar of the selections
       }
       fzf.register_ui_select()
       local function grep()
