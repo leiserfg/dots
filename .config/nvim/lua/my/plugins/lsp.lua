@@ -42,7 +42,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    depenencies = { "saghen/blink.cmp" },
+    dependencies = { "saghen/blink.cmp" },
     config = function()
       local ld = vim.diagnostic
 

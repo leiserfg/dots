@@ -32,7 +32,15 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "carbonfox"
+      vim.api.nvim_create_autocmd("TermResponse", {
+        callback = function(args)
+          if vim.go.background == "light" then
+            vim.cmd.colorscheme "dayfox"
+          elseif vim.go.background == "dark" then
+            vim.cmd.colorscheme "carbonfox"
+          end
+        end,
+      })
     end,
   },
 
