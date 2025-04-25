@@ -28,19 +28,13 @@ return {
     ft = { "markdown" },
   },
   {
-    "EdenEast/nightfox.nvim",
+    -- "EdenEast/nightfox.nvim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "carbonfox"
-      -- local callback = function()
-      --   if vim.go.background == "light" then
-      --     vim.cmd.colorscheme "dayfox"
-      --   else
-      --     vim.cmd.colorscheme "carbonfox"
-      --   end
-      -- end
-      -- vim.api.nvim_create_autocmd("TermResponse", { callback = callback })
+      require("gruvbox").setup { contrast = "hard" }
+      vim.cmd.colorscheme "gruvbox"
     end,
   },
 
