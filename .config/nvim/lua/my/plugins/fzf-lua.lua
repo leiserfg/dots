@@ -7,6 +7,7 @@ return {
       local fzf = require "fzf-lua"
       fzf.setup {
         winopts = { treesitter = false }, -- hl does not look well with the black bar of the selections
+        fzf_colors = true,
       }
       fzf.register_ui_select()
       local function grep()
