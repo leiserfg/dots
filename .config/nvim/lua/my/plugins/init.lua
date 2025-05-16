@@ -6,7 +6,6 @@ return {
       { "gp", "<Plug>ReplaceVisual", mode = { "v" } },
     },
   },
-  "tpope/vim-repeat",
   { "Olical/vim-enmasse", cmd = "EnMasse" },
   "tpope/vim-eunuch",
   -- { "Vimjas/vim-python-pep8-indent", ft = "python" },
@@ -15,7 +14,6 @@ return {
     config = true,
   },
   "direnv/direnv.vim",
-
   {
     "lambdalisue/suda.vim",
     init = function()

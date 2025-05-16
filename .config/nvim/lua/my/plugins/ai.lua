@@ -1,19 +1,32 @@
 -- return {}
 return {
   "olimorris/codecompanion.nvim",
+  dev = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    -- "github/copilot.vim",  -- run :Copilot setup
   },
   opts = {
+    -- strategies = {
+    --   chat = {
+    --     adapter = "gemini",
+    --     -- adapter = "llamaserver",
+    --   },
+    --   inline = {
+    --     -- adapter = "llamaserver",
+    --     adapter = "gemini",
+    --   },
+    -- },
     strategies = {
       chat = {
-        adapter = "gemini",
-        -- adapter = "llamaserver",
+        adapter = "copilot",
       },
       inline = {
-        -- adapter = "llamaserver",
-        adapter = "gemini",
+        adapter = "copilot",
+      },
+      agent = {
+        adapter = "copilot",
       },
     },
 
