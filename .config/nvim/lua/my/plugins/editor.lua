@@ -1,5 +1,8 @@
 return {
   "jrop/jq.nvim",
+  { "3rd/image.nvim", build = false, opts = {
+    processor = "magick_cli",
+  } },
   {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite

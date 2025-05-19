@@ -14,6 +14,7 @@ return {
           nix = { "alejandra" },
           sh = { "shellcheck", "shfmt" },
           toml = { "taplo" },
+          typst = { "typstyle" },
 
           -- ["*"] = { "trim_whitespace" },
         },
@@ -83,6 +84,14 @@ return {
       } do
         lsp_enable(lsp, { capabilities = capabilities })
       end
+
+      lsp_enable("tinymist", {
+        settings = {
+          exportPdf = "onType",
+          outputPath = "$root/$dir/$name",
+        },
+        capabilities = capabilities,
+      })
 
       lsp_enable("elixirls", {
         cmd = { "elixir-ls" },
