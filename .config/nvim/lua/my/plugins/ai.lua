@@ -20,6 +20,7 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
+        model = "claude-sonnet-4-20250514",
       },
       inline = {
         adapter = "copilot",
