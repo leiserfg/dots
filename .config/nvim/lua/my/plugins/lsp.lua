@@ -79,6 +79,7 @@ return {
         "ts_ls",
         "uiua",
         "ruff",
+        "nushell",
       } do
         lsp_enable(lsp, { capabilities = capabilities })
       end
