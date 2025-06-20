@@ -4,6 +4,12 @@ return {
     lazy = false,
   },
   {
+    "chomosuke/typst-preview.nvim",
+    ft = "typst",
+    version = "1.*",
+    opts = {},
+  },
+  {
     "stevearc/conform.nvim",
     config = function()
       local conform = require "conform"
