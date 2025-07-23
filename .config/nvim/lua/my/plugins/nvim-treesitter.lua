@@ -14,6 +14,7 @@ return {
     "MeanderingProgrammer/treesitter-modules.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
+      auto_install = true,
       ensure_installed = {
         "c",
         "lua",

@@ -86,6 +86,7 @@ return {
         "uiua",
         "ruff",
         "nushell",
+        "qmlls",
       } do
         lsp_enable(lsp, { capabilities = capabilities })
       end
