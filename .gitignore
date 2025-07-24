@@ -3,3 +3,5 @@
 
 # Avoid any kind of office leak
 inventorum
+
+.config/nvim/spell/
