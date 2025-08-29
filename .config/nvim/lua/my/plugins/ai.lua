@@ -31,30 +31,32 @@ return {
     },
 
     adapters = {
-      llamaserver = function()
-        return require("codecompanion.adapters").extend("openai_compatible", {
-          name = "llamaserver",
-          env = {
-            url = "http://localhost:8080",
-            api_key = "meh",
-          },
-        })
-      end,
-
-      gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-          schema = {
-            model = {
-              -- default = "gemini-1.5-flash",
-              -- default = "gemini-2.0-flash",
-              default = "gemini-2.5-pro-exp-03-25",
+      http = {
+        llamaserver = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            name = "llamaserver",
+            env = {
+              url = "http://localhost:8080",
+              api_key = "meh",
             },
-          },
-          env = {
-            api_key = "cmd:rbw get gemini",
-          },
-        })
-      end,
+          })
+        end,
+
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            schema = {
+              model = {
+                -- default = "gemini-1.5-flash",
+                -- default = "gemini-2.0-flash",
+                default = "gemini-2.5-pro-exp-03-25",
+              },
+            },
+            env = {
+              api_key = "cmd:rbw get gemini",
+            },
+          })
+        end,
+      },
     },
     prompt_library = {
       ["Code Review"] = {
@@ -67,13 +69,16 @@ return {
           },
           {
             role = "user",
-            content = string.format([[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
+            content = string.format(
+              [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
             In case of change request, include a diff. Changes:
 
 ```diff
 %s
 ```
-            ]], vim.fn.system("git diff --no-ext-diff $(git symbolic-ref refs/remotes/origin/HEAD --short)..HEAD") ),
+            ]],
+              vim.fn.system "git diff --no-ext-diff $(git symbolic-ref refs/remotes/origin/HEAD --short)..HEAD"
+            ),
           },
         },
       },
