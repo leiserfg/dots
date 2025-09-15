@@ -1,4 +1,3 @@
--- return {}
 return {
   "olimorris/codecompanion.nvim",
   dependencies = {
@@ -30,8 +29,8 @@ return {
       },
     },
 
-    adapters = {
-      http = {
+    http = {
+      adapters = {
         llamaserver = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
             name = "llamaserver",
