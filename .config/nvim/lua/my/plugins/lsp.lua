@@ -7,7 +7,9 @@ return {
     "chomosuke/typst-preview.nvim",
     ft = "typst",
     version = "1.*",
-    opts = {},
+    opts = {
+      dependencies_bin = { ["tinymist"] = "tinymist" },
+    },
   },
   {
     "stevearc/conform.nvim",
@@ -69,9 +71,10 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local function lsp_enable(name, conf)
-        if conf then
-          vim.lsp.config(name, conf)
-        end
+        local config = conf or {}
+        config.capabilities = capabilities
+
+        vim.lsp.config(name, config)
         vim.lsp.enable(name)
       end
 
@@ -88,36 +91,46 @@ return {
         "nushell",
         "qmlls",
       } do
-        lsp_enable(lsp, { capabilities = capabilities })
+        lsp_enable(lsp)
       end
 
-      lsp_enable("tinymist", {
-        settings = {
-          exportPdf = "onType",
-          outputPath = "$root/$dir/$name",
-        },
-        capabilities = capabilities,
-      })
+      -- lsp_enable("tinymist", {
+      --   settings = {
+      --     exportPdf = "onType",
+      --     outputPath = "$root/$dir/$name",
+      --   },
+      --   capabilities = capabilities,
+      -- })
 
       lsp_enable("elixirls", {
         cmd = { "elixir-ls" },
-        capabilities = capabilities,
       })
-
-      lsp_enable("basedpyright", {
-        capabilities = capabilities,
+      -- lsp_enable("zuban", { cmd = { "uvx", "zuban", "server" } })
+      lsp_enable("ty", {
         settings = {
-          basedpyright = {
-            reportUnreachable = true,
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = "openFilesOnly",
-              typeCheckingMode = "basic",
+          ty = {
+            experimental = {
+              rename = true,
+              autoImport = true,
             },
           },
         },
       })
+
+      -- lsp_enable("basedpyright", {
+      --   capabilities = capabilities,
+      --   settings = {
+      --     basedpyright = {
+      --       reportUnreachable = true,
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         useLibraryCodeForTypes = true,
+      --         diagnosticMode = "openFilesOnly",
+      --         typeCheckingMode = "basic",
+      --       },
+      --     },
+      --   },
+      -- })
 
       lsp_enable("lua_ls", {
         settings = {
@@ -129,7 +142,6 @@ return {
             hint = { enable = true },
           },
         },
-        capabilities = capabilities,
       })
 
       vim.diagnostic.config {
