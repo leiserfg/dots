@@ -116,6 +116,7 @@ return {
           },
         },
       })
+      lsp_enable "pyrefly"
 
       -- lsp_enable("basedpyright", {
       --   capabilities = capabilities,
