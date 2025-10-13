@@ -6,7 +6,14 @@ return {
       { "gp", "<Plug>ReplaceVisual", mode = { "v" } },
     },
   },
-  { "Olical/vim-enmasse", cmd = "EnMasse" },
+  -- { "Olical/vim-enmasse", cmd = "EnMasse" },
+  {
+    "stevearc/quicker.nvim",
+    ft = "qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
   "tpope/vim-eunuch",
   -- { "Vimjas/vim-python-pep8-indent", ft = "python" },
   {
