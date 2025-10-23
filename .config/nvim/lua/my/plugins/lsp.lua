@@ -105,8 +105,11 @@ return {
       lsp_enable("elixirls", {
         cmd = { "elixir-ls" },
       })
+
       -- lsp_enable("zuban", { cmd = { "uvx", "zuban", "server" } })
+
       lsp_enable("ty", {
+        cmd = { "uvx", "ty", "server" },
         settings = {
           ty = {
             experimental = {
@@ -116,7 +119,7 @@ return {
           },
         },
       })
-      lsp_enable "pyrefly"
+      -- lsp_enable "pyrefly"
 
       -- lsp_enable("basedpyright", {
       --   capabilities = capabilities,

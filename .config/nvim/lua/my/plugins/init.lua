@@ -15,11 +15,11 @@ return {
     opts = {},
   },
   "tpope/vim-eunuch",
-  -- { "Vimjas/vim-python-pep8-indent", ft = "python" },
-  {
-    "NvChad/nvim-colorizer.lua",
-    config = true,
-  },
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   config = true,
+  -- },
+
   "direnv/direnv.vim",
   {
     "lambdalisue/suda.vim",
