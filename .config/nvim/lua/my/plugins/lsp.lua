@@ -149,7 +149,7 @@ return {
       })
 
       vim.diagnostic.config {
-        jump = { float = false },
+        virtual_text = false,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "⚬",
@@ -161,15 +161,13 @@ return {
       }
     end,
   },
-
   {
-    "folke/lazydev.nvim",
-    -- depenencies = { "LuaCATS/love2d" },
-    ft = "lua",
-    opts = {
-      library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+      require("tiny-inline-diagnostic").setup()
+      vim.diagnostic.config { virtual_text = false } -- Disable Neovim's default virtual text diagnostics
+    end,
   },
 }
