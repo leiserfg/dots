@@ -58,6 +58,29 @@ return {
       },
     },
     prompt_library = {
+      ["JJ Code Review"] = {
+        strategy = "chat",
+        description = "Code review",
+        prompts = {
+          {
+            role = "system",
+            content = "You are an experienced developer which makes good but not too verbose comments and avoids bullshit chat",
+          },
+          {
+            role = "user",
+            content = string.format(
+              [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
+            In case of change request, include a diff. Changes:
+
+```diff
+%s
+```
+            ]],
+              vim.fn.system "jj diff '@..trunk()'"
+            ),
+          },
+        },
+      },
       ["Code Review"] = {
         strategy = "chat",
         description = "Code review",

@@ -23,8 +23,6 @@ return {
           sh = { "shellcheck", "shfmt" },
           toml = { "taplo" },
           typst = { "typstyle" },
-
-          -- ["*"] = { "trim_whitespace" },
         },
       }
 
@@ -119,22 +117,6 @@ return {
           },
         },
       })
-      -- lsp_enable "pyrefly"
-
-      -- lsp_enable("basedpyright", {
-      --   capabilities = capabilities,
-      --   settings = {
-      --     basedpyright = {
-      --       reportUnreachable = true,
-      --       analysis = {
-      --         autoSearchPaths = true,
-      --         useLibraryCodeForTypes = true,
-      --         diagnosticMode = "openFilesOnly",
-      --         typeCheckingMode = "basic",
-      --       },
-      --     },
-      --   },
-      -- })
 
       lsp_enable("lua_ls", {
         settings = {
@@ -149,7 +131,6 @@ return {
       })
 
       vim.diagnostic.config {
-        virtual_text = false,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "⚬",
@@ -166,7 +147,9 @@ return {
     event = "VeryLazy",
     priority = 1000,
     config = function()
-      require("tiny-inline-diagnostic").setup()
+      require("tiny-inline-diagnostic").setup {
+        profile = "powerline",
+      }
       vim.diagnostic.config { virtual_text = false } -- Disable Neovim's default virtual text diagnostics
     end,
   },
