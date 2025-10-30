@@ -88,6 +88,7 @@ return {
         "ruff",
         "nushell",
         "qmlls",
+        "nushell",
       } do
         lsp_enable(lsp)
       end

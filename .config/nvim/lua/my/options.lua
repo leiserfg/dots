@@ -90,3 +90,5 @@ vim.filetype.add {
 g.neovide_scroll_animation_length = 0
 g.neovide_cursor_animate_command_line = false
 g.neovide_cursor_trail_size = 0
+
+vim.cmd.colorscheme "notebook"
