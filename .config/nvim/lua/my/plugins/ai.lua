@@ -29,6 +29,14 @@ return {
       },
     },
 
+    memory = {
+      opts = {
+        chat = {
+          enabled = true,
+        },
+      },
+    },
+
     http = {
       adapters = {
         llamaserver = function()
