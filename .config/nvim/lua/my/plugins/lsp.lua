@@ -108,7 +108,7 @@ return {
       -- lsp_enable("zuban", { cmd = { "uvx", "zuban", "server" } })
 
       lsp_enable("ty", {
-        cmd = { "uvx", "ty", "server" },
+        -- cmd = { "uvx", "ty", "server" },
         settings = {
           ty = {
             experimental = {
