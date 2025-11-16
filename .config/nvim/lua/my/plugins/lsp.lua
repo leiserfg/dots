@@ -1,5 +1,11 @@
 return {
   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+
+  {
     "mrcjkb/rustaceanvim",
     lazy = false,
   },
@@ -83,7 +89,6 @@ return {
         "terraformls",
         "glsl_analyzer",
         "nixd",
-        "ts_ls",
         "uiua",
         "ruff",
         "nushell",

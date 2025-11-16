@@ -62,4 +62,10 @@ return {
   { "tpope/vim-rhubarb", dependencies = "tpope/vim-fugitive" },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   -- { "sindrets/diffview.nvim" },
+  {
+    "nicolasgb/jj.nvim",
+    config = function()
+      require("jj").setup {}
+    end,
+  },
 }
