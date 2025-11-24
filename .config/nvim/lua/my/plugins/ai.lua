@@ -19,13 +19,15 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
-        model = "claude-3-7-sonnet",
+        model = "claude-4-5-sonnet",
       },
       inline = {
         adapter = "copilot",
+        model = "claude-4-5-sonnet",
       },
       agent = {
         adapter = "copilot",
+        model = "claude-4-5-sonnet",
       },
     },
 

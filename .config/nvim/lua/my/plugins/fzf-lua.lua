@@ -13,6 +13,22 @@ return {
       local function grep()
         return fzf.grep { no_esc = true }
       end
+      local function ast_grep()
+        fzf.fzf_live(
+          "ast-grep --context 0 --heading never --pattern <query> 2>/dev/null",
+          {
+            exec_empty_query = false,
+            actions = {
+              ["default"] = require("fzf-lua").actions.file_edit,
+              ["ctrl-q"] = {
+                -- Send results to the quickfix list
+                fn = require("fzf-lua").actions.file_edit_or_qf,
+                prefix = "select-all+",
+              },
+            },
+          }
+        )
+      end
 
       local mappings = {
         ["<leader>ff"] = fzf.files,
@@ -20,6 +36,7 @@ return {
         ["<leader>fb"] = fzf.buffers,
         ["<leader>fh"] = fzf.help_tags,
         ["<leader>fz"] = fzf.builtin,
+        ["<leader>fa"] = ast_grep,
         ["<leader>/"] = grep,
         ["z="] = fzf.spell_suggest,
       }

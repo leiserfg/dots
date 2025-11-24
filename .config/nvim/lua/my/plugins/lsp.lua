@@ -98,31 +98,25 @@ return {
         lsp_enable(lsp)
       end
 
-      -- lsp_enable("tinymist", {
-      --   settings = {
-      --     exportPdf = "onType",
-      --     outputPath = "$root/$dir/$name",
-      --   },
-      --   capabilities = capabilities,
-      -- })
-
-      lsp_enable("elixirls", {
-        cmd = { "elixir-ls" },
-      })
-
+      lsp_enable("elixirls", { cmd = { "elixir-ls" } })
       -- lsp_enable("zuban", { cmd = { "uvx", "zuban", "server" } })
+      lsp_enable("pyrefly", { cmd = { "uvx", "pyrefly", "lsp" } })
 
-      lsp_enable("ty", {
-        -- cmd = { "uvx", "ty", "server" },
-        settings = {
-          ty = {
-            experimental = {
-              rename = true,
-              autoImport = true,
-            },
-          },
-        },
-      })
+      -- lsp_enable("ty", {
+      --   cmd = { "uvx", "ty", "server" },
+      --   settings = {
+      --     ty = {
+      --       experimental = {
+      --         rename = true,
+      --         autoImport = true,
+      --       },
+      --       inlayHints = {
+      --         callArgumentNames = true,
+      --         variableTypes = true,
+      --       },
+      --     },
+      --   },
+      -- })
 
       lsp_enable("lua_ls", {
         settings = {
