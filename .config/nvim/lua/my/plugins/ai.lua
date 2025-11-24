@@ -76,16 +76,18 @@ return {
           },
           {
             role = "user",
-            content = string.format(
-              [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
-            In case of change request, include a diff. Changes:
+            content = function()
+              return string.format(
+                [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
+              In case of change request, include a diff. Changes:
 
-```diff
-%s
-```
-            ]],
-              vim.fn.system "jj diff '@..trunk()'"
-            ),
+  ```diff
+  %s
+  ```
+              ]],
+                vim.fn.system "jj diff '@..trunk()'"
+              )
+            end,
           },
         },
       },
@@ -99,16 +101,18 @@ return {
           },
           {
             role = "user",
-            content = string.format(
-              [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
-            In case of change request, include a diff. Changes:
+            content = function()
+              return string.format(
+                [[Review the changes in the diff bellow. Don't do a resume of the changes, just comment what you see wrong or remarcable. Whenever it makes sence, include the file and number line.
+              In case of change request, include a diff. Changes:
 
-```diff
-%s
-```
-            ]],
-              vim.fn.system "git diff --no-ext-diff $(git symbolic-ref refs/remotes/origin/HEAD --short)..HEAD"
-            ),
+  ```diff
+  %s
+  ```
+              ]],
+                vim.fn.system "git diff --no-ext-diff $(git symbolic-ref refs/remotes/origin/HEAD --short)..HEAD"
+              )
+            end,
           },
         },
       },
