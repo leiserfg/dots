@@ -31,9 +31,42 @@ return {
       }
 
       require("mini.icons").mock_nvim_web_devicons()
-
+      require("mini.pairs").setup {
+        mappings = {
+          ["'"] = {
+            action = "closeopen",
+            pair = "''",
+            neigh_pattern = "[^'].",
+            register = { cr = false },
+          },
+          ['"'] = {
+            action = "closeopen",
+            pair = '""',
+            neigh_pattern = '[^\\"].',
+            register = { cr = false },
+          },
+        },
+      }
       -- I'm an old dog, so I keep using tpope's surround keybindings
       require("mini.surround").setup {
+
+        custom_surroundings = {
+          l = {
+            input = { "%[%[().-()%]%]" },
+            output = { left = "[[", right = "]]" },
+          },
+
+          n = {
+            input = { "%'%'%'().-()%'%'%'" },
+            output = { left = "'''", right = "'''" },
+          },
+
+          p = {
+            input = { '%"%"%"().-()%"%"%"' },
+            output = { left = '"""', right = '"""' },
+          },
+        },
+
         mappings = {
           add = "ys",
           delete = "ds",
